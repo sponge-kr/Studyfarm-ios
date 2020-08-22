@@ -24,8 +24,8 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     public var ViewModel = SignViewModel()
     public let disposedBag = DisposeBag()
-    private let headers: HTTPHeaders = ["Accept" : "application/hal+json","Content-Type": "application/hal+json;charset=UTF-8"]
-    private let ServerURL : URL = URL(string: "https://3.214.168.45:8080/api/v1/user")!
+    private let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
+    private let ServerURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/user")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +144,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
                 
         AF.request(Url, method: .post, parameters: paramter, encoding: JSONEncoding.default, headers: header)
             .responseJSON { (response) in
+                if response.response?.statusCode == 200 {
+                    print("Succes")
+                }else if response.response?.statusCode == 404 {
+                    print("error")
+                }
+                
                 switch response.result {
                 case .success(let value):
                     let JsonData = JSON(value)
@@ -170,7 +176,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc func CallServiceApi(){
         let paramter : Parameters = [
-            "name" : "김도현",
             "email" : self.SignEmailTextField.text!,
             "password" : self.SignPasswordTextField.text!,
             "nickname" : self.SignNicknamTextField.text!,
