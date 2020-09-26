@@ -16,29 +16,10 @@ import Alamofire
 import SwiftyJSON
 
 
-struct MainData {
-    var studyseq : [String]? = []
-    var studyDay : Int? = 0
-    var studyLimit : [String?] = []
-    var studyCreate : [String?] = []
-    var studyUpdate : String? = ""
-    var contents : String? = ""
-    var title : [String?] = []
-    var name : [String?] = []
-    var state : String? = ""
-    var city : String = ""
-    var iscolor : [String?] = []
-    
-}
-
-
-
-
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     private let URL = "http://3.214.168.45:8080/api/v1/study"
     private let headers: HTTPHeaders = ["Accept" : "application/hal+json","Content-Type": "application/hal+json;charset=UTF-8"]
-    var MainBLData = MainData()
     @IBOutlet weak var BLSubjectView: UIView!
     @IBOutlet weak var LeftNaviButton: UIButton!
     @IBOutlet weak var BLSubject: UILabel!
@@ -56,16 +37,22 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.ServerReqeust(URL: URL, headers: headers)
-        // Do any additional setup after loading the view.
+        APIService.shared.RequestStudyListGet {
+            DispatchQueue.main.async {
+                self.BLMainCollectionView.reloadData()
+            }
+        }
+        
         self.LayoutSetUP()
         self.BLMainCollectionView.delegate = self
         self.BLMainCollectionView.dataSource = self
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BLHeaderCell")
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BLMainCell")
         
-        
+ 
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -81,15 +68,15 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     private func LayoutSetUP(){
         
         //MARK - NavigationBar
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.isHeroEnabled = true
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.isHeroEnabled = true
         
         // MARK - BLSignButton
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
         self.BLSignButton.setTitle("", for: .normal)
         self.BLSignButton.tintColor = UIColor.black
-        self.BLSignButton.addTarget(self, action: #selector(BLRightAnimation), for: .touchUpInside)
+//        self.BLSignButton.addTarget(self, action: #selector(BLRightAnimation), for: .touchUpInside)
         
         
         
@@ -116,20 +103,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.LeftNaviButton.tintColor = UIColor.black
         
         
+        
     }
     
-    //MARK - SlideMenuBarAction
-    @objc private func BLRightAnimation(){
-        self.BLSignButton.hero.id = "BLSlideMain"
-        let SlideViewController = self.storyboard?.instantiateViewController(withIdentifier: "BLSlideView") as? BLSlideViewController
-        UIView.animate(withDuration: 0.2, animations: {
-            self.BLSignButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-            SlideViewController?.isHeroEnabled = true
-            SlideViewController?.heroModalAnimationType = .zoomOut
-            self.navigationController?.pushViewController(SlideViewController!, animated: false)
-            
-        })
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
@@ -141,7 +118,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.MainBLData.studyseq!.count
+        return APIService.shared.StudyData.studyseq!.count
     }
     
     
@@ -149,14 +126,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let MainCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell
         
         DispatchQueue.main.async {
-          
             
-            
-            MainCell?.CellHuman.text = self.MainBLData.studyLimit[indexPath.row]
-            MainCell?.CellWriter.text = self.MainBLData.name[indexPath.row]
-            MainCell?.CellSubject.text = self.MainBLData.title[indexPath.row]
-            MainCell?.CellStartDate.text = self.MainBLData.studyCreate[indexPath.row]
-            MainCell?.CellColorView.backgroundColor = UIColor(hex: self.MainBLData.iscolor[indexPath.row]!)
+            MainCell?.CellHuman.text = "\(APIService.shared.StudyData.studyLimit[indexPath.row]!)"
+            MainCell?.CellWriter.text = APIService.shared.StudyData.name[indexPath.row]
+            MainCell?.CellSubject.text = APIService.shared.StudyData.title[indexPath.row]
+            MainCell?.CellStartDate.text = APIService.shared.StudyData.studyCreate[indexPath.row]
+            MainCell?.CellColorView.backgroundColor = UIColor(hex: APIService.shared.StudyData.studycolor[indexPath.row]!)
         }
         
         return MainCell!
@@ -206,43 +181,21 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             fatalError("Kind BL HeaderView Error")
         }
     }
-
-
-    
-    func ServerReqeust(URL : String , headers : HTTPHeaders){
-        AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers)
-            .responseJSON{ response in
-                switch response.result {
-                case .success(let value):
-//                    print(value)
-                    let Json = JSON(value)
-                    for (key,subJson):(String,JSON) in Json["result"]{
-//                        debugPrint(key)
-//                        debugPrint(subJson)
-                        
-                        self.MainBLData.contents?.append(contentsOf: subJson["contents"].stringValue)
-                        self.MainBLData.studyCreate.append(subJson["study_created_at_str"].stringValue)
-                        self.MainBLData.title.append(subJson["title"].stringValue)
-                        self.MainBLData.name.append(subJson["name"].stringValue)
-                        self.MainBLData.studyLimit.append(subJson["study_limit"].stringValue)
-                        self.MainBLData.studyseq?.append(subJson["study_seq"].stringValue)
-                        self.MainBLData.iscolor.append(subJson["color"].stringValue)
-//                        self.MainBLData.studyCreate?.append(contentsOf: subJson[""])
-//                        print("테스트 Contents입니다 \(subJson["contents"])")
-                    }
-                    DispatchQueue.main.async {
-                        self.BLMainCollectionView.reloadData()
-                    }
-                    
-                    
-                case .failure(let error):
-                    print(error.errorDescription)
-                }
-                
-        }
+    //MARK - SlideMenuBarAction
+    @objc private func BLRightAnimation(){
+        self.BLSignButton.hero.id = "BLSlideMain"
+        let SlideViewController = self.storyboard?.instantiateViewController(withIdentifier: "BLSlideView") as? BLSlideViewController
+        UIView.animate(withDuration: 0.2, animations: {
+            self.BLSignButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            SlideViewController?.isHeroEnabled = true
+            SlideViewController?.heroModalAnimationType = .zoomOut
+            self.navigationController?.pushViewController(SlideViewController!, animated: false)
+            
+        })
     }
-    
+
 }
+
 
 
 

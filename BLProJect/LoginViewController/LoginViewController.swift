@@ -9,8 +9,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Alamofire
 import RxAlamofire
 import SnapKit
+import SwiftyJSON
+import SwiftKeychainWrapper
+
+
 
 
 
@@ -21,11 +26,35 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var AccountLabel: UILabel!
     @IBOutlet weak var AccountAddBtn: UIButton!
     @IBOutlet weak var AccountFindBtn: UIButton!
+    
+    private var LoginURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/auth/login")!
+    public var ErrorAlert : LoginAlertView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.SetLoginLayout()
         self.SetAutoLayout()
         self.AccountAddBtn.addTarget(self, action: #selector(showAccountView), for: .touchUpInside)
+        self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
+//        let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
+//        print("TokenkeyChain 값 입니다",TokenKeyChain)
+//        if TokenKeyChain != nil {
+//            let MainViewCall = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+//            guard let MainVC = MainViewCall else { return }
+//            self.navigationController?.pushViewController(MainVC, animated: true)
+//        }else{
+//            //ErrorAlert
+//
+//
+//        }
+        
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.KeyboardAddObserver()
     }
     
     
@@ -78,7 +107,7 @@ class LoginViewController: UIViewController {
         self.AccountFindBtn.tintColor = UIColor.lightGray
         self.AccountFindBtn.frame = CGRect(x: self.AccountFindBtn.frame.origin.x, y: self.AccountFindBtn.frame.origin.y, width: self.AccountFindBtn.frame.size.width, height: self.AccountFindBtn.frame.size.height)
         
-
+        
     }
     
     private func SetAutoLayout(){
@@ -124,9 +153,66 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+    public func KeyboardAddObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+        
+    
+    @objc func keyboardWillShow(_ notification : NSNotification){
+        if let keyboardFrame : NSValue =  notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let KeyboardFrameRect = keyboardFrame.cgRectValue
+            let keyboardFrameHeight = KeyboardFrameRect.height
+            self.ConfirmButton.frame = CGRect(x: self.ConfirmButton.frame.origin.x, y: self.ConfirmButton.frame.origin.y - keyboardFrameHeight, width: self.ConfirmButton.frame.size.width, height: self.ConfirmButton.frame.size.height)
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification : NSNotification){
+        if let keyboardFrame : NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let KeyboardFrameRect = keyboardFrame.cgRectValue
+            let KeyboardFrameHight = KeyboardFrameRect.height
+            self.ConfirmButton.frame = CGRect(x: self.ConfirmButton.frame.origin.x, y: self.ConfirmButton.frame.origin.y + KeyboardFrameHight, width: self.ConfirmButton.frame.size.width, height: self.ConfirmButton.frame.size.height)
+        }
+    }
+    
+    
+    @objc func ReceiveLoginAPI(){
+        let Paramter = LoginParamter(email: self.EmailTextField.text!, password: self.PasswordTextField.text!)
+        
+        APIService.shared.RequestLoginServer(LoginParamter: Paramter) { [weak self] result in
+            switch result {
+            case .success(let value):
+                print("테스트 status code 값입니다 : " ,value.message)
+                if value.code == 200 {
+                    KeychainWrapper.standard.set(APIService.shared.LoginData.token, forKey: "token")
+                    let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
+                    guard let MainVC = MainView else { return }
+                    self?.navigationController?.pushViewController(MainVC, animated: true)
+                }else{
+                    self?.ErrorAlert = LoginAlertView(frame: self!.view.frame)
+                    self?.ErrorAlert.LoginTitle.text = value.message
+                    self?.view.addSubview(self!.ErrorAlert)
+                    self?.ErrorAlert.LoginConfirmBtn.addTarget(self, action: #selector(self?.HideAlertView(_:)), for: .touchUpInside)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     @objc func showAccountView(){
-          let signUpView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
+        let signUpView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
         guard let SignVC = signUpView else { return }
         self.navigationController?.pushViewController(SignVC, animated: false)
     }
+    @IBAction func HideAlertView(_ sender : Any){
+        self.ErrorAlert.removeFromSuperview()
+    }
 }
+
+
+
+

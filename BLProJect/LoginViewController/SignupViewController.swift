@@ -25,13 +25,15 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     public var ViewModel = SignViewModel()
     public let disposedBag = DisposeBag()
     private let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
-    private let ServerURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/user")!
+    private let SignupURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/user")!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.SetSingViewLayout()
         self.SignViewAutoLayout()
         self.SignJoinButton.addTarget(self, action: #selector(CallServiceApi), for: .touchUpInside)
+//        self.SignJoinButton.addTarget(self, action: #selector(ShowSignAlert), for: .touchUpInside)
         self.SignEmailTextField.delegate = self
         self.SignNicknamTextField.delegate = self
         self.SignPasswordTextField.delegate = self
@@ -61,7 +63,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    private func SetSingViewLayout(){
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.addKeyboardNotification()
+    }
+    
+    public func SetSingViewLayout(){
         
         self.SubjectLabel.attributedText = NSAttributedString(string: "스터디를 찾거나 참가하려면\n 가입하세요", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 22, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         self.SubjectLabel.textAlignment = .center
@@ -141,7 +149,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     
     private func AddUserServiceApi(Url : URL, header : HTTPHeaders, paramter : Parameters){
-                
+        
         AF.request(Url, method: .post, parameters: paramter, encoding: JSONEncoding.default, headers: header)
             .responseJSON { (response) in
                 if response.response?.statusCode == 200 {
@@ -152,6 +160,9 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
                 
                 switch response.result {
                 case .success(let value):
+                    print(value)
+                    let value = String(bytes: response.data!, encoding: .utf8)
+                    print(value)
                     let JsonData = JSON(value)
                     for (key,subJson):(String,JSON) in JsonData["results"] {
                         print(subJson["email"].stringValue)
@@ -164,14 +175,22 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
                 }
         }
         
-    
+        
         
     }
     
-    private func addKeyboardNotification(){
+    public func addKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    @objc func ShowSignAlert(){
+        let SignAlert = SingUpAlertView(frame: self.view.frame)
+        self.view.addSubview(SignAlert)
+        
+    
     }
     
     @objc func CallServiceApi(){
@@ -180,14 +199,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             "password" : self.SignPasswordTextField.text!,
             "nickname" : self.SignNicknamTextField.text!,
         ]
-        guard let emailText = self.SignEmailTextField.text else { return }
-        guard let passwordText = self.SignPasswordTextField.text else { return }
-        guard let nicknameText = self.SignNicknamTextField.text else { return }
+        let OauthEmailParamter = oAuthParamter(email: self.SignEmailTextField.text!)
         
-        
-        let register = ResgisterModel(name : "김도현", email: emailText, password: passwordText, nickname: nicknameText)
-        APIManager.sharedInstance.CallAPI(register: register)
-        self.AddUserServiceApi(Url: ServerURL, header: headers, paramter: paramter)
+        self.AddUserServiceApi(Url: SignupURL, header: headers, paramter: paramter)
+        APIService.shared.oAuthEmailCodePost(oAuthParamter: OauthEmailParamter) {
+            print("성공")
+        }
     }
     
     @objc func keyboardWillShow(_ notification : Notification){
@@ -202,8 +219,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     @objc func keyboardWillHide(_ notification : Notification){
         
     }
-    
-    
     
 }
 
@@ -220,36 +235,4 @@ extension UITextField {
         self.layer.masksToBounds = true
     }
     
-}
-
-
-class APIManager {
-    static let sharedInstance = APIManager()
-    
-    func CallAPI(register : ResgisterModel) {
-        let headers: HTTPHeaders = ["Accept" : "application/hal+json","Content-Type": "application/hal+json;charset=UTF-8"]
-        let ServerURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/user")!
-        AF.request("http://3.214.168.45:8080/api/v1/user", method: .post, parameters: register, encoder: JSONParameterEncoder.default, headers: headers).response { response in
-            debugPrint(response)
-            switch response.result {
-            case .success(let value):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: value!, options: [])
-                    print(json)
-                } catch  {
-                    
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-}
-
-
-struct ResgisterModel :Encodable{
-    let name : String
-    let email : String
-    let password : String
-    let nickname : String
 }

@@ -10,6 +10,7 @@ target 'BLProJect' do
   pod 'RxCocoa', '~> 5'
   pod 'Hero'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftKeychainWrapper'
 
   # Pods for BLProJect
 
