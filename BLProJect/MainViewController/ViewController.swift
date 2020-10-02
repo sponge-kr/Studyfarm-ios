@@ -14,12 +14,13 @@ import SnapKit
 import Hero
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
-    private let URL = "http://3.214.168.45:8080/api/v1/study"
-    private let headers: HTTPHeaders = ["Accept" : "application/hal+json","Content-Type": "application/hal+json;charset=UTF-8"]
+    
+    fileprivate let OauthHeader : HTTPHeaders = ["Accept" : "application/hal+json","Authorization":"Bearer\(KeychainWrapper.standard.string(forKey: "token")!)","Content-Type": "application/hal+json;charset=UTF-8"]
     @IBOutlet weak var BLSubjectView: UIView!
     @IBOutlet weak var LeftNaviButton: UIButton!
     @IBOutlet weak var BLSubject: UILabel!
@@ -76,7 +77,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
         self.BLSignButton.setTitle("", for: .normal)
         self.BLSignButton.tintColor = UIColor.black
-//        self.BLSignButton.addTarget(self, action: #selector(BLRightAnimation), for: .touchUpInside)
+        self.BLSignButton.addTarget(self, action: #selector(LogoutAction), for: .touchUpInside)
         
         
         
@@ -193,11 +194,28 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             
         })
     }
+    
+    @objc private func LogoutAction(){
+        APIService.shared.RequestLogoutServer(headers: OauthHeader) { [weak self] result in
+            switch result {
+            case .success(let value):
+                if value.code == 200 {
+                    print("Logut 성공")
+                    self?.navigationController?.popViewController(animated: true)
+                }else{
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
 
 }
-
-
-
 
 extension UIColor {
     public convenience init?(hex : String){

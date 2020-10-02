@@ -9,6 +9,7 @@
     import UIKit
     import Alamofire
     import SwiftyJSON
+    import SwiftKeychainWrapper
     
     
     struct StudyList {
@@ -37,6 +38,17 @@
         var token : String = ""
         var email : String = ""
     }
+    struct LogoutList {
+        var code : Int = 0
+        var message : String = ""
+        var responseTime : String = ""
+    }
+    
+    struct SignList {
+        var code : Int = 0
+        var message : String = ""
+    }
+    
     
     
     
@@ -44,7 +56,6 @@
     struct LoginParamter : Encodable {
         var email : String
         var password : String
-        //        var app_ver : String
     }
     
     
@@ -69,10 +80,13 @@
         fileprivate let headers : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
         
         
+        
         //MARK - ServerData
         public var StudyData = StudyList()
         public var LoginData = LoginList()
         public var oAuthData = oAuthList()
+        public var LogoutData = LogoutList()
+        public var SingData = SignList()
         
         init() {}
         
@@ -91,8 +105,6 @@
                             print("토근 값입니다  token :", self.LoginData.token)
                             print("파싱 status code 입니다",self.LoginData.code)
                             completionHandler(.success(self.LoginData))
-                        } catch {
-                            print(error.localizedDescription)
                         }
                     case .failure(let error):
                         print(error.localizedDescription)
@@ -103,22 +115,53 @@
             
         }
         
+        //MARK - LogoutServer 요청 함수
+        public func RequestLogoutServer(headers : HTTPHeaders,completionHandler : @escaping (Result<LogoutList,Error>) -> ()){
+            AF.request("http://3.214.168.45:8080/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: headers)
+                .response { response in
+                    switch response.result {
+                    case.success(let value):
+                        do {
+                            let LogoutJson = JSON(value!)
+                            self.LogoutData.code = LogoutJson["code"].intValue
+                            self.LogoutData.message = LogoutJson["message"].stringValue
+                            self.LogoutData.responseTime = LogoutJson["responseTime"].stringValue
+                            if self.LogoutData.message == "로그인이 만료되었습니다." || self.LogoutData.code == 401{
+                                KeychainWrapper.standard.removeObject(forKey: "token")
+                                
+                            }
+                            
+                            
+                            print("Logout Code 값:  : \(self.LogoutData.code)")
+                            print("Logout message 값 : \(self.LogoutData.message)")
+                            print("Logout resposeTime : \(self.LogoutData.responseTime)")
+                            completionHandler(.success(self.LogoutData))
+                            
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        completionHandler(.failure(error))
+                    }
+            }
+        }
+        
         
         //MARK - SignServer 요청 함수
-        public func RequestSignServer(SignParamter : SignParamter, completionHandler : @escaping () -> ()) {
+        public func RequestSignServer(SignParamter : SignParamter, completionHandler : @escaping (Result<SignList,Error>) -> ()) {
             AF.request("http://3.214.168.45:8080/api/v1/user", method: .post, parameters: SignParamter, encoder: JSONParameterEncoder.default, headers: headers)
                 .response { response in
                     debugPrint(response)
                     switch response.result {
                     case .success(let value):
-                        do {
-                            let SignData = try JSONSerialization.jsonObject(with: value!, options: [])
-                            
-                        } catch {
-                            print(error.localizedDescription)
+                        let SingJson = JSON(value!)
+                        for (_,subJson):(String,JSON) in SingJson["results"] {
+                            print("스터디팜 회원가입 이메일 입니다 :" ,subJson["email"].stringValue)
+                            print("스터디팜 회원가입 닉네임 입니다 :", subJson["nickname"].stringValue)
                         }
+                        completionHandler(.success(self.SingData))
                     case.failure(let error):
                         print(error.localizedDescription)
+                        completionHandler(.failure(error))
                     }
             }
         }
@@ -174,6 +217,9 @@
             }
             
         }
+        
+        
+        
         
     }
     

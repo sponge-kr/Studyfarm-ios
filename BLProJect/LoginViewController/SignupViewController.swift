@@ -33,7 +33,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.SetSingViewLayout()
         self.SignViewAutoLayout()
         self.SignJoinButton.addTarget(self, action: #selector(CallServiceApi), for: .touchUpInside)
-//        self.SignJoinButton.addTarget(self, action: #selector(ShowSignAlert), for: .touchUpInside)
+        //        self.SignJoinButton.addTarget(self, action: #selector(ShowSignAlert), for: .touchUpInside)
         self.SignEmailTextField.delegate = self
         self.SignNicknamTextField.delegate = self
         self.SignPasswordTextField.delegate = self
@@ -190,18 +190,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         let SignAlert = SingUpAlertView(frame: self.view.frame)
         self.view.addSubview(SignAlert)
         
-    
+        
     }
     
     @objc func CallServiceApi(){
-        let paramter : Parameters = [
-            "email" : self.SignEmailTextField.text!,
-            "password" : self.SignPasswordTextField.text!,
-            "nickname" : self.SignNicknamTextField.text!,
-        ]
-        let OauthEmailParamter = oAuthParamter(email: self.SignEmailTextField.text!)
         
-        self.AddUserServiceApi(Url: SignupURL, header: headers, paramter: paramter)
+        let OauthEmailParamter = oAuthParamter(email: self.SignEmailTextField.text!)
+        let Signparamter = SignParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!)
         APIService.shared.oAuthEmailCodePost(oAuthParamter: OauthEmailParamter) {
             print("성공")
         }

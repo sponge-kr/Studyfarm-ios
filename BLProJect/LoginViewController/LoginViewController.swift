@@ -36,17 +36,17 @@ class LoginViewController: UIViewController {
         self.SetAutoLayout()
         self.AccountAddBtn.addTarget(self, action: #selector(showAccountView), for: .touchUpInside)
         self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
-//        let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
-//        print("TokenkeyChain 값 입니다",TokenKeyChain)
-//        if TokenKeyChain != nil {
-//            let MainViewCall = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-//            guard let MainVC = MainViewCall else { return }
-//            self.navigationController?.pushViewController(MainVC, animated: true)
-//        }else{
-//            //ErrorAlert
-//
-//
-//        }
+        let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
+        print("TokenkeyChain 값 입니다",TokenKeyChain)
+        if TokenKeyChain != nil {
+            let MainViewCall = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+            guard let MainVC = MainViewCall else { return }
+            self.navigationController?.pushViewController(MainVC, animated: true)
+        }else{
+            //ErrorAlert
+            
+            
+        }
         
         
     }
@@ -158,7 +158,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
-        
+    
     
     @objc func keyboardWillShow(_ notification : NSNotification){
         if let keyboardFrame : NSValue =  notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
