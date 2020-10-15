@@ -28,7 +28,7 @@ class BLViewModel {
     
     init(Model : Model) {
         self.BLModel = Model
-        
+               
     }
     
     
