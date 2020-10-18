@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SingUpAlertView: UIView {
     @IBOutlet weak var AlertBackground: UIView!
     @IBOutlet weak var AlertConfirmBtn: UIButton!

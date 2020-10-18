@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 import RxAlamofire
 import SnapKit
-import Hero
 import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
@@ -181,18 +180,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         default:
             fatalError("Kind BL HeaderView Error")
         }
-    }
-    //MARK - SlideMenuBarAction
-    @objc private func BLRightAnimation(){
-        self.BLSignButton.hero.id = "BLSlideMain"
-        let SlideViewController = self.storyboard?.instantiateViewController(withIdentifier: "BLSlideView") as? BLSlideViewController
-        UIView.animate(withDuration: 0.2, animations: {
-            self.BLSignButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-            SlideViewController?.isHeroEnabled = true
-            SlideViewController?.heroModalAnimationType = .zoomOut
-            self.navigationController?.pushViewController(SlideViewController!, animated: false)
-            
-        })
     }
     
     @objc private func LogoutAction(){

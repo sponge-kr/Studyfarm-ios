@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import KakaoSDKUser
+import KakaoSDKCommon
+import KakaoSDKAuth
 import Alamofire
-import RxAlamofire
 import SnapKit
 import SwiftyJSON
 import SwiftKeychainWrapper
@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var ContourLine: UIView!
     @IBOutlet weak var ContourLine2: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var KakaoLoginBtn: UIButton!
     
     
     private var LoginURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/auth/login")!
@@ -34,6 +35,7 @@ class LoginViewController: UIViewController {
         self.SetLoginLayout()
         self.SetAutoLayout()
         self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
+        self.KakaoLoginBtn.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
         let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다",TokenKeyChain)
         if TokenKeyChain != nil {
@@ -123,6 +125,21 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+    
+    @objc func KakaoLogin(){
+        AuthApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+           if let error = error {
+             print(error)
+           }
+           else {
+            print("loginWithKakaoAccount() success.")
+            
+            //do something
+            _ = oauthToken
+           }
+        }
+    }
     
     @objc func ReceiveLoginAPI(){
 //        let Paramter = LoginParamter(email: self.EmailTextField.text!, password: self.PasswordTextField.text!)
