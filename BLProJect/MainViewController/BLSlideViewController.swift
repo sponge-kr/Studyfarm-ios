@@ -35,13 +35,13 @@ class BLSlideViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     public func LayoutSetup(){
         //MARK - NavigationBar
         self.navigationItem.hidesBackButton = true
         
-    
+        
         
         //MARK - LeftView
         self.LeftView.backgroundColor = UIColor.black
@@ -92,7 +92,7 @@ class BLSlideViewController: UIViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.LeftBackButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
         }) { (animated) in
-             self.navigationController?.popViewController(animated: animated)
+            self.navigationController?.popViewController(animated: animated)
         }
         
     }

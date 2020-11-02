@@ -24,8 +24,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     public var ViewModel = SignViewModel()
     public let disposedBag = DisposeBag()
-    private let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
-    private let SignupURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/user")!
     
     override func viewDidLoad() {
         
@@ -125,7 +123,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         }
         self.SignNicknamTextField.snp.makeConstraints { (make) in
             make.top.equalTo(self.SignEmailTextField.snp
-                .bottom).offset(70)
+                                .bottom).offset(70)
             make.right.equalTo(self.view).offset(-20)
             make.left.equalTo(self.view).offset(20)
             make.bottom.equalTo(self.SignPasswordTextField.snp.top).offset(-70)
@@ -147,38 +145,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    
-    private func AddUserServiceApi(Url : URL, header : HTTPHeaders, paramter : Parameters){
-        
-        AF.request(Url, method: .post, parameters: paramter, encoding: JSONEncoding.default, headers: header)
-            .responseJSON { (response) in
-                if response.response?.statusCode == 200 {
-                    print("Succes")
-                }else if response.response?.statusCode == 404 {
-                    print("error")
-                }
-                
-                switch response.result {
-                case .success(let value):
-                    print(value)
-                    let value = String(bytes: response.data!, encoding: .utf8)
-                    print(value)
-                    let JsonData = JSON(value)
-                    for (key,subJson):(String,JSON) in JsonData["results"] {
-                        print(subJson["email"].stringValue)
-                        print(subJson["nickname"].stringValue)
-                    }
-                    
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-        }
-        
-        
-        
-    }
-    
     public func addKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -195,11 +161,19 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc func CallServiceApi(){
         
-        let OauthEmailParamter = oAuthParamter(email: self.SignEmailTextField.text!)
-        let Signparamter = SignParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!)
-        APIService.shared.oAuthEmailCodePost(oAuthParamter: OauthEmailParamter) {
-            print("성공")
+        let SingParamterTest = SignUpParamter(email: "kmr98321@hanmail.net", password: "sdfsfs2!", nickname: "미란223", name: "김미란", city_info: [1,1,1,2,1,3], gender: 0, born_date: "1998-12-04", interesting: [["name":"토익","skill_level":"A+"],["name":"토익","skill_level":"A+"]], service_use_agree: true, profile: nil, phone: "010-4055-9598", age: 23, simple_introduce: "반갑습니다", study_purpose: "공부하려고", service_way: "글보고")
+        
+        oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamterTest) { [weak self] reuslt in
+            switch reuslt {
+            case .success(let value):
+                print(value.code)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
         }
+        
     }
     
     @objc func keyboardWillShow(_ notification : Notification){

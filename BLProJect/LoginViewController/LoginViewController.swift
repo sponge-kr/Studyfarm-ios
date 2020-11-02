@@ -24,10 +24,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var ContourLine: UIView!
     @IBOutlet weak var ContourLine2: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var EmailTextFiled: UITextField!
+    @IBOutlet weak var PasswordTextFiled: UITextField!
     @IBOutlet weak var KakaoLoginBtn: UIButton!
     
-    
-    private var LoginURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/auth/login")!
     public var ErrorAlert : LoginAlertView!
     
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true
         
-    
+        
         
         
         self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
@@ -93,13 +93,43 @@ class LoginViewController: UIViewController {
         self.descriptionLabel.textAlignment = .center
         self.descriptionLabel.frame = CGRect(x: self.descriptionLabel.frame.origin.x, y: self.descriptionLabel.frame.origin.y, width: self.descriptionLabel.frame.size.width, height: self.descriptionLabel.frame.size.height)
         
-    
+        self.EmailTextFiled.placeholder = "Welcome@email.com"
+        self.PasswordTextFiled.placeholder = "6자 이상의 비밀번호"
+        self.PasswordTextFiled.isSecureTextEntry = true
     }
     
     private func SetAutoLayout(){
         
         
     }
+    
+    private func KakaoUserInfo(){
+        UserApi.shared.me { (user, error) in
+            if let error = error {
+                // Kakao error
+                print(error.localizedDescription)
+            }else{
+                UserApi.shared.me { (user, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }else{
+                        print("Kakao UserEmail",user?.kakaoAccount?.email)
+                        print("Kakao UserProfile",user?.kakaoAccount?.profile)
+                        print("Kakao UserName",user?.kakaoAccount?.legalName)
+                        UserApi.shared.updateProfile(properties: ["nickname" : "UserProfile_Nickname","id" :"UserProfile_Id","profile_image" : "UserProfile_Profile_image"]) { (error) in
+                            if let error = error {
+                                //kakao UserProifle Data 저장
+                                print(error.localizedDescription)
+                            }else{
+                                print("UpdateProfile succes")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     
     public func KeyboardAddObserver(){
@@ -128,42 +158,43 @@ class LoginViewController: UIViewController {
     
     
     @objc func KakaoLogin(){
-        AuthApi.shared.loginWithKakaoAccount {(oauthToken, error) in
-           if let error = error {
-             print(error)
-           }
-           else {
-            print("loginWithKakaoAccount() success.")
-            
-            //do something
-            _ = oauthToken
-           }
+        AuthApi.shared.loginWithKakaoAccount(authType: .Reauthenticate) { (oAuthToken, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }else{
+                _ = oAuthToken
+                let accesToken = oAuthToken?.accessToken
+                self.KakaoUserInfo()
+            }
         }
     }
     
+    
+    
+    
     @objc func ReceiveLoginAPI(){
-//        let Paramter = LoginParamter(email: self.EmailTextField.text!, password: self.PasswordTextField.text!)
+        let Paramter = LoginParamter(email: self.EmailTextFiled.text!, password: self.PasswordTextFiled.text!)
         
-//        APIService.shared.RequestLoginServer(LoginParamter: Paramter) { [weak self] result in
-//            switch result {
-//            case .success(let value):
-//                print("테스트 status code 값입니다 : " ,value.message)
-//                if value.code == 200 {
-//                    KeychainWrapper.standard.set(APIService.shared.LoginData.token, forKey: "token")
-//                    let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
-//                    guard let MainVC = MainView else { return }
-//                    self?.navigationController?.pushViewController(MainVC, animated: true)
-//                }else{
-//                    self?.ErrorAlert = LoginAlertView(frame: self!.view.frame)
-//                    self?.ErrorAlert.LoginTitle.text = value.message
-//                    self?.view.addSubview(self!.ErrorAlert)
-//                    self?.ErrorAlert.LoginConfirmBtn.addTarget(self, action: #selector(self?.HideAlertView(_:)), for: .touchUpInside)
-//                }
-//
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+        oAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
+            switch result {
+            case .success(let value):
+                print("테스트 status code 값입니다 : \(value.message)")
+                if value.code == 200 {
+                    KeychainWrapper.standard.set(oAuthApi.shared.LoginModel.token!, forKey: "token")
+                    let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
+                    guard let MainVC = MainView else { return }
+                    self?.navigationController?.pushViewController(MainVC, animated: true)
+                }else{
+                    self?.ErrorAlert = LoginAlertView(frame: self!.view.frame)
+                    self?.ErrorAlert.LoginTitle.text = value.message
+                    self?.view.addSubview(self!.ErrorAlert)
+                    self?.ErrorAlert.LoginConfirmBtn.addTarget(self, action: #selector(self?.HideAlertView(_:)), for: .touchUpInside)
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc func showAccountView(){

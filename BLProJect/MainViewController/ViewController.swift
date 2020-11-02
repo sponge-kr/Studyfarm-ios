@@ -19,7 +19,6 @@ import SwiftKeychainWrapper
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
-    fileprivate let OauthHeader : HTTPHeaders = ["Accept" : "application/hal+json","Authorization":"Bearer\(KeychainWrapper.standard.string(forKey: "token")!)","Content-Type": "application/hal+json;charset=UTF-8"]
     @IBOutlet weak var BLSubjectView: UIView!
     @IBOutlet weak var LeftNaviButton: UIButton!
     @IBOutlet weak var BLSubject: UILabel!
@@ -37,7 +36,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIService.shared.RequestStudyListGet {
+        ServerApi.shared.StudyListCall {
             DispatchQueue.main.async {
                 self.BLMainCollectionView.reloadData()
             }
@@ -49,7 +48,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BLHeaderCell")
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BLMainCell")
         
- 
+        
     }
     
     
@@ -61,16 +60,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
     }
     
     
     private func LayoutSetUP(){
         
-        //MARK - NavigationBar
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.isHeroEnabled = true
         
         // MARK - BLSignButton
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
@@ -83,9 +78,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         // MARK - BLSubjectView
         self.BLSubjectView.frame = CGRect(x: self.BLSubjectView.frame.origin.x, y: self.BLSubjectView.frame.origin.y, width: self.BLSubjectView.frame.size.width, height: self.BLSubjectView.frame.size.height)
         self.BLSubjectView.backgroundColor = UIColor(red: 234/255, green: 234/255, blue: 234/255, alpha: 1.0)
-        
-        
-        
         
         // MARK - BLSubject Label
         self.BLSubject.text = "BL과 함께 새로운 \n스터디 그룹을 만들어 보새요"
@@ -118,7 +110,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return APIService.shared.StudyData.studyseq!.count
+        return ServerApi.shared.StudyModel.study_seq.count
     }
     
     
@@ -127,11 +119,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         DispatchQueue.main.async {
             
-            MainCell?.CellHuman.text = "\(APIService.shared.StudyData.studyLimit[indexPath.row]!)"
-            MainCell?.CellWriter.text = APIService.shared.StudyData.name[indexPath.row]
-            MainCell?.CellSubject.text = APIService.shared.StudyData.title[indexPath.row]
-            MainCell?.CellStartDate.text = APIService.shared.StudyData.studyCreate[indexPath.row]
-            MainCell?.CellColorView.backgroundColor = UIColor(hex: APIService.shared.StudyData.studycolor[indexPath.row]!)
+            MainCell?.CellHuman.text = ServerApi.shared.StudyModel.nickname[indexPath.row]
+            MainCell?.CellWriter.text = ServerApi.shared.StudyModel.name[indexPath.row]
+            MainCell?.CellSubject.text = ServerApi.shared.StudyModel.title[indexPath.row]
+            MainCell?.CellStartDate.text = ServerApi.shared.StudyModel.contents[indexPath.row]
+            MainCell?.CellColorView.backgroundColor = UIColor.white
         }
         
         return MainCell!
@@ -183,7 +175,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     @objc private func LogoutAction(){
-        APIService.shared.RequestLogoutServer(headers: OauthHeader) { [weak self] result in
+        oAuthApi.shared.AuthLogoutCall { [weak self] result in
             switch result {
             case .success(let value):
                 if value.code == 200 {
@@ -201,7 +193,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     
-
+    
 }
 
 extension UIColor {
@@ -222,7 +214,7 @@ extension UIColor {
                     alphaColor = CGFloat((hexNumber & 0x000000ff) >> 24) / 255
                     
                     self.init(red :redColor , green : greenColor, blue : blueColor, alpha : alphaColor)
-                        return
+                    return
                 }
             }
         }
