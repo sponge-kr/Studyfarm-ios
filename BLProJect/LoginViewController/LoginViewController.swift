@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var EmailTextFiled: UITextField!
     @IBOutlet weak var PasswordTextFiled: UITextField!
     @IBOutlet weak var KakaoLoginBtn: UIButton!
+    @IBOutlet weak var SignUpBtn: UIButton!
     
     public var ErrorAlert : LoginAlertView!
     
@@ -36,6 +37,7 @@ class LoginViewController: UIViewController {
         self.SetAutoLayout()
         self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
         self.KakaoLoginBtn.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
+        self.SignUpBtn.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
         let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다",TokenKeyChain)
         if TokenKeyChain != nil {
@@ -167,6 +169,12 @@ class LoginViewController: UIViewController {
                 self.KakaoUserInfo()
             }
         }
+    }
+    
+    @objc func SignUpTransform(){
+        let SignView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
+        guard let SignVC = SignView else { return }
+        self.navigationController?.pushViewController(SignVC, animated: true)
     }
     
     

@@ -35,6 +35,28 @@
         var topic_name : [String] = []
     }
     
+    //MARK - 스터디 디테일 데이터
+    struct StudyOneDataModel {
+        var study_seq : Int = 0
+        var user_seq : Int = 0
+        var title : String = ""
+        var email : String = ""
+        var name : String = ""
+        var phone : String = ""
+        var age : Int = 0
+        var nickname : String = ""
+        var state_code : Int = 0
+        var state_name : String = ""
+        var city_code : Int = 0
+        var city_name : String = ""
+        var gender : String = ""
+        var interesting_name : String = ""
+        var interesting_skill_level : String = ""
+        var contents : String = ""
+        var category_name : String = ""
+        var topic_name : String = ""
+    }
+        
     //MARK - 댓글 등록 데이터
     struct CommentDataModel {
         var code : Int = 0
@@ -47,6 +69,21 @@
         var message : String = ""
     }
     
+    //MARK - 메인 스터디 등록 Paramter
+    struct StudyRegisterParamter : Encodable {
+        var title : String
+        var study_limit : Int
+        var week : String
+        var week_type : Int
+        var state : Int
+        var city : Int
+        var contents : String
+        var category : String
+        var topic : Int
+        var color : String
+        var study_day : Int
+    }
+        
     //MARK - 댓글 등록 Paramter
     struct CommentParamter : Encodable {
         var study_seq : Int
@@ -64,7 +101,6 @@
     
     
     
-    
     class ServerApi{
         static let shared = ServerApi()
         
@@ -74,6 +110,7 @@
         
         //MARK - DataModel Instace 초기화
         public var StudyModel = StudyDataModel()
+        public var StudyOneModel = StudyOneDataModel()
         public var CommnetModel = CommentDataModel()
         public var SubCommentModel = SubCommentDataModel()
         
@@ -92,8 +129,8 @@
                             print("스터디팜 댓글 번호 입니다",subJson["seq"].intValue)
                             print("스터디팜 작성자 입니다 ",subJson["writer"].arrayValue)
                             print("스터디팜 부모 댓글 번호 입니다",subJson["parent_reply_seq"].intValue)
-                            
                         }
+                        completionHandler(.success(self.CommnetModel))
                     case .failure(let error):
                         print(error.localizedDescription)
                         completionHandler(.failure(error))
@@ -104,10 +141,32 @@
                 }
             
         }
+        
+        //MARK - Server Study 등록 요청 함수
+        public func StudyRegisterCall(StudyRegisterParamter : StudyRegisterParamter, completionHandler : @escaping() -> ()){
+            AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: StudyRegisterParamter, encoder: JSONParameterEncoder.default, headers: Privateheaders)
+                .response { response in
+                    switch response.result {
+                    case .success(let value):
+                        let RegisterJson = JSON(value)
+                        for (_,subJson):(String,JSON) in RegisterJson["result"] {
+                            print("스터디팜 스터디 번호 \(RegisterJson["study_seq"].intValue)")
+                            print("스터디팜 스터디 제목 \(RegisterJson["title"].stringValue)")
+                            print("스터디팜 스터디 장 이메일 \(RegisterJson["email"].stringValue)")
+                            print("스터디팜 스터디 닉네임 \(RegisterJson["nickname"].stringValue)")
+                        }
+                        completionHandler()
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+        }
+        
         //MARK - Server StudyList 조회 요청 함수
         public func StudyListCall(completionHandler :  @escaping () -> ()){
             AF.request("http://3.214.168.45:8080/api/v1/study", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
-                .responseJSON { response in
+                .response { response in
                     debugPrint(response)
                     switch response.result {
                     case .success(let value):
@@ -133,7 +192,6 @@
                             print("스터디팜 스터디 리스트 제목 입니다 : \(self.StudyModel.title)")
                             print("스터디팜 스터디 등록 이메일 입니다 : \(self.StudyModel.age)")
                             print("스터디팜 스터디 리스트 콘텐츠 입니다 : \(self.StudyModel.contents)")
-                            
                         }
                         completionHandler()
                     case .failure(let error):
@@ -142,10 +200,37 @@
                 }
         }
         
-        
-        
-        
-        
+        //MARK - Server studyList 한건 조회 요청 함수
+        public func StudyListOneCall(study_seq : Int, completionHandler : @escaping(Result<StudyOneDataModel,Error>) -> ()){
+            AF.request("http://3.214.168.45:8080/api/v1/study\(study_seq)", method: .get,headers: Privateheaders)
+                .response { response in
+                    switch response.result {
+                    case .success(let value):
+                        let StudyOneJson = JSON(value)
+                        for (_,subJson):(String,JSON) in StudyOneJson["result"] {
+                            self.StudyOneModel.study_seq = StudyOneJson["study_seq"].intValue
+                            self.StudyOneModel.user_seq = StudyOneJson["user_seq"].intValue
+                            self.StudyOneModel.title = StudyOneJson["title"].stringValue
+                            self.StudyOneModel.email = StudyOneJson["email"].stringValue
+                            self.StudyOneModel.name = StudyOneJson["name"].stringValue
+                            self.StudyOneModel.nickname = StudyOneJson["nickname"].stringValue
+                            self.StudyOneModel.phone = StudyOneJson["phone"].stringValue
+                            self.StudyOneModel.age = StudyOneJson["age"].intValue
+                            self.StudyOneModel.gender = StudyOneJson["gender"].stringValue
+                            self.StudyOneModel.interesting_name = StudyOneJson["interesting"]["name"].stringValue
+                            self.StudyOneModel.interesting_skill_level = StudyOneJson["interesting"]["skill_level"].stringValue
+                            self.StudyOneModel.contents = StudyOneJson["contents"].stringValue
+                            self.StudyOneModel.category_name = StudyOneJson["category_name"].stringValue
+                            self.StudyOneModel.topic_name = StudyOneJson["topic_name"].stringValue
+                        }
+                        completionHandler(.success(self.StudyOneModel))
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        completionHandler(.failure(error))
+                    }
+                    
+                }
+        }
         
     }
     

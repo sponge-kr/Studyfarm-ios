@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZH3-IN-hbT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zvG-dD-ovI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -335,6 +335,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftH-a4-ehj">
+                                <rect key="frame" x="144" y="757" width="124" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eup-7r-WHB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -348,6 +353,7 @@
                         <outlet property="KakaoLoginBtn" destination="Ivm-44-gYA" id="ZQc-n0-H0f"/>
                         <outlet property="MainSubject" destination="xlh-SW-hbd" id="Fhq-xT-cTg"/>
                         <outlet property="PasswordTextFiled" destination="KsL-Sb-kzT" id="Ydg-hi-T7Y"/>
+                        <outlet property="SignUpBtn" destination="ftH-a4-ehj" id="pVu-2X-Ebv"/>
                         <outlet property="descriptionLabel" destination="741-dz-itX" id="Uob-Ua-DuW"/>
                     </connections>
                 </viewController>
