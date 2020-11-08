@@ -20,6 +20,7 @@
 		D19A868625502FC8000C14D6 /* oAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A868525502FC8000C14D6 /* oAuthApi.swift */; };
 		D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D9F3D624E15BAB008FF54D /* BLMainCollectionViewHeader.swift */; };
 		D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D9F3D724E15BAB008FF54D /* BLMainCollectionViewHeader.xib */; };
+		D1F185662558170B00C5F248 /* UtilApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F185652558170B00C5F248 /* UtilApi.swift */; };
 		D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85CC724C45B1100E1F7BE /* AppDelegate.swift */; };
 		D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85CC924C45B1100E1F7BE /* SceneDelegate.swift */; };
 		D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85CCB24C45B1100E1F7BE /* ViewController.swift */; };
@@ -79,6 +80,7 @@
 		D19A868525502FC8000C14D6 /* oAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oAuthApi.swift; sourceTree = "<group>"; };
 		D1D9F3D624E15BAB008FF54D /* BLMainCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLMainCollectionViewHeader.swift; sourceTree = "<group>"; };
 		D1D9F3D724E15BAB008FF54D /* BLMainCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLMainCollectionViewHeader.xib; sourceTree = "<group>"; };
+		D1F185652558170B00C5F248 /* UtilApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilApi.swift; sourceTree = "<group>"; };
 		D1F85CC424C45B1100E1F7BE /* 스터디팜.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "스터디팜.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F85CC724C45B1100E1F7BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1F85CC924C45B1100E1F7BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				D152357125053B70000FB32A /* ServerApi.swift */,
 				D19A868525502FC8000C14D6 /* oAuthApi.swift */,
+				D1F185652558170B00C5F248 /* UtilApi.swift */,
 			);
 			path = ServerCommon;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F185662558170B00C5F248 /* UtilApi.swift in Sources */,
 				D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,

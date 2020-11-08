@@ -135,7 +135,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         if let SelctedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell {
             let DetailVC = self.storyboard?.instantiateViewController(identifier: "DetailVC") as? BLDetailViewController
             
-            
+           
             
             self.performSegue(withIdentifier: "BLDetailVC", sender: nil)
         }

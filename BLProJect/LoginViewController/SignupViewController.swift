@@ -161,7 +161,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc func CallServiceApi(){
         
-        let SingParamterTest = SignUpParamter(email: "kmr98321@hanmail.net", password: "sdfsfs2!", nickname: "미란223", name: "김미란", city_info: [1,1,1,2,1,3], gender: 0, born_date: "1998-12-04", interesting: [["name":"토익","skill_level":"A+"],["name":"토익","skill_level":"A+"]], service_use_agree: true, profile: nil, phone: "010-4055-9598", age: 23, simple_introduce: "반갑습니다", study_purpose: "공부하려고", service_way: "글보고")
+        let SingParamterTest = SignUpParamter(email: "ysksoft@naver.com", password: "kysd1234!", nickname: "강동원233", name: "김미란", city_info: [1,1,1,2,1,3], gender: 0, born_date: "1998-12-04", interesting: [["name":"토익","skill_level":"A+"],["name":"토익","skill_level":"A+"]], service_use_agree: true, profile: nil, phone: "010-4055-9598", age: 23, simple_introduce: "반갑습니다", study_purpose: "공부하려고", service_way: "글보고")
         
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamterTest) { [weak self] reuslt in
             switch reuslt {
