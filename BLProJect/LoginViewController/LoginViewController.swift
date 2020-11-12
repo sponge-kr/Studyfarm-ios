@@ -14,6 +14,8 @@ import Alamofire
 import SnapKit
 import SwiftyJSON
 import SwiftKeychainWrapper
+import RxSwift
+import RxCocoa
 
 
 
@@ -30,6 +32,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var SignUpBtn: UIButton!
     
     public var ErrorAlert : LoginAlertView!
+    let disposeBag : DisposeBag = DisposeBag()
+    public var ViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +53,20 @@ class LoginViewController: UIViewController {
             
             
         }
+        self.bind()
         
-        
+    }
+    
+    private func bind(){
+        EmailTextFiled.rx.text
+            .bind(to: ViewModel.input.emailText)
+            .disposed(by: disposeBag)
+        PasswordTextFiled.rx.text
+            .bind(to: ViewModel.input.passwordText)
+            .disposed(by: disposeBag)
+        ViewModel.output.isConfirmEnabled
+            .drive(ConfirmButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
     
     

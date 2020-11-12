@@ -12,6 +12,7 @@
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
 		D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391D24EAA9E0004D661C /* SignViewModel.swift */; };
+		D14F4D41255DA20900FB1773 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F4D40255DA20900FB1773 /* LoginViewModel.swift */; };
 		D152357225053B70000FB32A /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D152357125053B70000FB32A /* ServerApi.swift */; };
 		D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */; };
 		D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */; };
@@ -72,6 +73,7 @@
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D149391D24EAA9E0004D661C /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
+		D14F4D40255DA20900FB1773 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D152357125053B70000FB32A /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
 		D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpAlertView.swift; sourceTree = "<group>"; };
 		D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingUpAlertView.xib; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		D149391824E7F9EF004D661C /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D14F4D3F255DA1DF00FB1773 /* LoginMVVM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
 				D149391D24EAA9E0004D661C /* SignViewModel.swift */,
@@ -174,6 +177,14 @@
 				D1D9F3D724E15BAB008FF54D /* BLMainCollectionViewHeader.xib */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		D14F4D3F255DA1DF00FB1773 /* LoginMVVM */ = {
+			isa = PBXGroup;
+			children = (
+				D14F4D40255DA20900FB1773 /* LoginViewModel.swift */,
+			);
+			path = LoginMVVM;
 			sourceTree = "<group>";
 		};
 		D152357025053B4F000FB32A /* ServerCommon */ = {
@@ -558,6 +569,7 @@
 				D19A868625502FC8000C14D6 /* oAuthApi.swift in Sources */,
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
+				D14F4D41255DA20900FB1773 /* LoginViewModel.swift in Sources */,
 				D1F85D0A24CDBEAA00E1F7BE /* BLSlideViewController.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
 				D152357225053B70000FB32A /* ServerApi.swift in Sources */,
