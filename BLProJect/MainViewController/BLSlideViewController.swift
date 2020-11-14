@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Hero
 import SnapKit
 
 
@@ -40,7 +39,6 @@ class BLSlideViewController: UIViewController {
     }
     public func LayoutSetup(){
         //MARK - NavigationBar
-        self.navigationController?.isHeroEnabled = true
         self.navigationItem.hidesBackButton = true
         
     

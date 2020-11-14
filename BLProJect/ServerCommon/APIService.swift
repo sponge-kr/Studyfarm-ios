@@ -64,6 +64,8 @@
         var email : String
         var password : String
         var nickname : String
+        
+        
     }
     
     //MARK - 회원가입 Email 인증 Paramter

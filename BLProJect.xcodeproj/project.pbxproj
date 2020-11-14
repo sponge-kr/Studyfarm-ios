@@ -12,11 +12,14 @@
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
 		D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391D24EAA9E0004D661C /* SignViewModel.swift */; };
-		D152357225053B70000FB32A /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D152357125053B70000FB32A /* APIService.swift */; };
 		D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */; };
 		D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */; };
 		D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194D14C2519EC3F00023302 /* LoginAlertView.swift */; };
 		D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D194D14E2519EC8A00023302 /* LoginAlertView.xib */; };
+		D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B46335255FA3F80063D714 /* ServerApi.swift */; };
+		D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B46336255FA3F80063D714 /* UtilApi.swift */; };
+		D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B46337255FA3F80063D714 /* oAuthApi.swift */; };
+		D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B46353255FA4C90063D714 /* LoginViewModel.swift */; };
 		D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D9F3D624E15BAB008FF54D /* BLMainCollectionViewHeader.swift */; };
 		D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D9F3D724E15BAB008FF54D /* BLMainCollectionViewHeader.xib */; };
 		D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85CC724C45B1100E1F7BE /* AppDelegate.swift */; };
@@ -70,11 +73,14 @@
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D149391D24EAA9E0004D661C /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
-		D152357125053B70000FB32A /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpAlertView.swift; sourceTree = "<group>"; };
 		D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingUpAlertView.xib; sourceTree = "<group>"; };
 		D194D14C2519EC3F00023302 /* LoginAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertView.swift; sourceTree = "<group>"; };
 		D194D14E2519EC8A00023302 /* LoginAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginAlertView.xib; sourceTree = "<group>"; };
+		D1B46335255FA3F80063D714 /* ServerApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
+		D1B46336255FA3F80063D714 /* UtilApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilApi.swift; sourceTree = "<group>"; };
+		D1B46337255FA3F80063D714 /* oAuthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = oAuthApi.swift; sourceTree = "<group>"; };
+		D1B46353255FA4C90063D714 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D1D9F3D624E15BAB008FF54D /* BLMainCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLMainCollectionViewHeader.swift; sourceTree = "<group>"; };
 		D1D9F3D724E15BAB008FF54D /* BLMainCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLMainCollectionViewHeader.xib; sourceTree = "<group>"; };
 		D1F85CC424C45B1100E1F7BE /* 스터디팜.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "스터디팜.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +151,7 @@
 		D149391824E7F9EF004D661C /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D1B46352255FA4B40063D714 /* LoginMVMM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
 				D149391D24EAA9E0004D661C /* SignViewModel.swift */,
@@ -175,7 +182,9 @@
 		D152357025053B4F000FB32A /* ServerCommon */ = {
 			isa = PBXGroup;
 			children = (
-				D152357125053B70000FB32A /* APIService.swift */,
+				D1B46337255FA3F80063D714 /* oAuthApi.swift */,
+				D1B46335255FA3F80063D714 /* ServerApi.swift */,
+				D1B46336255FA3F80063D714 /* UtilApi.swift */,
 			);
 			path = ServerCommon;
 			sourceTree = "<group>";
@@ -189,6 +198,14 @@
 				D194D14E2519EC8A00023302 /* LoginAlertView.xib */,
 			);
 			path = CustomAlert;
+			sourceTree = "<group>";
+		};
+		D1B46352255FA4B40063D714 /* LoginMVMM */ = {
+			isa = PBXGroup;
+			children = (
+				D1B46353255FA4C90063D714 /* LoginViewModel.swift */,
+			);
+			path = LoginMVMM;
 			sourceTree = "<group>";
 		};
 		D1F85CBB24C45B1100E1F7BE = {
@@ -542,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
 				D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
@@ -551,11 +569,13 @@
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
 				D1F85D0A24CDBEAA00E1F7BE /* BLSlideViewController.swift in Sources */,
+				D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
-				D152357225053B70000FB32A /* APIService.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,
+				D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
+				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

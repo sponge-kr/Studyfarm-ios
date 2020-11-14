@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import KakaoSDKUser
+import KakaoSDKCommon
+import KakaoSDKAuth
 import Alamofire
-import RxAlamofire
 import SnapKit
 import SwiftyJSON
 import SwiftKeychainWrapper
@@ -18,24 +18,26 @@ import SwiftKeychainWrapper
 
 
 
-
 class LoginViewController: UIViewController {
-    @IBOutlet weak var EmailTextField: UITextField!
-    @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var ConfirmButton: UIButton!
-    @IBOutlet weak var AccountLabel: UILabel!
-    @IBOutlet weak var AccountAddBtn: UIButton!
-    @IBOutlet weak var AccountFindBtn: UIButton!
+    @IBOutlet weak var MainSubject: UILabel!
+    @IBOutlet weak var ContourLine: UIView!
+    @IBOutlet weak var ContourLine2: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var EmailTextFiled: UITextField!
+    @IBOutlet weak var PasswordTextFiled: UITextField!
+    @IBOutlet weak var KakaoLoginBtn: UIButton!
+    @IBOutlet weak var SignUpBtn: UIButton!
     
-    private var LoginURL : URL = URL(string: "http://3.214.168.45:8080/api/v1/auth/login")!
     public var ErrorAlert : LoginAlertView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.SetLoginLayout()
         self.SetAutoLayout()
-        self.AccountAddBtn.addTarget(self, action: #selector(showAccountView), for: .touchUpInside)
         self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
+        self.KakaoLoginBtn.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
+        self.SignUpBtn.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
         let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다",TokenKeyChain)
         if TokenKeyChain != nil {
@@ -48,7 +50,6 @@ class LoginViewController: UIViewController {
             
         }
         
-        
     }
     
     
@@ -57,102 +58,79 @@ class LoginViewController: UIViewController {
         self.KeyboardAddObserver()
     }
     
+    private func KakaoAPICall(){
+        if KeychainWrapper.standard.string(forKey: "Kakaotoken") != nil{
+            oAuthApi.shared.AuthKakaoLoginCall { [weak self] result in
+                switch result{
+                case.success(let value):
+                    if value.code == 401 {
+                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hyun-Kim", service_use_agree: true)
+                        oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) { [weak self] result in
+                            switch result{
+                            case.success(let value):
+                            print("KakaoSingUpAPI Code\(value.code)")
+                            print("KakaoSingUpApI Message\(value.message)")
+                            print("카카오 정식 계정 Email 입니다 \(value.email)")
+                            print("카카오 정식 계정 nickname 입니다 \(value.nickname)")
+                            case.failure(let error):
+                            print(error.localizedDescription)
+                            }
+                            
+                        }
+                    }
+                    print("카카오 로그인 email 계정 입니다\(value.email)")
+                    print("카카오 로그인 nickname 입니다\(value.nickname)")
+                    print("카카오 로그인 code 입니다 \(value.code)")
+                    print("카카오 로그인 message 입니다 \(value.message)")
+                case.failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        
+    }
+}
     
     // MARK - 초기 Layout 세팅
     private func SetLoginLayout(){
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true
-        
-        
-        self.EmailTextField.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.gray])
-        self.EmailTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.EmailTextField.layer.borderWidth = 1.0
-        self.EmailTextField.textContentType = .emailAddress
-        self.EmailTextField.borderStyle = .line
-        self.EmailTextField.frame = CGRect(x: self.EmailTextField.frame.origin.x, y: self.EmailTextField.frame.origin.y, width: self.EmailTextField.frame.size.width, height: self.EmailTextField.frame.size.height)
-        
-        self.PasswordTextField.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.gray])
-        self.PasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.PasswordTextField.layer.borderWidth = 1.0
-        self.PasswordTextField.textContentType = .password
-        self.PasswordTextField.borderStyle = .line
-        self.PasswordTextField.frame = CGRect(x: self.PasswordTextField.frame.origin.x, y: self.PasswordTextField.frame.origin.y, width: self.PasswordTextField.frame.size.width, height: self.PasswordTextField.frame.size.height)
-        
-        self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "로그인", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
+    
+        self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
         self.ConfirmButton.tintColor = UIColor.white
-        self.ConfirmButton.backgroundColor = UIColor.black
+        self.ConfirmButton.backgroundColor = UIColor(red: 73/255, green: 72/255, blue: 75/255, alpha: 1.0)
         self.ConfirmButton.layer.borderColor = UIColor.clear.cgColor
-        self.ConfirmButton.layer.cornerRadius = 12
+        self.ConfirmButton.layer.cornerRadius = 30
         self.ConfirmButton.layer.masksToBounds = true
         
-        self.AccountLabel.attributedText = NSAttributedString(string: "계졍이 없으신가요?", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(rawValue: 1.0))])
-        self.AccountLabel.textColor = UIColor.lightGray
-        self.AccountLabel.textAlignment = .center
-        self.AccountLabel.frame = CGRect(x: self.AccountLabel.frame.origin.x, y: self.AccountLabel.frame.origin.y, width: self.AccountLabel.frame.size.width, height: self.AccountLabel.frame.size.height)
-        
-        let UnderLineAttributed = NSMutableAttributedString(string: "가입하기")
-        UnderLineAttributed.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, UnderLineAttributed.string.count))
-        UnderLineAttributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(rawValue: 1.0)), range: NSMakeRange(0, UnderLineAttributed.string.count))
-        self.AccountAddBtn.setAttributedTitle(UnderLineAttributed, for: .normal)
-        self.AccountAddBtn.layer.borderColor = UIColor.clear.cgColor
-        self.AccountAddBtn.tintColor = UIColor.lightGray
-        self.AccountAddBtn.frame = CGRect(x: self.AccountAddBtn.frame.origin.x, y: self.AccountAddBtn.frame.origin.y, width: self.AccountAddBtn.frame.size.width, height: self.AccountAddBtn.frame.size.height)
-        
-        let FindAccoundUnderLine = NSMutableAttributedString(string: "비밀번호를잊으셨나요?")
-        FindAccoundUnderLine.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, FindAccoundUnderLine.string.count))
-        FindAccoundUnderLine.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(rawValue: 1.0)), range: NSMakeRange(0, FindAccoundUnderLine.string.count))
-        
-        self.AccountFindBtn.setAttributedTitle(FindAccoundUnderLine, for: .normal)
-        self.AccountFindBtn.layer.borderColor = UIColor.clear.cgColor
-        self.AccountFindBtn.tintColor = UIColor.lightGray
-        self.AccountFindBtn.frame = CGRect(x: self.AccountFindBtn.frame.origin.x, y: self.AccountFindBtn.frame.origin.y, width: self.AccountFindBtn.frame.size.width, height: self.AccountFindBtn.frame.size.height)
+        self.MainSubject.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0))
+        self.MainSubject.text = "스터디모임을 손쉽게 찾아 함께 공부해요!"
+        self.MainSubject.textColor = UIColor.black
+        self.MainSubject.textAlignment = .left
+        self.MainSubject.frame = CGRect(x: self.MainSubject.frame.origin.x, y: self.MainSubject.frame.origin.y, width: self.MainSubject.frame.size.width, height: self.MainSubject.frame.size.height)
+        self.MainSubject.numberOfLines = 2
         
         
+        self.ContourLine.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
+        self.ContourLine.frame = CGRect(x: self.ContourLine.frame.origin.x, y: self.ContourLine.frame.origin.y, width: self.ContourLine.frame.size.width, height: self.ContourLine.frame.size.height)
+        self.ContourLine2.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
+        self.ContourLine2.frame = CGRect(x: self.ContourLine2.frame.origin.x, y: self.ContourLine2.frame.origin.y, width: self.ContourLine2.frame.size.width, height: self.ContourLine2.frame.size.height)
+        
+        
+        self.descriptionLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        self.descriptionLabel.text = "또는"
+        self.descriptionLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        self.descriptionLabel.textAlignment = .center
+        self.descriptionLabel.frame = CGRect(x: self.descriptionLabel.frame.origin.x, y: self.descriptionLabel.frame.origin.y, width: self.descriptionLabel.frame.size.width, height: self.descriptionLabel.frame.size.height)
+        
+        self.EmailTextFiled.placeholder = "Welcome@email.com"
+        self.PasswordTextFiled.placeholder = "6자 이상의 비밀번호"
+        self.PasswordTextFiled.isSecureTextEntry = true
     }
     
     private func SetAutoLayout(){
-        self.EmailTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view).offset(256)
-            make.left.equalTo(self.view).offset(47)
-            make.right.equalTo(self.view).offset(-47)
-            
-            
-        }
-        self.PasswordTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.EmailTextField.snp.bottom).offset(65)
-            make.left.equalTo(self.view).offset(47)
-            make.right.equalTo(self.view).offset(-47)
-            
-        }
         
-        self.ConfirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(47)
-            make.right.equalTo(self.view).offset(-47)
-            make.bottom.equalTo(self.view).offset(-220)
-            make.size.equalTo(CGSize(width: 320, height: 30))
-        }
         
-        self.AccountLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.ConfirmButton.snp.bottom).offset(30)
-            make.left.equalTo(self.view).offset(100)
-            make.bottom.equalTo(self.view).offset(-170)
-            make.size.equalTo(CGSize(width: 150, height: 20))
-        }
-        self.AccountAddBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.AccountLabel.snp.right).offset(5)
-            make.right.equalTo(self.view).offset(-94)
-            make.bottom.equalTo(self.view).offset(-170)
-            make.size.equalTo(CGSize(width: 65, height: 20))
-        }
-        self.AccountFindBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(100)
-            make.right.equalTo(self.view).offset(-100)
-            make.bottom.equalTo(self.view).offset(-64)
-            make.top.equalTo(self.AccountAddBtn.snp.bottom).offset(75)
-            make.size.equalTo(CGSize(width: 214, height: 30))
-        }
     }
-    
     
     public func KeyboardAddObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -178,15 +156,40 @@ class LoginViewController: UIViewController {
     }
     
     
+    
+    @objc func KakaoLogin(){
+        AuthApi.shared.loginWithKakaoAccount(authType: .Reauthenticate) { (oAuthToken, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }else{
+                _ = oAuthToken
+                guard let AccesToken = oAuthToken?.accessToken else { return }
+                if AccesToken != "" {
+                    KeychainWrapper.standard.set(AccesToken, forKey: "Kakaotoken")
+                    self.KakaoAPICall()
+                }
+            }
+        }
+    }
+    
+    @objc func SignUpTransform(){
+        let SignView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
+        guard let SignVC = SignView else { return }
+        self.navigationController?.pushViewController(SignVC, animated: true)
+    }
+    
+    
+    
+    
     @objc func ReceiveLoginAPI(){
-        let Paramter = LoginParamter(email: self.EmailTextField.text!, password: self.PasswordTextField.text!)
+        let Paramter = LoginParamter(email: self.EmailTextFiled.text!, password: self.PasswordTextFiled.text!)
         
-        APIService.shared.RequestLoginServer(LoginParamter: Paramter) { [weak self] result in
+        oAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
             switch result {
             case .success(let value):
-                print("테스트 status code 값입니다 : " ,value.message)
+                print("테스트 status code 값입니다 : \(value.message)")
                 if value.code == 200 {
-                    KeychainWrapper.standard.set(APIService.shared.LoginData.token, forKey: "token")
+                    KeychainWrapper.standard.set(oAuthApi.shared.LoginModel.token!, forKey: "token")
                     let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
                     guard let MainVC = MainView else { return }
                     self?.navigationController?.pushViewController(MainVC, animated: true)
