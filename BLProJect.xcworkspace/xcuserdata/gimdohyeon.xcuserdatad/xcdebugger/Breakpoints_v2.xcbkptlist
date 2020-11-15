@@ -190,8 +190,8 @@
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "KakaoLogin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "KakaoLogin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,74 +222,10 @@
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "LoginViewController"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "204A147A-3A3E-4619-931D-40C1D1106327"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/LoginViewController/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "KakaoAPICall()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "204A147A-3A3E-4619-931D-40C1D1106327 - ded412ade4601c62"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "&#xc2a4;&#xd130;&#xb514;&#xd31c;.LoginViewController.(KakaoAPICall in _8420A05A46814639E69236F2480BAF81)() -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "255">
-               </Location>
-               <Location
-                  uuid = "204A147A-3A3E-4619-931D-40C1D1106327 - 3bb13783e1c58c5c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.LoginViewController.(KakaoAPICall in _8420A05A46814639E69236F2480BAF81)() -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "291">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "08ACC34B-0B17-470C-9A2A-9EF06461FC34"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/LoginViewController/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "KakaoAPICall()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -35,7 +35,10 @@ final class LoginViewModel : LoginViewModelType{
     
     struct  Output {
         var isConfirmEnabled : Driver<Bool>
-//        var setEmailTextEnabled  : Driver<String>
+        var setEmailTextEnabled  : Driver<CGColor>
+        var setPasswordTextEnabled : Driver<CGColor>
+        var isEmptyEmailText : Driver<Bool>
+        
     }
     
     struct Dependency {
@@ -49,7 +52,9 @@ final class LoginViewModel : LoginViewModelType{
     
     private let EmailTextInput = BehaviorSubject<String?>(value: nil)
     private let PasswordTextInput = BehaviorSubject<String?>(value: nil)
-    
+    private let EmailTextDriver : Driver<CGColor>
+    private let PasswordTextDriver : Driver<CGColor>
+    private let isEmpryTextDrvier : Driver<Bool>
     
     init(dependency : Dependency = Dependency(Email: nil, Password: nil)) {
         self.dependency = dependency
@@ -59,16 +64,46 @@ final class LoginViewModel : LoginViewModelType{
             .map(validation)
             .asDriver(onErrorJustReturn: false)
         
-//        let setEmailTextEnabled =
-            
+        EmailTextDriver = EmailText.map(AddEmailVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
+        
+        PasswordTextDriver = PasswordText.map(AddPassWordVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
+        
+        isEmpryTextDrvier = EmailText.map(isEmptyEmail).asDriver(onErrorJustReturn: false)
+        
         
         self.input = Input(EmailText: EmailText.asObserver(), PassWordText: PasswordText.asObserver())
-        self.output = Output(isConfirmEnabled: isConfirmEnabled)
+        self.output = Output(isConfirmEnabled: isConfirmEnabled, setEmailTextEnabled: EmailTextDriver, setPasswordTextEnabled: PasswordTextDriver, isEmptyEmailText: isEmpryTextDrvier)
     }
 }
 
 
+private func AddEmailVaildation(Email : String?) -> CGColor {
+    let EmailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let EmailVaildation = NSPredicate(format: "SELF MATCHES %@",EmailRegex)
+    if EmailVaildation.evaluate(with: Email) == true {
+        return UIColor.cyan.cgColor
+    }else{
+        return UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+    }
+}
 
+private func AddPassWordVaildation(Password : String?) -> CGColor {
+    let PasswordRegex = "(?=.*[A-Za-z])(?=.*[0-9]).{8,16}"
+    let PasswordVaildation = NSPredicate(format: "SELF MATCHES %@",PasswordRegex)
+    if PasswordVaildation.evaluate(with: Password) == true {
+        return UIColor.cyan.cgColor
+    }else{
+        return UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+    }
+}
+
+private func isEmptyEmail(Email : String?) -> Bool{
+    if Email?.isEmpty == true {
+        return true
+    }else{
+        return false
+    }
+}
 
 private func validation(Email : String? , Password : String?) -> Bool {
     return Email?.isEmpty == false && Password?.isEmpty == false

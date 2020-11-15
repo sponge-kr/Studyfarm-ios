@@ -14,6 +14,8 @@ import Alamofire
 import SnapKit
 import SwiftyJSON
 import SwiftKeychainWrapper
+import RxCocoa
+import RxSwift
 
 
 
@@ -33,6 +35,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var SignUpBtn: UIButton!
     
     public var ErrorAlert : LoginAlertView!
+    var ViewModel : LoginViewModel = LoginViewModel()
+    let disposeBag : DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +56,7 @@ class LoginViewController: UIViewController {
             
             
         }
+        self.TextFiledbind()
         
     }
     
@@ -59,6 +64,28 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.KeyboardAddObserver()
+    }
+    
+    
+    private func TextFiledbind(){
+        EmailTextFiled.rx.text
+            .bind(to: ViewModel.input.EmailText)
+            .disposed(by: disposeBag)
+        PasswordTextFiled.rx.text
+            .bind(to: ViewModel.input.PassWordText)
+            .disposed(by: disposeBag)
+        ViewModel.output.setEmailTextEnabled
+            .drive{ (isempty) in
+                self.EmailTextFiled.rx.base.layer.borderColor = isempty
+            }.disposed(by: disposeBag)
+        ViewModel.output.setPasswordTextEnabled
+            .drive{ (isempty) in
+                self.PasswordTextFiled.rx.base.layer.borderColor = isempty
+            }.disposed(by: disposeBag)
+        ViewModel.output.isEmptyEmailText
+            .drive{ (ishidden) in
+                self.EmailTextFiled.rightView?.rx.base.isHidden = ishidden
+            }.disposed(by: disposeBag)
     }
     
     private func KakaoAPICall(){
@@ -237,6 +264,9 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    
+    
     
     @objc func showAccountView(){
         let signUpView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
