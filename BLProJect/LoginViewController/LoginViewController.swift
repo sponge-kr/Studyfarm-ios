@@ -21,7 +21,10 @@ import SwiftKeychainWrapper
 class LoginViewController: UIViewController {
     @IBOutlet weak var ConfirmButton: UIButton!
     @IBOutlet weak var MainSubject: UILabel!
+    @IBOutlet weak var ParentsSubject: UILabel!
     @IBOutlet weak var ContourLine: UIView!
+    @IBOutlet weak var AuthLoginSubject: UILabel!
+    @IBOutlet weak var AuthLoginSwitch: UISwitch!
     @IBOutlet weak var ContourLine2: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var EmailTextFiled: UITextField!
@@ -95,20 +98,27 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true
     
-        self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
+        self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "로그인", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
         self.ConfirmButton.tintColor = UIColor.white
-        self.ConfirmButton.backgroundColor = UIColor(red: 73/255, green: 72/255, blue: 75/255, alpha: 1.0)
+        self.ConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.ConfirmButton.layer.borderColor = UIColor.clear.cgColor
-        self.ConfirmButton.layer.cornerRadius = 30
+        self.ConfirmButton.layer.cornerRadius = 8
         self.ConfirmButton.layer.masksToBounds = true
         
         self.MainSubject.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0))
-        self.MainSubject.text = "스터디모임을 손쉽게 찾아 함께 공부해요!"
+        self.MainSubject.text = "나와 딱 맞는 \n스터디를 찾고 계신가요?"
         self.MainSubject.textColor = UIColor.black
         self.MainSubject.textAlignment = .left
         self.MainSubject.frame = CGRect(x: self.MainSubject.frame.origin.x, y: self.MainSubject.frame.origin.y, width: self.MainSubject.frame.size.width, height: self.MainSubject.frame.size.height)
         self.MainSubject.numberOfLines = 2
         
+        
+        self.ParentsSubject.text = "스터디팜을 이용하시려면 로그인해 주세요"
+        self.ParentsSubject.font = UIFont.systemFont(ofSize: 14)
+        self.ParentsSubject.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
+        self.ParentsSubject.textAlignment = .left
+        self.ParentsSubject.frame = CGRect(x: self.ParentsSubject.frame.origin.x, y: self.ParentsSubject.frame.origin.y, width: self.ParentsSubject.frame.size.width, height: self.ParentsSubject.frame.size.height)
+        self.ParentsSubject.numberOfLines = 1
         
         self.ContourLine.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
         self.ContourLine.frame = CGRect(x: self.ContourLine.frame.origin.x, y: self.ContourLine.frame.origin.y, width: self.ContourLine.frame.size.width, height: self.ContourLine.frame.size.height)
@@ -116,15 +126,37 @@ class LoginViewController: UIViewController {
         self.ContourLine2.frame = CGRect(x: self.ContourLine2.frame.origin.x, y: self.ContourLine2.frame.origin.y, width: self.ContourLine2.frame.size.width, height: self.ContourLine2.frame.size.height)
         
         
+        self.descriptionLabel.text = "다음 계정으로 이용"
         self.descriptionLabel.font = UIFont.boldSystemFont(ofSize: 12)
-        self.descriptionLabel.text = "또는"
-        self.descriptionLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        self.descriptionLabel.textColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
         self.descriptionLabel.textAlignment = .center
         self.descriptionLabel.frame = CGRect(x: self.descriptionLabel.frame.origin.x, y: self.descriptionLabel.frame.origin.y, width: self.descriptionLabel.frame.size.width, height: self.descriptionLabel.frame.size.height)
         
-        self.EmailTextFiled.placeholder = "Welcome@email.com"
-        self.PasswordTextFiled.placeholder = "6자 이상의 비밀번호"
+        
+        self.EmailTextFiled.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
+        self.EmailTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+        self.EmailTextFiled.layer.borderWidth = 1.0
+        self.EmailTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.EmailTextFiled.leftViewMode = .always
+        
+    
+        self.PasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "비밀번호 (영문, 숫자 조합의 8~16자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
         self.PasswordTextFiled.isSecureTextEntry = true
+        self.PasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+        self.PasswordTextFiled.layer.borderWidth = 1.0
+        self.PasswordTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.PasswordTextFiled.leftViewMode = .always
+        
+        self.AuthLoginSubject.text = "자동로그인"
+        self.AuthLoginSubject.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
+        self.AuthLoginSubject.font = UIFont.systemFont(ofSize: 12)
+        self.AuthLoginSubject.numberOfLines = 1
+        self.AuthLoginSubject.textAlignment = .center
+        
+        self.AuthLoginSwitch.onTintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        
+        self.SignUpBtn.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        
     }
     
     private func SetAutoLayout(){
