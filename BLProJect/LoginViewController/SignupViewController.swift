@@ -21,6 +21,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var SignNicknamTextField: UITextField!
     @IBOutlet weak var SignJoinButton: UIButton!
     @IBOutlet weak var SubjectLabel: UILabel!
+    @IBOutlet weak var ExplanationSubject: UILabel!
+    @IBOutlet weak var EmailLabel: UILabel!
+    @IBOutlet weak var PasswordLabel: UILabel!
+    @IBOutlet weak var NicknameLabel: UILabel!
     
     public var ViewModel = SignViewModel()
     public let disposedBag = DisposeBag()
@@ -67,82 +71,118 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.addKeyboardNotification()
     }
     
+    //MARK - 초기 회원가입 Layout 구현
     public func SetSingViewLayout(){
         
-        self.SubjectLabel.attributedText = NSAttributedString(string: "스터디를 찾거나 참가하려면\n 가입하세요", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 22, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        let Navigationimage = UIImage(named: "Navigation@1x.png")
+        self.navigationController?.navigationBar.backIndicatorImage = Navigationimage
+        
+        self.SubjectLabel.text = "이메일로 시작하기"
+        self.SubjectLabel.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0))
+        self.SubjectLabel.textColor = UIColor.black
         self.SubjectLabel.textAlignment = .center
-        self.SubjectLabel.numberOfLines = 2
+        self.SubjectLabel.numberOfLines = 1
+        self.SubjectLabel.frame = CGRect(x: self.SubjectLabel.frame.origin.x, y: self.SubjectLabel.frame.origin.y, width: self.SubjectLabel.frame.size.width, height: self.SubjectLabel.frame.size.height)
         
-        self.SignEmailTextField.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0))])
-        self.SignEmailTextField.layer.borderColor = UIColor.lightGray.cgColor
+       
+        self.ExplanationSubject.text = "입력하신 메일로 본인인증을 위한 인증번호가 전송됩니다.\n비밀번호는 1번만 입력하니 정확히 입력해주세요."
+        self.ExplanationSubject.font = UIFont.systemFont(ofSize: 14)
+        self.ExplanationSubject.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
+        self.ExplanationSubject.textAlignment = .left
+        self.ExplanationSubject.numberOfLines = 2
+        self.ExplanationSubject.frame = CGRect(x: self.ExplanationSubject.frame.origin.x, y: self.ExplanationSubject.frame.origin.y, width: self.ExplanationSubject.frame.size.width, height: self.ExplanationSubject.frame.size.height)
+        
+        
+        self.EmailLabel.text = "이메일"
+        self.EmailLabel.font = UIFont.systemFont(ofSize: 14)
+        self.EmailLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        self.EmailLabel.textAlignment = .center
+        self.EmailLabel.frame = CGRect(x: self.EmailLabel.frame.origin.x, y: self.EmailLabel.frame.origin.y, width: self.EmailLabel.frame.size.width, height: self.EmailLabel.frame.size.height)
+        
+        self.PasswordLabel.text = "비밀번호"
+        self.PasswordLabel.font = UIFont.systemFont(ofSize: 14)
+        self.PasswordLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        self.PasswordLabel.textAlignment = .center
+        self.PasswordLabel.frame = CGRect(x: self.PasswordLabel.frame.origin.x, y: self.PasswordLabel.frame.origin.y, width: self.PasswordLabel.frame.size.width, height: self.PasswordLabel.frame.size.height)
+        
+        self.NicknameLabel.text = "닉네임"
+        self.NicknameLabel.font = UIFont.systemFont(ofSize: 14)
+        self.NicknameLabel.textColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
+        self.NicknameLabel.textAlignment = .center
+        self.NicknameLabel.frame = CGRect(x: self.NicknameLabel.frame.origin.x, y: self.NicknameLabel.frame.origin.y, width: self.NicknameLabel.frame.size.width, height: self.NicknameLabel.frame.size.height)
+        
+        self.SignEmailTextField.attributedPlaceholder = NSAttributedString(string: "Welcome@email.com", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 0.6)])
+        self.SignEmailTextField.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.SignEmailTextField.layer.borderWidth = 1.0
+        self.SignEmailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.SignEmailTextField.leftViewMode = .always
         self.SignEmailTextField.textContentType = .emailAddress
-        self.SignEmailTextField.borderStyle = .line
         self.SignEmailTextField.frame = CGRect(x: self.SignEmailTextField.frame.origin.x, y: self.SignEmailTextField.frame.origin.y, width: self.SignEmailTextField.frame.size.width, height: self.SignEmailTextField.frame.size.height)
-        self.SignEmailTextField.UnderLine()
         
-        self.SignNicknamTextField.attributedPlaceholder = NSAttributedString(string: "닉네임", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0))])
-        self.SignNicknamTextField.layer.borderColor = UIColor.lightGray.cgColor
+        self.SignNicknamTextField.attributedPlaceholder = NSAttributedString(string: "10자 이내로 입력해주세요.", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 0.6)])
+        self.SignNicknamTextField.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.SignNicknamTextField.layer.borderWidth = 1.0
+        self.SignNicknamTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.SignNicknamTextField.leftViewMode = .always
         self.SignNicknamTextField.textContentType = .name
-        self.SignNicknamTextField.borderStyle = .line
         self.SignNicknamTextField.frame = CGRect(x: self.SignNicknamTextField.frame.origin.x, y: self.SignNicknamTextField.frame.origin.y, width: self.SignNicknamTextField.frame.size.width, height: self.SignNicknamTextField.frame.size.height)
-        self.SignNicknamTextField.UnderLine()
         
-        self.SignPasswordTextField.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0))])
-        self.SignPasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
+        self.SignPasswordTextField.attributedPlaceholder = NSAttributedString(string: "영문, 숫자 포함 6~16자로 조합해주세요.", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 0.6)])
+        self.SignPasswordTextField.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.SignPasswordTextField.layer.borderWidth = 1.0
+        self.SignPasswordTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.SignPasswordTextField.leftViewMode = .always
         self.SignPasswordTextField.textContentType = .password
-        self.SignPasswordTextField.borderStyle = .line
+        self.SignPasswordTextField.isSecureTextEntry = true
         self.SignPasswordTextField.frame = CGRect(x: self.SignPasswordTextField.frame.origin.x, y: self.SignPasswordTextField.frame.origin.y, width: self.SignPasswordTextField.frame.size.width, height: self.SignPasswordTextField.frame.size.height)
-        self.SignPasswordTextField.UnderLine()
         
-        self.SignJoinButton.backgroundColor = UIColor.black
-        self.SignJoinButton.setAttributedTitle(NSAttributedString(string: "가입하기", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
+        self.SignJoinButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.SignJoinButton.setAttributedTitle(NSAttributedString(string: "다음", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)), NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
         self.SignJoinButton.layer.borderColor = UIColor.clear.cgColor
-        self.SignJoinButton.layer.cornerRadius = 12
+        self.SignJoinButton.layer.cornerRadius = 8
         self.SignJoinButton.frame = CGRect(x: self.SignJoinButton.frame.origin.x, y: self.SignJoinButton.frame.origin.y, width: self.SignJoinButton.frame.size.width, height: self.SignJoinButton.frame.size.height)
         
     }
     
     public func SignViewAutoLayout(){
-        self.SubjectLabel.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 374, height: 100))
-            make.top.equalTo(self.view).offset(156)
-            make.right.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
-            make.bottom.equalTo(self.SignEmailTextField.snp.top).offset(-48)
-            
-        }
-        self.SignEmailTextField.snp.makeConstraints { (make) in
-            make.right.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
-            make.bottom.equalTo(self.SignNicknamTextField.snp.top).offset(-70)
-            make.top.equalTo(self.SubjectLabel.snp.bottom).offset(48)
-            make.size.equalTo(CGSize(width: 374, height: 30))
-        }
-        self.SignNicknamTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SignEmailTextField.snp
-                                .bottom).offset(70)
-            make.right.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
-            make.bottom.equalTo(self.SignPasswordTextField.snp.top).offset(-70)
-            make.size.equalTo(CGSize(width: 374, height: 30))
-        }
-        self.SignPasswordTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SignNicknamTextField.snp.bottom).offset(70)
-            make.right.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
-            make.bottom.equalTo(self.SignJoinButton.snp.top).offset(-83)
-            make.size.equalTo(CGSize(width: 374, height: 30))
-        }
-        self.SignJoinButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SignPasswordTextField.snp.bottom).offset(83)
-            make.right.equalTo(self.view).offset(-20)
-            make.left.equalTo(self.view).offset(20)
-            make.bottom.equalTo(self.view).offset(-149)
-            make.size.equalTo(CGSize(width: 374, height: 40))
-        }
+//        self.SubjectLabel.snp.makeConstraints { (make) in
+//            make.size.equalTo(CGSize(width: 374, height: 100))
+//            make.top.equalTo(self.view).offset(156)
+//            make.right.equalTo(self.view).offset(-20)
+//            make.left.equalTo(self.view).offset(20)
+//            make.bottom.equalTo(self.SignEmailTextField.snp.top).offset(-48)
+//
+//        }
+//        self.SignEmailTextField.snp.makeConstraints { (make) in
+//            make.right.equalTo(self.view).offset(-20)
+//            make.left.equalTo(self.view).offset(20)
+//            make.bottom.equalTo(self.SignNicknamTextField.snp.top).offset(-70)
+//            make.top.equalTo(self.SubjectLabel.snp.bottom).offset(48)
+//            make.size.equalTo(CGSize(width: 374, height: 30))
+//        }
+//        self.SignNicknamTextField.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.SignEmailTextField.snp
+//                                .bottom).offset(70)
+//            make.right.equalTo(self.view).offset(-20)
+//            make.left.equalTo(self.view).offset(20)
+//            make.bottom.equalTo(self.SignPasswordTextField.snp.top).offset(-70)
+//            make.size.equalTo(CGSize(width: 374, height: 30))
+//        }
+//        self.SignPasswordTextField.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.SignNicknamTextField.snp.bottom).offset(70)
+//            make.right.equalTo(self.view).offset(-20)
+//            make.left.equalTo(self.view).offset(20)
+//            make.bottom.equalTo(self.SignJoinButton.snp.top).offset(-83)
+//            make.size.equalTo(CGSize(width: 374, height: 30))
+//        }
+//        self.SignJoinButton.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.SignPasswordTextField.snp.bottom).offset(83)
+//            make.right.equalTo(self.view).offset(-20)
+//            make.left.equalTo(self.view).offset(20)
+//            make.bottom.equalTo(self.view).offset(-149)
+//            make.size.equalTo(CGSize(width: 374, height: 40))
+//        }
     }
     
     public func addKeyboardNotification(){
@@ -161,9 +201,9 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc func CallServiceApi(){
         
-        let SingParamterTest = SignUpParamter(email: "ysksoft@naver.com", password: "kysd1234!", nickname: "강동원233", name: "김미란", city_info: [1,1,1,2,1,3], gender: 0, born_date: "1998-12-04", interesting: [["name":"토익","skill_level":"A+"],["name":"토익","skill_level":"A+"]], service_use_agree: true, profile: nil, phone: "010-4055-9598", age: 23, simple_introduce: "반갑습니다", study_purpose: "공부하려고", service_way: "글보고")
+        let SingParamter = SignUpParamter(email: "ysk8019@daum.net", password: "kysd1234!", nickname: "Do-HY-K11", service_use_agree: true)
         
-        oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamterTest) { [weak self] reuslt in
+        oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { [weak self] reuslt in
             switch reuslt {
             case .success(let value):
                 print(value.code)

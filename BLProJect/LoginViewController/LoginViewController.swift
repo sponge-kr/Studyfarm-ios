@@ -90,28 +90,21 @@ class LoginViewController: UIViewController {
     
     private func KakaoAPICall(){
         if KeychainWrapper.standard.string(forKey: "Kakaotoken") != nil{
-            oAuthApi.shared.AuthKakaoLoginCall { [weak self] result in
+            oAuthApi.shared.AuthKakaoLoginCall { result in
                 switch result{
                 case.success(let value):
                     if value.code == 401 {
                         let kakaoParamter = KakaoUserParamter(nickname: "Do-hyun-Kim", service_use_agree: true)
-                        oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) { [weak self] result in
+                        oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result{
                             case.success(let value):
-                            print("KakaoSingUpAPI Code\(value.code)")
-                            print("KakaoSingUpApI Message\(value.message)")
-                            print("카카오 정식 계정 Email 입니다 \(value.email)")
-                            print("카카오 정식 계정 nickname 입니다 \(value.nickname)")
+                                print(value.email)
                             case.failure(let error):
                             print(error.localizedDescription)
                             }
                             
                         }
                     }
-                    print("카카오 로그인 email 계정 입니다\(value.email)")
-                    print("카카오 로그인 nickname 입니다\(value.nickname)")
-                    print("카카오 로그인 code 입니다 \(value.code)")
-                    print("카카오 로그인 message 입니다 \(value.message)")
                 case.failure(let error):
                     print(error.localizedDescription)
                 }
@@ -120,7 +113,7 @@ class LoginViewController: UIViewController {
     }
 }
     
-    // MARK - 초기 Layout 세팅
+    // MARK - 초기 로그인 Layout 구현
     private func SetLoginLayout(){
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true

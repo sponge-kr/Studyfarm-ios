@@ -189,10 +189,10 @@
                             self.StudyModel.contents.append(subJson["contents"].stringValue)
                             self.StudyModel.topic_name.append(subJson["topic_name"].stringValue)
                             self.StudyModel.category_name.append(subJson["category_name"].stringValue)
-                            print("스터디팜 스터디 리스트 제목 입니다 : \(self.StudyModel.title)")
-                            print("스터디팜 스터디 등록 이메일 입니다 : \(self.StudyModel.age)")
-                            print("스터디팜 스터디 리스트 콘텐츠 입니다 : \(self.StudyModel.contents)")
                         }
+                        print("스터디팜 스터디 리스트 제목 입니다 : \(self.StudyModel.title)")
+                        print("스터디팜 스터디 등록 이메일 입니다 : \(self.StudyModel.age)")
+                        print("스터디팜 스터디 리스트 콘텐츠 입니다 : \(self.StudyModel.contents)")
                         completionHandler()
                     case .failure(let error):
                         print(error.localizedDescription)

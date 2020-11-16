@@ -174,8 +174,8 @@
             filePath = "BLProJect/ServerCommon/oAuthApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "oAuthApi"
             landmarkType = "3">
          </BreakpointContent>
@@ -184,14 +184,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BAEB8E3A-1AE9-4C62-90CB-B80BDF00D6E6"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "KakaoLogin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -200,14 +200,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "81B4292D-91BD-4198-9D68-882BA2C51EEF"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "KakaoLogin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,14 +216,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4D273A85-EF4B-477C-A4A2-3C5A3FC1DDCD"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "LoginViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -238,8 +238,8 @@
             filePath = "BLProJect/ServerCommon/oAuthApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "AuthkakaoSignUp(KakaoUserParamter:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -248,6 +248,86 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EB57BFF1-5593-440D-AAAD-2E608B27D33E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC410A42-F72E-4523-9087-95BD3EC47013"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AC410A42-F72E-4523-9087-95BD3EC47013 - b5ddec14a9535da0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "&#xc2a4;&#xd130;&#xb514;&#xd31c;.oAuthApi.AuthKakaoLoginCall(completionHandler: (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/ServerCommon/oAuthApi.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "617">
+               </Location>
+               <Location
+                  uuid = "AC410A42-F72E-4523-9087-95BD3EC47013 - df32c197f4d31f89"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.oAuthApi.AuthKakaoLoginCall(completionHandler: (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/ServerCommon/oAuthApi.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "266"
+                  endingLineNumber = "266"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1F206D0-27B6-4D92-A2DE-0C3CA830CCBE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A904AAD-C9ED-4631-9D9D-C299C6EDFF08"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -263,86 +343,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC410A42-F72E-4523-9087-95BD3EC47013"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AC410A42-F72E-4523-9087-95BD3EC47013 - b5ddec14a9534276"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "&#xc2a4;&#xd130;&#xb514;&#xd31c;.oAuthApi.AuthKakaoLoginCall(completionHandler: (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/ServerCommon/oAuthApi.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "275"
-                  endingLineNumber = "275"
-                  offsetFromSymbolStart = "617">
-               </Location>
-               <Location
-                  uuid = "AC410A42-F72E-4523-9087-95BD3EC47013 - df32c197f4d30053"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.oAuthApi.AuthKakaoLoginCall(completionHandler: (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/ServerCommon/oAuthApi.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "355">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1F206D0-27B6-4D92-A2DE-0C3CA830CCBE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6A904AAD-C9ED-4631-9D9D-C299C6EDFF08"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/ServerCommon/oAuthApi.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "AuthKakaoLoginCall(completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "524C9483-0EB8-4FE3-B25E-AE7846E4780A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -350,8 +350,8 @@
             filePath = "BLProJect/ServerCommon/oAuthApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "AuthkakaoSignUp(KakaoUserParamter:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -359,16 +359,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0BDAF34E-DED6-456C-9AF1-030BD7F91174"
+            uuid = "E750C76E-13E5-45BD-A51D-EBF03E276EBB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/LoginViewController/LoginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "KakaoAPICall()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E750C76E-13E5-45BD-A51D-EBF03E276EBB - 3bb13783e1c5887c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.LoginViewController.(KakaoAPICall in _8420A05A46814639E69236F2480BAF81)() -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "311">
+               </Location>
+               <Location
+                  uuid = "E750C76E-13E5-45BD-A51D-EBF03E276EBB - 3888b407c348c229"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoSingDataModel, Swift.Error&gt;) -&gt; () in closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.KakaoLoginDataModel, Swift.Error&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.LoginViewController.(KakaoAPICall in _8420A05A46814639E69236F2480BAF81)() -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/LoginViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "194">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9011ABE2-13B4-4A15-98D8-760803E4737A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/LoginViewController/SignupViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "CallServiceApi()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9011ABE2-13B4-4A15-98D8-760803E4737A - 6625739ea3cab2db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "&#xc2a4;&#xd130;&#xb514;&#xd31c;.SignupViewController.CallServiceApi() -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/SignupViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "9011ABE2-13B4-4A15-98D8-760803E4737A - ba91df4ff11d2f04"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.SignUpDataModel, Swift.Error&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.SignupViewController.CallServiceApi() -&gt; ()"
+                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gimdohyeon/Desktop/StudyFarm/Studyfarm-ios/BLProJect/LoginViewController/SignupViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "102">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9C594FA-6CE9-418A-83F2-00112A690F70"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLProJect/ServerCommon/oAuthApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "AuthkakaoSignUp(KakaoUserParamter:completionHandler:)"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "AuthSignUpCall(SignUpParamter:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46A72CFE-570D-40E2-AF19-6A96FD85337B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLProJect/LoginViewController/SignupViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "CallServiceApi()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

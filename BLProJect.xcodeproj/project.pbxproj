@@ -12,6 +12,8 @@
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
 		D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391D24EAA9E0004D661C /* SignViewModel.swift */; };
+		D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D167D8F32562F575008BB495 /* Navigation@1x.png */; };
+		D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167D8F82562F758008BB495 /* SignupViewModel.swift */; };
 		D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */; };
 		D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */; };
 		D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D194D14C2519EC3F00023302 /* LoginAlertView.swift */; };
@@ -73,6 +75,8 @@
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D149391D24EAA9E0004D661C /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
+		D167D8F32562F575008BB495 /* Navigation@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation@1x.png"; sourceTree = "<group>"; };
+		D167D8F82562F758008BB495 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpAlertView.swift; sourceTree = "<group>"; };
 		D18F6BCE24F27123001D53A1 /* SingUpAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingUpAlertView.xib; sourceTree = "<group>"; };
 		D194D14C2519EC3F00023302 /* LoginAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertView.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				D1B46353255FA4C90063D714 /* LoginViewModel.swift */,
+				D167D8F82562F758008BB495 /* SignupViewModel.swift */,
 			);
 			path = LoginMVMM;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				D1F85D0D24CDC90B00E1F7BE /* Vector.png */,
 				D1F85D0F24CDC96200E1F7BE /* Vector@2x.png */,
 				D1F85D1024CDC96200E1F7BE /* Vector@3x.png */,
+				D167D8F32562F575008BB495 /* Navigation@1x.png */,
 			);
 			path = ImageFile;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
+				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
@@ -559,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
 				D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
