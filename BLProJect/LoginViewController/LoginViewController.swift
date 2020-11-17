@@ -176,6 +176,9 @@ class LoginViewController: UIViewController {
         self.AuthLoginSwitch.onTintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         
         self.SignUpBtn.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+    
+        self.KakaoLoginBtn.setImage(UIImage(named: "kakao_login.png"), for: .normal)
+        
         
     }
     

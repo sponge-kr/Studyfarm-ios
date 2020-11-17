@@ -50,8 +50,6 @@ final class LoginViewModel : LoginViewModelType{
     let input: Input
     let output: Output
     
-    private let EmailTextInput = BehaviorSubject<String?>(value: nil)
-    private let PasswordTextInput = BehaviorSubject<String?>(value: nil)
     private let EmailTextDriver : Driver<CGColor>
     private let PasswordTextDriver : Driver<CGColor>
     private let isEmpryTextDrvier : Driver<Bool>
@@ -64,15 +62,15 @@ final class LoginViewModel : LoginViewModelType{
             .map(validation)
             .asDriver(onErrorJustReturn: false)
         
-        EmailTextDriver = EmailText.map(AddEmailVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
+        self.EmailTextDriver = EmailText.map(AddEmailVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
         
-        PasswordTextDriver = PasswordText.map(AddPassWordVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
+        self.PasswordTextDriver = PasswordText.map(AddPassWordVaildation).asDriver(onErrorJustReturn: UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor)
         
-        isEmpryTextDrvier = EmailText.map(isEmptyEmail).asDriver(onErrorJustReturn: false)
+        self.isEmpryTextDrvier = EmailText.map(isEmptyEmail).asDriver(onErrorJustReturn: false)
         
         
         self.input = Input(EmailText: EmailText.asObserver(), PassWordText: PasswordText.asObserver())
-        self.output = Output(isConfirmEnabled: isConfirmEnabled, setEmailTextEnabled: EmailTextDriver, setPasswordTextEnabled: PasswordTextDriver, isEmptyEmailText: isEmpryTextDrvier)
+        self.output = Output(isConfirmEnabled: isConfirmEnabled, setEmailTextEnabled: self.EmailTextDriver, setPasswordTextEnabled: self.PasswordTextDriver, isEmptyEmailText: self.isEmpryTextDrvier)
     }
 }
 

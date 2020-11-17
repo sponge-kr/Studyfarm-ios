@@ -49,6 +49,13 @@ struct LogoutDataModel {
     var responseTime : String = ""
 }
 
+//MARK - 닉네임 중복확인 데이터 모델
+struct NickNameDataModel {
+    var code : Int = 0
+    var message : String = ""
+    var exist : Bool = false
+}
+
 //MARK - KakakoUser 데이터 모델
 struct KakaoSingDataModel {
     var code : Int = 0
@@ -57,7 +64,7 @@ struct KakaoSingDataModel {
     var email : String = ""
     var nickname  : String = ""
 }
-
+//MARK - KakaoLogin 데이터 모델
 struct KakaoLoginDataModel {
     var code : Int = 0
     var message : String = ""
@@ -128,6 +135,8 @@ class oAuthApi {
     public var SignUpModel = SignUpDataModel()
     public var KakaoModel = KakaoSingDataModel()
     public var KakaoLoginModel = KakaoLoginDataModel()
+    public var NickNameModel = NickNameDataModel()
+    
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginCall(LoginParamter : LoginParamter, completionHandler : @escaping (Result<LoginDataModel,Error>) -> ()){
@@ -234,6 +243,7 @@ class oAuthApi {
     public func AuthEmailCall(oAuthButtonParamter : oAuthButtonParamter, completionHandler : @escaping(Result<oAuthButtonDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email-button", method: .post, parameters: oAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
+                debugPrint(response)
                 switch response.result {
                 case.success(let value):
                     let oAuthButtonJson = JSON(value!)
@@ -246,6 +256,28 @@ class oAuthApi {
                     completionHandler(.success(self.oAuthButtonModel))
                 case .failure(let error):
                     print(error.localizedDescription)
+                }
+                
+            }
+    }
+    
+    public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result{
+                case .success(let value):
+                    let NickNameJson = JSON(value!)
+                    self.NickNameModel.code = NickNameJson["code"].intValue
+                    self.NickNameModel.message = NickNameJson["message"].stringValue
+                    self.NickNameModel.exist = NickNameJson["result"]["exist"].boolValue
+                    print("스터디팜 닉네임 중복 확인 status code 값입니다 \(self.NickNameModel.code)")
+                    print("스터디팜 닉네임 중복 확인 message 값입니다 \(self.NickNameModel.message)")
+                    print("스터디팜 닉네임 중복 확인 exist(존재 여부) 값입니다 \(self.NickNameModel.exist)")
+                    completionHandler(.success(self.NickNameModel))
+                case .failure(let error):
+                print(error.localizedDescription)
+                    completionHandler(.failure(error))
                 }
                 
             }
@@ -300,8 +332,6 @@ class oAuthApi {
                 }
             }
     }
-    
-    
     
     
 }

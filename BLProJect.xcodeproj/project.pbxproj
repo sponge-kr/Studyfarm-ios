@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		B3736A40B4AA06F10FEE8FFC /* Pods_BLProJectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */; };
+		D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800BF25646FDF00B8E5A1 /* check@1x.png */; };
+		D11800C52564703700B8E5A1 /* uncheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800C42564703700B8E5A1 /* uncheck@1x.png */; };
 		D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12655D524E3D52A00C95256 /* BLDetailViewController.swift */; };
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
 		D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391D24EAA9E0004D661C /* SignViewModel.swift */; };
+		D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */ = {isa = PBXBuildFile; fileRef = D153B1A92563F8C200C612CD /* kakao_login.png */; };
 		D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D167D8F32562F575008BB495 /* Navigation@1x.png */; };
 		D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167D8F82562F758008BB495 /* SignupViewModel.swift */; };
 		D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */; };
@@ -70,11 +73,14 @@
 		8B06AAB1AFD73814B119A973 /* Pods-BLProJect-BLProJectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect-BLProJectUITests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJect_BLProJectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4EA45A336E1BFD8AB5FDC4 /* Pods-BLProJect-BLProJectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect-BLProJectUITests.release.xcconfig"; path = "Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D11800BF25646FDF00B8E5A1 /* check@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@1x.png"; sourceTree = "<group>"; };
+		D11800C42564703700B8E5A1 /* uncheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheck@1x.png"; sourceTree = "<group>"; };
 		D12655D524E3D52A00C95256 /* BLDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLDetailViewController.swift; sourceTree = "<group>"; };
 		D149391624E7CA36004D661C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D149391D24EAA9E0004D661C /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
+		D153B1A92563F8C200C612CD /* kakao_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kakao_login.png; sourceTree = "<group>"; };
 		D167D8F32562F575008BB495 /* Navigation@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation@1x.png"; sourceTree = "<group>"; };
 		D167D8F82562F758008BB495 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		D18F6BCC24F27111001D53A1 /* SingUpAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpAlertView.swift; sourceTree = "<group>"; };
@@ -285,6 +291,9 @@
 				D1F85D0F24CDC96200E1F7BE /* Vector@2x.png */,
 				D1F85D1024CDC96200E1F7BE /* Vector@3x.png */,
 				D167D8F32562F575008BB495 /* Navigation@1x.png */,
+				D153B1A92563F8C200C612CD /* kakao_login.png */,
+				D11800BF25646FDF00B8E5A1 /* check@1x.png */,
+				D11800C42564703700B8E5A1 /* uncheck@1x.png */,
 			);
 			path = ImageFile;
 			sourceTree = "<group>";
@@ -429,12 +438,15 @@
 				D1F85CD424C45B1300E1F7BE /* LaunchScreen.storyboard in Resources */,
 				D1F85D1224CDC96200E1F7BE /* Vector@3x.png in Resources */,
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
+				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
+				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
+				D11800C52564703700B8E5A1 /* uncheck@1x.png in Resources */,
 				D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */,
 				D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
