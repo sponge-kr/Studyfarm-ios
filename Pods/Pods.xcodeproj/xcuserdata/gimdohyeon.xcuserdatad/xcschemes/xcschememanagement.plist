@@ -19,7 +19,7 @@
 		<key>KakaoSDKAuth.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>13</integer>
 		</dict>
 		<key>KakaoSDKCommon.xcscheme</key>
 		<dict>
@@ -39,7 +39,7 @@
 		<key>KakaoSDKUser.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>12</integer>
 		</dict>
 		<key>Pods-BLProJect-BLProJectUITests.xcscheme</key>
 		<dict>

@@ -32,6 +32,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var EmailTextFiled: UITextField!
     @IBOutlet weak var PasswordTextFiled: UITextField!
     @IBOutlet weak var KakaoLoginBtn: UIButton!
+    @IBOutlet weak var NaverLoginBtn: UIButton!
+    @IBOutlet weak var GoogleLoginBtn: UIButton!
     @IBOutlet weak var SignUpBtn: UIButton!
     
     public var ErrorAlert : LoginAlertView!
@@ -94,11 +96,12 @@ class LoginViewController: UIViewController {
                 switch result{
                 case.success(let value):
                     if value.code == 401 {
-                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hyun-Kim", service_use_agree: true)
+                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hsaa", service_use_agree: true)
                         oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result{
                             case.success(let value):
                                 print(value.email)
+                                
                             case.failure(let error):
                             print(error.localizedDescription)
                             }
@@ -108,6 +111,9 @@ class LoginViewController: UIViewController {
                 case.failure(let error):
                     print(error.localizedDescription)
                 }
+                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                guard let MainVC = MainView else {return}
+                self.navigationController?.pushViewController(MainVC, animated: true)
             }
         
     }
@@ -177,8 +183,24 @@ class LoginViewController: UIViewController {
         
         self.SignUpBtn.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
     
-        self.KakaoLoginBtn.setImage(UIImage(named: "kakao_login.png"), for: .normal)
+        self.KakaoLoginBtn.frame = CGRect(x: self.KakaoLoginBtn.frame.origin.x, y: self.KakaoLoginBtn.frame.origin
+                                            .y, width: self.KakaoLoginBtn.frame.size.width, height: self.KakaoLoginBtn.frame.size.height)
+        self.KakaoLoginBtn.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
+        self.KakaoLoginBtn.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.KakaoLoginBtn.layer.cornerRadius = self.KakaoLoginBtn.frame.size.height / 2
+        self.KakaoLoginBtn.layer.borderColor = UIColor.clear.cgColor
         
+        self.NaverLoginBtn.frame = CGRect(x: self.NaverLoginBtn.frame.origin.x, y: self.NaverLoginBtn.frame.origin.y, width: self.NaverLoginBtn.frame.size.width, height: self.NaverLoginBtn.frame.size.height)
+        self.NaverLoginBtn.backgroundColor = UIColor(red: 42/255, green: 210/255, blue: 137/255, alpha: 1.0)
+        self.NaverLoginBtn.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.NaverLoginBtn.layer.cornerRadius = self.NaverLoginBtn.frame.size.width / 2
+        self.NaverLoginBtn.layer.borderColor = UIColor.clear.cgColor
+        
+        self.GoogleLoginBtn.frame = CGRect(x: self.GoogleLoginBtn.frame.origin.x, y: self.GoogleLoginBtn.frame.origin.y, width: self.GoogleLoginBtn.frame.size.width, height: self.GoogleLoginBtn.frame.size.height)
+        self.GoogleLoginBtn.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
+        self.GoogleLoginBtn.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.GoogleLoginBtn.layer.cornerRadius = self.GoogleLoginBtn.frame.size.height / 2
+        self.GoogleLoginBtn.layer.borderColor = UIColor.clear.cgColor
         
     }
     

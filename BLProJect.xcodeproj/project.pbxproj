@@ -13,7 +13,7 @@
 		D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12655D524E3D52A00C95256 /* BLDetailViewController.swift */; };
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
-		D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391D24EAA9E0004D661C /* SignViewModel.swift */; };
+		D14A273325653F2D00CE460D /* uncheck@0.5.png in Resources */ = {isa = PBXBuildFile; fileRef = D14A273225653F2D00CE460D /* uncheck@0.5.png */; };
 		D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */ = {isa = PBXBuildFile; fileRef = D153B1A92563F8C200C612CD /* kakao_login.png */; };
 		D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D167D8F32562F575008BB495 /* Navigation@1x.png */; };
 		D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167D8F82562F758008BB495 /* SignupViewModel.swift */; };
@@ -38,7 +38,6 @@
 		D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85CF724C45EDD00E1F7BE /* BLMainCollectionViewCell.swift */; };
 		D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F85CF824C45EDD00E1F7BE /* BLMainCollectionViewCell.xib */; };
 		D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F85CFE24CDAA6800E1F7BE /* icon.png */; };
-		D1F85D0A24CDBEAA00E1F7BE /* BLSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85D0924CDBEAA00E1F7BE /* BLSlideViewController.swift */; };
 		D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F85D0B24CDC35C00E1F7BE /* delete.png */; };
 		D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F85D0D24CDC90B00E1F7BE /* Vector.png */; };
 		D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F85D0F24CDC96200E1F7BE /* Vector@2x.png */; };
@@ -78,8 +77,8 @@
 		D12655D524E3D52A00C95256 /* BLDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLDetailViewController.swift; sourceTree = "<group>"; };
 		D149391624E7CA36004D661C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		D149391D24EAA9E0004D661C /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
+		D14A273225653F2D00CE460D /* uncheck@0.5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheck@0.5.png"; sourceTree = "<group>"; };
 		D153B1A92563F8C200C612CD /* kakao_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kakao_login.png; sourceTree = "<group>"; };
 		D167D8F32562F575008BB495 /* Navigation@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation@1x.png"; sourceTree = "<group>"; };
 		D167D8F82562F758008BB495 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -110,7 +109,6 @@
 		D1F85CF724C45EDD00E1F7BE /* BLMainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLMainCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1F85CF824C45EDD00E1F7BE /* BLMainCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLMainCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1F85CFE24CDAA6800E1F7BE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		D1F85D0924CDBEAA00E1F7BE /* BLSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLSlideViewController.swift; sourceTree = "<group>"; };
 		D1F85D0B24CDC35C00E1F7BE /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		D1F85D0D24CDC90B00E1F7BE /* Vector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vector.png; sourceTree = "<group>"; };
 		D1F85D0F24CDC96200E1F7BE /* Vector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vector@2x.png"; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				D1B46352255FA4B40063D714 /* LoginMVMM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
-				D149391D24EAA9E0004D661C /* SignViewModel.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -173,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				D1F85CCB24C45B1100E1F7BE /* ViewController.swift */,
-				D1F85D0924CDBEAA00E1F7BE /* BLSlideViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -288,6 +284,7 @@
 				D1F85CFE24CDAA6800E1F7BE /* icon.png */,
 				D1F85D0B24CDC35C00E1F7BE /* delete.png */,
 				D1F85D0D24CDC90B00E1F7BE /* Vector.png */,
+				D14A273225653F2D00CE460D /* uncheck@0.5.png */,
 				D1F85D0F24CDC96200E1F7BE /* Vector@2x.png */,
 				D1F85D1024CDC96200E1F7BE /* Vector@3x.png */,
 				D167D8F32562F575008BB495 /* Navigation@1x.png */,
@@ -451,6 +448,7 @@
 				D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
+				D14A273325653F2D00CE460D /* uncheck@0.5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +578,6 @@
 			files = (
 				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
-				D149391E24EAA9E0004D661C /* SignViewModel.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
 				D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */,
@@ -588,7 +585,6 @@
 				D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */,
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
-				D1F85D0A24CDBEAA00E1F7BE /* BLSlideViewController.swift in Sources */,
 				D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,

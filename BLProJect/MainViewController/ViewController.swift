@@ -20,11 +20,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     @IBOutlet weak var BLSubjectView: UIView!
-    @IBOutlet weak var LeftNaviButton: UIButton!
     @IBOutlet weak var BLSubject: UILabel!
     @IBOutlet weak var BLMainCollectionView: UICollectionView!
     @IBOutlet weak var BLSignButton: UIButton!
-    
+    var index : Int?
     
     lazy var HeaderView: BLMainCollectionViewHeader = {
         let HeaderView = self.BLMainCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BLHeaderCell", for: IndexPath(item: 0, section: 0)) as? BLMainCollectionViewHeader
@@ -90,9 +89,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         titleAttribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 102/255, green: 102/255, blue: 255/255, alpha: 1.0), range:(self.BLSubject.text as! NSString).range(of: "BL"))
         self.BLSubject.attributedText = titleAttribute
         
-        // MARK - NavigtaionButton
-        self.LeftNaviButton.setAttributedTitle(NSAttributedString(string: "B.L.", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
-        self.LeftNaviButton.tintColor = UIColor.black
+        self.navigationController?.navigationBar.topItem?.title = "StudyFarm"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)]
+        
         
         
         
@@ -102,8 +101,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
-        let ViewCell = BLMainCollectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: IndexPath(item: 0, section: 0)) as? BLMainCollectionViewCell
-        
+        DetailSegue.Index = self.index
     }
     
     
@@ -119,11 +117,11 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         DispatchQueue.main.async {
             
-            MainCell?.CellHuman.text = ServerApi.shared.StudyModel.nickname[indexPath.row]
-            MainCell?.CellWriter.text = ServerApi.shared.StudyModel.name[indexPath.row]
             MainCell?.CellSubject.text = ServerApi.shared.StudyModel.title[indexPath.row]
-            MainCell?.CellStartDate.text = ServerApi.shared.StudyModel.contents[indexPath.row]
-            MainCell?.CellColorView.backgroundColor = UIColor.white
+            MainCell?.CellHuman.text = ServerApi.shared.StudyModel.nickname[indexPath.row]
+            MainCell?.CellWriter.text = ServerApi.shared.StudyModel.email[indexPath.row]
+            MainCell?.CellState.text = ServerApi.shared.StudyModel.contents[indexPath.row]
+            MainCell?.CellStartDate.text = ServerApi.shared.StudyModel.study_created_at_str[indexPath.row]
         }
         
         return MainCell!
@@ -132,14 +130,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let SelctedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell {
-            let DetailVC = self.storyboard?.instantiateViewController(identifier: "DetailVC") as? BLDetailViewController
-            
-            
-            
-            self.performSegue(withIdentifier: "BLDetailVC", sender: nil)
-        }
-        
+        guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
+        self.index = indexPath.row
+        self.performSegue(withIdentifier: "BLDetailVC", sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -180,9 +173,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
             case .success(let value):
                 if value.code == 200 {
                     print("Logut 성공")
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popToRootViewController(animated: true)
                 }else{
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popToRootViewController(animated: true)
                 }
                 
                 
@@ -196,29 +189,4 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
 }
 
-extension UIColor {
-    public convenience init?(hex : String){
-        let redColor,greenColor,blueColor,alphaColor: CGFloat
-        if hex.hasPrefix("#"){
-            let start = hex.index(hex.startIndex, offsetBy: 1)
-            let hexColor = String(hex[start...])
-            
-            if hexColor.count == 8 {
-                let scanner  = Scanner(string: hexColor)
-                var hexNumber : UInt64 = 0
-                
-                if scanner.scanHexInt64(&hexNumber){
-                    redColor = CGFloat((hexNumber & 0xff000000) >> 24) / 255
-                    greenColor = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
-                    blueColor = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
-                    alphaColor = CGFloat((hexNumber & 0x000000ff) >> 24) / 255
-                    
-                    self.init(red :redColor , green : greenColor, blue : blueColor, alpha : alphaColor)
-                    return
-                }
-            }
-        }
-        return nil
-    }
-    
-}
+

@@ -45,6 +45,43 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             self.AgreementViewTermsBtn.setImage(Checkimage, for: .selected)
         }
     }
+    @IBOutlet weak var AgreementViewTermsBtn2: UIButton! {
+        didSet {
+            let Checkimage = UIImage(named: "check@1x.png")
+            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            self.AgreementViewTermsBtn2.setImage(unCheckimage, for: .normal)
+            self.AgreementViewTermsBtn2.setImage(Checkimage, for: .selected)
+        }
+    }
+    @IBOutlet weak var AgreementViewTermsBtn3: UIButton! {
+        didSet {
+            let Checkimage = UIImage(named: "check@1x.png")
+            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            self.AgreementViewTermsBtn3.setImage(unCheckimage, for: .normal)
+            self.AgreementViewTermsBtn3.setImage(Checkimage, for: .selected)
+        }
+    }
+    @IBOutlet weak var AgreementViewTermsBtn4: UIButton! {
+        didSet {
+            let Checkimage = UIImage(named: "check@1x.png")
+            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            self.AgreementViewTermsBtn4.setImage(unCheckimage, for: .normal)
+            self.AgreementViewTermsBtn4.setImage(Checkimage, for: .selected)
+        }
+    }
+    @IBOutlet weak var AgreementViewTermsBtn5: UIButton! {
+        didSet {
+            let Checkimage = UIImage(named: "check@1x.png")
+            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            self.AgreementViewTermsBtn5.setImage(unCheckimage, for: .normal)
+            self.AgreementViewTermsBtn5.setImage(Checkimage, for: .selected)
+        }
+    }
+    @IBAction func checkbox(_ sender: UIButton) {
+        sender.checkboxAnimation {
+            print(sender.isSelected)
+        }
+    }
     
     public var ViewModel = SignupViewModel()
     public let disposedBag = DisposeBag()
@@ -59,6 +96,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.SignNicknamTextField.delegate = self
         self.SignPasswordTextField.delegate = self
         self.ViewBind()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,7 +232,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         }, completion: nil)
     }
     
-    public func AgreementViewLayou(){
+    public func AgreementViewLayout(){
         self.AgreementViewLabel.text = "약관 동의"
         self.AgreementViewLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(rawValue: 1.0))
         self.AgreementViewLabel.textAlignment = .left
@@ -242,13 +280,21 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         
         self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.AgreementViewConfirmBtn.setAttributedTitle(NSAttributedString(string: "동의 후 계속하기", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 0.5)),NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
+        
         self.AgreementViewConfirmBtn.layer.borderColor = UIColor.clear.cgColor
         self.AgreementViewConfirmBtn.layer.cornerRadius = 8
+        self.AgreementViewConfirmBtn.addTarget(self, action: #selector(ConfirmButtonSelect), for: .touchUpInside)
         self.AgreementViewConfirmBtn.frame = CGRect(x: self.AgreementViewConfirmBtn.frame.origin.x, y: self.AgreementViewConfirmBtn.frame.origin.y, width: self.AgreementViewConfirmBtn.frame.size.width, height: self.AgreementViewConfirmBtn.frame.size.height)
         
-        self.AgreementViewTermsBtn.setTitle("", for: .normal)
-        let unCheckimage = UIImage(named: "uncheck@1x.png")
-        self.AgreementViewTermsBtn.setImage(unCheckimage, for: .normal)
+        self.AgreementViewTermsBtn.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn2.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn2.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
+        self.AgreementViewTermsBtn3.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn3.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
+        self.AgreementViewTermsBtn4.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn4.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
+        self.AgreementViewTermsBtn5.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn5.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
         
     }
     
@@ -298,6 +344,24 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    @objc func AgreementisSelect(sender : UIButton){
+        sender.checkboxAnimation {
+            print(sender.isSelected)
+        }
+    }
+    @objc func ConfirmButtonSelect(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) {
+            let ScreenSize = UIScreen.main.bounds.size
+            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+        } completion: { (succes) in
+            if succes == true{
+                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                guard let MainVC = MainView else {return}
+                self.navigationController?.pushViewController(MainVC, animated: true)
+            }
+        }
+    }
+    
     @objc func CallServiceApi(){
         let SingParamter = SignUpParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!, service_use_agree: true)
         
@@ -305,7 +369,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         oAuthApi.shared.AuthNickNameOverlap(Nickname: self.SignNicknamTextField.text!) { [self] result in
             switch result{
             case .success(let value):
-                if value.exist == true{
+                if value.exist == false{
                     oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { reuslt in
                         switch reuslt {
                         case .success(let value):
@@ -315,12 +379,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
                             print(error.localizedDescription)
                         }
                     }
-                    self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                 }else{
                     self.NicknameErrorAlert.textColor = UIColor.clear
-                    self.AgreementViewLayou()
+                    self.AgreementViewLayout()
                     self.AddAgreementView()
                 }
+                self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
             case.failure(let error):
                 print(error.localizedDescription)
             }
@@ -351,16 +415,22 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
 }
 
 
-extension UITextField {
-    
-    func UnderLine(){
-        let border = CALayer()
-        let borderWidth = CGFloat(1.0)
-        border.borderColor = UIColor.darkGray.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - borderWidth, width: self.frame.size.width, height: self.frame.size.height)
-        border.borderWidth = borderWidth
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
+
+
+
+extension UIButton {
+    func checkboxAnimation(closure : @escaping () -> Void) {
+        guard let image = self.imageView else {return}
+        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveLinear) {
+//            image.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+            self.setTitle("", for: .selected)
+        } completion: { (success) in
+            UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
+                self.isSelected = !self.isSelected
+                closure()
+                image.transform = .identity
+            }, completion: nil)
+            
+        }
     }
-    
 }

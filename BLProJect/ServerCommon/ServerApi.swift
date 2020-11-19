@@ -33,10 +33,13 @@
         var contents : [String] = []
         var category_name : [String] = []
         var topic_name : [String] = []
+        var study_created_at_str : [String] = []
     }
     
     //MARK - 스터디 디테일 데이터
     struct StudyOneDataModel {
+        var code : Int = 0
+        var message : String = ""
         var study_seq : Int = 0
         var user_seq : Int = 0
         var title : String = ""
@@ -186,13 +189,16 @@
                             self.StudyModel.city_name.append(subJson["user_city_info"]["city_name"].stringValue)
                             self.StudyModel.interesting_name.append(subJson["interesting"]["name"].stringValue)
                             self.StudyModel.interesting_skill_level.append(subJson["interesting"]["skill_level"].stringValue)
+                            self.StudyModel.study_created_at_str.append(subJson["study_created_at_str"].stringValue)
                             self.StudyModel.contents.append(subJson["contents"].stringValue)
                             self.StudyModel.topic_name.append(subJson["topic_name"].stringValue)
                             self.StudyModel.category_name.append(subJson["category_name"].stringValue)
                         }
                         print("스터디팜 스터디 리스트 제목 입니다 : \(self.StudyModel.title)")
-                        print("스터디팜 스터디 등록 이메일 입니다 : \(self.StudyModel.age)")
+                        print("스터디팜 스터디 리스트 이메일 입니다 : \(self.StudyModel.email)")
                         print("스터디팜 스터디 리스트 콘텐츠 입니다 : \(self.StudyModel.contents)")
+                        print("스터디팜 스터디 리스트 닉네임 입니다 : \(self.StudyModel.nickname)")
+                        print("스터디팜 스터디 등록일 입니다 :\(self.StudyModel.study_created_at_str)")
                         completionHandler()
                     case .failure(let error):
                         print(error.localizedDescription)
@@ -207,6 +213,7 @@
                     switch response.result {
                     case .success(let value):
                         let StudyOneJson = JSON(value)
+                        self.StudyOneModel.message = StudyOneJson["message"].stringValue
                         for (_,subJson):(String,JSON) in StudyOneJson["result"] {
                             self.StudyOneModel.study_seq = StudyOneJson["study_seq"].intValue
                             self.StudyOneModel.user_seq = StudyOneJson["user_seq"].intValue
@@ -223,6 +230,10 @@
                             self.StudyOneModel.category_name = StudyOneJson["category_name"].stringValue
                             self.StudyOneModel.topic_name = StudyOneJson["topic_name"].stringValue
                         }
+                        print("스터디팜 스터디 한건 제목 입니다 \(self.StudyOneModel.contents) ")
+                        print("스터디팜 스터디 한건 이메일 입니다 \(self.StudyOneModel.email)")
+                        print("스터디팜 스터디 한건 닉네임 입니다 \(self.StudyOneModel.nickname)")
+                        print("스터디팜 스터디 한건 오류 메세지 입니다 \(self.StudyOneModel.message)")
                         completionHandler(.success(self.StudyOneModel))
                     case .failure(let error):
                         print(error.localizedDescription)
