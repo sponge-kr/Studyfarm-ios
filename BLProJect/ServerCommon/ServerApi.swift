@@ -34,6 +34,7 @@
         var category_name : [String] = []
         var topic_name : [String] = []
         var study_created_at_str : [String] = []
+        
     }
     
     //MARK - 스터디 디테일 데이터

@@ -16,7 +16,7 @@ import SwiftKeychainWrapper
 struct LoginDataModel {
     var code : Int?
     var message : String?
-    var token : String?
+    var token : String = ""
     var user_seq : Int?
     var email : String?
     var name : String?
@@ -74,6 +74,26 @@ struct KakaoLoginDataModel {
 }
 
 
+
+struct GIDLoginDataModel {
+    var code : Int = 0
+    var users_seq : Int = 0
+    var message : String = ""
+    var token : String = ""
+    var email : String = ""
+    var nickname : String = ""
+}
+
+//MARK - GIDLogin 데이터 모델
+struct GIDSignDataModel {
+    var code : Int = 0
+    var message : String = ""
+    var users_seq : Int = 0
+    var nickname : String = ""
+    var email : String = ""
+}
+
+
 //MARK - 회원가입 데이터
 struct SignUpDataModel {
     var code : Int = 0
@@ -117,12 +137,19 @@ struct KakaoUserParamter : Encodable {
     var service_use_agree : Bool
 }
 
+//MARK - GIDUser 등록 Paramter
+struct GIDUserParamter : Encodable {
+    var nickname : String
+    var service_use_agree : Bool
+}
+
 
 class oAuthApi {
     static let shared = oAuthApi()
     fileprivate let headers : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
-    fileprivate let tokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Authorization" : "Bearer \(KeychainWrapper.standard.string(forKey: "token"))","Accept":"application/hal+json"]
-    fileprivate let Kakaotokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "Kakaotoken")!)"]
+    fileprivate let tokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","Authorization" : "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
+    fileprivate let Kakaotokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "Kakaotoken"))"]
+    fileprivate let GIDtokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "GIDtoken"))"]
     
     
     //MARK - 초기화
@@ -136,6 +163,7 @@ class oAuthApi {
     public var KakaoModel = KakaoSingDataModel()
     public var KakaoLoginModel = KakaoLoginDataModel()
     public var NickNameModel = NickNameDataModel()
+    public var GIDSignModel = GIDSignDataModel()
     
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
@@ -165,7 +193,7 @@ class oAuthApi {
                         self.LoginModel.profile = LoginSubJson["profile"].stringValue
                     }
                     print("스터디팜 로그인 토근 값입니다 \(self.LoginModel.token)")
-                    print("스터디팜 로그인 status code 값입니다 \(self.LoginModel.code)")
+                    print("AuthSignUpCall스터디팜 로그인 status code 값입니다 \(self.LoginModel.code)")
                     print("스터디팜 로그인 email 값입니다 \(self.LoginModel.email)")
                     print("스터디팜 로그인 nickname 값 입니다 \(self.LoginModel.nickname)")
                     completionHandler(.success(self.LoginModel))
@@ -217,6 +245,8 @@ class oAuthApi {
                 switch response.result {
                 case .success(let value):
                     let SignJson = JSON(value!)
+                    self.SignUpModel.code = SignJson["code"].intValue
+                    self.SignUpModel.message = SignJson["message"].stringValue
                     self.SignUpModel.email = SignJson["result"]["email"].stringValue
                     self.SignUpModel.nickname = SignJson["result"]["nickname"].stringValue
                     self.SignUpModel.gender = SignJson["result"]["gender"].stringValue
@@ -322,7 +352,7 @@ class oAuthApi {
                     self.KakaoModel.users_seq = KakaoSignJson["result"]["users_seq"].intValue
                     self.KakaoModel.email = KakaoSignJson["result"]["email"].stringValue
                     self.KakaoModel.nickname = KakaoSignJson["nickname"].stringValue
-                    print("카카오 등록 nickname값입니다 \(self.KakaoModel.nickname)")
+                    print("카카오 등록 nickname 값입니다 \(self.KakaoModel.nickname)")
                     print("카카오 등록 email 값입니다 \(self.KakaoModel.email)")
                     print("카카오 등록 Message 값입니다 \(self.KakaoModel.message)")
                     completionHandler(.success(self.KakaoModel))
@@ -330,6 +360,39 @@ class oAuthApi {
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
                 }
+            }
+    }
+    
+    public func AuthGIDLoginCall(completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
+            .response { response in
+                
+            }
+    }
+    
+    
+    public func AuthGIDSignUp(GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
+            .response { response in
+                debugPrint(response)
+                switch response.result{
+                case.success(let value):
+                    let GIDSingJson = JSON(value!)
+                    self.GIDSignModel.code = GIDSingJson["code"].intValue
+                    self.GIDSignModel.message = GIDSingJson["message"].stringValue
+                    self.GIDSignModel.email = GIDSingJson["result"]["email"].stringValue
+                    self.GIDSignModel.nickname = GIDSingJson["result"]["nickname"].stringValue
+                    self.GIDSignModel.users_seq = GIDSingJson["result"]["users_seq"].intValue
+                    print("구글 등록 message 값입니다 \(self.GIDSignModel.message)")
+                    print("구글 등록 code 값입니다 \(self.GIDSignModel.code)")
+                    print("구글 등록 nickname 값입니다\(self.GIDSignModel.nickname)")
+                    print("구글 등록 email 값입니다 \(self.GIDSignModel.email)")
+                    completionHandler(.success(self.GIDSignModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+                
             }
     }
     

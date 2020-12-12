@@ -156,7 +156,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.SubjectLabel.textAlignment = .center
         self.SubjectLabel.numberOfLines = 1
         self.SubjectLabel.frame = CGRect(x: self.SubjectLabel.frame.origin.x, y: self.SubjectLabel.frame.origin.y, width: self.SubjectLabel.frame.size.width, height: self.SubjectLabel.frame.size.height)
-
+        
         self.ExplanationSubject.text = "입력하신 메일로 본인인증을 위한 인증번호가 전송됩니다.\n비밀번호는 1번만 입력하니 정확히 입력해주세요."
         self.ExplanationSubject.font = UIFont.systemFont(ofSize: 14)
         self.ExplanationSubject.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1.0)
@@ -364,29 +364,26 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc func CallServiceApi(){
         let SingParamter = SignUpParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!, service_use_agree: true)
-        
-        
-        oAuthApi.shared.AuthNickNameOverlap(Nickname: self.SignNicknamTextField.text!) { [self] result in
-            switch result{
+        oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
+            switch  result{
             case .success(let value):
-                if value.exist == false{
-                    oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { reuslt in
-                        switch reuslt {
-                        case .success(let value):
-                            print("스터디팜 회원가입 성공 stauts code \(value.code)")
-                            print("스터디팜 회원가입 성공 message \(value.message)")
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                }else{
+                if value.code == 200 || value.message == "성공하였습니다."{
                     self.NicknameErrorAlert.textColor = UIColor.clear
                     self.AgreementViewLayout()
                     self.AddAgreementView()
+                }else if value.code == 400 || value.message == "이미 존재하는 이메일입니다."{
+                    DispatchQueue.main.async {
+                        self.EmailErrorAlert.text = "이미 존재하는 이메일입니다."
+                        self.EmailErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                    }
+                }else if value.code == 400 || value.message == "이미 존재하는 닉네임입니다."{
+                    DispatchQueue.main.async {
+                        self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                    }
                 }
-                self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-            case.failure(let error):
+            case .failure(let error):
                 print(error.localizedDescription)
+                
             }
         }
     }
@@ -422,7 +419,7 @@ extension UIButton {
     func checkboxAnimation(closure : @escaping () -> Void) {
         guard let image = self.imageView else {return}
         UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveLinear) {
-//            image.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+            //            image.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
             self.setTitle("", for: .selected)
         } completion: { (success) in
             UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {

@@ -335,6 +335,7 @@
 				D1F85CC124C45B1100E1F7BE /* Frameworks */,
 				D1F85CC224C45B1100E1F7BE /* Resources */,
 				F2787BD322C3D247E612190D /* [CP] Embed Pods Frameworks */,
+				6FFA1CA2C1AA0B75656AFEB6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -373,6 +374,7 @@
 				D1F85CE224C45B1300E1F7BE /* Frameworks */,
 				D1F85CE324C45B1300E1F7BE /* Resources */,
 				8CAB26C0DA9CCCAA5CE735FB /* [CP] Embed Pods Frameworks */,
+				2A6D62D1DFA442FDE137DB8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -469,6 +471,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2A6D62D1DFA442FDE137DB8A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FFA1CA2C1AA0B75656AFEB6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8C47A0D9490F1AD564F8A804 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

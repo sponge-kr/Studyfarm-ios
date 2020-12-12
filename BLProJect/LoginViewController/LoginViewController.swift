@@ -10,6 +10,7 @@ import UIKit
 import KakaoSDKUser
 import KakaoSDKCommon
 import KakaoSDKAuth
+import GoogleSignIn
 import Alamofire
 import SnapKit
 import SwiftyJSON
@@ -95,7 +96,7 @@ class LoginViewController: UIViewController {
             oAuthApi.shared.AuthKakaoLoginCall { result in
                 switch result{
                 case.success(let value):
-                    if value.code == 401 {
+                    if value.code == 400 {
                         let kakaoParamter = KakaoUserParamter(nickname: "Do-hsaa", service_use_agree: true)
                         oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result{
@@ -266,7 +267,7 @@ class LoginViewController: UIViewController {
             case .success(let value):
                 print("테스트 status code 값입니다 : \(value.message)")
                 if value.code == 200 {
-                    KeychainWrapper.standard.set(oAuthApi.shared.LoginModel.token!, forKey: "token")
+                    KeychainWrapper.standard.set(oAuthApi.shared.LoginModel.token, forKey: "token")
                     let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
                     guard let MainVC = MainView else { return }
                     self?.navigationController?.pushViewController(MainVC, animated: true)
