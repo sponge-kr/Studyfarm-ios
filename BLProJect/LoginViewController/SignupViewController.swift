@@ -39,47 +39,32 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var AgreementViewTermsLabel4: UILabel!
     @IBOutlet weak var AgreementViewTermsBtn: UIButton! {
         didSet {
-            let Checkimage = UIImage(named: "check@1x.png")
-            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            let unCheckimage = UIImage(named: "unCheckGray@1x.png")
             self.AgreementViewTermsBtn.setImage(unCheckimage, for: .normal)
-            self.AgreementViewTermsBtn.setImage(Checkimage, for: .selected)
         }
     }
     @IBOutlet weak var AgreementViewTermsBtn2: UIButton! {
         didSet {
-            let Checkimage = UIImage(named: "check@1x.png")
-            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            let unCheckimage = UIImage(named: "unCheckGray@1x.png")
             self.AgreementViewTermsBtn2.setImage(unCheckimage, for: .normal)
-            self.AgreementViewTermsBtn2.setImage(Checkimage, for: .selected)
         }
     }
     @IBOutlet weak var AgreementViewTermsBtn3: UIButton! {
         didSet {
-            let Checkimage = UIImage(named: "check@1x.png")
-            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            let unCheckimage = UIImage(named: "unCheckGray@1x.png")
             self.AgreementViewTermsBtn3.setImage(unCheckimage, for: .normal)
-            self.AgreementViewTermsBtn3.setImage(Checkimage, for: .selected)
         }
     }
     @IBOutlet weak var AgreementViewTermsBtn4: UIButton! {
         didSet {
-            let Checkimage = UIImage(named: "check@1x.png")
-            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            let unCheckimage = UIImage(named: "unCheckGray@1x.png")
             self.AgreementViewTermsBtn4.setImage(unCheckimage, for: .normal)
-            self.AgreementViewTermsBtn4.setImage(Checkimage, for: .selected)
         }
     }
     @IBOutlet weak var AgreementViewTermsBtn5: UIButton! {
         didSet {
-            let Checkimage = UIImage(named: "check@1x.png")
-            let unCheckimage = UIImage(named: "uncheck@1x.png")
+            let unCheckimage = UIImage(named: "unCheckGray@1x.png")
             self.AgreementViewTermsBtn5.setImage(unCheckimage, for: .normal)
-            self.AgreementViewTermsBtn5.setImage(Checkimage, for: .selected)
-        }
-    }
-    @IBAction func checkbox(_ sender: UIButton) {
-        sender.checkboxAnimation {
-            print(sender.isSelected)
         }
     }
     
@@ -278,7 +263,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewTermsLabel4.frame = CGRect(x: self.AgreementViewTermsLabel4.frame.origin.x, y: self.AgreementViewTermsLabel4.frame.origin.y, width: self.AgreementViewTermsLabel4.frame.size.width, height: self.AgreementViewTermsLabel4.frame.size.height)
         
         
-        self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
         self.AgreementViewConfirmBtn.setAttributedTitle(NSAttributedString(string: "동의 후 계속하기", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 0.5)),NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
         
         self.AgreementViewConfirmBtn.layer.borderColor = UIColor.clear.cgColor
@@ -287,6 +272,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewConfirmBtn.frame = CGRect(x: self.AgreementViewConfirmBtn.frame.origin.x, y: self.AgreementViewConfirmBtn.frame.origin.y, width: self.AgreementViewConfirmBtn.frame.size.width, height: self.AgreementViewConfirmBtn.frame.size.height)
         
         self.AgreementViewTermsBtn.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.AgreementViewTermsBtn.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
         self.AgreementViewTermsBtn2.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.AgreementViewTermsBtn2.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
         self.AgreementViewTermsBtn3.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
@@ -344,8 +330,40 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    public func necessaryCheckAnimation(){
+        if self.AgreementViewTermsBtn2.isSelected == true && self.AgreementViewTermsBtn3.isSelected == true {
+            self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }else{
+            self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
+        }
+    }
+    
+    
+    // UIButton Extension을 사용하여 AgreementViewTermsBtn만 클릭했을때 모두 true로 변환하도록 수정
+    func AgreementButtonisAllSelect(){
+        if self.AgreementViewTermsBtn.isSelected == true {
+            self.AgreementViewTermsBtn2.isSelected = true
+            self.AgreementViewTermsBtn3.isSelected = true
+            self.AgreementViewTermsBtn4.isSelected = true
+            self.AgreementViewTermsBtn5.isSelected = true
+            
+        }
+    }
+    
+    
+    func AgreememtButtonisSelect() {
+        self.AgreementButtonisAllSelect()
+        self.necessaryCheckAnimation()
+        self.AgreementViewTermsBtn.customEnableLayout()
+        self.AgreementViewTermsBtn2.customEnableLayout()
+        self.AgreementViewTermsBtn3.customEnableLayout()
+        self.AgreementViewTermsBtn4.customEnableLayout()
+        self.AgreementViewTermsBtn5.customEnableLayout()
+    }
+    
     @objc func AgreementisSelect(sender : UIButton){
         sender.checkboxAnimation {
+            self.AgreememtButtonisSelect()
             print(sender.isSelected)
         }
     }
@@ -363,20 +381,22 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc func CallServiceApi(){
+        self.AgreementViewLayout()
+        self.AddAgreementView()
         let SingParamter = SignUpParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!, service_use_agree: true)
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{
                     self.NicknameErrorAlert.textColor = UIColor.clear
-                    self.AgreementViewLayout()
-                    self.AddAgreementView()
-                }else if value.code == 400 || value.message == "이미 존재하는 이메일입니다."{
+//                    self.AgreementViewLayout()
+//                    self.AddAgreementView()
+                }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
                     DispatchQueue.main.async {
                         self.EmailErrorAlert.text = "이미 존재하는 이메일입니다."
                         self.EmailErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                     }
-                }else if value.code == 400 || value.message == "이미 존재하는 닉네임입니다."{
+                }else if value.code == 400 && value.message == "이미 존재하는 닉네임입니다."{
                     DispatchQueue.main.async {
                         self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                     }
@@ -416,16 +436,28 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
 
 
 extension UIButton {
+    func customEnableLayout() {
+        if isSelected == true {
+            self.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.layer.cornerRadius = 4
+            let Checkimage = UIImage(named: "check@1x.png")
+            self.layer.borderColor = UIColor.white.cgColor
+            self.setImage(Checkimage, for: .normal)
+            self.setTitle("", for: .normal)
+        }else{
+            self.backgroundColor = UIColor.white
+            self.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+        }
+    }
+    
     func checkboxAnimation(closure : @escaping () -> Void) {
         guard let image = self.imageView else {return}
         UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveLinear) {
-            //            image.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
             self.setTitle("", for: .selected)
         } completion: { (success) in
             UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
                 self.isSelected = !self.isSelected
                 closure()
-                image.transform = .identity
             }, completion: nil)
             
         }

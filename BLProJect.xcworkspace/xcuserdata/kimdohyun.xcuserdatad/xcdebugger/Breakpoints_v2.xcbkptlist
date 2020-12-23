@@ -7,65 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C08A642C-2116-4CEF-93C4-BB4858E1F90C"
+            uuid = "880FBF4E-9933-4FE6-A81A-A832396CF275"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLProJect/LoginViewController/SignupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
-            landmarkName = "CallServiceApi()"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "AgreementButtonisAllSelect()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5D5CE90E-B284-4BFF-B64F-73086D1B37CC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLProJect/LoginViewController/SignupViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "CallServiceApi()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5D5CE90E-B284-4BFF-B64F-73086D1B37CC - e05fcf71ac4be040"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "&#xc2a4;&#xd130;&#xb514;&#xd31c;.SignupViewController.CallServiceApi() -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kimdohyun/Desktop/%E1%84%86%E1%85%AE%E1%84%8C%E1%85%A6%20%E1%84%91%E1%85%A9%E1%86%AF%E1%84%83%E1%85%A5/BLProJect/LoginViewController/SignupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "367"
-                  endingLineNumber = "367"
-                  offsetFromSymbolStart = "1732">
-               </Location>
-               <Location
-                  uuid = "5D5CE90E-B284-4BFF-B64F-73086D1B37CC - 3ceb63a0fe9c7d9b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;&#xc2a4;&#xd130;&#xb514;&#xd31c;.SignUpDataModel, Swift.Error&gt;) -&gt; () in &#xc2a4;&#xd130;&#xb514;&#xd31c;.SignupViewController.CallServiceApi() -&gt; ()"
-                  moduleName = "&#x1109;&#x1173;&#x1110;&#x1165;&#x1103;&#x1175;&#x1111;&#x1161;&#x11b7;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kimdohyun/Desktop/%E1%84%86%E1%85%AE%E1%84%8C%E1%85%A6%20%E1%84%91%E1%85%A9%E1%86%AF%E1%84%83%E1%85%A5/BLProJect/LoginViewController/SignupViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "369"
-                  endingLineNumber = "369"
-                  offsetFromSymbolStart = "213">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
