@@ -272,7 +272,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewConfirmBtn.frame = CGRect(x: self.AgreementViewConfirmBtn.frame.origin.x, y: self.AgreementViewConfirmBtn.frame.origin.y, width: self.AgreementViewConfirmBtn.frame.size.width, height: self.AgreementViewConfirmBtn.frame.size.height)
         
         self.AgreementViewTermsBtn.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.AgreementViewTermsBtn.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
+        self.AgreementViewTermsBtn.addTarget(self, action: #selector(AgreementAllisSelect(sender:)), for: .touchUpInside)
         self.AgreementViewTermsBtn2.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.AgreementViewTermsBtn2.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
         self.AgreementViewTermsBtn3.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
@@ -339,21 +339,23 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    // UIButton Extension을 사용하여 AgreementViewTermsBtn만 클릭했을때 모두 true로 변환하도록 수정
-    func AgreementButtonisAllSelect(){
-        if self.AgreementViewTermsBtn.isSelected == true {
+    // 추후 AgreementView RadiusButton 리펙토링
+    public func AgreementButtonisAllSelect(){
+        if self.AgreementViewTermsBtn.isSelected == true{
             self.AgreementViewTermsBtn2.isSelected = true
             self.AgreementViewTermsBtn3.isSelected = true
             self.AgreementViewTermsBtn4.isSelected = true
             self.AgreementViewTermsBtn5.isSelected = true
-            
+        }else{
+            self.AgreementViewTermsBtn2.isSelected = false
+            self.AgreementViewTermsBtn3.isSelected = false
+            self.AgreementViewTermsBtn4.isSelected = false
+            self.AgreementViewTermsBtn5.isSelected = false
         }
     }
     
     
-    func AgreememtButtonisSelect() {
-        self.AgreementButtonisAllSelect()
-        self.necessaryCheckAnimation()
+    private func AgreementLayoutInit(){
         self.AgreementViewTermsBtn.customEnableLayout()
         self.AgreementViewTermsBtn2.customEnableLayout()
         self.AgreementViewTermsBtn3.customEnableLayout()
@@ -361,11 +363,35 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewTermsBtn5.customEnableLayout()
     }
     
+    public func AgreememtButtonisSelect() {
+        if self.AgreementViewTermsBtn2.isSelected == false || self.AgreementViewTermsBtn3.isSelected == false || self.AgreementViewTermsBtn4.isSelected == false || self.AgreementViewTermsBtn5.isSelected == false{
+            self.AgreementViewTermsBtn.isSelected = false
+        }
+        self.necessaryCheckAnimation()
+        self.AgreementLayoutInit()
+    }
+    public func AgreementButtonAllisSelect(){
+        self.AgreementButtonisAllSelect()
+        self.necessaryCheckAnimation()
+        self.AgreementLayoutInit()
+    }
+    
+    @objc func AgreementAllisSelect(sender : UIButton){
+        
+        sender.checkboxAnimation {
+            self.AgreementButtonAllisSelect()
+            print(sender.isSelected)
+        }
+    }
+    
+    
     @objc func AgreementisSelect(sender : UIButton){
         sender.checkboxAnimation {
             self.AgreememtButtonisSelect()
+            
             print(sender.isSelected)
         }
+        
     }
     @objc func ConfirmButtonSelect(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) {
@@ -381,16 +407,16 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc func CallServiceApi(){
-        self.AgreementViewLayout()
-        self.AddAgreementView()
+//        self.AgreementViewLayout()
+//        self.AddAgreementView()
         let SingParamter = SignUpParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!, service_use_agree: true)
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{
                     self.NicknameErrorAlert.textColor = UIColor.clear
-//                    self.AgreementViewLayout()
-//                    self.AddAgreementView()
+                    self.AgreementViewLayout()
+                    self.AddAgreementView()
                 }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
                     DispatchQueue.main.async {
                         self.EmailErrorAlert.text = "이미 존재하는 이메일입니다."
@@ -436,6 +462,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
 
 
 extension UIButton {
+    
     func customEnableLayout() {
         if isSelected == true {
             self.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
