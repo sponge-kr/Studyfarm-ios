@@ -91,6 +91,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.addKeyboardNotification()
+        self.AgreementViewTermsBtn.isSelected = false
+        self.AgreementViewTermsBtn2.isSelected = false
+        self.AgreementViewTermsBtn3.isSelected = false
+        self.AgreementViewTermsBtn4.isSelected = false
+        self.AgreementViewTermsBtn5.isSelected = false
+        self.AgreementButtonInit()
+
     }
     
     public func ViewBind(){
@@ -214,7 +221,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height / 2)
         window?.addSubview(self.AgreementView)
         self.view.addGestureRecognizer(tapGesture)
-        self.view.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.view.alpha = 0.5
             self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height - ScreenSize.height / 2, width: ScreenSize.width, height: ScreenSize.height / 2)
@@ -343,6 +349,19 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewTermsBtn4.customEnableLayout()
         self.AgreementViewTermsBtn5.customEnableLayout()
     }
+    public func AgreementButtonInit(){
+        self.AgreementViewTermsBtn.backgroundColor = UIColor.white
+        self.AgreementViewTermsBtn2.backgroundColor = UIColor.white
+        self.AgreementViewTermsBtn3.backgroundColor = UIColor.white
+        self.AgreementViewTermsBtn4.backgroundColor = UIColor.white
+        self.AgreementViewTermsBtn5.backgroundColor = UIColor.white
+        
+        self.AgreementViewTermsBtn.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+        self.AgreementViewTermsBtn2.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+        self.AgreementViewTermsBtn3.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+        self.AgreementViewTermsBtn4.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+        self.AgreementViewTermsBtn5.setBackgroundImage(#imageLiteral(resourceName: "unCheckGray-1"), for: .normal)
+    }
     
     public func AgreememtButtonisSelect() {
         if self.AgreementViewTermsBtn2.isSelected == false || self.AgreementViewTermsBtn3.isSelected == false || self.AgreementViewTermsBtn4.isSelected == false || self.AgreementViewTermsBtn5.isSelected == false{
@@ -380,9 +399,11 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
         } completion: { (succes) in
             if succes == true{
-                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-                guard let MainVC = MainView else {return}
-                self.navigationController?.pushViewController(MainVC, animated: true)
+                let EmailAuthView = self.storyboard?.instantiateViewController(withIdentifier: "EmailAuth")
+                guard let EmailVc = EmailAuthView else {return}
+                self.navigationController?.pushViewController(EmailVc, animated: true)
+                self.view.alpha = 1
+                self.view.backgroundColor = UIColor.systemBackground
             }
         }
     }

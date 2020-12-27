@@ -45,6 +45,7 @@
 		D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */; };
 		D939A4367B9FCE91492E3EDB /* Pods_BLProJect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */; };
 		FB5B368149491471BFC3D997 /* Pods_BLProJect_BLProJectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */; };
+		FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,7 @@
 		D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLViewModel.swift; sourceTree = "<group>"; };
 		F2192852FD2B28CCDB99D81B /* Pods-BLProJectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.release.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69BDC8880EC0FE7F25666E2 /* Pods-BLProJectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +168,7 @@
 				D1B46352255FA4B40063D714 /* LoginMVMM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
+				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,
 				D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */,
+				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
