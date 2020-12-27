@@ -176,6 +176,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="AcceptsTermsBtn" destination="5s4-me-Fn9" id="qn1-op-nbc"/>
+                        <outlet property="AcceptsTermsBtn2" destination="1YY-3c-tm7" id="XMF-wx-YLv"/>
+                        <outlet property="AcceptsTermsBtn3" destination="e2f-2l-SJ5" id="29F-Jq-yoR"/>
+                        <outlet property="AcceptsTermsBtn4" destination="srU-x7-dJm" id="Kpm-jJ-kcX"/>
                         <outlet property="AgreementView" destination="zCB-bX-0Qe" id="caM-J5-TSZ"/>
                         <outlet property="AgreementViewConfirmBtn" destination="BY2-8s-dkx" id="oap-H9-1c5"/>
                         <outlet property="AgreementViewFullLabel" destination="h2Q-ft-GmK" id="JMS-ka-j2i"/>
@@ -285,6 +289,26 @@
                             <rect key="frame" x="31" y="257" width="24" height="24"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="unCheckGray.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s4-me-Fn9">
+                            <rect key="frame" x="347" y="134" width="34" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YY-3c-tm7">
+                            <rect key="frame" x="347" y="174" width="34" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2f-2l-SJ5">
+                            <rect key="frame" x="347" y="214" width="34" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srU-x7-dJm">
+                            <rect key="frame" x="347" y="256" width="34" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
                         </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="0Lg-b0-dAK"/>

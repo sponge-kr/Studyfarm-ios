@@ -67,6 +67,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             self.AgreementViewTermsBtn5.setImage(unCheckimage, for: .normal)
         }
     }
+    @IBOutlet weak var AcceptsTermsBtn: UIButton!
+    @IBOutlet weak var AcceptsTermsBtn2: UIButton!
+    @IBOutlet weak var AcceptsTermsBtn3: UIButton!
+    @IBOutlet weak var AcceptsTermsBtn4: UIButton!
     
     public var ViewModel = SignupViewModel()
     public let disposedBag = DisposeBag()
@@ -268,6 +272,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         
         self.AgreementViewConfirmBtn.layer.borderColor = UIColor.clear.cgColor
         self.AgreementViewConfirmBtn.layer.cornerRadius = 8
+        self.AgreementViewConfirmBtn.isEnabled = false
         self.AgreementViewConfirmBtn.addTarget(self, action: #selector(ConfirmButtonSelect), for: .touchUpInside)
         self.AgreementViewConfirmBtn.frame = CGRect(x: self.AgreementViewConfirmBtn.frame.origin.x, y: self.AgreementViewConfirmBtn.frame.origin.y, width: self.AgreementViewConfirmBtn.frame.size.width, height: self.AgreementViewConfirmBtn.frame.size.height)
         
@@ -282,46 +287,20 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.AgreementViewTermsBtn5.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.AgreementViewTermsBtn5.addTarget(self, action: #selector(AgreementisSelect(sender:)), for: .touchUpInside)
         
+        
+        self.AcceptsTermsBtn.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
+        self.AcceptsTermsBtn.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor : UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        self.AcceptsTermsBtn2.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
+        self.AcceptsTermsBtn2.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue , NSAttributedString.Key.underlineColor : UIColor(red: 146/244, green: 146/244, blue: 146/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        self.AcceptsTermsBtn3.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
+        self.AcceptsTermsBtn3.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor : UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        self.AcceptsTermsBtn4.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
+        self.AcceptsTermsBtn4.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue, NSAttributedString.Key.underlineColor : UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        
     }
     
     public func SignViewAutoLayout(){
-        //        self.SubjectLabel.snp.makeConstraints { (make) in
-        //            make.size.equalTo(CGSize(width: 374, height: 100))
-        //            make.top.equalTo(self.view).offset(156)
-        //            make.right.equalTo(self.view).offset(-20)
-        //            make.left.equalTo(self.view).offset(20)
-        //            make.bottom.equalTo(self.SignEmailTextField.snp.top).offset(-48)
-        //
-        //        }
-        //        self.SignEmailTextField.snp.makeConstraints { (make) in
-        //            make.right.equalTo(self.view).offset(-20)
-        //            make.left.equalTo(self.view).offset(20)
-        //            make.bottom.equalTo(self.SignNicknamTextField.snp.top).offset(-70)
-        //            make.top.equalTo(self.SubjectLabel.snp.bottom).offset(48)
-        //            make.size.equalTo(CGSize(width: 374, height: 30))
-        //        }
-        //        self.SignNicknamTextField.snp.makeConstraints { (make) in
-        //            make.top.equalTo(self.SignEmailTextField.snp
-        //                                .bottom).offset(70)
-        //            make.right.equalTo(self.view).offset(-20)
-        //            make.left.equalTo(self.view).offset(20)
-        //            make.bottom.equalTo(self.SignPasswordTextField.snp.top).offset(-70)
-        //            make.size.equalTo(CGSize(width: 374, height: 30))
-        //        }
-        //        self.SignPasswordTextField.snp.makeConstraints { (make) in
-        //            make.top.equalTo(self.SignNicknamTextField.snp.bottom).offset(70)
-        //            make.right.equalTo(self.view).offset(-20)
-        //            make.left.equalTo(self.view).offset(20)
-        //            make.bottom.equalTo(self.SignJoinButton.snp.top).offset(-83)
-        //            make.size.equalTo(CGSize(width: 374, height: 30))
-        //        }
-        //        self.SignJoinButton.snp.makeConstraints { (make) in
-        //            make.top.equalTo(self.SignPasswordTextField.snp.bottom).offset(83)
-        //            make.right.equalTo(self.view).offset(-20)
-        //            make.left.equalTo(self.view).offset(20)
-        //            make.bottom.equalTo(self.view).offset(-149)
-        //            make.size.equalTo(CGSize(width: 374, height: 40))
-        //        }
+        
     }
     
     public func addKeyboardNotification(){
@@ -333,8 +312,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     public func necessaryCheckAnimation(){
         if self.AgreementViewTermsBtn2.isSelected == true && self.AgreementViewTermsBtn3.isSelected == true {
             self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.AgreementViewConfirmBtn.isEnabled = true
         }else{
             self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
+            self.AgreementViewConfirmBtn.isEnabled = false
         }
     }
     
@@ -407,16 +388,18 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc func CallServiceApi(){
-//        self.AgreementViewLayout()
-//        self.AddAgreementView()
+        self.AgreementViewLayout()
+        self.AddAgreementView()
         let SingParamter = SignUpParamter(email: self.SignEmailTextField.text!, password: self.SignPasswordTextField.text!, nickname: self.SignNicknamTextField.text!, service_use_agree: true)
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{
                     self.NicknameErrorAlert.textColor = UIColor.clear
-                    self.AgreementViewLayout()
-                    self.AddAgreementView()
+//                    self.AgreementViewLayout()
+//                    self.AddAgreementView()
+                    //2020월 12월 27일 월요알
+                    UserDefaults.standard.set(value.email, forKey: "service_use_email")
                 }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
                     DispatchQueue.main.async {
                         self.EmailErrorAlert.text = "이미 존재하는 이메일입니다."
@@ -424,6 +407,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
                     }
                 }else if value.code == 400 && value.message == "이미 존재하는 닉네임입니다."{
                     DispatchQueue.main.async {
+                        self.EmailErrorAlert.text = "이미 존재하는 닉네임입니다."
                         self.NicknameErrorAlert.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                     }
                 }
