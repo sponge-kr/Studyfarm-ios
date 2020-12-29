@@ -400,6 +400,21 @@
             </objects>
             <point key="canvasLocation" x="900.00000000000011" y="-597.32142857142856"/>
         </scene>
+        <!--User Information View Controller-->
+        <scene sceneID="jaO-7C-7fK">
+            <objects>
+                <viewController storyboardIdentifier="UserInformation" id="2H8-tp-NJL" customClass="UserInformationViewController" customModule="스터디팜" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iAe-jI-oUT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cI8-Aa-z6N"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9T-hN-RA8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="-597"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ieq-9T-fJy">
             <objects>

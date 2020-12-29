@@ -26,10 +26,19 @@ struct stateCityCodeData {
     var stateCityName : String?
 }
 
-struct ResetEmailData {
+struct resetEmailData {
     var code : Int?
     var message : String?
 }
+struct studyCategoryData{
+    var code : Int?
+    var message : String?
+    var contentCode : Int?  //카테고리 코드
+    var contentName : String? //카테고리 명
+    var childrenCode : Int?  //주제 코드
+    var childrenName : String? //주제 명
+}
+
 
 
 
@@ -42,11 +51,13 @@ class UtilApi{
     
     public var stateCodeModel = stateCodeData()
     public var stateCityCodeModel = stateCityCodeData()
-    public var ResetEmailModel = ResetEmailData()
+    public var resetEmailModel = resetEmailData()
+    public var studyCategoryModel = studyCategoryData()
     
     private init(){}
     
-    public func UtilStatesCodeCall(completionHandler : @escaping (Result<stateCodeData,Error>) -> ()){
+    //MARK - 스터디 시도 리스트 조회 함수 구현(GET)
+    public func UtilStatesCiteCodeCall(completionHandler : @escaping (Result<stateCodeData,Error>) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/utils/states", method: .get, headers: headers)
             .response { response in
                 switch response.result {
@@ -65,16 +76,22 @@ class UtilApi{
             }
     }
     
-    public func UtilStateCiteCodeCall(statecode : Int,completionHandler : @escaping (Result<stateCityCodeData,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/utils/cities/\(statecode)", method: .get, headers: headers)
+    //MARK - 스터디 리스트 조회 함수 구현(GET)
+    public func UtilStudyCategoryCall(completionHandler : @escaping(Result<studyCategoryData,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/utils/categories", method: .get, headers: headers)
             .response { response in
+                debugPrint(response)
                 switch response.result {
-                case.success(let value):
-                    let StateCityJson = JSON(value)
-                    for (_,subJson):(String,JSON) in StateCityJson["result"]["content"] {
-                        self.stateCityCodeModel.stateCityCode = StateCityJson["code"].intValue
-                        self.stateCityCodeModel.stateCityName = StateCityJson["name"].stringValue
-                        completionHandler(.success(self.stateCityCodeModel))
+                case .success(let value):
+                    let CategoryJson = JSON(value)
+                    self.studyCategoryModel.code = CategoryJson["code"].intValue
+                    self.studyCategoryModel.message = CategoryJson["message"].stringValue
+                    for (_,subJson):(String,JSON) in CategoryJson["result"]["content"] {
+                        self.studyCategoryModel.contentCode = CategoryJson["code"].intValue
+                        self.studyCategoryModel.contentName = CategoryJson["name"].stringValue
+                        self.studyCategoryModel.childrenCode = CategoryJson["children"]["code"].intValue
+                        self.studyCategoryModel.childrenName = CategoryJson["children"]["name"].stringValue
+                        completionHandler(.success(self.studyCategoryModel))
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -83,7 +100,9 @@ class UtilApi{
             }
     }
     
-    public func UtilSendResetEmailCall(EmailParamter : Parameters, completionHandler : @escaping (Result<ResetEmailData,Error>) -> ()){
+    
+    //MARK - 이메일 전송 함수 구현(POST)
+    public func UtilSendResetEmailCall(EmailParamter : Parameters, completionHandler : @escaping (Result<resetEmailData,Error>) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
             .response { response in
                 debugPrint(response)
@@ -91,16 +110,14 @@ class UtilApi{
                 case.success(let value):
                     let ResetEmailJson = JSON(value)
                     for (_,subJson):(String,JSON) in ResetEmailJson {
-                        self.ResetEmailModel.code = ResetEmailJson["code"].intValue
-                        self.ResetEmailModel.message = ResetEmailJson["message"].stringValue
-                        completionHandler(.success(self.ResetEmailModel))
+                        self.resetEmailModel.code = ResetEmailJson["code"].intValue
+                        self.resetEmailModel.message = ResetEmailJson["message"].stringValue
+                        completionHandler(.success(self.resetEmailModel))
                     }
                 case.failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
                 }
-                
-                
             }
     }
     

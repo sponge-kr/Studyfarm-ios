@@ -53,14 +53,12 @@ class EmailAuthViewController: UIViewController {
         self.SendEmailExampleLabel.text = "메일함에서 인증 확인 버튼을 눌러주세요."
         self.SendEmailExampleLabel.font = UIFont(name: "Roboto-Bold", size: 14)
 
-        
-        
         self.SendEmailConfirmButton.setTitleColor(UIColor.white, for: .normal)
         self.SendEmailConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        
         self.SendEmailConfirmButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         self.SendEmailConfirmButton.setTitle("가입하기", for: .normal)
         self.SendEmailConfirmButton.layer.cornerRadius = 8.0
+        self.SendEmailConfirmButton.addTarget(self, action: #selector(UserAuchConfirmAction), for: .touchUpInside)
         
         self.SendEmailResetLabel.textAlignment = .center
         self.SendEmailResetLabel.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -89,6 +87,25 @@ class EmailAuthViewController: UIViewController {
                     print("확인되었습니다.")
                 }else{
                     print("실패했습니다.")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    @objc private func UserAuchConfirmAction(){
+        
+        oAuthApi.shared.AuthCheckUserCall(CheckUser: UserDefaults.standard.value(forKey: "service_use_email") as! String) { result in
+            switch result{
+            case .success(let value):
+                if value.code == 200 && value.check_result == false {
+                    let informView = self.storyboard?.instantiateViewController(withIdentifier: "UserInformation")
+                    guard let InformVC = informView else {return}
+                    self.navigationController?.pushViewController(InformVC, animated: true)
+                    print("유저 체크 성공")
+                }else{
+                    print("유저 체크 실패")
                 }
             case .failure(let error):
                 print(error.localizedDescription)

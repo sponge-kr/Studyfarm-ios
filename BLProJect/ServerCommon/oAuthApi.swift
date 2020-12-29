@@ -111,6 +111,16 @@ struct SignUpDataModel {
     var user_active : Bool = false
 }
 
+//MARK - 유저 체크 데이터
+
+struct UserCheckDataModel {
+    var code : Int = 0
+    var message : String = ""
+    var check_result : Bool = false
+}
+
+
+
 //MARK - 로그인 Paramter
 struct LoginParamter : Encodable {
     var email : String
@@ -163,6 +173,7 @@ class oAuthApi {
     public var KakaoModel = KakaoSingDataModel()
     public var KakaoLoginModel = KakaoLoginDataModel()
     public var NickNameModel = NickNameDataModel()
+    public var UserCheckModel = UserCheckDataModel()
     public var GIDSignModel = GIDSignDataModel()
     
     
@@ -291,6 +302,28 @@ class oAuthApi {
             }
     }
     
+    //MARK - 유저 인증 확인 함수 구현(GET)
+    public func AuthCheckUserCall(CheckUser : String, completionHandler : @escaping(Result<UserCheckDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result{
+                case .success(let value):
+                    let CheckUserJson = JSON(value!)
+                    self.UserCheckModel.code = CheckUserJson["code"].intValue
+                    self.UserCheckModel.message = CheckUserJson["message"].stringValue
+                    self.UserCheckModel.check_result = CheckUserJson["result"]["check_result"].boolValue
+                    completionHandler(.success(self.UserCheckModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+                
+            }
+    }
+    
+    
+    //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
     public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in

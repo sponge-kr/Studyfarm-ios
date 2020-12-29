@@ -60,6 +60,7 @@
 		FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF331D82259B34BD00BD8C33 /* Roboto-Medium.ttf */; };
 		FF331D8F259B34BD00BD8C33 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF331D83259B34BD00BD8C33 /* Roboto-LightItalic.ttf */; };
 		FF331D90259B34BD00BD8C33 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF331D84259B34BD00BD8C33 /* Roboto-Italic.ttf */; };
+		FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
 /* End PBXBuildFile section */
@@ -148,6 +149,7 @@
 		FF331D82259B34BD00BD8C33 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FF331D83259B34BD00BD8C33 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		FF331D84259B34BD00BD8C33 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewController.swift; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,6 +199,7 @@
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
 				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
+				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
+				FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,7 +885,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XKA22N2KHA;
 				INFOPLIST_FILE = BLProJect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -903,7 +907,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XKA22N2KHA;
 				INFOPLIST_FILE = BLProJect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
