@@ -26,6 +26,12 @@ struct stateCityCodeData {
     var stateCityName : String?
 }
 
+struct ResetEmailData {
+    var code : Int?
+    var message : String?
+}
+
+
 
 class UtilApi{
     
@@ -36,6 +42,7 @@ class UtilApi{
     
     public var stateCodeModel = stateCodeData()
     public var stateCityCodeModel = stateCityCodeData()
+    public var ResetEmailModel = ResetEmailData()
     
     private init(){}
     
@@ -75,5 +82,27 @@ class UtilApi{
                 }
             }
     }
+    
+    public func UtilSendResetEmailCall(EmailParamter : Parameters, completionHandler : @escaping (Result<ResetEmailData,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result{
+                case.success(let value):
+                    let ResetEmailJson = JSON(value)
+                    for (_,subJson):(String,JSON) in ResetEmailJson {
+                        self.ResetEmailModel.code = ResetEmailJson["code"].intValue
+                        self.ResetEmailModel.message = ResetEmailJson["message"].stringValue
+                        completionHandler(.success(self.ResetEmailModel))
+                    }
+                case.failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+                
+                
+            }
+    }
+    
 }
 
