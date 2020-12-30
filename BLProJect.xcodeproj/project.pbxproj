@@ -63,6 +63,8 @@
 		FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
+		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
+		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewController.swift; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
+		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
+		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +202,9 @@
 				D1B46352255FA4B40063D714 /* LoginMVMM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
+				FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */,
 				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
+				FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 			);
 			path = LoginViewController;
@@ -258,7 +264,6 @@
 			children = (
 				FF331D78259B349600BD8C33 /* Font */,
 				D1F85D1324CDE4FF00E1F7BE /* ViewModel */,
-				D1F85D0024CDB02500E1F7BE /* CustomView */,
 				D1F85CFD24CDAA5A00E1F7BE /* ImageFile */,
 				D1F85CC624C45B1100E1F7BE /* BLProJect */,
 				D1F85CDD24C45B1300E1F7BE /* BLProJectTests */,
@@ -336,13 +341,6 @@
 				D11800C42564703700B8E5A1 /* uncheck@1x.png */,
 			);
 			path = ImageFile;
-			sourceTree = "<group>";
-		};
-		D1F85D0024CDB02500E1F7BE /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
 			sourceTree = "<group>";
 		};
 		D1F85D1324CDE4FF00E1F7BE /* ViewModel */ = {
@@ -504,11 +502,13 @@
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
+				FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
 				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
+				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,

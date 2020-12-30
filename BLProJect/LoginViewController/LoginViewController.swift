@@ -22,20 +22,20 @@ import RxSwift
 
 
 class LoginViewController: UIViewController {
-    @IBOutlet weak var ConfirmButton: UIButton!
-    @IBOutlet weak var MainSubject: UILabel!
-    @IBOutlet weak var ParentsSubject: UILabel!
-    @IBOutlet weak var ContourLine: UIView!
-    @IBOutlet weak var AuthLoginSubject: UILabel!
-    @IBOutlet weak var AuthLoginSwitch: UISwitch!
-    @IBOutlet weak var ContourLine2: UIView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var EmailTextFiled: UITextField!
-    @IBOutlet weak var PasswordTextFiled: UITextField!
-    @IBOutlet weak var KakaoLoginBtn: UIButton!
-    @IBOutlet weak var NaverLoginBtn: UIButton!
-    @IBOutlet weak var GoogleLoginBtn: UIButton!
-    @IBOutlet weak var SignUpBtn: UIButton!
+    @IBOutlet weak var loginConfirmbutton: UIButton!
+    @IBOutlet weak var loginSubtitlelabel: UILabel!
+    @IBOutlet weak var loginSubheadlabel: UILabel!
+    @IBOutlet weak var loginGrayline: UIView!
+    @IBOutlet weak var loginAutotitlelabel: UILabel!
+    @IBOutlet weak var loginAutoswitch: UISwitch!
+    @IBOutlet weak var loginGraylines: UIView!
+    @IBOutlet weak var loginDescriptionlabel: UILabel!
+    @IBOutlet weak var loginEmailtextfiled: UITextField!
+    @IBOutlet weak var loginPasswordtextfiled: UITextField!
+    @IBOutlet weak var kakaoLoginbutton: UIButton!
+    @IBOutlet weak var naverLoginbutton: UIButton!
+    @IBOutlet weak var googleLoginbutton: UIButton!
+    @IBOutlet weak var signUpbutton: UIButton!
     
     public var ErrorAlert : LoginAlertView!
     var ViewModel : LoginViewModel = LoginViewModel()
@@ -45,9 +45,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.SetLoginLayout()
         self.SetAutoLayout()
-        self.ConfirmButton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
-        self.KakaoLoginBtn.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
-        self.SignUpBtn.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
+        self.loginConfirmbutton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
+        self.kakaoLoginbutton.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
+        self.signUpbutton.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
         let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다",TokenKeyChain)
         if TokenKeyChain != nil {
@@ -71,23 +71,23 @@ class LoginViewController: UIViewController {
     
     
     private func TextFiledbind(){
-        EmailTextFiled.rx.text
+        loginEmailtextfiled.rx.text
             .bind(to: ViewModel.input.EmailText)
             .disposed(by: disposeBag)
-        PasswordTextFiled.rx.text
+        loginPasswordtextfiled.rx.text
             .bind(to: ViewModel.input.PassWordText)
             .disposed(by: disposeBag)
         ViewModel.output.setEmailTextEnabled
             .drive{ (isempty) in
-                self.EmailTextFiled.rx.base.layer.borderColor = isempty
+                self.loginEmailtextfiled.rx.base.layer.borderColor = isempty
             }.disposed(by: disposeBag)
         ViewModel.output.setPasswordTextEnabled
             .drive{ (isempty) in
-                self.PasswordTextFiled.rx.base.layer.borderColor = isempty
+                self.loginPasswordtextfiled.rx.base.layer.borderColor = isempty
             }.disposed(by: disposeBag)
         ViewModel.output.isEmptyEmailText
             .drive{ (ishidden) in
-                self.EmailTextFiled.rightView?.rx.base.isHidden = ishidden
+                self.loginEmailtextfiled.rightView?.rx.base.isHidden = ishidden
             }.disposed(by: disposeBag)
     }
     
@@ -125,83 +125,83 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true
     
-        self.ConfirmButton.setAttributedTitle(NSAttributedString(string: "로그인", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
-        self.ConfirmButton.tintColor = UIColor.white
-        self.ConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.ConfirmButton.layer.borderColor = UIColor.clear.cgColor
-        self.ConfirmButton.layer.cornerRadius = 8
-        self.ConfirmButton.layer.masksToBounds = true
+        self.loginConfirmbutton.setAttributedTitle(NSAttributedString(string: "로그인", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 1.0))]), for: .normal)
+        self.loginConfirmbutton.tintColor = UIColor.white
+        self.loginConfirmbutton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.loginConfirmbutton.layer.borderColor = UIColor.clear.cgColor
+        self.loginConfirmbutton.layer.cornerRadius = 8
+        self.loginConfirmbutton.layer.masksToBounds = true
         
-        self.MainSubject.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0))
-        self.MainSubject.text = "나와 딱 맞는 \n스터디를 찾고 계신가요?"
-        self.MainSubject.textColor = UIColor.black
-        self.MainSubject.textAlignment = .left
-        self.MainSubject.frame = CGRect(x: self.MainSubject.frame.origin.x, y: self.MainSubject.frame.origin.y, width: self.MainSubject.frame.size.width, height: self.MainSubject.frame.size.height)
-        self.MainSubject.numberOfLines = 2
-        
-        
-        self.ParentsSubject.text = "스터디팜을 이용하시려면 로그인해 주세요"
-        self.ParentsSubject.font = UIFont.systemFont(ofSize: 14)
-        self.ParentsSubject.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
-        self.ParentsSubject.textAlignment = .left
-        self.ParentsSubject.frame = CGRect(x: self.ParentsSubject.frame.origin.x, y: self.ParentsSubject.frame.origin.y, width: self.ParentsSubject.frame.size.width, height: self.ParentsSubject.frame.size.height)
-        self.ParentsSubject.numberOfLines = 1
-        
-        self.ContourLine.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
-        self.ContourLine.frame = CGRect(x: self.ContourLine.frame.origin.x, y: self.ContourLine.frame.origin.y, width: self.ContourLine.frame.size.width, height: self.ContourLine.frame.size.height)
-        self.ContourLine2.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
-        self.ContourLine2.frame = CGRect(x: self.ContourLine2.frame.origin.x, y: self.ContourLine2.frame.origin.y, width: self.ContourLine2.frame.size.width, height: self.ContourLine2.frame.size.height)
+        self.loginSubtitlelabel.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0))
+        self.loginSubtitlelabel.text = "나와 딱 맞는 \n스터디를 찾고 계신가요?"
+        self.loginSubtitlelabel.textColor = UIColor.black
+        self.loginSubtitlelabel.textAlignment = .left
+        self.loginSubtitlelabel.frame = CGRect(x: self.loginSubtitlelabel.frame.origin.x, y: self.loginSubtitlelabel.frame.origin.y, width: self.loginSubtitlelabel.frame.size.width, height: self.loginSubtitlelabel.frame.size.height)
+        self.loginSubtitlelabel.numberOfLines = 2
         
         
-        self.descriptionLabel.text = "다음 계정으로 이용"
-        self.descriptionLabel.font = UIFont.boldSystemFont(ofSize: 12)
-        self.descriptionLabel.textColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
-        self.descriptionLabel.textAlignment = .center
-        self.descriptionLabel.frame = CGRect(x: self.descriptionLabel.frame.origin.x, y: self.descriptionLabel.frame.origin.y, width: self.descriptionLabel.frame.size.width, height: self.descriptionLabel.frame.size.height)
+        self.loginSubheadlabel.text = "스터디팜을 이용하시려면 로그인해 주세요"
+        self.loginSubheadlabel.font = UIFont.systemFont(ofSize: 14)
+        self.loginSubheadlabel.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
+        self.loginSubheadlabel.textAlignment = .left
+        self.loginSubheadlabel.frame = CGRect(x: self.loginSubheadlabel.frame.origin.x, y: self.loginSubheadlabel.frame.origin.y, width: self.loginSubheadlabel.frame.size.width, height: self.loginSubheadlabel.frame.size.height)
+        self.loginSubheadlabel.numberOfLines = 1
+        
+        self.loginGrayline.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
+        self.loginGrayline.frame = CGRect(x: self.loginGrayline.frame.origin.x, y: self.loginGrayline.frame.origin.y, width: self.loginGrayline.frame.size.width, height: self.loginGrayline.frame.size.height)
+        self.loginGraylines.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
+        self.loginGraylines.frame = CGRect(x: self.loginGraylines.frame.origin.x, y: self.loginGraylines.frame.origin.y, width: self.loginGraylines.frame.size.width, height: self.loginGraylines.frame.size.height)
         
         
-        self.EmailTextFiled.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
-        self.EmailTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
-        self.EmailTextFiled.layer.borderWidth = 1.0
-        self.EmailTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
-        self.EmailTextFiled.leftViewMode = .always
+        self.loginDescriptionlabel.text = "다음 계정으로 이용"
+        self.loginDescriptionlabel.font = UIFont.boldSystemFont(ofSize: 12)
+        self.loginDescriptionlabel.textColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
+        self.loginDescriptionlabel.textAlignment = .center
+        self.loginDescriptionlabel.frame = CGRect(x: self.loginDescriptionlabel.frame.origin.x, y: self.loginDescriptionlabel.frame.origin.y, width: self.loginDescriptionlabel.frame.size.width, height: self.loginDescriptionlabel.frame.size.height)
+        
+        
+        self.loginEmailtextfiled.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
+        self.loginEmailtextfiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+        self.loginEmailtextfiled.layer.borderWidth = 1.0
+        self.loginEmailtextfiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.loginEmailtextfiled.leftViewMode = .always
         
     
-        self.PasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "비밀번호 (영문, 숫자 조합의 8~16자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
-        self.PasswordTextFiled.isSecureTextEntry = true
-        self.PasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
-        self.PasswordTextFiled.layer.borderWidth = 1.0
-        self.PasswordTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
-        self.PasswordTextFiled.leftViewMode = .always
+        self.loginPasswordtextfiled.attributedPlaceholder = NSAttributedString(string: "비밀번호 (영문, 숫자 조합의 8~16자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
+        self.loginPasswordtextfiled.isSecureTextEntry = true
+        self.loginPasswordtextfiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
+        self.loginPasswordtextfiled.layer.borderWidth = 1.0
+        self.loginPasswordtextfiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
+        self.loginPasswordtextfiled.leftViewMode = .always
         
-        self.AuthLoginSubject.text = "자동로그인"
-        self.AuthLoginSubject.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
-        self.AuthLoginSubject.font = UIFont.systemFont(ofSize: 12)
-        self.AuthLoginSubject.numberOfLines = 1
-        self.AuthLoginSubject.textAlignment = .center
+        self.loginAutotitlelabel.text = "자동로그인"
+        self.loginAutotitlelabel.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
+        self.loginAutotitlelabel.font = UIFont.systemFont(ofSize: 12)
+        self.loginAutotitlelabel.numberOfLines = 1
+        self.loginAutotitlelabel.textAlignment = .center
         
-        self.AuthLoginSwitch.onTintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.loginAutoswitch.onTintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         
-        self.SignUpBtn.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
+        self.signUpbutton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
     
-        self.KakaoLoginBtn.frame = CGRect(x: self.KakaoLoginBtn.frame.origin.x, y: self.KakaoLoginBtn.frame.origin
-                                            .y, width: self.KakaoLoginBtn.frame.size.width, height: self.KakaoLoginBtn.frame.size.height)
-        self.KakaoLoginBtn.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
-        self.KakaoLoginBtn.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.KakaoLoginBtn.layer.cornerRadius = self.KakaoLoginBtn.frame.size.height / 2
-        self.KakaoLoginBtn.layer.borderColor = UIColor.clear.cgColor
+        self.kakaoLoginbutton.frame = CGRect(x: self.kakaoLoginbutton.frame.origin.x, y: self.kakaoLoginbutton.frame.origin
+                                            .y, width: self.kakaoLoginbutton.frame.size.width, height: self.kakaoLoginbutton.frame.size.height)
+        self.kakaoLoginbutton.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
+        self.kakaoLoginbutton.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.kakaoLoginbutton.layer.cornerRadius = self.kakaoLoginbutton.frame.size.height / 2
+        self.kakaoLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
-        self.NaverLoginBtn.frame = CGRect(x: self.NaverLoginBtn.frame.origin.x, y: self.NaverLoginBtn.frame.origin.y, width: self.NaverLoginBtn.frame.size.width, height: self.NaverLoginBtn.frame.size.height)
-        self.NaverLoginBtn.backgroundColor = UIColor(red: 42/255, green: 210/255, blue: 137/255, alpha: 1.0)
-        self.NaverLoginBtn.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.NaverLoginBtn.layer.cornerRadius = self.NaverLoginBtn.frame.size.width / 2
-        self.NaverLoginBtn.layer.borderColor = UIColor.clear.cgColor
+        self.naverLoginbutton.frame = CGRect(x: self.naverLoginbutton.frame.origin.x, y: self.naverLoginbutton.frame.origin.y, width: self.naverLoginbutton.frame.size.width, height: self.naverLoginbutton.frame.size.height)
+        self.naverLoginbutton.backgroundColor = UIColor(red: 42/255, green: 210/255, blue: 137/255, alpha: 1.0)
+        self.naverLoginbutton.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.naverLoginbutton.layer.cornerRadius = self.naverLoginbutton.frame.size.width / 2
+        self.naverLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
-        self.GoogleLoginBtn.frame = CGRect(x: self.GoogleLoginBtn.frame.origin.x, y: self.GoogleLoginBtn.frame.origin.y, width: self.GoogleLoginBtn.frame.size.width, height: self.GoogleLoginBtn.frame.size.height)
-        self.GoogleLoginBtn.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
-        self.GoogleLoginBtn.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.GoogleLoginBtn.layer.cornerRadius = self.GoogleLoginBtn.frame.size.height / 2
-        self.GoogleLoginBtn.layer.borderColor = UIColor.clear.cgColor
+        self.googleLoginbutton.frame = CGRect(x: self.googleLoginbutton.frame.origin.x, y: self.googleLoginbutton.frame.origin.y, width: self.googleLoginbutton.frame.size.width, height: self.googleLoginbutton.frame.size.height)
+        self.googleLoginbutton.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
+        self.googleLoginbutton.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.googleLoginbutton.layer.cornerRadius = self.googleLoginbutton.frame.size.height / 2
+        self.googleLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
     }
     
@@ -220,7 +220,7 @@ class LoginViewController: UIViewController {
         if let keyboardFrame : NSValue =  notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let KeyboardFrameRect = keyboardFrame.cgRectValue
             let keyboardFrameHeight = KeyboardFrameRect.height
-            self.ConfirmButton.frame = CGRect(x: self.ConfirmButton.frame.origin.x, y: self.ConfirmButton.frame.origin.y - keyboardFrameHeight, width: self.ConfirmButton.frame.size.width, height: self.ConfirmButton.frame.size.height)
+            self.loginConfirmbutton.frame = CGRect(x: self.loginConfirmbutton.frame.origin.x, y: self.loginConfirmbutton.frame.origin.y - keyboardFrameHeight, width: self.loginConfirmbutton.frame.size.width, height: self.loginConfirmbutton.frame.size.height)
             
         }
     }
@@ -229,7 +229,7 @@ class LoginViewController: UIViewController {
         if let keyboardFrame : NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let KeyboardFrameRect = keyboardFrame.cgRectValue
             let KeyboardFrameHight = KeyboardFrameRect.height
-            self.ConfirmButton.frame = CGRect(x: self.ConfirmButton.frame.origin.x, y: self.ConfirmButton.frame.origin.y + KeyboardFrameHight, width: self.ConfirmButton.frame.size.width, height: self.ConfirmButton.frame.size.height)
+            self.loginConfirmbutton.frame = CGRect(x: self.loginConfirmbutton.frame.origin.x, y: self.loginConfirmbutton.frame.origin.y + KeyboardFrameHight, width: self.loginConfirmbutton.frame.size.width, height: self.loginConfirmbutton.frame.size.height)
         }
     }
     
@@ -251,7 +251,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func SignUpTransform(){
-        let SignView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
+        let Storyboard = UIStoryboard(name: "SignupViewController", bundle: nil)
+        let SignView = Storyboard.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
         guard let SignVC = SignView else { return }
         self.navigationController?.pushViewController(SignVC, animated: true)
     }
@@ -260,7 +261,7 @@ class LoginViewController: UIViewController {
     
     
     @objc func ReceiveLoginAPI(){
-        let Paramter = LoginParamter(email: self.EmailTextFiled.text!, password: self.PasswordTextFiled.text!)
+        let Paramter = LoginParamter(email: self.loginEmailtextfiled.text!, password: self.loginPasswordtextfiled.text!)
         
         oAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
             switch result {

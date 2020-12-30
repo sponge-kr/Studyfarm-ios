@@ -399,9 +399,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
         } completion: { (succes) in
             if succes == true{
-                let EmailAuthView = self.storyboard?.instantiateViewController(withIdentifier: "EmailAuth")
-                guard let EmailVc = EmailAuthView else {return}
-                self.navigationController?.pushViewController(EmailVc, animated: true)
+                let Storyboard = UIStoryboard(name: "EmailAuthViewController", bundle: nil)
+                let EmailView = Storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
+                guard let EmailVC = EmailView else { return }
+                self.navigationController?.pushViewController(EmailVC, animated: true)
                 self.view.alpha = 1
                 self.view.backgroundColor = UIColor.systemBackground
             }
