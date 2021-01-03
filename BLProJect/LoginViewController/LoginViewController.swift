@@ -7,13 +7,9 @@
 //
 
 import UIKit
-import KakaoSDKUser
-import KakaoSDKCommon
 import KakaoSDKAuth
 import GoogleSignIn
-import Alamofire
 import SnapKit
-import SwiftyJSON
 import SwiftKeychainWrapper
 import RxCocoa
 import RxSwift
@@ -44,7 +40,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.SetLoginLayout()
-        self.SetAutoLayout()
+        self.setAutoLayout()
         self.loginConfirmbutton.addTarget(self, action: #selector(ReceiveLoginAPI), for: .touchUpInside)
         self.kakaoLoginbutton.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
         self.signUpbutton.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
@@ -66,9 +62,18 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.KeyboardAddObserver()
+        self.keyboardAddObserver()
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        self.naverLoginbutton.layer.cornerRadius = self.naverLoginbutton.frame.size.width / 2.0
+        self.naverLoginbutton.layer.masksToBounds = true
+        self.kakaoLoginbutton.layer.cornerRadius = self.kakaoLoginbutton.frame.size.width / 2.0
+        self.kakaoLoginbutton.layer.masksToBounds = true
+        self.googleLoginbutton.layer.cornerRadius = self.googleLoginbutton.frame.size.width / 2.0
+        self.googleLoginbutton.layer.masksToBounds = true
+    }
     
     private func TextFiledbind(){
         loginEmailtextfiled.rx.text
@@ -182,35 +187,126 @@ class LoginViewController: UIViewController {
         
         self.loginAutoswitch.onTintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         
+        
         self.signUpbutton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]), for: .normal)
     
         self.kakaoLoginbutton.frame = CGRect(x: self.kakaoLoginbutton.frame.origin.x, y: self.kakaoLoginbutton.frame.origin
                                             .y, width: self.kakaoLoginbutton.frame.size.width, height: self.kakaoLoginbutton.frame.size.height)
         self.kakaoLoginbutton.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
         self.kakaoLoginbutton.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.kakaoLoginbutton.layer.cornerRadius = self.kakaoLoginbutton.frame.size.height / 2
+        self.kakaoLoginbutton.layer.cornerRadius = self.kakaoLoginbutton.frame.size.width / 2.0
         self.kakaoLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
         self.naverLoginbutton.frame = CGRect(x: self.naverLoginbutton.frame.origin.x, y: self.naverLoginbutton.frame.origin.y, width: self.naverLoginbutton.frame.size.width, height: self.naverLoginbutton.frame.size.height)
         self.naverLoginbutton.backgroundColor = UIColor(red: 42/255, green: 210/255, blue: 137/255, alpha: 1.0)
         self.naverLoginbutton.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.naverLoginbutton.layer.cornerRadius = self.naverLoginbutton.frame.size.width / 2
+        self.naverLoginbutton.layer.cornerRadius = self.naverLoginbutton.frame.size.width / 2.0
         self.naverLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
         self.googleLoginbutton.frame = CGRect(x: self.googleLoginbutton.frame.origin.x, y: self.googleLoginbutton.frame.origin.y, width: self.googleLoginbutton.frame.size.width, height: self.googleLoginbutton.frame.size.height)
         self.googleLoginbutton.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
         self.googleLoginbutton.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.googleLoginbutton.layer.cornerRadius = self.googleLoginbutton.frame.size.height / 2
+        self.googleLoginbutton.layer.cornerRadius = self.googleLoginbutton.frame.size.width / 2.0
         self.googleLoginbutton.layer.borderColor = UIColor.clear.cgColor
         
-    }
-    
-    private func SetAutoLayout(){
-        
         
     }
     
-    public func KeyboardAddObserver(){
+    //MARK - 로그인 AutoLayout 코드1
+    private func setAutoLayout(){
+        self.loginSubtitlelabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.top).offset(87)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.bottom.equalTo(self.loginSubheadlabel.snp.top).offset(-20)
+            make.width.equalTo(277)
+            make.height.equalTo(72)
+        }
+        self.loginSubheadlabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginSubtitlelabel.snp.bottom).offset(20)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.bottom.equalTo(self.loginEmailtextfiled.snp.top).offset(-17)
+            make.width.equalTo(253)
+            make.height.equalTo(24)
+        }
+        self.loginEmailtextfiled.snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.bottom.equalTo(self.loginPasswordtextfiled.snp.top).offset(-25)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.width.equalTo(333)
+            make.height.equalTo(45)
+        }
+        self.loginPasswordtextfiled.snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.bottom.equalTo(self.loginAutoswitch.snp.top).offset(-27)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.width.equalTo(333)
+            make.height.equalTo(45)
+        }
+        self.loginAutoswitch.snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.bottom.equalTo(self.loginConfirmbutton.snp.top).offset(-28)
+            make.right.equalTo(self.loginAutotitlelabel.snp.left).offset(-10)
+        }
+        self.loginAutotitlelabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginPasswordtextfiled.snp.bottom).offset(32)
+            make.bottom.equalTo(self.loginConfirmbutton.snp.top).offset(-30)
+            make.left.equalTo(self.loginAutoswitch.snp.right).offset(10)
+        }
+        self.loginConfirmbutton.snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
+            make.bottom.equalTo(self.signUpbutton.snp.top).offset(-9)
+            make.width.equalTo(355)
+            make.height.equalTo(49)
+        }
+        self.signUpbutton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginConfirmbutton.snp.bottom).offset(9)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(24)
+            make.bottom.equalTo(self.loginDescriptionlabel.snp.top).offset(-37)
+        }
+        self.loginDescriptionlabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.signUpbutton.snp.bottom).offset(37)
+            make.left.equalTo(self.loginGrayline.snp.right).offset(28)
+            make.height.equalTo(24)
+        }
+        self.loginGrayline.snp.makeConstraints { (make) in
+            make.top.equalTo(self.signUpbutton.snp.bottom).offset(47)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(22)
+            make.right.equalTo(self.loginDescriptionlabel.snp.left).offset(-28)
+            make.width.equalTo(94)
+            make.height.equalTo(1)
+        }
+        self.loginGraylines.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginConfirmbutton.snp.bottom).offset(80)
+            make.left.equalTo(self.loginDescriptionlabel.snp.right).offset(28)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-18)
+            make.width.equalTo(94)
+            make.height.equalTo(1)
+        }
+        self.naverLoginbutton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginGrayline.snp.bottom).offset(53)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(87)
+            make.right.equalTo(self.kakaoLoginbutton.snp.left).offset(-25)
+            make.width.equalTo(56)
+            make.height.equalTo(56)
+        }
+        self.kakaoLoginbutton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(40)
+            make.left.equalTo(self.naverLoginbutton.snp.right).offset(25)
+            make.right.equalTo(self.googleLoginbutton.snp.left).offset(-25)
+            make.width.equalTo(56)
+            make.height.equalTo(56)
+        }
+        self.googleLoginbutton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(40)
+            make.left.equalTo(self.kakaoLoginbutton.snp.right).offset(25)
+            make.width.equalTo(56)
+            make.height.equalTo(56)
+        }
+        
+    }
+    
+    public func keyboardAddObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }

@@ -78,8 +78,8 @@
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "SignUpTransform()"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "BLProJect/LoginViewController/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "SignUpTransform()"
             landmarkType = "7">
          </BreakpointContent>
