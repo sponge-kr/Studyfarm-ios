@@ -212,10 +212,10 @@ class LoginViewController: UIViewController {
         
     }
     
-    //MARK - 로그인 AutoLayout 코드1
+    //MARK - 로그인 AutoLayout 코드2
     private func setAutoLayout(){
         self.loginSubtitlelabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top).offset(87)
+            make.top.equalTo(self.view.snp.top).offset(106)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             make.bottom.equalTo(self.loginSubheadlabel.snp.top).offset(-20)
             make.width.equalTo(277)
