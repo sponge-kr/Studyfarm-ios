@@ -220,6 +220,7 @@ class LoginViewController: UIViewController {
             make.bottom.equalTo(self.loginSubheadlabel.snp.top).offset(-20)
             make.width.equalTo(277)
             make.height.equalTo(72)
+            
         }
         self.loginSubheadlabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.loginSubtitlelabel.snp.bottom).offset(20)
