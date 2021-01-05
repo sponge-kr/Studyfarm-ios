@@ -278,28 +278,28 @@ class LoginViewController: UIViewController {
             make.height.equalTo(1)
         }
         self.loginGraylines.snp.makeConstraints { (make) in
-            make.top.equalTo(self.loginConfirmbutton.snp.bottom).offset(80)
+            make.top.equalTo(self.signUpbutton.snp.bottom).offset(47)
             make.left.equalTo(self.loginDescriptionlabel.snp.right).offset(28)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-18)
             make.width.equalTo(94)
             make.height.equalTo(1)
         }
         self.naverLoginbutton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.loginGrayline.snp.bottom).offset(53)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(87)
+            make.top.equalTo(self.loginGrayline.snp.bottom).offset(33)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(77)
             make.right.equalTo(self.kakaoLoginbutton.snp.left).offset(-25)
             make.width.equalTo(56)
             make.height.equalTo(56)
         }
         self.kakaoLoginbutton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(40)
+            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(20)
             make.left.equalTo(self.naverLoginbutton.snp.right).offset(25)
             make.right.equalTo(self.googleLoginbutton.snp.left).offset(-25)
             make.width.equalTo(56)
             make.height.equalTo(56)
         }
         self.googleLoginbutton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(40)
+            make.top.equalTo(self.loginDescriptionlabel.snp.bottom).offset(20)
             make.left.equalTo(self.kakaoLoginbutton.snp.right).offset(25)
             make.width.equalTo(56)
             make.height.equalTo(56)
