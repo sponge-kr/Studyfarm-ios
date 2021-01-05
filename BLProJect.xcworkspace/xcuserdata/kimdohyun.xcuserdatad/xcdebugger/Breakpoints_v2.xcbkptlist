@@ -14,8 +14,8 @@
             filePath = "BLProJect/LoginViewController/SignupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "576"
-            endingLineNumber = "576"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "checkboxAnimation(closure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "BLProJect/LoginViewController/SignupViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
             landmarkName = "onCickTransparentView()"
             landmarkType = "7">
          </BreakpointContent>
