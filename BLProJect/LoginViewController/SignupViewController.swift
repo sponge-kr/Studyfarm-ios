@@ -394,6 +394,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         
     }
     
+    //MARK - 약관동의 화면 AutoLayout 코드3
     private func AgreementViewAutoLayout(){
         self.AgreementViewLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
