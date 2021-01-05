@@ -228,7 +228,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    
     public func AgreementViewLayout(){
         self.AgreementViewLabel.text = "약관 동의"
         self.AgreementViewLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(rawValue: 1.0))
