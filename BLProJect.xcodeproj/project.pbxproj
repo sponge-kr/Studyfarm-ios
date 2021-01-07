@@ -63,6 +63,16 @@
 		FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
+		FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */; };
+		FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */; };
+		FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */; };
+		FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01F25A4F70B00D21482 /* NotoSansKR-Black.otf */; };
+		FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B02025A4F70B00D21482 /* NotoSansKR-Regular.otf */; };
+		FFC0B02725A4F70C00D21482 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B02125A4F70B00D21482 /* NotoSansKR-Light.otf */; };
+		FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B02225A4F70C00D21482 /* NotoSansKR-Thin.otf */; };
+		FFC0B08A25A763DE00D21482 /* genderunCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B08925A763DE00D21482 /* genderunCheck.png */; };
+		FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09325A765D100D21482 /* genderunCheckgray@4x.png */; };
+		FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 /* End PBXBuildFile section */
@@ -154,6 +164,16 @@
 		FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewController.swift; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
+		FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserInformationViewController.storyboard; sourceTree = "<group>"; };
+		FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		FFC0B01F25A4F70B00D21482 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		FFC0B02025A4F70B00D21482 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		FFC0B02125A4F70B00D21482 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		FFC0B02225A4F70C00D21482 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		FFC0B08925A763DE00D21482 /* genderunCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = genderunCheck.png; sourceTree = "<group>"; };
+		FFC0B09325A765D100D21482 /* genderunCheckgray@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@4x.png"; sourceTree = "<group>"; };
+		FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@1x.png"; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +226,7 @@
 				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
+				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -325,6 +346,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */,
+				FFC0B09325A765D100D21482 /* genderunCheckgray@4x.png */,
+				FFC0B08925A763DE00D21482 /* genderunCheck.png */,
 				FF331D722599067D00BD8C33 /* Email@1x.png */,
 				FF331D712599067D00BD8C33 /* Email@2x.png */,
 				D1F85CFE24CDAA6800E1F7BE /* icon.png */,
@@ -367,6 +391,12 @@
 		FF331D78259B349600BD8C33 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				FFC0B01F25A4F70B00D21482 /* NotoSansKR-Black.otf */,
+				FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */,
+				FFC0B02125A4F70B00D21482 /* NotoSansKR-Light.otf */,
+				FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */,
+				FFC0B02025A4F70B00D21482 /* NotoSansKR-Regular.otf */,
+				FFC0B02225A4F70C00D21482 /* NotoSansKR-Thin.otf */,
 				FF331D7C259B34BC00BD8C33 /* Roboto-Black.ttf */,
 				FF331D7E259B34BC00BD8C33 /* Roboto-BlackItalic.ttf */,
 				FF331D7B259B34BC00BD8C33 /* Roboto-Bold.ttf */,
@@ -496,34 +526,44 @@
 			files = (
 				FF331D8D259B34BD00BD8C33 /* Roboto-ThinItalic.ttf in Resources */,
 				FF331D8B259B34BD00BD8C33 /* Roboto-Thin.ttf in Resources */,
+				FFC0B08A25A763DE00D21482 /* genderunCheck.png in Resources */,
 				FF331D8F259B34BD00BD8C33 /* Roboto-LightItalic.ttf in Resources */,
 				D1F85CD424C45B1300E1F7BE /* LaunchScreen.storyboard in Resources */,
 				D1F85D1224CDC96200E1F7BE /* Vector@3x.png in Resources */,
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
+				FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
+				FFC0B02725A4F70C00D21482 /* NotoSansKR-Light.otf in Resources */,
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
 				FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
 				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
+				FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
+				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
+				FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */,
 				D11800C52564703700B8E5A1 /* uncheck@1x.png in Resources */,
 				FF331D85259B34BD00BD8C33 /* Roboto-BoldItalic.ttf in Resources */,
 				FF331D87259B34BD00BD8C33 /* Roboto-Bold.ttf in Resources */,
 				D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */,
+				FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */,
 				FF331D8C259B34BD00BD8C33 /* Roboto-MediumItalic.ttf in Resources */,
 				FF331D742599067E00BD8C33 /* Email@1x.png in Resources */,
 				FF331D732599067E00BD8C33 /* Email@2x.png in Resources */,
 				D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */,
+				FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */,
 				FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */,
 				FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */,
 				FF331D8A259B34BD00BD8C33 /* Roboto-BlackItalic.ttf in Resources */,
+				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
+				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
 				FF331D88259B34BD00BD8C33 /* Roboto-Black.ttf in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,

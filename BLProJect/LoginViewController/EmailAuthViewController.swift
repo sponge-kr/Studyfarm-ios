@@ -157,7 +157,8 @@ class EmailAuthViewController: UIViewController {
             switch result{
             case .success(let value):
                 if value.code == 200 && value.check_result == false {
-                    let informView = self.storyboard?.instantiateViewController(withIdentifier: "UserInformation")
+                    let Storyboard = UIStoryboard(name: "UserInformationViewController", bundle: nil)
+                    let informView = Storyboard.instantiateViewController(withIdentifier: "UserInformation") as? UserInformationViewController
                     guard let InformVC = informView else {return}
                     self.navigationController?.pushViewController(InformVC, animated: true)
                     print("유저 체크 성공")
