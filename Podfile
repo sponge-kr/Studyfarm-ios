@@ -14,6 +14,7 @@ target 'BLProJect' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
   pod 'GoogleSignIn'
+  pod 'SwiftLint'
 
   # Pods for BLProJect
 

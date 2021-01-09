@@ -10,8 +10,6 @@ import UIKit
 import Alamofire
 import SnapKit
 
-
-
 class EmailAuthViewController: UIViewController {
     
     @IBOutlet weak var SendEmailLabel: UILabel!
@@ -28,7 +26,7 @@ class EmailAuthViewController: UIViewController {
         self.EmailViewAutoLayout()
     }
     
-    private func Layoutinit(){
+    private func Layoutinit() {
         self.SendEmailLabel.text = "인증메일 발송 완료"
         self.SendEmailLabel.font = UIFont(name: "Roboto-Bold", size: 26)
         self.SendEmailLabel.tintColor = UIColor(red: 65/255, green: 61/266, blue: 61/255, alpha: 1.0)
@@ -40,8 +38,7 @@ class EmailAuthViewController: UIViewController {
         
         self.SendEmailIconImage.image = UIImage(named: "Email@1x.png")
         self.SendEmailIconImage.contentMode = .scaleAspectFill
-        
-        
+    
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.46
         self.SendEmailExampleLabel.tintColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
@@ -71,9 +68,8 @@ class EmailAuthViewController: UIViewController {
         
     }
     
-    
     //MARK - 인증발송 화면 AutoLayout 코드3
-    private func EmailViewAutoLayout(){
+    private func EmailViewAutoLayout() {
         self.SendEmailLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top).offset(112)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
@@ -131,18 +127,18 @@ class EmailAuthViewController: UIViewController {
         }
     }
     
-    @objc private func SelectSendEmail(){
+    @objc private func SelectSendEmail() {
         
-        let EmailParamter : Parameters = [
-            "email" : UserDefaults.standard.value(forKey: "service_use_email") as? String
+        let EmailParamter: Parameters = [
+            "email": UserDefaults.standard.value(forKey: "service_use_email") as? String
         ]
         print(UserDefaults.standard.value(forKey: "service_use_email"))
         UtilApi.shared.UtilSendResetEmailCall(EmailParamter: EmailParamter) { result in
-            switch result{
+            switch result {
             case .success(let value):
-                if value.code == 200{
+                if value.code == 200 {
                     print("확인되었습니다.")
-                }else{
+                } else {
                     print("실패했습니다.")
                 }
             case .failure(let error):
@@ -153,8 +149,8 @@ class EmailAuthViewController: UIViewController {
     
     @objc private func UserAuchConfirmAction(){
         
-        oAuthApi.shared.AuthCheckUserCall(CheckUser: UserDefaults.standard.value(forKey: "service_use_email") as! String) { result in
-            switch result{
+        OAuthApi.shared.AuthCheckUserCall(CheckUser: UserDefaults.standard.value(forKey: "service_use_email") as? String ?? "") { result in
+            switch result {
             case .success(let value):
                 if value.code == 200 && value.check_result == false {
                     let Storyboard = UIStoryboard(name: "UserInformationViewController", bundle: nil)
@@ -162,7 +158,7 @@ class EmailAuthViewController: UIViewController {
                     guard let InformVC = informView else {return}
                     self.navigationController?.pushViewController(InformVC, animated: true)
                     print("유저 체크 성공")
-                }else{
+                } else {
                     print("유저 체크 실패")
                 }
             case .failure(let error):

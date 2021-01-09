@@ -616,7 +616,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
 //        self.AddAgreementView()
 //        self.AgreementViewAutoLayout()
         let SingParamter = SignUpParamter(email: self.signEmailtextfield.text!, password: self.signPasswordtextfield.text!, nickname: self.signNicknametextfield.text!, service_use_agree: true)
-        oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
+        OAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{

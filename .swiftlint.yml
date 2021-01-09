@@ -1,0 +1,11 @@
+disabled_rules:
+- identifier_name
+- line_length
+- type_body_length
+- trailing_whitespace
+- file_length
+
+included:
+
+excluded:
+- Pods
