@@ -612,17 +612,18 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         }
     }
     @objc func CallServiceApi(){
-        self.AgreementViewLayout()
-        self.AddAgreementView()
-        self.AgreementViewAutoLayout()
+//        self.AgreementViewLayout()
+//        self.AddAgreementView()
+//        self.AgreementViewAutoLayout()
         let SingParamter = SignUpParamter(email: self.signEmailtextfield.text!, password: self.signPasswordtextfield.text!, nickname: self.signNicknametextfield.text!, service_use_agree: true)
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{
                     self.signNicknameerrorlabel.textColor = UIColor.clear
-//                    self.AgreementViewLayout()
-//                    self.AddAgreementView()
+                    self.AgreementViewLayout()
+                    self.AddAgreementView()
+                    self.AgreementViewAutoLayout()
                     UserDefaults.standard.set(value.email, forKey: "service_use_email")
                 }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
                     DispatchQueue.main.async {

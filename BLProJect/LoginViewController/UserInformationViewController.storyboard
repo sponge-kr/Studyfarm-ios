@@ -57,17 +57,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-qe-4yd">
+                                <rect key="frame" x="0.0" y="344" width="414" height="70"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3D-vW-h3W">
+                                <rect key="frame" x="20" y="434" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cI8-Aa-z6N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="userInformationareatitle" destination="8cp-cf-DU9" id="fPL-PX-AvT"/>
+                        <outlet property="userInformationagepickerview" destination="d5u-qe-4yd" id="Q4L-Bf-anw"/>
+                        <outlet property="userInformationagetitle" destination="8cp-cf-DU9" id="fPL-PX-AvT"/>
+                        <outlet property="userInformationareatitle" destination="y3D-vW-h3W" id="9ok-AZ-zPV"/>
                         <outlet property="userInformationgendertitle" destination="7O5-20-NVb" id="EQE-87-NMO"/>
                         <outlet property="userInformationgirlbtn" destination="LSS-Gh-iE0" id="9DV-v3-ffV"/>
                         <outlet property="userInformationmanbtn" destination="EZx-pf-8Rc" id="tkn-Ax-Jtx"/>
                         <outlet property="userInformationsubtitle" destination="6RZ-IU-DDK" id="cBX-QV-Sau"/>
-                        <outlet property="userInformatiotitle" destination="c4u-6T-NH1" id="R1q-Ey-B70"/>
+                        <outlet property="userInformationtitle" destination="c4u-6T-NH1" id="R1q-Ey-B70"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9T-hN-RA8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
