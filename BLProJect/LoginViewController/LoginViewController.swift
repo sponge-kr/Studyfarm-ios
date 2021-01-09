@@ -14,9 +14,6 @@ import SwiftKeychainWrapper
 import RxCocoa
 import RxSwift
 
-
-
-
 class LoginViewController: UIViewController {
     @IBOutlet weak var loginConfirmbutton: UIButton!
     @IBOutlet weak var loginSubtitlelabel: UILabel!
@@ -45,26 +42,23 @@ class LoginViewController: UIViewController {
         self.kakaoLoginbutton.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
         self.signUpbutton.addTarget(self, action: #selector(SignUpTransform), for: .touchUpInside)
         let TokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
-        print("TokenkeyChain 값 입니다",TokenKeyChain)
+        print("TokenkeyChain 값 입니다", TokenKeyChain)
         if TokenKeyChain != nil {
             let MainViewCall = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
             guard let MainVC = MainViewCall else { return }
             self.navigationController?.pushViewController(MainVC, animated: true)
-        }else{
+        } else {
             //ErrorAlert
-            
             
         }
         self.TextFiledbind()
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.keyboardAddObserver()
     }
-    
     
     override func viewDidLayoutSubviews() {
         self.naverLoginbutton.layer.cornerRadius = self.naverLoginbutton.frame.size.width / 2.0
@@ -75,7 +69,7 @@ class LoginViewController: UIViewController {
         self.googleLoginbutton.layer.masksToBounds = true
     }
     
-    private func TextFiledbind(){
+    private func TextFiledbind() {
         loginEmailtextfiled.rx.text
             .bind(to: ViewModel.input.EmailText)
             .disposed(by: disposeBag)
@@ -83,28 +77,28 @@ class LoginViewController: UIViewController {
             .bind(to: ViewModel.input.PassWordText)
             .disposed(by: disposeBag)
         ViewModel.output.setEmailTextEnabled
-            .drive{ (isempty) in
+            .drive { (isempty) in
                 self.loginEmailtextfiled.rx.base.layer.borderColor = isempty
             }.disposed(by: disposeBag)
         ViewModel.output.setPasswordTextEnabled
-            .drive{ (isempty) in
+            .drive { (isempty) in
                 self.loginPasswordtextfiled.rx.base.layer.borderColor = isempty
             }.disposed(by: disposeBag)
         ViewModel.output.isEmptyEmailText
-            .drive{ (ishidden) in
+            .drive { (ishidden) in
                 self.loginEmailtextfiled.rightView?.rx.base.isHidden = ishidden
             }.disposed(by: disposeBag)
     }
     
-    private func KakaoAPICall(){
+    private func KakaoAPICall() {
         if KeychainWrapper.standard.string(forKey: "Kakaotoken") != nil{
-            oAuthApi.shared.AuthKakaoLoginCall { result in
-                switch result{
+            OAuthApi.shared.AuthKakaoLoginCall { result in
+                switch result {
                 case.success(let value):
                     if value.code == 400 {
                         let kakaoParamter = KakaoUserParamter(nickname: "Do-hsaa", service_use_agree: true)
-                        oAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
-                            switch result{
+                        OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
+                            switch result {
                             case.success(let value):
                                 print(value.email)
                                 
@@ -125,8 +119,8 @@ class LoginViewController: UIViewController {
     }
 }
     
-    // MARK - 초기 로그인 Layout 구현
-    private func SetLoginLayout(){
+    // MARK: - 초기 로그인 Layout 구현
+    private func SetLoginLayout() {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.clipsToBounds = true
     
@@ -144,7 +138,6 @@ class LoginViewController: UIViewController {
         self.loginSubtitlelabel.frame = CGRect(x: self.loginSubtitlelabel.frame.origin.x, y: self.loginSubtitlelabel.frame.origin.y, width: self.loginSubtitlelabel.frame.size.width, height: self.loginSubtitlelabel.frame.size.height)
         self.loginSubtitlelabel.numberOfLines = 2
         
-        
         self.loginSubheadlabel.text = "스터디팜을 이용하시려면 로그인해 주세요"
         self.loginSubheadlabel.font = UIFont.systemFont(ofSize: 14)
         self.loginSubheadlabel.textColor = UIColor(red: 118/255, green: 118/255, blue: 118/255, alpha: 1.0)
@@ -157,13 +150,11 @@ class LoginViewController: UIViewController {
         self.loginGraylines.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.13)
         self.loginGraylines.frame = CGRect(x: self.loginGraylines.frame.origin.x, y: self.loginGraylines.frame.origin.y, width: self.loginGraylines.frame.size.width, height: self.loginGraylines.frame.size.height)
         
-        
         self.loginDescriptionlabel.text = "다음 계정으로 이용"
         self.loginDescriptionlabel.font = UIFont.boldSystemFont(ofSize: 12)
         self.loginDescriptionlabel.textColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
         self.loginDescriptionlabel.textAlignment = .center
         self.loginDescriptionlabel.frame = CGRect(x: self.loginDescriptionlabel.frame.origin.x, y: self.loginDescriptionlabel.frame.origin.y, width: self.loginDescriptionlabel.frame.size.width, height: self.loginDescriptionlabel.frame.size.height)
-        
         
         self.loginEmailtextfiled.attributedPlaceholder = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
         self.loginEmailtextfiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
@@ -171,8 +162,7 @@ class LoginViewController: UIViewController {
         self.loginEmailtextfiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
         self.loginEmailtextfiled.leftViewMode = .always
         
-    
-        self.loginPasswordtextfiled.attributedPlaceholder = NSAttributedString(string: "비밀번호 (영문, 숫자 조합의 8~16자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0),NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
+        self.loginPasswordtextfiled.attributedPlaceholder = NSAttributedString(string: "비밀번호 (영문, 숫자 조합의 8~16자)", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1.0), NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)])
         self.loginPasswordtextfiled.isSecureTextEntry = true
         self.loginPasswordtextfiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.loginPasswordtextfiled.layer.borderWidth = 1.0
@@ -347,29 +337,26 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc func SignUpTransform(){
+    @objc func SignUpTransform() {
         let Storyboard = UIStoryboard(name: "SignupViewController", bundle: nil)
         let SignView = Storyboard.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
         guard let SignVC = SignView else { return }
         self.navigationController?.pushViewController(SignVC, animated: true)
     }
-    
-    
-    
-    
-    @objc func ReceiveLoginAPI(){
+
+    @objc func ReceiveLoginAPI() {
         let Paramter = LoginParamter(email: self.loginEmailtextfiled.text!, password: self.loginPasswordtextfiled.text!)
         
-        oAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
+        OAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
             switch result {
             case .success(let value):
                 print("테스트 status code 값입니다 : \(value.message)")
                 if value.code == 200 {
-                    KeychainWrapper.standard.set(oAuthApi.shared.LoginModel.token, forKey: "token")
+                    KeychainWrapper.standard.set(OAuthApi.shared.LoginModel.token, forKey: "token")
                     let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
                     guard let MainVC = MainView else { return }
                     self?.navigationController?.pushViewController(MainVC, animated: true)
-                }else{
+                } else {
                     self?.ErrorAlert = LoginAlertView(frame: self!.view.frame)
                     self?.ErrorAlert.LoginTitle.text = value.message
                     self?.view.addSubview(self!.ErrorAlert)
@@ -382,19 +369,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    @objc func showAccountView(){
+    @objc func showAccountView() {
         let signUpView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
         guard let SignVC = signUpView else { return }
         self.navigationController?.pushViewController(SignVC, animated: false)
     }
-    @IBAction func HideAlertView(_ sender : Any){
+    
+    @IBAction func HideAlertView(_ sender: Any) {
         self.ErrorAlert.removeFromSuperview()
     }
 }
-
-
-
-

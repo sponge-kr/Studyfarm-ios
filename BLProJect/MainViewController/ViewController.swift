@@ -85,9 +85,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLSubject.textColor = UIColor.black
         self.BLSubject.textAlignment = .center
         self.BLSubject.numberOfLines = 2
-        let titleAttribute = NSMutableAttributedString(string: self.BLSubject.text!)
-        titleAttribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 102/255, green: 102/255, blue: 255/255, alpha: 1.0), range:(self.BLSubject.text as! NSString).range(of: "BL"))
-        self.BLSubject.attributedText = titleAttribute
+        // kys force_cast 때문에 일단 주석처리 했습니다. 수정예정
+//        let titleAttribute = NSMutableAttributedString(string: self.BLSubject.text!)
+//        titleAttribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 102/255, green: 102/255, blue: 255/255, alpha: 1.0), range:(self.BLSubject.text as! NSString).range(of: "BL"))
+//        self.BLSubject.attributedText = titleAttribute
         
         self.navigationController?.navigationBar.topItem?.title = "StudyFarm"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)]
@@ -168,7 +169,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     @objc private func LogoutAction(){
-        oAuthApi.shared.AuthLogoutCall { [weak self] result in
+        OAuthApi.shared.AuthLogoutCall { [weak self] result in
             switch result {
             case .success(let value):
                 if value.code == 200 {
