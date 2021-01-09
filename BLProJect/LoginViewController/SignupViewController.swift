@@ -359,12 +359,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.signPassworderrorlabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.signPasswordtextfield.snp.bottom).offset(4)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(30)
-            make.bottom.equalTo(self.signNicknamelabel.snp.top).offset(-36)
+            make.bottom.equalTo(self.signNicknamelabel.snp.top).offset(-7)
             make.width.equalTo(153)
             make.height.equalTo(24)
         }
         self.signNicknamelabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.signPassworderrorlabel.snp.bottom).offset(36)
+            make.top.equalTo(self.signPassworderrorlabel.snp.bottom).offset(7)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             make.bottom.equalTo(self.signNicknametextfield.snp.top).offset(-5)
             make.width.equalTo(39)
@@ -380,12 +380,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         self.signNicknameerrorlabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.signNicknametextfield.snp.bottom).offset(4)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(30)
-            make.bottom.equalTo(self.signConforbutton.snp.top).offset(-64)
+            make.bottom.equalTo(self.signConforbutton.snp.top).offset(-40)
             make.width.equalTo(153)
             make.height.equalTo(24)
         }
         self.signConforbutton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.signNicknameerrorlabel.snp.bottom).offset(64)
+            make.top.equalTo(self.signNicknametextfield.snp.bottom).offset(40)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
             make.width.equalTo(394)
@@ -393,6 +393,124 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
         }
         
     }
+    
+    //MARK - 약관동의 화면 AutoLayout 코드3
+    private func AgreementViewAutoLayout(){
+        self.AgreementViewLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.bottom.equalTo(self.AgreementViewFullLabel.snp.top).offset(-37)
+            make.width.equalTo(245)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewFullLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewLabel.snp.bottom).offset(37)
+            make.left.equalTo(self.AgreementViewTermsBtn.snp.right).offset(12)
+            make.bottom.equalTo(self.AgreementViewTermsLabel.snp.top).offset(-34)
+            make.width.equalTo(63)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewLabel.snp.bottom).offset(37)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.right.equalTo(self.AgreementViewFullLabel.snp.left).offset(-12)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsBtn2.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.right.equalTo(self.AgreementViewTermsLabel.snp.left).offset(-12)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
+            make.left.equalTo(self.AgreementViewTermsBtn2.snp.right).offset(12)
+            make.bottom.equalTo(self.AgreementViewTermsLabel2.snp.top).offset(-17)
+            make.width.equalTo(171)
+            make.height.equalTo(24)
+        }
+        self.AcceptsTermsBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
+            make.bottom.equalTo(self.AcceptsTermsBtn2.snp.top).offset(-16)
+            make.width.equalTo(34)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsBtn3.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsBtn2.snp.bottom).offset(17)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.right.equalTo(self.AgreementViewTermsLabel2.snp.left).offset(-12)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsLabel2.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsLabel.snp.bottom).offset(17)
+            make.left.equalTo(self.AgreementViewTermsBtn3.snp.right).offset(12)
+            make.bottom.equalTo(self.AgreementViewTermsLabel3.snp.top).offset(-17)
+            make.width.equalTo(171)
+            make.height.equalTo(24)
+        }
+        self.AcceptsTermsBtn2.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AcceptsTermsBtn.snp.bottom).offset(16)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
+            make.bottom.equalTo(self.AcceptsTermsBtn3.snp.top).offset(-16)
+            make.width.equalTo(34)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsBtn4.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsBtn3.snp.bottom).offset(17)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.right.equalTo(self.AgreementViewTermsLabel3.snp.left).offset(-12)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsLabel3.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsLabel2.snp.bottom).offset(17)
+            make.left.equalTo(self.AgreementViewTermsBtn4.snp.right).offset(12)
+            make.bottom.equalTo(self.AgreementViewTermsLabel4.snp.top).offset(-17)
+            make.width.equalTo(171)
+            make.height.equalTo(24)
+        }
+        self.AcceptsTermsBtn3.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AcceptsTermsBtn2.snp.bottom).offset(16)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
+            make.bottom.equalTo(self.AcceptsTermsBtn4.snp.top).offset(-19)
+            make.width.equalTo(34)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsBtn5.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsBtn4.snp.bottom).offset(17)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
+            make.right.equalTo(self.AgreementViewTermsLabel4.snp.left).offset(-12)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewTermsLabel4.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsLabel3.snp.bottom).offset(17)
+            make.left.equalTo(self.AgreementViewTermsBtn5.snp.right).offset(12)
+            make.bottom.equalTo(self.AgreementViewConfirmBtn.snp.top).offset(-44)
+            make.width.equalTo(171)
+            make.height.equalTo(24)
+        }
+        self.AcceptsTermsBtn4.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AcceptsTermsBtn3.snp.bottom).offset(19)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
+            make.bottom.equalTo(self.AgreementViewConfirmBtn.snp.top).offset(-44)
+            make.width.equalTo(34)
+            make.height.equalTo(24)
+        }
+        self.AgreementViewConfirmBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(self.AgreementViewTermsLabel4.snp.bottom).offset(44)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
+            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
+            make.height.equalTo(48)
+        }
+    }
+    
+    
+    
     
     public func addKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -493,18 +611,19 @@ class SignupViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
-    
     @objc func CallServiceApi(){
-        self.AgreementViewLayout()
-        self.AddAgreementView()
+//        self.AgreementViewLayout()
+//        self.AddAgreementView()
+//        self.AgreementViewAutoLayout()
         let SingParamter = SignUpParamter(email: self.signEmailtextfield.text!, password: self.signPasswordtextfield.text!, nickname: self.signNicknametextfield.text!, service_use_agree: true)
         oAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
             switch  result{
             case .success(let value):
                 if value.code == 200 || value.message == "성공하였습니다."{
                     self.signNicknameerrorlabel.textColor = UIColor.clear
-//                    self.AgreementViewLayout()
-//                    self.AddAgreementView()
+                    self.AgreementViewLayout()
+                    self.AddAgreementView()
+                    self.AgreementViewAutoLayout()
                     UserDefaults.standard.set(value.email, forKey: "service_use_email")
                 }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
                     DispatchQueue.main.async {

@@ -84,41 +84,6 @@
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="97.767857142857139"/>
         </scene>
-        <!--User Information View Controller-->
-        <scene sceneID="jaO-7C-7fK">
-            <objects>
-                <viewController storyboardIdentifier="UserInformation" id="2H8-tp-NJL" customClass="UserInformationViewController" customModule="스터디팜" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iAe-jI-oUT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4u-6T-NH1">
-                                <rect key="frame" x="20" y="137" width="295" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RZ-IU-DDK">
-                                <rect key="frame" x="20" y="188" width="278" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="cI8-Aa-z6N"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="userInformationsubtitle" destination="6RZ-IU-DDK" id="cBX-QV-Sau"/>
-                        <outlet property="userInformatiotitle" destination="c4u-6T-NH1" id="R1q-Ey-B70"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S9T-hN-RA8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1958" y="-597"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ieq-9T-fJy">
             <objects>
@@ -330,6 +295,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BQ-oH-7zf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="414" y="-400"/>
+        </scene>
+        <!--UserInformation-->
+        <scene sceneID="C6r-pz-cZd">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="UserInformation" storyboardName="UserInformationViewController" referencedIdentifier="UserInformation" id="kLI-rZ-ejC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lGr-tg-xgp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="788" y="-400"/>
         </scene>
     </scenes>
     <resources>

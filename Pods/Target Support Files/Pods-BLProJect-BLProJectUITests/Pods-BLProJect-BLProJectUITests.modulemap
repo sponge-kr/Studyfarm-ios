@@ -1,6 +1,0 @@
-framework module Pods_BLProJect_BLProJectUITests {
-  umbrella header "Pods-BLProJect-BLProJectUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
