@@ -200,9 +200,87 @@ extension UIButton {
 extension UIPickerView {
     public func setTopBorderLayer(){
         let topLayer = CALayer()
-        topLayer.frame = CGRect(x: self.frame.width - 1, y: 0, width: 1, height: self.frame.height)
+        topLayer.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 1)
         topLayer.borderColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1.0).cgColor
         topLayer.borderWidth = 1
         self.layer.addSublayer(topLayer)
     }
+}
+
+
+class DifficultyBtn : UIView {
+    
+    lazy var beginButton : UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.setTitle("초급", for: .normal)
+        button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
+        button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
+        button.backgroundColor = UIColor.white
+        if button.isSelected == true{
+            button.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }
+        return button
+    }()
+    
+    lazy var beginmiddleButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: self.beginButton.frame.origin.x + self.beginButton.frame.size.width, y: self.beginButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.setTitle("초중급", for: .normal)
+        button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
+        button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
+        button.backgroundColor = UIColor.white
+        if button.isSelected == true{
+            button.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }
+        return button
+    }()
+    
+    lazy var middleButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: self.beginmiddleButton.frame.origin.x + self.beginmiddleButton.frame.size.width, y: self.beginmiddleButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.setTitle("중급", for: .normal)
+        button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
+        button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
+        button.backgroundColor = UIColor.white
+        if button.isSelected == true{
+            button.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }
+        return button
+    }()
+    
+    lazy var advancedButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: self.middleButton.frame.origin.x + self.middleButton.frame.size.width, y: self.middleButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.setTitle("상급", for: .normal)
+        button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
+        button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
+        button.backgroundColor = UIColor.white
+        if button.isSelected == true{
+            button.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }
+        return button
+    }()
+    var Button : [UIButton] = []
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setInitLayout()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setInitLayout()
+    }
+   
+    public func setInitLayout(){
+        self.layer.cornerRadius = 25
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
+        self.layer.masksToBounds = true
+        self.backgroundColor = UIColor.white
+        
+        self.Button.append(beginButton)
+        self.Button.append(beginmiddleButton)
+        self.Button.append(middleButton)
+        self.Button.append(advancedButton)
+        for views in self.Button {
+            self.addSubview(views)
+        }
+    }
+    
 }
