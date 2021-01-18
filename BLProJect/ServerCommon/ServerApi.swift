@@ -11,27 +11,65 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
+
+//MARK - 메인 스터디 최종 데이터
+struct StudyResponse : Codable{
+    var result : StudyResults
+}
+
+//MARK - 메인 스터디 콘텐츠 데이터
+struct StudyResults : Codable {
+    var content : [StudyContent]
+}
+
+
 // MARK: - 메인스터디 리스트 데이터
-struct StudyDataModel {
-    var study_seq: [Int] = []
-    var users_seq: [Int] = []
-    var title: [String] = []
-    var email: [String] = []
-    var name: [String] = []
-    var phone: [String] = []
-    var age: [Int] = []
-    var nickname: [String] = []
-    var state_code: [Int] = []
-    var state_name: [String] = []
-    var city_code: [Int] = []
-    var city_name: [String] = []
-    var gender: [String] = []
-    var interesting_name: [String] = []
-    var interesting_skill_level: [String] = []
-    var contents: [String] = []
-    var category_name: [String] = []
-    var topic_name: [String] = []
-    var study_created_at_str: [String] = []
+struct StudyContent : Codable {
+    var study_seq: Int?
+    var title: String?
+    var study_leader: StudyCotainer
+    var recruit_number: Int?
+    var content: String?
+    var category_name: String?
+    var topic_name: String?
+    var state_name: String?
+    var city_name: String?
+    var end_yn: Bool?
+    var views: Int?
+    var member_check_type: Int?
+    var member_check_type_str : String?
+    var progress_type: Int?
+    var progress_type_str: String?
+    var step: Int?
+    var start_date: String?
+    var end_date: String?
+    var dateFormat: String?
+    var study_in_place : StudyPlaceAttachment
+    var tags: [String?]
+    var is_my_study: Bool?
+    var lat: Double?
+    var lng: Double?
+    var study_created_at_str: String?
+    var study_updated_at_str: String?
+}
+
+// MARK - 메인 스터디 유저관련 리스트 데이터
+struct StudyCotainer: Codable {
+    var users_seq: Int?
+    var email: String?
+    var nickname: String?
+    var simple_introduce: String?
+    var profile: String?
+    var user_created_at: String?
+    var user_updated_at: String?
+}
+
+// MARK - 메인 스터디 장소관련 리스트 데이터
+struct StudyPlaceAttachment : Codable {
+    var studycafe_seq: Int?
+    var name: String?
+    var x_location: Double?
+    var y_location: Double?
 }
 
 // MARK: - 스터디 디테일 데이터
@@ -102,11 +140,13 @@ struct SubCommnetParamter : Encodable {
 class ServerApi {
     static let shared = ServerApi()
     
+    
+    
     fileprivate let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
     public let Privateheaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))", "Accept": "application/hal+json"]
     
     // MARK: - DataModel Instace 초기화
-    public var StudyModel = StudyDataModel()
+    public var StudyModel = [StudyResponse]()
     public var StudyOneModel = StudyOneDataModel()
     public var CommnetModel = CommentDataModel()
     public var SubCommentModel = SubCommentDataModel()
@@ -156,39 +196,20 @@ class ServerApi {
     }
     
     // MARK: - Server StudyList 조회 요청 함수
-    public func StudyListCall(completionHandler :  @escaping () -> ()) {
+    public func StudyListCall(completionHandler :  @escaping ([StudyContent]) -> ()) {
         AF.request("http://3.214.168.45:8080/api/v1/study", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
-            .response { response in
+            .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let value):
-                    let StudyJson = JSON(value)
-                    for (_, subJson):(String, JSON) in StudyJson["result"]["study"] {
-                        self.StudyModel.study_seq.append(subJson["study_seq"].intValue)
-                        self.StudyModel.users_seq.append(subJson["users_seq"].intValue)
-                        self.StudyModel.title.append(subJson["title"].stringValue)
-                        self.StudyModel.name.append(subJson["name"].stringValue)
-                        self.StudyModel.age.append(subJson["age"].intValue)
-                        self.StudyModel.email.append(subJson["email"].stringValue)
-                        self.StudyModel.phone.append(subJson["phone"].stringValue)
-                        self.StudyModel.nickname.append(subJson["nickname"].stringValue)
-                        self.StudyModel.state_code.append(subJson["user_city_info"]["state_code"].intValue)
-                        self.StudyModel.state_name.append(subJson["user_city_info"]["state_name"].stringValue)
-                        self.StudyModel.city_code.append(subJson["user_city_info"]["city_code"].intValue)
-                        self.StudyModel.city_name.append(subJson["user_city_info"]["city_name"].stringValue)
-                        self.StudyModel.interesting_name.append(subJson["interesting"]["name"].stringValue)
-                        self.StudyModel.interesting_skill_level.append(subJson["interesting"]["skill_level"].stringValue)
-                        self.StudyModel.study_created_at_str.append(subJson["study_created_at_str"].stringValue)
-                        self.StudyModel.contents.append(subJson["contents"].stringValue)
-                        self.StudyModel.topic_name.append(subJson["topic_name"].stringValue)
-                        self.StudyModel.category_name.append(subJson["category_name"].stringValue)
+                    do {
+                        let dataJson = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let InstanceData = try JSONDecoder().decode(StudyResponse.self, from: dataJson)
+                        self.StudyModel.append(InstanceData)
+                        completionHandler(InstanceData.result.content)
+                    } catch  {
+                        print(error.localizedDescription)
                     }
-                    print("스터디팜 스터디 리스트 제목 입니다 : \(self.StudyModel.title)")
-                    print("스터디팜 스터디 리스트 이메일 입니다 : \(self.StudyModel.email)")
-                    print("스터디팜 스터디 리스트 콘텐츠 입니다 : \(self.StudyModel.contents)")
-                    print("스터디팜 스터디 리스트 닉네임 입니다 : \(self.StudyModel.nickname)")
-                    print("스터디팜 스터디 등록일 입니다 :\(self.StudyModel.study_created_at_str)")
-                    completionHandler()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

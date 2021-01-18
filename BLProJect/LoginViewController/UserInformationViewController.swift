@@ -10,19 +10,20 @@ import UIKit
 import SnapKit
 
 
-
-class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class UserInformationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var userInformationtitle: UILabel!
     @IBOutlet weak var userInformationsubtitle: UILabel!
     @IBOutlet weak var userInformationgendertitle: UILabel!
-    @IBOutlet weak var userInformationmanbtn: UIButton!{
+    @IBOutlet weak var userInformationmanbtn: UIButton!
+    {
         didSet{
             self.userInformationmanbtn.setTitleColor(UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1.0), for: .normal)
             self.userInformationmanbtn.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
         }
     }
-    @IBOutlet weak var userInformationgirlbtn: UIButton!{
+    @IBOutlet weak var userInformationgirlbtn: UIButton!
+    {
         didSet{
             self.userInformationgirlbtn.setTitleColor(UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1.0), for: .normal)
             self.userInformationgirlbtn.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
@@ -212,6 +213,8 @@ class DifficultyBtn : UIView {
     
     lazy var beginButton : UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = true
         button.setTitle("초급", for: .normal)
         button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
         button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
@@ -224,6 +227,8 @@ class DifficultyBtn : UIView {
     
     lazy var beginmiddleButton: UIButton = {
         let button = UIButton(frame: CGRect(x: self.beginButton.frame.origin.x + self.beginButton.frame.size.width, y: self.beginButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = true
         button.setTitle("초중급", for: .normal)
         button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
         button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
@@ -236,6 +241,8 @@ class DifficultyBtn : UIView {
     
     lazy var middleButton: UIButton = {
         let button = UIButton(frame: CGRect(x: self.beginmiddleButton.frame.origin.x + self.beginmiddleButton.frame.size.width, y: self.beginmiddleButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = true
         button.setTitle("중급", for: .normal)
         button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
         button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
@@ -248,6 +255,8 @@ class DifficultyBtn : UIView {
     
     lazy var advancedButton: UIButton = {
         let button = UIButton(frame: CGRect(x: self.middleButton.frame.origin.x + self.middleButton.frame.size.width, y: self.middleButton.frame.origin.y, width: self.frame.size.width / 4.5, height: self.frame.size.height))
+        button.layer.cornerRadius = 25
+        button.layer.masksToBounds = true
         button.setTitle("상급", for: .normal)
         button.setTitleColor(UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0), for: .normal)
         button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)

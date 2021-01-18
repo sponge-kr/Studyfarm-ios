@@ -23,6 +23,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var BLSubject: UILabel!
     @IBOutlet weak var BLMainCollectionView: UICollectionView!
     @IBOutlet weak var BLSignButton: UIButton!
+    public var StudyModel = [StudyContent]()
     var index : Int?
     
     lazy var HeaderView: BLMainCollectionViewHeader = {
@@ -35,8 +36,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ServerApi.shared.StudyListCall {
+        ServerApi.shared.StudyListCall { data in
             DispatchQueue.main.async {
+                self.StudyModel = data
                 self.BLMainCollectionView.reloadData()
             }
         }
@@ -107,28 +109,24 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ServerApi.shared.StudyModel.study_seq.count
+        return self.StudyModel.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let MainCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell
         
         DispatchQueue.main.async {
-            
-            MainCell?.CellSubject.text = ServerApi.shared.StudyModel.title[indexPath.row]
-            MainCell?.CellHuman.text = ServerApi.shared.StudyModel.nickname[indexPath.row]
-            MainCell?.CellWriter.text = ServerApi.shared.StudyModel.email[indexPath.row]
-            MainCell?.CellState.text = ServerApi.shared.StudyModel.contents[indexPath.row]
-            MainCell?.CellStartDate.text = ServerApi.shared.StudyModel.study_created_at_str[indexPath.row]
+            MainCell?.CellSubject.text = self.StudyModel[indexPath.row].title
+            MainCell?.CellHuman.text = self.StudyModel[indexPath.row].study_leader.nickname
+            MainCell?.CellWriter.text = self.StudyModel[indexPath.row].study_leader.email
+            MainCell?.CellState.text =  self.StudyModel[indexPath.row].content
+            MainCell?.CellStartDate.text = self.StudyModel[indexPath.row].study_created_at_str
         }
         
         return MainCell!
     }
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
