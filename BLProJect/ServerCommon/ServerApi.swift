@@ -13,18 +13,17 @@ import SwiftKeychainWrapper
 
 
 //MARK - 메인 스터디 최종 데이터
-struct StudyResponse : Codable{
+struct StudyResponse: Codable{
     var result : StudyResults
 }
 
 //MARK - 메인 스터디 콘텐츠 데이터
-struct StudyResults : Codable {
-    var content : [StudyContent]
+struct StudyResults: Codable {
+    var content: [StudyContent]
 }
 
-
 // MARK: - 메인스터디 리스트 데이터
-struct StudyContent : Codable {
+struct StudyContent: Codable {
     var study_seq: Int?
     var title: String?
     var study_leader: StudyCotainer
@@ -37,14 +36,14 @@ struct StudyContent : Codable {
     var end_yn: Bool?
     var views: Int?
     var member_check_type: Int?
-    var member_check_type_str : String?
+    var member_check_type_str: String?
     var progress_type: Int?
     var progress_type_str: String?
     var step: Int?
     var start_date: String?
     var end_date: String?
     var dateFormat: String?
-    var study_in_place : StudyPlaceAttachment
+    var study_in_place: StudyPlaceAttachment
     var tags: [String?]
     var is_my_study: Bool?
     var lat: Double?
@@ -137,6 +136,47 @@ struct SubCommnetParamter : Encodable {
     var parent_reply_seq: Int
 }
 
+struct StudyEnrollment: Codable {
+    var study_seq: Int?
+    var title: String?
+    var recruit_number: Int?
+    var content: String?
+    var category_name: String?
+    var topic_name: String?
+    var state_name: String?
+    var city_name: String?
+    var end_yn: Bool?
+    var views: Int?
+    var member_check_type: Int?
+    var member_check_type_str: String?
+    var progress_type: Int?
+    var progress_type_str: String?
+    var step: String?
+    var start_date: String?
+    var end_date: String?
+    var dateFormat: String?
+    var tags: [String?]
+    var is_my_study: Bool?
+    var study_created_at_str: String?
+    var study_updated_at_str: String?
+}
+
+
+struct EnrollParamater : Encodable{
+    var title: String
+    var content: String
+    var recruit_number: Int
+    var state: Int
+    var city: Int
+    var topic: Int
+    var member_check_type: Int
+    var progress_type: Int
+    var step: Int
+    var start_date: String
+    var end_date: String
+    var studycafe_seq: Int
+}
+
 class ServerApi {
     static let shared = ServerApi()
     
@@ -144,7 +184,6 @@ class ServerApi {
     
     fileprivate let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
     public let Privateheaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))", "Accept": "application/hal+json"]
-    
     // MARK: - DataModel Instace 초기화
     public var StudyModel = [StudyResponse]()
     public var StudyOneModel = StudyOneDataModel()
@@ -174,26 +213,26 @@ class ServerApi {
             }
     }
     
-    // MARK: - Server Study 등록 요청 함수
-    public func StudyRegisterCall(StudyRegisterParamter: StudyRegisterParamter, completionHandler : @escaping() -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: StudyRegisterParamter, encoder: JSONParameterEncoder.default, headers: Privateheaders)
-            .response { response in
-                switch response.result {
+    public func StudyEnrollmentCall(EnrollParamter: EnrollParamater, completionHandler : @escaping ([StudyEnrollment]) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: EnrollParamter, encoder: JSONParameterEncoder.default, headers: Privateheaders)
+            .responseJSON { response in
+                debugPrint(response)
+                switch response.result{
                 case .success(let value):
-                    let RegisterJson = JSON(value)
-                    for (_, subJson):(String, JSON) in RegisterJson["result"] {
-                        print("스터디팜 스터디 번호 \(RegisterJson["study_seq"].intValue)")
-                        print("스터디팜 스터디 제목 \(RegisterJson["title"].stringValue)")
-                        print("스터디팜 스터디 장 이메일 \(RegisterJson["email"].stringValue)")
-                        print("스터디팜 스터디 닉네임 \(RegisterJson["nickname"].stringValue)")
+                    do {
+                        let EnrollData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let EnrollInstace = try JSONDecoder().decode(StudyEnrollment.self, from: EnrollData)
+                        completionHandler([EnrollInstace])
+                        print(EnrollInstace.title ,"성하였습니다")
+                    } catch  {
+                        print(error.localizedDescription)
                     }
-                    completionHandler()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
             }
     }
+    
     
     // MARK: - Server StudyList 조회 요청 함수
     public func StudyListCall(completionHandler :  @escaping ([StudyContent]) -> ()) {
@@ -205,7 +244,6 @@ class ServerApi {
                     do {
                         let dataJson = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let InstanceData = try JSONDecoder().decode(StudyResponse.self, from: dataJson)
-                        self.StudyModel.append(InstanceData)
                         completionHandler(InstanceData.result.content)
                     } catch  {
                         print(error.localizedDescription)

@@ -15,7 +15,6 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
@@ -24,6 +23,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var BLMainCollectionView: UICollectionView!
     @IBOutlet weak var BLSignButton: UIButton!
     public var StudyModel = [StudyContent]()
+    public var StudyEnrollModel = [StudyEnrollment]()
     var index : Int?
     
     lazy var HeaderView: BLMainCollectionViewHeader = {
@@ -66,21 +66,16 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     private func LayoutSetUP(){
-        
-        
-        // MARK - BLSignButton
+
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
         self.BLSignButton.setTitle("", for: .normal)
         self.BLSignButton.tintColor = UIColor.black
         self.BLSignButton.addTarget(self, action: #selector(LogoutAction), for: .touchUpInside)
         
         
-        
-        // MARK - BLSubjectView
         self.BLSubjectView.frame = CGRect(x: self.BLSubjectView.frame.origin.x, y: self.BLSubjectView.frame.origin.y, width: self.BLSubjectView.frame.size.width, height: self.BLSubjectView.frame.size.height)
         self.BLSubjectView.backgroundColor = UIColor(red: 234/255, green: 234/255, blue: 234/255, alpha: 1.0)
         
-        // MARK - BLSubject Label
         self.BLSubject.text = "BL과 함께 새로운 \n스터디 그룹을 만들어 보새요"
         self.BLSubject.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight(1.0))
         self.BLSubject.frame = CGRect(x: self.BLSubject.frame.origin.x, y: self.BLSubject.frame.origin.y, width: self.BLSubject.frame.size.width, height: self.BLSubject.frame.size.height)
@@ -94,19 +89,13 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         self.navigationController?.navigationBar.topItem?.title = "StudyFarm"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)]
-        
-        
-        
-        
     }
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
         DetailSegue.Index = self.index
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -142,7 +131,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         switch kind {
@@ -177,7 +165,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     self?.navigationController?.popToRootViewController(animated: true)
                 }
                 
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -185,7 +172,5 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     
-    
 }
-
 
