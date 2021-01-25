@@ -13,9 +13,10 @@ import SwiftKeychainWrapper
 
 
 //MARK - 메인 스터디 최종 데이터
-struct StudyResponse: Codable{
+struct StudyResponse: Codable {
     var result : StudyResults
 }
+
 
 //MARK - 메인 스터디 콘텐츠 데이터
 struct StudyResults: Codable {
@@ -39,7 +40,7 @@ struct StudyContent: Codable {
     var member_check_type_str: String?
     var progress_type: Int?
     var progress_type_str: String?
-    var step: Int?
+    var steps: [Int?]
     var start_date: String?
     var end_date: String?
     var dateFormat: String?
@@ -161,8 +162,187 @@ struct StudyEnrollment: Codable {
     var study_updated_at_str: String?
 }
 
+struct StudyModifiedResponse: Codable {
+    var result : [StudyModifiedResult]
+}
+struct StudyModifiedResult: Codable {
+    var study_seq: Int
+    var title: String
+    var study_leader: ModifiedContainer
+    var recruit_number: Int
+    var content: String
+    var category_name: String
+    var topic_name: String
+    var state_name: String
+    var city_name: String
+    var end_yn: Bool
+    var views: Int
+    var member_check_type: Int
+    var member_check_type_str: String
+    var progress_type: Int
+    var progress_type_str: String
+    var step: Int
+    var start_date: String
+    var end_date: String
+    var dateFormat: String
+    var study_in_place : [ModifiedStudyPlaceContainer]
+}
+struct ModifiedContainer: Codable {
+    var users_seq: Int
+    var email: String
+    var nickname: String
+    var gender: String
+    var age: Int
+    var interesting: [ModifiedInterestingContainer]
+    var simple_introduce: String
+    var profile: String
+    var user_info_process: Bool
+    var user_city_info : [ModifiedUserInfoContainer]
+    var user_created_at: String
+    var user_updated_at: String
+    var user_active: Bool
+    var member: [ModifiedStudyMembersContainer]
+    var tags: [String]
+    var is_my_study: Bool
+    var study_created_at_str: String
+    var study_updated_at_str: String
 
-struct EnrollParamater : Encodable{
+}
+struct ModifiedInterestingContainer: Codable {
+    var code: Int
+    var name: String
+    var skill_level: Int
+    var parent_code: Int
+}
+struct ModifiedUserInfoContainer: Codable {
+    var state_code: Int
+    var state_name: String
+    var city_code: Int
+    var city_name: String
+}
+struct ModifiedStudyPlaceContainer: Codable {
+    var studycafe_seq: Int
+    var name: String
+    var phone: String
+    var description: String
+    var full_address: String
+    var road_address: String
+    var x_location: Double
+    var y_location: Double
+    var city_code: Int
+    var city_name: String
+    var bizhour: [ModifiedStudybizhourContainer]
+    var thumbnail: String
+    var images: [String]
+    var menu_info: [ModifiedStudyMenuInfoContainer]
+    var options: [String]
+}
+struct ModifiedStudybizhourContainer: Codable {
+    var type: String
+    var startTime: String
+    var endTime: String
+    var description: String
+    var isDayOff: Bool
+}
+struct ModifiedStudyMenuInfoContainer: Codable {
+    var name: String
+    var price: String
+    var isRecommended: Bool
+    var change: Bool
+}
+struct ModifiedStudyMembersContainer: Codable {
+    var created_at: String
+    var updated_at: String
+    var actived_at: String
+    var is_study_leader: Bool
+    var status: Int
+    var users_seq: Int
+    var nickname: String
+    var email: String
+    var gender: String
+    var age: Int
+    var profile: String
+    var simple_introduce: String
+}
+
+struct StudyMyInfoResponse: Codable {
+    var reuslt: [StudyMyInfoReuslt]
+    struct StudyMyInfoReuslt: Codable {
+        var content: [StduyMyContent]
+        struct StduyMyContent: Codable{
+            var study_seq: Int
+            var title: String
+            var study_leader: [StduyMyContainer]
+            var recruit_number: Int
+            var content: String
+            var category_name: String
+            var topic_name: String
+            var state_name: String
+            var city_name: String
+            var end_yn: Bool
+            var views: Int
+            var member_check_type: Int
+            var member_check_type_str: String
+            var progress_type: Int
+            var progress_type_str: String
+            var step: Int
+            var start_date: String
+            var end_date: String
+            var dateFormat: String
+            var tags: [String]
+            var is_my_study: Bool
+            var study_created_at_str: String
+            var study_updated_at_str: String
+            struct StduyMyContainer: Codable {
+                var users_seq: Int
+                var email: String
+                var nickname: String
+                var gender: String
+                var age: Int
+                var interesting: [StudyMyInterestingContainer]
+                var simple_introduce: String
+                var profile: String
+                var user_info_process: String
+                var user_city_info: [StudyMyUserCityInfoContainer]
+                var user_created_at: String
+                var user_updated_at: String
+                var user_active: Bool
+                struct StudyMyInterestingContainer: Codable{
+                    var code: Int
+                    var name: String
+                    var skill_level: Int
+                    var parent_code: Int
+                }
+                struct StudyMyUserCityInfoContainer: Codable{
+                    var state_code: Int
+                    var state_name: String
+                    var city_code: Int
+                    var city_name: String
+                }
+            }
+        }
+    }
+
+}
+
+
+
+struct EnrollParamater : Encodable {
+    var title: String
+    var content: String
+    var recruit_number: Int
+    var state: Int
+    var city: Int
+    var topic: Int
+    var member_check_type: Int
+    var progress_type: Int
+    var step: Int
+    var start_date: String
+    var end_date: String
+    var studycafe_seq: Int
+}
+
+struct ModifiedParamater : Encodable {
     var title: String
     var content: String
     var recruit_number: Int
@@ -184,6 +364,8 @@ class ServerApi {
     
     fileprivate let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
     public let Privateheaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))", "Accept": "application/hal+json"]
+    public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
+
     // MARK: - DataModel Instace 초기화
     public var StudyModel = [StudyResponse]()
     public var StudyOneModel = StudyOneDataModel()
@@ -213,8 +395,27 @@ class ServerApi {
             }
     }
     
-    public func StudyEnrollmentCall(EnrollParamter: EnrollParamater, completionHandler : @escaping ([StudyEnrollment]) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: EnrollParamter, encoder: JSONParameterEncoder.default, headers: Privateheaders)
+    public func StudyModifiedCall(ModifiedParamter: ModifiedParamater, completionHandler: @escaping([StudyModifiedResult]) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/study/1", method: .put, parameters: ModifiedParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        .responseJSON {  response in
+            debugPrint(response)
+            switch response.result{
+            case .success(let value):
+                do {
+                    let ModifiedData = try JSONSerialization.data(withJSONObject: value, options: [])
+                    let ModifiedInstance = try JSONDecoder().decode(StudyModifiedResult.self, from: ModifiedData)
+                    completionHandler([ModifiedInstance])
+                }catch{
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    public func StudyEnrollmentCall(EnrollParamter: EnrollParamater, completionHandler: @escaping ([StudyEnrollment]) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: EnrollParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result{
@@ -223,7 +424,6 @@ class ServerApi {
                         let EnrollData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let EnrollInstace = try JSONDecoder().decode(StudyEnrollment.self, from: EnrollData)
                         completionHandler([EnrollInstace])
-                        print(EnrollInstace.title ,"성하였습니다")
                     } catch  {
                         print(error.localizedDescription)
                     }
@@ -232,10 +432,30 @@ class ServerApi {
                 }
             }
     }
+
+    public func StudyMyListCall(completionHandler: @escaping ([StudyMyInfoResponse.StudyMyInfoReuslt.StduyMyContent]) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/study/my", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: TestHeaders)
+        .responseJSON { response in
+            debugPrint(response)
+            switch response.result{
+            case .success(let value):
+                do {
+                    let MyStudyData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                    let MyStudyInstance = try JSONDecoder().decode(StudyMyInfoResponse.StudyMyInfoReuslt.self, from: MyStudyData)
+                    completionHandler(MyStudyInstance.content)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+
+            }
+        }
+    }
     
     
     // MARK: - Server StudyList 조회 요청 함수
-    public func StudyListCall(completionHandler :  @escaping ([StudyContent]) -> ()) {
+    public func StudyListCall(completionHandler:  @escaping ([StudyContent]) -> ()) {
         AF.request("http://3.214.168.45:8080/api/v1/study", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .responseJSON { response in
                 debugPrint(response)

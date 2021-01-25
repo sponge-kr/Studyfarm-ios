@@ -23,7 +23,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var BLMainCollectionView: UICollectionView!
     @IBOutlet weak var BLSignButton: UIButton!
     public var StudyModel = [StudyContent]()
-    public var StudyEnrollModel = [StudyEnrollment]()
     var index : Int?
     
     lazy var HeaderView: BLMainCollectionViewHeader = {
