@@ -93,7 +93,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
-        DetailSegue.Index = self.index
+        DetailSegue.Index = self.index!
     }
     
     

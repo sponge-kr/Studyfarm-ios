@@ -16,21 +16,29 @@ import Alamofire
 class BLDetailViewController: UIViewController {
     @IBOutlet weak var Detailtitle: UILabel!
     @IBOutlet weak var Detailname: UILabel!
-    var Index: Int?
+    var Index: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         print("스터디팜 디테일 index 데스트 입니다 \(self.Index)")
-        ServerApi.shared.StudyListOneCall(study_seq: Index!) { reulst in
-            switch reulst {
-            case .success(let value):
+        ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
+            DispatchQueue.main.async {
                 self.initLayout()
-                self.Detailname.text = value.nickname
-                self.Detailtitle.text = value.contents
-            case .failure(let error):
-                print(error.localizedDescription)
+                self.Detailtitle.text = result.title
+                self.Detailname.text = result.city_name
             }
-             
         }
+        
+//        ServerApi.shared.StudyListOneCall(study_seq: Index!) { reulst in
+//            switch reulst {
+//            case .success(let value):
+//                self.initLayout()
+//                self.Detailname.text = value.nickname
+//                self.Detailtitle.text = value.contents
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//
+//        }
     }
     
     public func initLayout() {
