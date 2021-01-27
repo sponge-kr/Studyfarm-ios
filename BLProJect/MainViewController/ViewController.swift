@@ -106,8 +106,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         DispatchQueue.main.async {
             MainCell?.CellSubject.text = self.StudyModel[indexPath.row].title
-            MainCell?.CellHuman.text = self.StudyModel[indexPath.row].study_leader.nickname
-            MainCell?.CellWriter.text = self.StudyModel[indexPath.row].study_leader.email
+            MainCell?.CellHuman.text = self.StudyModel[indexPath.row].study_leader?.nickname
+            MainCell?.CellWriter.text = self.StudyModel[indexPath.row].study_leader?.email
             MainCell?.CellState.text =  self.StudyModel[indexPath.row].content
             MainCell?.CellStartDate.text = self.StudyModel[indexPath.row].study_created_at_str
         }
