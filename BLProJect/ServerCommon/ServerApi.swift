@@ -270,55 +270,94 @@ struct SubCommnetParamter : Encodable {
     var parent_reply_seq: Int
 }
 
+struct StudyEnrollmentResponse: Codable {
+    var result : StudyEnrollment
+}
+
+
 struct StudyEnrollment: Codable {
-    var study_seq: Int?
-    var title: String?
-    var recruit_number: Int?
-    var content: String?
-    var category_name: String?
-    var topic_name: String?
-    var state_name: String?
-    var city_name: String?
-    var end_yn: Bool?
-    var views: Int?
-    var member_check_type: Int?
-    var member_check_type_str: String?
-    var progress_type: Int?
-    var progress_type_str: String?
-    var step: String?
-    var start_date: String?
-    var end_date: String?
-    var dateFormat: String?
-    var tags: [String?]
-    var is_my_study: Bool?
-    var study_created_at_str: String?
-    var study_updated_at_str: String?
+    let study_seq,recruit_number,views,member_check_type,progress_type: Int?
+    let title,content,category_name,topic_name,state_name,city_name,member_check_type_str,progress_type_str,start_date,end_date,dateFormat,study_created_at_str,study_updated_at_str: String?
+    let end_yn,is_my_study: Bool?
+    let steps: [Int]?
+    let tags: [String]?
+    enum CodingKeys: String,CodingKey {
+        case study_seq,recruit_number,views,member_check_type,progress_type
+        case title,content,category_name,topic_name,state_name,city_name,member_check_type_str,progress_type_str,start_date,end_date,dateFormat,study_created_at_str,study_updated_at_str
+        case end_yn,is_my_study
+        case steps
+        case tags
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.study_seq = try? values.decode(Int.self, forKey: .study_seq)
+        self.recruit_number = try? values.decode(Int.self, forKey: .recruit_number)
+        self.views = try? values.decode(Int.self, forKey: .views)
+        self.member_check_type = try? values.decode(Int.self, forKey: .member_check_type)
+        self.progress_type = try? values.decode(Int.self, forKey: .progress_type)
+        self.title = try? values.decode(String.self, forKey: .title)
+        self.content = try? values.decode(String.self, forKey: .content)
+        self.category_name = try? values.decode(String.self, forKey: .category_name)
+        self.topic_name = try? values.decode(String.self, forKey: .topic_name)
+        self.state_name = try? values.decode(String.self, forKey: .state_name)
+        self.city_name = try? values.decode(String.self, forKey: .city_name)
+        self.member_check_type_str = try? values.decode(String.self, forKey: .member_check_type_str)
+        self.progress_type_str = try? values.decode(String.self, forKey: .progress_type_str)
+        self.start_date = try? values.decode(String.self, forKey: .start_date)
+        self.end_date = try? values.decode(String.self, forKey: .end_date)
+        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
+        self.study_created_at_str = try? values.decode(String.self, forKey: .study_created_at_str)
+        self.study_updated_at_str = try? values.decode(String.self, forKey: .study_updated_at_str)
+        self.end_yn = try? values.decode(Bool.self, forKey: .end_yn)
+        self.is_my_study = try? values.decode(Bool.self, forKey: .is_my_study)
+        self.steps = try? values.decode([Int].self, forKey: .steps)
+        self.tags = try? values.decode([String].self, forKey: .tags)
+    }
 }
 
 struct StudyModifiedResponse: Codable {
-    var result : [StudyModifiedResult]
+    var result : StudyModifiedResult
 }
+
 struct StudyModifiedResult: Codable {
-    var study_seq: Int
-    var title: String
-    var study_leader: ModifiedContainer
-    var recruit_number: Int
-    var content: String
-    var category_name: String
-    var topic_name: String
-    var state_name: String
-    var city_name: String
-    var end_yn: Bool
-    var views: Int
-    var member_check_type: Int
-    var member_check_type_str: String
-    var progress_type: Int
-    var progress_type_str: String
-    var step: Int
-    var start_date: String
-    var end_date: String
-    var dateFormat: String
-    var study_in_place : [ModifiedStudyPlaceContainer]
+    let study_seq,recruit_number,views,member_check_type,progress_type: Int?
+    let title,content,category_name,topic_name,state_name,city_name,member_check_type_str,progress_type_str,start_date,end_date,dateFormat: String?
+    let end_yn: Bool?
+    let steps: [Int]?
+    let study_leader: ModifiedContainer?
+    let study_in_place: [ModifiedStudyPlaceContainer]?
+    enum CodingKeys: String,CodingKey {
+        case study_seq,recruit_number,views,member_check_type,progress_type
+        case title,content,category_name,topic_name,state_name,city_name,member_check_type_str,progress_type_str,start_date,end_date,dateFormat
+        case end_yn
+        case steps
+        case study_leader
+        case study_in_place
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.study_seq = try? values.decode(Int.self, forKey: .study_seq)
+        self.recruit_number = try? values.decode(Int.self, forKey: .recruit_number)
+        self.views = try? values.decode(Int.self, forKey: .views)
+        self.member_check_type = try? values.decode(Int.self, forKey: .member_check_type)
+        self.progress_type = try? values.decode(Int.self, forKey: .progress_type)
+        self.title = try? values.decode(String.self, forKey: .title)
+        self.content = try? values.decode(String.self, forKey: .content)
+        self.category_name = try? values.decode(String.self, forKey: .category_name)
+        self.topic_name = try? values.decode(String.self, forKey: .topic_name)
+        self.state_name = try? values.decode(String.self, forKey: .state_name)
+        self.city_name = try? values.decode(String.self, forKey: .city_name)
+        self.member_check_type_str = try? values.decode(String.self, forKey: .member_check_type_str)
+        self.progress_type_str = try? values.decode(String.self, forKey: .progress_type_str)
+        self.start_date = try? values.decode(String.self, forKey: .start_date)
+        self.end_date = try? values.decode(String.self, forKey: .end_date)
+        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
+        self.end_yn = try? values.decode(Bool.self, forKey: .end_yn)
+        self.steps = try? values.decode([Int].self, forKey: .steps)
+        self.study_leader = try? values.decode(ModifiedContainer.self, forKey: .study_leader)
+        self.study_in_place = try? values.decode([ModifiedStudyPlaceContainer].self, forKey: .study_in_place)
+        
+    }
 }
 struct ModifiedContainer: Codable {
     var users_seq: Int
@@ -467,7 +506,7 @@ struct EnrollParamater : Encodable {
     var topic: Int
     var member_check_type: Int
     var progress_type: Int
-    var step: Int
+    var steps: [Int]?
     var start_date: String
     var end_date: String
     var studycafe_seq: Int
@@ -482,7 +521,7 @@ struct ModifiedParamater : Encodable {
     var topic: Int
     var member_check_type: Int
     var progress_type: Int
-    var step: Int
+    var steps: [Int]?
     var start_date: String
     var end_date: String
     var studycafe_seq: Int
@@ -498,9 +537,7 @@ class ServerApi {
     public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
 
     // MARK: - DataModel Instace 초기화
-    public var StudyModel = [StudyResponse]()
     public var CommnetModel = CommentDataModel()
-    public var SubCommentModel = SubCommentDataModel()
     
     private init() {}
 
@@ -525,7 +562,7 @@ class ServerApi {
             }
     }
     
-    public func StudyModifiedCall(ModifiedParamter: ModifiedParamater, completionHandler: @escaping([StudyModifiedResult]) -> ()){
+    public func StudyModifiedCall(ModifiedParamter: ModifiedParamater, completionHandler: @escaping(StudyModifiedResult) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/study/1", method: .put, parameters: ModifiedParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
         .responseJSON {  response in
             debugPrint(response)
@@ -533,8 +570,8 @@ class ServerApi {
             case .success(let value):
                 do {
                     let ModifiedData = try JSONSerialization.data(withJSONObject: value, options: [])
-                    let ModifiedInstance = try JSONDecoder().decode(StudyModifiedResult.self, from: ModifiedData)
-                    completionHandler([ModifiedInstance])
+                    let ModifiedInstance = try JSONDecoder().decode(StudyModifiedResponse.self, from: ModifiedData)
+                    completionHandler(ModifiedInstance.result)
                 }catch{
                     print(error.localizedDescription)
                 }
@@ -552,8 +589,8 @@ class ServerApi {
                 case .success(let value):
                     do {
                         let EnrollData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                        let EnrollInstace = try JSONDecoder().decode(StudyEnrollment.self, from: EnrollData)
-                        completionHandler(EnrollInstace)
+                        let EnrollInstace = try JSONDecoder().decode(StudyEnrollmentResponse.self, from: EnrollData)
+                        completionHandler(EnrollInstace.result)
                     } catch  {
                         print(error.localizedDescription)
                     }
