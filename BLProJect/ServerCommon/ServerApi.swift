@@ -228,19 +228,6 @@ struct StudyDetailMemberResultsContainer: Codable {
     var simple_introduce: String
 }
 
-    
-// MARK: - 댓글 등록 데이터
-struct CommentDataModel {
-    var code: Int = 0
-    var message: String = ""
-}
-
-// MARK: - 대댓글 등록 데이터
-struct SubCommentDataModel {
-    var code: Int = 0
-    var message: String = ""
-}
-
 // MARK: - 메인 스터디 등록 Paramter
 struct StudyRegisterParamter: Encodable {
     var title: String
@@ -256,20 +243,6 @@ struct StudyRegisterParamter: Encodable {
     var study_day: Int
 }
     
-// MARK: - 댓글 등록 Paramter
-struct CommentParamter: Encodable {
-    var study_seq: Int
-    var content: String
-    var parent_reply_seq: Int
-}
-
-// MARK: - 대댓글 등록 Paramter
-struct SubCommnetParamter : Encodable {
-    var study_seq: Int
-    var content: String
-    var parent_reply_seq: Int
-}
-
 struct StudyEnrollmentResponse: Codable {
     var result : StudyEnrollment
 }
@@ -552,31 +525,9 @@ class ServerApi {
     public let Privateheaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))", "Accept": "application/hal+json"]
     public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
 
-    // MARK: - DataModel Instace 초기화
-    public var CommnetModel = CommentDataModel()
     
     private init() {}
 
-    // MARK: - Server Comment 댓글 등록 함수
-    public func StudyCommentCall(CommentParamter: CommentParamter, completionHandler: @escaping (Result<CommentDataModel, Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/study-replies", method: .post, parameters: CommentParamter, encoder: JSONParameterEncoder.default, headers: Privateheaders)
-            .response { response in
-                debugPrint(response)
-                switch response.result {
-                case .success(let value):
-                    let CommentJson = JSON(value)
-                    for (_, subJson):(String, JSON) in CommentJson["result"] {
-                        print("스터디팜 댓글 번호 입니다", subJson["seq"].intValue)
-                        print("스터디팜 작성자 입니다 ", subJson["writer"].arrayValue)
-                        print("스터디팜 부모 댓글 번호 입니다", subJson["parent_reply_seq"].intValue)
-                    }
-                    completionHandler(.success(self.CommnetModel))
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    completionHandler(.failure(error))
-                }
-            }
-    }
     
     public func StudyModifiedCall(ModifiedParamter: ModifiedParamater, completionHandler: @escaping(StudyModifiedResult) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/study/1", method: .put, parameters: ModifiedParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
