@@ -49,6 +49,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BLMainCell")
         
         
+        
     }
     
     

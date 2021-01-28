@@ -18,13 +18,26 @@ struct RepliesResult: Codable {
     var content: [RepliesContent]
 }
 struct RepliesContent: Codable {
-    var seq: Int
-    var writer: RepliesContainer
-    var content: String
-    var dateFormat: String
-    var is_parent: Bool
-    var is_my_reply: Bool
-    var children: [RepliesChildrenCotainer]
+    let seq: Int?
+    let content,dateFormat: String?
+    let is_parent,is_my_reply: Bool?
+    let children: [RepliesChildrenCotainer]?
+    
+    enum CodingKeys: String,CodingKey {
+        case seq
+        case content,dateFormat
+        case is_parent,is_my_reply
+        case children
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.seq = try? values.decode(Int.self, forKey: .seq)
+        self.content = try? values.decode(String.self, forKey: .content)
+        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
+        self.is_parent = try? values.decode(Bool.self, forKey: .is_parent)
+        self.is_my_reply = try? values.decode(Bool.self, forKey: .is_my_reply)
+        self.children = try? values.decode([RepliesChildrenCotainer].self, forKey: .children)
+    }
 }
 struct RepliesContainer: Codable {
     var users_seq: Int
@@ -89,17 +102,43 @@ struct RepliesCityInfoContainer: Codable {
     var city_name: String
 }
 
-struct ReplysParamter: Encodable {
-    var size: Int?
-    var page: Int?
+struct RepliesParams: Encodable {
+    var size: Int
+    var page: Int
 }
 
+
 class RepliesApi {
-    let data = ReplysParamter(size: 10, page: 20)
+    static let shared = RepliesApi()
+    
+    
     public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
-    public func StudyReplysCall(){
-        
+    public func StudyRepliesCall(study_seq: Int, RepliesParamter:Parameters,completionHandler: @escaping(RepliesResult) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/study-replies/study/\(study_seq)", method: .get, parameters: RepliesParamter, encoding: URLEncoding.queryString, headers: TestHeaders)
+            .validate()
+            .responseJSON { response in
+                debugPrint(response)
+                switch response.result{
+                case .success(let value):
+                    do {
+                        let RepliesData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let RepliesInstace = try JSONDecoder().decode(RepliesResponse.self, from: RepliesData)
+                        completionHandler(RepliesInstace.result)
+                    } catch  {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+}
+
+
+extension Encodable {
+    func asParamters() throws -> Parameters? {
+        let data = try JSONEncoder().encode(self)
+        let params = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Parameters
+        return params
     }
-    
-    
 }
