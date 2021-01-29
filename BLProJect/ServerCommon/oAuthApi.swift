@@ -12,27 +12,43 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 
-// MARK - 로그인 데이터 모델
-struct LoginDataModel {
+struct LoginResponse: Codable {
     var code: Int?
     var message: String?
-    var token: String = ""
-    var user_seq: Int?
-    var email: String?
-    var name: String?
-    var nickname: String?
-    var phone: String?
-    var age: Int?
-    var state_code: Int?
-    var state_name: String?
-    var city_code: Int?
-    var city_name: String?
-    var gender: String?
-    var interesting_name: String?
-    var interesting_skill_level: String?
-    var born_date: String?
-    var profile: String?
+    var result: LoginResult?
 }
+struct LoginResult: Codable {
+    var token: String
+    var user: LoginUserContainer?
+}
+struct LoginUserContainer: Codable {
+    var users_seq: Int?
+    var email: String?
+    var nickname: String?
+    var gender: String?
+    var age: Int?
+    var interesting: [LoginInterestingContainer]?
+    var simple_introduce: String?
+    var profile: String?
+    var user_info_process: Bool?
+    var user_city_info: [LoginCiryInfoContainer]?
+    var user_created_at: String?
+    var user_updated_at: String?
+    var user_active: Bool?
+}
+struct LoginInterestingContainer: Codable {
+    var code: Int
+    var name: String
+    var skill_level: Int
+    var parent_code: Int
+}
+struct LoginCiryInfoContainer: Codable {
+    var state_code: Int
+    var state_name: String
+    var city_code: Int
+    var city_name: String
+}
+
 
 // MARK - 이메일 인증 버튼 데이타 모델
 struct OAuthButtonDataModel {
@@ -163,7 +179,6 @@ class OAuthApi {
     private init(){}
     
     //MARK - DataModel Instace 초기화
-    public var LoginModel = LoginDataModel()
     public var oAuthButtonModel = OAuthButtonDataModel()
     public var LogoutModel = LogoutDataModel()
     public var SignUpModel = SignUpDataModel()
@@ -175,45 +190,25 @@ class OAuthApi {
     
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
-    public func AuthLoginCall(LoginParamter : LoginParamter, completionHandler : @escaping (Result<LoginDataModel,Error>) -> ()){
+    public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
-            .response { response in
+            .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let value):
-                    let LoginJson = JSON(value!)
-                    self.LoginModel.code = LoginJson["code"].intValue
-                    self.LoginModel.message = LoginJson["message"].stringValue
-                    self.LoginModel.token = LoginJson["result"]["token"].stringValue
-                    for (_,LoginSubJson):(String,JSON) in LoginJson["result"]["user"] {
-                        self.LoginModel.email = LoginSubJson["email"].stringValue
-                        self.LoginModel.name = LoginSubJson["name"].stringValue
-                        self.LoginModel.nickname = LoginSubJson["nickname"].stringValue
-                        self.LoginModel.age = LoginSubJson["age"].intValue
-                        self.LoginModel.gender = LoginSubJson["gender"].stringValue
-                        self.LoginModel.state_code = LoginSubJson["user_city_info"]["state_code"].intValue
-                        self.LoginModel.state_name = LoginSubJson["user_city_info"]["state_name"].stringValue
-                        self.LoginModel.city_code = LoginSubJson["user_city_info"]["city_code"].intValue
-                        self.LoginModel.city_name = LoginSubJson["user_city_info"]["city_name"].stringValue
-                        self.LoginModel.interesting_name = LoginSubJson["interesting"]["name"].stringValue
-                        self.LoginModel.interesting_skill_level = LoginSubJson["interesting"]["skill_level"].stringValue
-                        self.LoginModel.born_date = LoginSubJson["born_date"].stringValue
-                        self.LoginModel.profile = LoginSubJson["profile"].stringValue
+                    do {
+                        let LoginData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let LoginInstance = try JSONDecoder().decode(LoginResponse.self, from: LoginData)
+                        completionHandler(LoginInstance)
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                    print("스터디팜 로그인 토근 값입니다 \(self.LoginModel.token)")
-                    print("AuthSignUpCall스터디팜 로그인 status code 값입니다 \(self.LoginModel.code)")
-                    print("스터디팜 로그인 email 값입니다 \(self.LoginModel.email)")
-                    print("스터디팜 로그인 nickname 값 입니다 \(self.LoginModel.nickname)")
-                    completionHandler(.success(self.LoginModel))
-                    
                 case .failure(let error):
                     print(error.localizedDescription)
-                    completionHandler(.failure(error))
-                    
                 }
             }
     }
-    
+        
     //MARK - oAuth Server 로그아웃 요청 함수(POST)
     public func AuthLogoutCall(completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
@@ -295,7 +290,6 @@ class OAuthApi {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
             }
     }
     
@@ -315,7 +309,6 @@ class OAuthApi {
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
                 }
-                
             }
     }
     

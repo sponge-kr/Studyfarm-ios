@@ -535,7 +535,7 @@ class ServerApi {
                 switch response.result{
                 case .success(let value):
                     do {
-                        let ModifiedData = try JSONSerialization.data(withJSONObject: value, options: [])
+                        let ModifiedData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let ModifiedInstance = try JSONDecoder().decode(StudyModifiedResponse.self, from: ModifiedData)
                         completionHandler(ModifiedInstance.result)
                     }catch{

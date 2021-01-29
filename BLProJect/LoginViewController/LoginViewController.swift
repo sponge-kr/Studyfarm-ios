@@ -346,25 +346,15 @@ class LoginViewController: UIViewController {
 
     @objc func ReceiveLoginAPI() {
         let Paramter = LoginParamter(email: self.loginEmailtextfiled.text!, password: self.loginPasswordtextfiled.text!)
-        
-        OAuthApi.shared.AuthLoginCall(LoginParamter: Paramter) { [weak self] result in
-            switch result {
-            case .success(let value):
-                print("테스트 status code 값입니다 : \(value.message)")
-                if value.code == 200 {
-                    KeychainWrapper.standard.set(OAuthApi.shared.LoginModel.token, forKey: "token")
-                    let MainView = self?.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
-                    guard let MainVC = MainView else { return }
-                    self?.navigationController?.pushViewController(MainVC, animated: true)
-                } else {
-                    self?.ErrorAlert = LoginAlertView(frame: self!.view.frame)
-                    self?.ErrorAlert.LoginTitle.text = value.message
-                    self?.view.addSubview(self!.ErrorAlert)
-                    self?.ErrorAlert.LoginConfirmBtn.addTarget(self, action: #selector(self?.HideAlertView(_:)), for: .touchUpInside)
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
+        OAuthApi.shared.AuthLoginfetch(LoginParamter: Paramter) { result in
+            print(result.code)
+            if result.code == 200{
+                KeychainWrapper.standard.set(result.result!.token, forKey: "token")
+                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
+                guard  let MainVC =  MainView else { return }
+                self.navigationController?.pushViewController(MainVC, animated: true)
+            }else{
+                // ErrorAlert
             }
         }
     }
