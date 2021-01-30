@@ -107,24 +107,22 @@ struct RepliesParams: Encodable {
     var page: Int
 }
 
-
 class RepliesApi {
     static let shared = RepliesApi()
     
-    
     public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
-    public func StudyRepliesCall(study_seq: Int, RepliesParamter:Parameters,completionHandler: @escaping(RepliesResult) -> ()){
+    public func StudyRepliesCall(study_seq: Int, RepliesParamter:Parameters,completionHandler: @escaping(RepliesResult) -> Void) {
         AF.request("http://3.214.168.45:8080/api/v1/study-replies/study/\(study_seq)", method: .get, parameters: RepliesParamter, encoding: URLEncoding.queryString, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
-                switch response.result{
+                switch response.result {
                 case .success(let value):
                     do {
                         let RepliesData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let RepliesInstace = try JSONDecoder().decode(RepliesResponse.self, from: RepliesData)
                         completionHandler(RepliesInstace.result)
-                    } catch  {
+                    } catch {
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
@@ -133,7 +131,6 @@ class RepliesApi {
             }
         }
 }
-
 
 extension Encodable {
     func asParamters() throws -> Parameters? {

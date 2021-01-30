@@ -70,7 +70,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
         self.BLSignButton.setTitle("", for: .normal)
         self.BLSignButton.tintColor = UIColor.black
-        self.BLSignButton.addTarget(self, action: #selector(LogoutAction), for: .touchUpInside)
+//        self.BLSignButton.addTarget(self, action: #selector(LogoutAction), for: .touchUpInside)
         
         
         self.BLSubjectView.frame = CGRect(x: self.BLSubjectView.frame.origin.x, y: self.BLSubjectView.frame.origin.y, width: self.BLSubjectView.frame.size.width, height: self.BLSubjectView.frame.size.height)
@@ -87,8 +87,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 //        titleAttribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 102/255, green: 102/255, blue: 255/255, alpha: 1.0), range:(self.BLSubject.text as! NSString).range(of: "BL"))
 //        self.BLSubject.attributedText = titleAttribute
         
-        self.navigationController?.navigationBar.topItem?.title = "StudyFarm"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)]
+
     }
     
     
@@ -154,22 +153,22 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         }
     }
     
-    @objc private func LogoutAction(){
-        OAuthApi.shared.AuthLogoutCall { [weak self] result in
-            switch result {
-            case .success(let value):
-                if value.code == 200 {
-                    print("Logut 성공")
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }else{
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    @objc private func LogoutAction(){
+//        OAuthApi.shared.AuthLogoutCall { [weak self] result in
+//            switch result {
+//            case .success(let value):
+//                if value.code == 200 {
+//                    print("Logut 성공")
+//                    self?.navigationController?.popToRootViewController(animated: true)
+//                }else{
+//                    self?.navigationController?.popToRootViewController(animated: true)
+//                }
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     
 }

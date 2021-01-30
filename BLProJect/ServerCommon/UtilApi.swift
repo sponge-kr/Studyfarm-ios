@@ -57,7 +57,7 @@ class UtilApi {
     }
     
     // MARK: - 스터디 시도 리스트 조회 함수 구현(GET)
-    public func UtilStatesCiteCodeCall(completionHandler: @escaping (Result<StateCodeData,Error>) -> ()){
+    public func UtilStatesCiteCodeCall(completionHandler: @escaping (Result<StateCodeData,Error>) -> ()) {
         AF.request("http://3.214.168.45:8080/api/v1/utils/states", method: .get, headers: headers)
             .response { response in
                 switch response.result {

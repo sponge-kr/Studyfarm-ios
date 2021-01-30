@@ -22,19 +22,34 @@ struct LoginResult: Codable {
     var user: LoginUserContainer?
 }
 struct LoginUserContainer: Codable {
-    var users_seq: Int?
-    var email: String?
-    var nickname: String?
-    var gender: String?
-    var age: Int?
-    var interesting: [LoginInterestingContainer]?
-    var simple_introduce: String?
-    var profile: String?
-    var user_info_process: Bool?
-    var user_city_info: [LoginCiryInfoContainer]?
-    var user_created_at: String?
-    var user_updated_at: String?
-    var user_active: Bool?
+    let users_seq,age: Int?
+    let email,nickname,gender,simple_introduce,profile,user_created_at,user_updated_at: String?
+    let user_info_process,user_active: Bool?
+    let interesting: [LoginInterestingContainer]?
+    let user_city_info: [LoginCiryInfoContainer]?
+    enum CodingKeys: String,CodingKey {
+        case users_seq,age
+        case email,nickname,gender,simple_introduce,profile,user_created_at,user_updated_at
+        case user_info_process,user_active
+        case interesting
+        case user_city_info
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.users_seq = try? values.decode(Int.self, forKey: .users_seq)
+        self.age = try? values.decode(Int.self, forKey: .age)
+        self.email = try? values.decode(String.self, forKey: .email.self)
+        self.nickname = try? values.decode(String.self, forKey: .nickname)
+        self.gender = try? values.decode(String.self, forKey: .gender)
+        self.simple_introduce = try? values.decode(String.self, forKey: .simple_introduce)
+        self.profile = try? values.decode(String.self, forKey: .profile)
+        self.user_created_at = try? values.decode(String.self, forKey: .user_created_at)
+        self.user_updated_at = try? values.decode(String.self, forKey: .user_updated_at)
+        self.user_info_process = try? values.decode(Bool.self, forKey: .user_info_process)
+        self.user_active = try? values.decode(Bool.self, forKey: .user_active)
+        self.interesting = try? values.decode([LoginInterestingContainer].self, forKey: .interesting)
+        self.user_city_info = try? values.decode([LoginCiryInfoContainer].self, forKey: .user_city_info)
+    }
 }
 struct LoginInterestingContainer: Codable {
     var code: Int
@@ -187,7 +202,6 @@ class OAuthApi {
     public var NickNameModel = NickNameDataModel()
     public var UserCheckModel = UserCheckDataModel()
     public var GIDSignModel = GIDSignDataModel()
-    
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
