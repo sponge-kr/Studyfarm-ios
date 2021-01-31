@@ -72,6 +72,8 @@
 		FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74325C68C0700AE82CD /* Rectangle@3x.png */; };
 		FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74425C68C0700AE82CD /* Rectangle@2x.png */; };
 		FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74525C68C0700AE82CD /* Rectangle@1x.png */; };
+		FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78325C6CABD00AE82CD /* searchbar@1x.png */; };
+		FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
 		FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */; };
@@ -186,6 +188,8 @@
 		FF70E74325C68C0700AE82CD /* Rectangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@3x.png"; sourceTree = "<group>"; };
 		FF70E74425C68C0700AE82CD /* Rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@2x.png"; sourceTree = "<group>"; };
 		FF70E74525C68C0700AE82CD /* Rectangle@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@1x.png"; sourceTree = "<group>"; };
+		FF70E78325C6CABD00AE82CD /* searchbar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@1x.png"; sourceTree = "<group>"; };
+		FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
 		FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollMentViewController.swift; sourceTree = "<group>"; };
@@ -249,8 +253,8 @@
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
 				FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */,
-				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */,
+				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
 			);
@@ -375,6 +379,8 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */,
+				FF70E78325C6CABD00AE82CD /* searchbar@1x.png */,
 				FF70E74525C68C0700AE82CD /* Rectangle@1x.png */,
 				FF70E74425C68C0700AE82CD /* Rectangle@2x.png */,
 				FF70E74325C68C0700AE82CD /* Rectangle@3x.png */,
@@ -570,7 +576,9 @@
 				FF331D8F259B34BD00BD8C33 /* Roboto-LightItalic.ttf in Resources */,
 				D1F85CD424C45B1300E1F7BE /* LaunchScreen.storyboard in Resources */,
 				D1F85D1224CDC96200E1F7BE /* Vector@3x.png in Resources */,
+				FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */,
 				FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */,
+				FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */,
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
 				FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
