@@ -12,44 +12,44 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 
-//MARK - 로그인 데이터 모델
+// MARK - 로그인 데이터 모델
 struct LoginDataModel {
-    var code : Int?
-    var message : String?
-    var token : String = ""
-    var user_seq : Int?
-    var email : String?
-    var name : String?
-    var nickname : String?
-    var phone : String?
-    var age : Int?
-    var state_code : Int?
-    var state_name : String?
-    var city_code : Int?
-    var city_name : String?
-    var gender : String?
-    var interesting_name : String?
-    var interesting_skill_level : String?
-    var born_date : String?
-    var profile : String?
+    var code: Int?
+    var message: String?
+    var token: String = ""
+    var user_seq: Int?
+    var email: String?
+    var name: String?
+    var nickname: String?
+    var phone: String?
+    var age: Int?
+    var state_code: Int?
+    var state_name: String?
+    var city_code: Int?
+    var city_name: String?
+    var gender: String?
+    var interesting_name: String?
+    var interesting_skill_level: String?
+    var born_date: String?
+    var profile: String?
 }
 
-//MARK - 이메일 인증 버튼 데이타 모델
-struct oAuthButtonDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var resultmessage : String = ""
-    var resultlinks : String = ""
+// MARK - 이메일 인증 버튼 데이타 모델
+struct OAuthButtonDataModel {
+    var code: Int = 0
+    var message: String = ""
+    var resultmessage: String = ""
+    var resultlinks: String = ""
 }
 
-//MARK - 로그아웃 데이터 모델
+// MARK - 로그아웃 데이터 모델
 struct LogoutDataModel {
     var code : Int = 0
     var message : String = ""
     var responseTime : String = ""
 }
 
-//MARK - 닉네임 중복확인 데이터 모델
+// MARK - 닉네임 중복확인 데이터 모델
 struct NickNameDataModel {
     var code : Int = 0
     var message : String = ""
@@ -111,23 +111,20 @@ struct SignUpDataModel {
     var user_active : Bool = false
 }
 
-//MARK - 유저 체크 데이터
-
+// MARK - 유저 체크 데이터
 struct UserCheckDataModel {
     var code : Int = 0
     var message : String = ""
     var check_result : Bool = false
 }
 
-
-
-//MARK - 로그인 Paramter
+// MARK - 로그인 Paramter
 struct LoginParamter : Encodable {
     var email : String
     var password : String
 }
 
-//MARK - 회원가입 Paramter
+// MARK - 회원가입 Paramter
 struct SignUpParamter : Encodable {
     var email : String
     var password : String
@@ -135,8 +132,8 @@ struct SignUpParamter : Encodable {
     var service_use_agree : Bool
 }
 
-//MARK - 회원가입 Email 인증 버튼 Paramter
-struct oAuthButtonParamter : Encodable {
+// MARK - 회원가입 Email 인증 버튼 Paramter
+struct OAuthButtonParamter : Encodable {
     var email : String
 }
 
@@ -154,8 +151,8 @@ struct GIDUserParamter : Encodable {
 }
 
 
-class oAuthApi {
-    static let shared = oAuthApi()
+class OAuthApi {
+    static let shared = OAuthApi()
     fileprivate let headers : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
     fileprivate let tokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","Authorization" : "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
     fileprivate let Kakaotokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "Kakaotoken"))"]
@@ -167,7 +164,7 @@ class oAuthApi {
     
     //MARK - DataModel Instace 초기화
     public var LoginModel = LoginDataModel()
-    public var oAuthButtonModel = oAuthButtonDataModel()
+    public var oAuthButtonModel = OAuthButtonDataModel()
     public var LogoutModel = LogoutDataModel()
     public var SignUpModel = SignUpDataModel()
     public var KakaoModel = KakaoSingDataModel()
@@ -281,8 +278,8 @@ class oAuthApi {
     
     
     //MARK - oAuth Server 이메일 인증 버튼 함수(POST)
-    public func AuthEmailCall(oAuthButtonParamter : oAuthButtonParamter, completionHandler : @escaping(Result<oAuthButtonDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email-button", method: .post, parameters: oAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
+    public func AuthEmailCall(OAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -428,6 +425,4 @@ class oAuthApi {
                 
             }
     }
-    
-    
 }

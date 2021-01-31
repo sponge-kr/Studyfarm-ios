@@ -13,77 +13,65 @@
     
     
     struct StudyList {
-        var studyseq : [Int]? = []
-        var studyDay : Int? = 0
-        var studyLimit : [Int?] = []
-        var studyCreate : [String?] = []
-        var studyUpdate : String? = ""
-        var contents : String? = ""
-        var title : [String?] = []
-        var name : [String?] = []
-        var state : String? = ""
-        var city : String = ""
-        var studycolor : [String?] = []
+        var studyseq: [Int]? = []
+        var studyDay: Int? = 0
+        var studyLimit: [Int?] = []
+        var studyCreate: [String?] = []
+        var studyUpdate: String? = ""
+        var contents: String? = ""
+        var title: [String?] = []
+        var name: [String?] = []
+        var state: String? = ""
+        var city: String = ""
+        var studycolor: [String?] = []
     }
     
     struct LoginList {
-        var code : Int = 0
-        var message : String = ""
-        var token : String = ""
+        var code: Int = 0
+        var message: String = ""
+        var token: String = ""
     }
     
-    struct oAuthList {
-        var code : Int = 0
-        var message : String = ""
-        var token : String = ""
-        var email : String = ""
+    struct OAuthList {
+        var code: Int = 0
+        var message: String = ""
+        var token: String = ""
+        var email: String = ""
     }
     struct LogoutList {
-        var code : Int = 0
-        var message : String = ""
-        var responseTime : String = ""
+        var code: Int = 0
+        var message: String = ""
+        var responseTime: String = ""
     }
     
     struct SignList {
-        var code : Int = 0
-        var message : String = ""
+        var code: Int = 0
+        var message: String = ""
     }
     
-    
-    
-    
-    //MARK - 로그인 Paramter
-    struct LoginParamter : Encodable {
-        var email : String
-        var password : String
+    // MARK: - 로그인 Paramter
+    struct LoginParamter: Encodable {
+        var email: String
+        var password: String
+    }
+
+    // MARK: - 회원가입 Paramter
+    struct SignParamter: Encodable {
+        var email: String
+        var password: String
+        var nickname: String
     }
     
-    
-    //MARK - 회원가입 Paramter
-    struct SignParamter : Encodable {
-        var email : String
-        var password : String
-        var nickname : String
-        
-        
+    // MARK: - 회원가입 Email 인증 Paramter
+    struct OAuthParamter: Encodable {
+        var email: String
     }
-    
-    //MARK - 회원가입 Email 인증 Paramter
-    struct oAuthParamter : Encodable {
-        var email : String
-    }
-    
-    
-    
-    
-    
+   
     class APIService {
         static let shared = APIService()
-        fileprivate let headers : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
+        fileprivate let headers: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept" : "application/hal+json"]
         
-        
-        
-        //MARK - ServerData
+        // MARK: - ServerData
         public var StudyData = StudyList()
         public var LoginData = LoginList()
         public var oAuthData = oAuthList()
@@ -92,8 +80,8 @@
         
         init() {}
         
-        //MARK - LoginServer 요청 함수
-        public func RequestLoginServer(LoginParamter : LoginParamter, completionHandler : @escaping (Result<LoginList,Error>) -> ()){
+        // MARK: - LoginServer 요청 함수
+        public func RequestLoginServer(LoginParamter: LoginParamter, completionHandler: @escaping (Result<LoginList, Error>)) {
             AF.request("http://3.214.168.45:8080/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
                 .response { response in
                     debugPrint(response)
@@ -105,7 +93,7 @@
                             self.LoginData.message = LoginJson["message"].stringValue
                             self.LoginData.token = LoginJson["result"]["token"].stringValue
                             print("토근 값입니다  token :", self.LoginData.token)
-                            print("파싱 status code 입니다",self.LoginData.code)
+                            print("파싱 status code 입니다", self.LoginData.code)
                             completionHandler(.success(self.LoginData))
                         }
                     case .failure(let error):
@@ -117,8 +105,8 @@
             
         }
         
-        //MARK - LogoutServer 요청 함수
-        public func RequestLogoutServer(headers : HTTPHeaders,completionHandler : @escaping (Result<LogoutList,Error>) -> ()){
+        // MARK: - LogoutServer 요청 함수
+        public func RequestLogoutServer(headers: HTTPHeaders, completionHandler: @escaping (Result<LogoutList, Error>)) {
             AF.request("http://3.214.168.45:8080/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: headers)
                 .response { response in
                     switch response.result {
@@ -128,12 +116,11 @@
                             self.LogoutData.code = LogoutJson["code"].intValue
                             self.LogoutData.message = LogoutJson["message"].stringValue
                             self.LogoutData.responseTime = LogoutJson["responseTime"].stringValue
-                            if self.LogoutData.message == "로그인이 만료되었습니다." || self.LogoutData.code == 401{
+                            if self.LogoutData.message == "로그인이 만료되었습니다." || self.LogoutData.code == 401 {
                                 KeychainWrapper.standard.removeObject(forKey: "token")
                                 
                             }
-                            
-                            
+                                 
                             print("Logout Code 값:  : \(self.LogoutData.code)")
                             print("Logout message 값 : \(self.LogoutData.message)")
                             print("Logout resposeTime : \(self.LogoutData.responseTime)")
@@ -147,17 +134,16 @@
             }
         }
         
-        
-        //MARK - SignServer 요청 함수
-        public func RequestSignServer(SignParamter : SignParamter, completionHandler : @escaping (Result<SignList,Error>) -> ()) {
+        // MARK: - SignServer 요청 함수
+        public func RequestSignServer(SignParamter: SignParamter, completionHandler: @escaping (Result<SignList, Error>)) {
             AF.request("http://3.214.168.45:8080/api/v1/user", method: .post, parameters: SignParamter, encoder: JSONParameterEncoder.default, headers: headers)
                 .response { response in
                     debugPrint(response)
                     switch response.result {
                     case .success(let value):
                         let SingJson = JSON(value!)
-                        for (_,subJson):(String,JSON) in SingJson["results"] {
-                            print("스터디팜 회원가입 이메일 입니다 :" ,subJson["email"].stringValue)
+                        for (_, subJson):(String, JSON) in SingJson["results"] {
+                            print("스터디팜 회원가입 이메일 입니다 :", subJson["email"].stringValue)
                             print("스터디팜 회원가입 닉네임 입니다 :", subJson["nickname"].stringValue)
                         }
                         completionHandler(.success(self.SingData))
@@ -168,16 +154,15 @@
             }
         }
         
-        
-        //MARK - StudyList 조회 요청 함수
-        public func RequestStudyListGet(completionHandler :  @escaping () -> ()){
+        // MARK: - StudyList 조회 요청 함수
+        public func RequestStudyListGet(completionHandler: @escaping ()) {
             AF.request("http://3.214.168.45:8080/api/v1/study", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
                 .responseJSON { response in
                     debugPrint(response)
                     switch response.result {
                     case .success(let value):
                         let StudyJson = JSON(value)
-                        for (_,subJson):(String,JSON) in StudyJson["result"] {
+                        for (_, subJson):(String, JSON) in StudyJson["result"] {
                             self.StudyData.title.append(subJson["title"].stringValue)
                             self.StudyData.name.append(subJson["name"].stringValue)
                             self.StudyData.studycolor.append(subJson["color"].stringValue)
@@ -192,13 +177,13 @@
             }
         }
         
-        //MARK - ProfileUpload 요청 함수
-        public func UploadProfileImage(){
+        // MARK: - ProfileUpload 요청 함수
+        public func UploadProfileImage() {
             
         }
         
-        //MARK - Email인증 코드 전송 함수
-        public func oAuthEmailCodePost(oAuthParamter : oAuthParamter, completionHandler : @escaping () -> ()){
+        // MARK: - Email인증 코드 전송 함수
+        public func oAuthEmailCodePost(oAuthParamter: oAuthParamter, completionHandler : @escaping ()) {
             AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email", method: .post, parameters: oAuthParamter, encoder: JSONParameterEncoder.default, headers: headers)
                 .response { response in
                     debugPrint(response)
@@ -215,15 +200,7 @@
                     case.failure(let error):
                         print(error.localizedDescription)
                     }
-                    
             }
             
         }
-        
-        
-        
-        
     }
-    
-    
-    

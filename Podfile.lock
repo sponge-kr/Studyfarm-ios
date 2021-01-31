@@ -37,6 +37,7 @@ PODS:
   - RxSwift (5.1.1)
   - SnapKit (5.0.1)
   - SwiftKeychainWrapper (3.4.0)
+  - SwiftLint (0.42.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -49,6 +50,7 @@ DEPENDENCIES:
   - RxSwift (~> 5)
   - SnapKit (~> 5.0.0)
   - SwiftKeychainWrapper
+  - SwiftLint
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -67,6 +69,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwiftKeychainWrapper
+    - SwiftLint
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -84,8 +87,9 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 953ee6630e22523f10b974aa5e573accd78a4ff2
+PODFILE CHECKSUM: 05b317cbdeea19b08d064ddbbb808a8efb5c932f
 
 COCOAPODS: 1.10.0
