@@ -34,6 +34,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var Recruitmentareabtn: UIButton!
     @IBOutlet weak var Studyarealabel: UILabel!
     @IBOutlet weak var StudyCafesearchbar: UISearchBar!
+    @IBOutlet weak var StudyCafeExamplelabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +72,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.FirstComeLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.FirstComeLabel.numberOfLines = 1
         var paragraphStyle2 = NSMutableParagraphStyle()
-        paragraphStyle2.lineHeightMultiple = 1.66
+        paragraphStyle2.lineHeightMultiple = 1.25
         self.FirstComeLabel.attributedText = NSAttributedString(string: "선착순 모집", attributes: [NSAttributedString.Key.kern:-0.77, NSAttributedString.Key.paragraphStyle: paragraphStyle2])
         self.FirstComeLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.FirstComeExampleLabel.textAlignment = .left
@@ -83,6 +84,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.FirstComeBtn.translatesAutoresizingMaskIntoConstraints = false
         self.ReviewLabel.textAlignment = .left
         self.ReviewLabel.numberOfLines = 1
+        var paragraphStyle4 = NSMutableParagraphStyle()
+        paragraphStyle4.lineHeightMultiple = 1.66
         self.ReviewLabel.attributedText = NSAttributedString(string: "검토 후 승인", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.kern:-0.77])
         self.ReviewLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.ReviewExampleLabel.textAlignment = .left
@@ -100,7 +103,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.RecruitmentBtn.layer.cornerRadius = 4
         self.RecruitmentBtn.layer.masksToBounds = true
         self.RecruitmentBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        self.RecruitmentBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        self.RecruitmentBtn.titleEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 10, right: 16)
         self.RecruitmentBtn.tintColor = UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
         self.RecruitmentBtn.setImage(UIImage(named: "triangle@1x.png"), for: .normal)
         self.RecruitmentBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 310, bottom: 0, right: 0)
@@ -116,26 +119,26 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.Offlinelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.Offlinelabel.textAlignment = .left
         self.Offlinelabel.numberOfLines = 1
-        var paragraphStyle4 = NSMutableParagraphStyle()
-        paragraphStyle4.lineHeightMultiple = 1.20
-        self.Offlinelabel.attributedText = NSAttributedString(string: "오프라인", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle4,NSAttributedString.Key.kern : -0.77])
+        var paragraphStyle5 = NSMutableParagraphStyle()
+        paragraphStyle5.lineHeightMultiple = 1.25
+        self.Offlinelabel.attributedText = NSAttributedString(string: "오프라인", attributes: [NSAttributedString.Key.paragraphStyle : paragraphStyle5,NSAttributedString.Key.kern : -0.77])
         self.OfflineCheckbtn.setTitle("", for: .normal)
         self.Onlinelabel.textAlignment = .left
         self.Onlinelabel.numberOfLines = 1
         self.Onlinelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.Onlinelabel.attributedText = NSAttributedString(string: "온라인", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle4,NSAttributedString.Key.kern: -0.77])
+        self.Onlinelabel.attributedText = NSAttributedString(string: "온라인", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle5,NSAttributedString.Key.kern: -0.77])
         self.OfflineCheckbtn.setTitle("", for: .normal)
         self.Recruitmentarealabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
         self.Recruitmentarealabel.textAlignment = .left
         self.Recruitmentarealabel.numberOfLines = 1
         self.Recruitmentarealabel.attributedText = NSAttributedString(string: "모집 지역", attributes: [NSAttributedString.Key.kern :-0.88])
-        self.Recruitmentareabtn.setAttributedTitle(NSAttributedString(string: "서울시 강동구", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0)]), for: .normal)
+        self.Recruitmentareabtn.setAttributedTitle(NSAttributedString(string: "지역 선택", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0)]), for: .normal)
         self.Recruitmentareabtn.layer.borderWidth = 1.0
         self.Recruitmentareabtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
         self.Recruitmentareabtn.layer.cornerRadius = 4
         self.Recruitmentareabtn.layer.masksToBounds = true
         self.Recruitmentareabtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        self.Recruitmentareabtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        self.Recruitmentareabtn.titleEdgeInsets = UIEdgeInsets(top: 11, left: 0, bottom: 10, right: 16)
         self.Recruitmentareabtn.tintColor = UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
         self.Recruitmentareabtn.setImage(UIImage(named: "triangle@1x.png"), for: .normal)
         self.Recruitmentareabtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 310, bottom: 0, right: 0)
@@ -151,7 +154,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.StudyCafesearchbar.layer.cornerRadius = 4
         self.StudyCafesearchbar.searchTextField.attributedPlaceholder = NSAttributedString(string: "스터디룸 검색하기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)])
         self.StudyCafesearchbar.setImage(UIImage(named: "searchbar@2x.png"), for: .search, state: .normal)
-        self.StudyCafesearchbar.
+        self.StudyCafeExamplelabel.lineBreakMode = .byWordWrapping
+        self.StudyCafeExamplelabel.numberOfLines = 2
+        self.StudyCafeExamplelabel.attributedText = NSAttributedString(string: "모집 지역과 스터디 진행 장소를 같은 지역으로 맞춰주세요. 비대면 스터디의 경우 진행 플랫폼을 입력해주세요.", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle: paragraphStyle4])
+        
         
     }
     
