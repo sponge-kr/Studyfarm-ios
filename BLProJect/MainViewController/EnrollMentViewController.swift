@@ -45,15 +45,28 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         UIButton!
     @IBOutlet weak var StudyDiffcultybtn2:
         UIButton!
+    @IBOutlet weak var StudyDiffcultybtn3: UIButton!
+    @IBOutlet weak var StudyDiffcultybtn4: UIButton!
     @IBOutlet weak var StudyDiffcultylabel1: UILabel!
     @IBOutlet weak var StudyDiffcultylabel2: UILabel!
-    
+    @IBOutlet weak var StudyDiffcultylabel3: UILabel!
+    @IBOutlet weak var StudyDiffcultylabel4: UILabel!
+    @IBOutlet weak var StudyTermlabel: UILabel!
+    @IBOutlet weak var Studystartdatelabel: UILabel!
+    @IBOutlet weak var Studystartdatebtn: UIButton!
+    @IBOutlet weak var Studylastdatelabel: UILabel!
+    @IBOutlet weak var Studylastdatebtn: UIButton!
+    @IBOutlet weak var Limitbtn2: UIButton!
+    @IBOutlet weak var Conferencelabel: UILabel!
+    @IBOutlet weak var Studymeetnamelabel: UILabel!
+    @IBOutlet weak var Studymeettextview: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.EnrollMentscrollview.isScrollEnabled = true
         self.EnrollMentscrollview.delegate = self
         self.NavigationLayou()
         self.SetupInitLayout()
+        self.SetStudyInitLayout()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -70,6 +83,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
     }
+    
     
     public func SetupInitLayout() {
         self.RecruitmentInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -104,8 +118,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.RecruitmentBtn.tintColor = UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1.0)
         self.RecruitmentBtn.setImage(UIImage(named: "triangle@1x.png"), for: .normal)
         self.RecruitmentBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 310, bottom: 0, right: 0)
+        var Limitparagraph = NSMutableParagraphStyle()
+        Limitparagraph.lineHeightMultiple = 1.15
         self.Limitlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.Limitlabel.attributedText = NSAttributedString(string: "제한 없음", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.Limitlabel.attributedText = NSAttributedString(string: "제한 없음", attributes: [NSAttributedString.Key.kern: -0.77,NSAttributedString.Key.paragraphStyle:Limitparagraph])
         self.DetailInfolabel.attributedText = NSAttributedString(string: "상세 정보", attributes: [NSAttributedString.Key.kern: -1.21])
         self.DetailInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.Progresslabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -162,5 +178,47 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         self.StudyDiffcultylabel1.attributedText = NSAttributedString(string: "초급", attributes: [NSAttributedString.Key.kern : -0.77])
         self.StudyDiffcultylabel2.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
         self.StudyDiffcultylabel2.attributedText = NSAttributedString(string: "초중급", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.StudyDiffcultylabel3.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        self.StudyDiffcultylabel3.attributedText = NSAttributedString(string: "중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        self.StudyDiffcultylabel4.attributedText = NSAttributedString(string: "상급", attributes: [NSAttributedString.Key.kern: -0.77])
+    }
+    public func SetStudyInitLayout(){
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.54
+        self.StudyTermlabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
+        self.StudyTermlabel.attributedText = NSAttributedString(string: "스터디 진행 기간", attributes: [NSAttributedString.Key.kern: -0.88])
+        self.Studystartdatelabel.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        self.Studystartdatelabel.attributedText = NSAttributedString(string: "시작 일시", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        self.Studystartdatebtn.setTitle("날짜 선택", for: .normal)
+        self.Studystartdatebtn.setAttributedTitle(NSAttributedString(string: "날짜 선택", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size:16)]), for: .normal)
+        self.Studystartdatebtn.setTitleColor(UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0), for: .normal)
+        self.Studystartdatebtn.layer.borderWidth = 1
+        self.Studystartdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.Studystartdatebtn.layer.cornerRadius = 4
+        self.Studystartdatebtn.layer.masksToBounds = true
+        self.Studystartdatebtn.titleEdgeInsets = UIEdgeInsets(top: 11, left: 16, bottom: 10, right: 0)
+        self.Studystartdatebtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+        self.Studylastdatelabel.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        self.Studylastdatelabel.attributedText = NSAttributedString(string: "마감 일시", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle:paragraphStyle])
+        self.Studylastdatebtn.setTitle("날짜 선택", for: .normal)
+        self.Studylastdatebtn.setTitleColor(UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0), for: .normal)
+        self.Studylastdatebtn.setAttributedTitle(NSAttributedString(string: "날짜 선택", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)]), for: .normal)
+        self.Studylastdatebtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+        self.Studylastdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.Studylastdatebtn.layer.borderWidth = 1.0
+        self.Studylastdatebtn.layer.cornerRadius = 4
+        self.Studylastdatebtn.layer.masksToBounds = true
+        self.Studylastdatebtn.titleEdgeInsets = UIEdgeInsets(top: 11, left: 16, bottom: 10, right: 0)
+        self.Conferencelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        var paragraphStyle2 = NSMutableParagraphStyle()
+        paragraphStyle2.lineHeightMultiple = 1.15
+        self.Conferencelabel.attributedText = NSAttributedString(string: "협의 예정", attributes: [NSAttributedString.Key.kern: -0.77,NSAttributedString.Key.paragraphStyle: paragraphStyle2])
+        self.Studymeettextview.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        self.Studymeettextview.layer.borderWidth = 1
+        self.Studymeettextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.Studymeettextview.layer.cornerRadius = 4
+        self.Studymeettextview.layer.masksToBounds = true
+        
     }
 }

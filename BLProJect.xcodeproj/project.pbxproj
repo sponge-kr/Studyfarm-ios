@@ -87,6 +87,9 @@
 		FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */; };
 		FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */; };
 		FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */; };
+		FFBA6F3225C805BC004783C6 /* GrayEllipse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */; };
+		FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */; };
+		FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */; };
 		FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */; };
 		FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */; };
 		FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */; };
@@ -212,6 +215,9 @@
 		FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedEllipse@1x.png"; sourceTree = "<group>"; };
 		FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedEllipse@2x.png"; path = "../../../Downloads/RedEllipse@2x.png"; sourceTree = "<group>"; };
 		FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedEllipse@3x.png"; path = "../../../Downloads/RedEllipse@3x.png"; sourceTree = "<group>"; };
+		FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@1x.png"; sourceTree = "<group>"; };
+		FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@2x.png"; sourceTree = "<group>"; };
+		FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@3x.png"; sourceTree = "<group>"; };
 		FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserInformationViewController.storyboard; sourceTree = "<group>"; };
 		FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -397,6 +403,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */,
+				FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */,
+				FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */,
 				FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */,
 				FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */,
 				FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */,
@@ -604,6 +613,7 @@
 				FF331D8F259B34BD00BD8C33 /* Roboto-LightItalic.ttf in Resources */,
 				D1F85CD424C45B1300E1F7BE /* LaunchScreen.storyboard in Resources */,
 				D1F85D1224CDC96200E1F7BE /* Vector@3x.png in Resources */,
+				FFBA6F3225C805BC004783C6 /* GrayEllipse@1x.png in Resources */,
 				FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */,
 				FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */,
 				FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */,
@@ -642,6 +652,7 @@
 				FF331D87259B34BD00BD8C33 /* Roboto-Bold.ttf in Resources */,
 				D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */,
 				FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */,
+				FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */,
 				FF331D8C259B34BD00BD8C33 /* Roboto-MediumItalic.ttf in Resources */,
 				FFBA6F0C25C7F698004783C6 /* Group@2x.png in Resources */,
 				FFBA6F1225C7F6E3004783C6 /* Groupnext@1x.png in Resources */,
@@ -654,6 +665,7 @@
 				FF70E73225C6879200AE82CD /* triangle@2x.png in Resources */,
 				FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */,
 				FF331D8A259B34BD00BD8C33 /* Roboto-BlackItalic.ttf in Resources */,
+				FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */,
 				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
 				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
