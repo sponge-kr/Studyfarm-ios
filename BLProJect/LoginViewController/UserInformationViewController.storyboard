@@ -97,7 +97,7 @@
                         <outlet property="userInformationareaAddbtn" destination="cgs-hh-lhG" id="S3W-XX-4kD"/>
                         <outlet property="userInformationareatitle" destination="y3D-vW-h3W" id="9ok-AZ-zPV"/>
                         <outlet property="userInformationgendertitle" destination="7O5-20-NVb" id="EQE-87-NMO"/>
-                        <outlet property="userInformationgirlbtn" destination="LSS-Gh-iE0" id="9DV-v3-ffV"/>
+                        <outlet property="userInformationgirlbtn" destination="LSS-Gh-iE0" id="OhE-ap-Exl"/>
                         <outlet property="userInformationmanbtn" destination="EZx-pf-8Rc" id="tkn-Ax-Jtx"/>
                         <outlet property="userInformationsubtitle" destination="6RZ-IU-DDK" id="cBX-QV-Sau"/>
                         <outlet property="userInformationtitle" destination="c4u-6T-NH1" id="R1q-Ey-B70"/>
