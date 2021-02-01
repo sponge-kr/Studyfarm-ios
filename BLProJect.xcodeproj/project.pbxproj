@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8592967225B2AA24000C21E8 /* SignUpViewController2.swift */; };
+		8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */; };
 		85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 85BC73F525A9930B005830A1 /* .swiftlint.yml */; };
 		B3736A40B4AA06F10FEE8FFC /* Pods_BLProJectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */; };
 		D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800BF25646FDF00B8E5A1 /* check@1x.png */; };
@@ -46,6 +48,7 @@
 		D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */; };
 		D939A4367B9FCE91492E3EDB /* Pods_BLProJect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */; };
 		FB5B368149491471BFC3D997 /* Pods_BLProJect_BLProJectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */; };
+		FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */; };
 		FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */; };
 		FF331D732599067E00BD8C33 /* Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF331D712599067D00BD8C33 /* Email@2x.png */; };
 		FF331D742599067E00BD8C33 /* Email@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF331D722599067D00BD8C33 /* Email@1x.png */; };
@@ -100,6 +103,8 @@
 		24331572F816F95482D908EB /* Pods-BLProJect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect.debug.xcconfig"; path = "Target Support Files/Pods-BLProJect/Pods-BLProJect.debug.xcconfig"; sourceTree = "<group>"; };
 		2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8592967225B2AA24000C21E8 /* SignUpViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController2.swift; sourceTree = "<group>"; };
+		8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController2.storyboard; sourceTree = "<group>"; };
 		85BC73F525A9930B005830A1 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8B06AAB1AFD73814B119A973 /* Pods-BLProJect-BLProJectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect-BLProJectUITests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJect_BLProJectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +153,7 @@
 		D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLViewModel.swift; sourceTree = "<group>"; };
 		F2192852FD2B28CCDB99D81B /* Pods-BLProJectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.release.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69BDC8880EC0FE7F25666E2 /* Pods-BLProJectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesApi.swift; sourceTree = "<group>"; };
 		FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		FF331D712599067D00BD8C33 /* Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Email@2x.png"; sourceTree = "<group>"; };
 		FF331D722599067D00BD8C33 /* Email@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Email@1x.png"; sourceTree = "<group>"; };
@@ -229,6 +235,8 @@
 				FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
+				8592967225B2AA24000C21E8 /* SignUpViewController2.swift */,
+				8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -258,6 +266,7 @@
 				D1B46337255FA3F80063D714 /* oAuthApi.swift */,
 				D1B46335255FA3F80063D714 /* ServerApi.swift */,
 				D1B46336255FA3F80063D714 /* UtilApi.swift */,
+				FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */,
 			);
 			path = ServerCommon;
 			sourceTree = "<group>";
@@ -548,6 +557,7 @@
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
+				8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */,
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
@@ -753,6 +763,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
+				FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
@@ -769,6 +780,7 @@
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
 				FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */,
+				8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

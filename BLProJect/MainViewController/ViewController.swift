@@ -15,7 +15,6 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-
 class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     
@@ -23,6 +22,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     @IBOutlet weak var BLSubject: UILabel!
     @IBOutlet weak var BLMainCollectionView: UICollectionView!
     @IBOutlet weak var BLSignButton: UIButton!
+    public var StudyModel = [StudyContent]()
     var index : Int?
     
     lazy var HeaderView: BLMainCollectionViewHeader = {
@@ -35,8 +35,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ServerApi.shared.StudyListCall {
+        ServerApi.shared.StudyListCall { data in
             DispatchQueue.main.async {
+                self.StudyModel = data
                 self.BLMainCollectionView.reloadData()
             }
         }
@@ -46,6 +47,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         self.BLMainCollectionView.dataSource = self
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "BLHeaderCell")
         self.BLMainCollectionView.register(UINib(nibName: "BLMainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BLMainCell")
+        
         
         
     }
@@ -64,21 +66,16 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     private func LayoutSetUP(){
-        
-        
-        // MARK - BLSignButton
+
         self.BLSignButton.setImage(UIImage(named: "icon.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0), resizingMode: .stretch), for: .normal)
         self.BLSignButton.setTitle("", for: .normal)
         self.BLSignButton.tintColor = UIColor.black
         self.BLSignButton.addTarget(self, action: #selector(LogoutAction), for: .touchUpInside)
         
         
-        
-        // MARK - BLSubjectView
         self.BLSubjectView.frame = CGRect(x: self.BLSubjectView.frame.origin.x, y: self.BLSubjectView.frame.origin.y, width: self.BLSubjectView.frame.size.width, height: self.BLSubjectView.frame.size.height)
         self.BLSubjectView.backgroundColor = UIColor(red: 234/255, green: 234/255, blue: 234/255, alpha: 1.0)
         
-        // MARK - BLSubject Label
         self.BLSubject.text = "BL과 함께 새로운 \n스터디 그룹을 만들어 보새요"
         self.BLSubject.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight(1.0))
         self.BLSubject.frame = CGRect(x: self.BLSubject.frame.origin.x, y: self.BLSubject.frame.origin.y, width: self.BLSubject.frame.size.width, height: self.BLSubject.frame.size.height)
@@ -92,43 +89,33 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         self.navigationController?.navigationBar.topItem?.title = "StudyFarm"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)]
-        
-        
-        
-        
     }
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
-        DetailSegue.Index = self.index
+        DetailSegue.Index = self.index!
     }
-    
-    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ServerApi.shared.StudyModel.study_seq.count
+        return self.StudyModel.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let MainCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell
         
         DispatchQueue.main.async {
-            
-            MainCell?.CellSubject.text = ServerApi.shared.StudyModel.title[indexPath.row]
-            MainCell?.CellHuman.text = ServerApi.shared.StudyModel.nickname[indexPath.row]
-            MainCell?.CellWriter.text = ServerApi.shared.StudyModel.email[indexPath.row]
-            MainCell?.CellState.text = ServerApi.shared.StudyModel.contents[indexPath.row]
-            MainCell?.CellStartDate.text = ServerApi.shared.StudyModel.study_created_at_str[indexPath.row]
+            MainCell?.CellSubject.text = self.StudyModel[indexPath.row].title
+            MainCell?.CellHuman.text = self.StudyModel[indexPath.row].study_leader?.nickname
+            MainCell?.CellWriter.text = self.StudyModel[indexPath.row].study_leader?.email
+            MainCell?.CellState.text =  self.StudyModel[indexPath.row].content
+            MainCell?.CellStartDate.text = self.StudyModel[indexPath.row].study_created_at_str
         }
         
         return MainCell!
     }
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
@@ -143,7 +130,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -179,7 +165,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     self?.navigationController?.popToRootViewController(animated: true)
                 }
                 
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -187,7 +172,5 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     }
     
     
-    
 }
-
 
