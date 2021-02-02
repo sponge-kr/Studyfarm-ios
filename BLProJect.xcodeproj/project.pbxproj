@@ -102,6 +102,9 @@
 		FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
+		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
+		FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212025C963B500ED7660 /* RedCheck@2x.png */; };
+		FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212525C963BA00ED7660 /* RedCheck@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,6 +233,9 @@
 		FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@1x.png"; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
+		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
+		FFF5212025C963B500ED7660 /* RedCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@2x.png"; sourceTree = "<group>"; };
+		FFF5212525C963BA00ED7660 /* RedCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -403,6 +409,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFF5212525C963BA00ED7660 /* RedCheck@3x.png */,
+				FFF5212025C963B500ED7660 /* RedCheck@2x.png */,
+				FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */,
 				FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */,
 				FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */,
 				FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */,
@@ -635,6 +644,7 @@
 				FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */,
+				FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */,
 				FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
@@ -643,6 +653,7 @@
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
+				FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */,
 				FFB2EED225C5559100DBFCBE /* NavigationBackbutton@1x.jpg in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
@@ -669,6 +680,7 @@
 				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
 				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
+				FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */,
 				FFBA6F1925C7F6E8004783C6 /* Groupnext@3x.png in Resources */,
 				FF331D88259B34BD00BD8C33 /* Roboto-Black.ttf in Resources */,
 				FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */,

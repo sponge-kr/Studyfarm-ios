@@ -66,6 +66,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyIntroducenamelabel: UILabel!
     @IBOutlet weak var StudyIntroducetextview: UITextView!
     @IBOutlet weak var StudyIntroducecountlabel: UILabel!
+    @IBOutlet weak var Studypostbtn: UIButton!
     
     
     override func viewDidLoad() {
@@ -79,11 +80,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.SetupInitLayout()
         self.SetStudyInitLayout()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.EnrollMentscrollview.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2270)
-    }
-    
     
     public func NavigationLayou() {
         self.navigationItem.title = "스터디 만들기"
@@ -109,6 +105,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         paragraphStyle2.lineHeightMultiple = 1.25
         self.FirstComeLabel.attributedText = NSAttributedString(string: "선착순 모집", attributes: [NSAttributedString.Key.kern:-0.77, NSAttributedString.Key.paragraphStyle: paragraphStyle2])
         self.FirstComeLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.FirstComeBtn.addTarget(self, action: #selector(self.FirstComeBtnCheck(_:)), for: .touchUpInside)
         var paragraphStyle3 = NSMutableParagraphStyle()
         paragraphStyle3.lineHeightMultiple = 1.54
         self.FirstComeExampleLabel.attributedText = NSAttributedString(string: "선착순으로 모집 인원이 다 차면 모임이 생성돼요.", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle3, NSAttributedString.Key.kern: -0.66])
@@ -116,6 +113,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         paragraphStyle4.lineHeightMultiple = 1.66
         self.ReviewLabel.attributedText = NSAttributedString(string: "검토 후 승인", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.kern:-0.77])
         self.ReviewLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.ReviewBtn.addTarget(self, action: #selector(self.ReviewBtnCheck(_:)), for: .touchUpInside)
         self.ReviewExampleLabel.attributedText = NSAttributedString(string: "가입 신청한 사람을 검토하고, 승인된 사람들과 모임을 진행해요.", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle3,NSAttributedString.Key.kern:-0.66])
         self.Recruitmentlabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
         self.Recruitmentlabel.attributedText = NSAttributedString(string: "모집 인원", attributes: [NSAttributedString.Key.kern : -0.88])
@@ -249,9 +247,33 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyIntroducetextview.layer.masksToBounds = true
         self.StudyIntroducetextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle2,NSAttributedString.Key.font:UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
         self.StudyIntroducecountlabel.attributedText = NSAttributedString(string: "0 / 1000", attributes: [NSAttributedString.Key.kern : -0.66])
+        self.Studypostbtn.layer.cornerRadius = 8
+        self.Studypostbtn.layer.masksToBounds = true
+        self.Studypostbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
     }
     
-    //만약에 다른 텍스트를 눌렀어 그러면 위에 텍스트는 플레이스 홀더를 보이게하게 만들어야해 하지만 위에 텍스트가 써있는 상태라면 플레이스 홀더는 지우고 텍스트만 보이는 형태로
+    @objc func FirstComeBtnCheck(_ sender : UIButton){
+        if sender.isSelected {
+            sender.isSelected = false
+            self.ReviewBtn.isSelected = false
+        }else{
+            self.FirstComeBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+            sender.isSelected = true
+            self.ReviewBtn.isSelected = false
+        }
+    }
+    
+    @objc func ReviewBtnCheck(_ sender : UIButton){
+        if sender.isSelected {
+            sender.isSelected = false
+            self.FirstComeBtn.isSelected = false
+        }else{
+            self.ReviewBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+            sender.isSelected = true
+            self.FirstComeBtn.isSelected = false
+        }
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         var textparagraphStyle = NSMutableParagraphStyle()
         textparagraphStyle.lineHeightMultiple = 1.15

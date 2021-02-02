@@ -605,6 +605,15 @@
                                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mct-Qt-n3j">
+                                                <rect key="frame" x="10" y="1918" width="394" height="49"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="0.46274509803921571" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <state key="normal" title="게시하기">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -755,6 +764,7 @@
                         <outlet property="Studymeetnamelabel" destination="Uxy-sN-f7w" id="phM-Iw-gWh"/>
                         <outlet property="Studymeettextcountlabel" destination="NB9-XF-liC" id="NqU-qi-Ls5"/>
                         <outlet property="Studymeettextview" destination="Vrg-AV-ctI" id="G47-KF-nDP"/>
+                        <outlet property="Studypostbtn" destination="mct-Qt-n3j" id="UqC-M9-WFF"/>
                         <outlet property="Studystartdatebtn" destination="ycb-S9-CjV" id="bjE-dL-zdO"/>
                         <outlet property="Studystartdatelabel" destination="JCb-xs-LAT" id="YNI-lf-4xZ"/>
                     </connections>
