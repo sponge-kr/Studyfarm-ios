@@ -9,7 +9,7 @@
 import UIKit
 
 
-class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
+class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate {
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
     @IBOutlet weak var RecruitmentInfoLine: UIView!
     @IBOutlet weak var Participantlabel: UILabel!
@@ -60,10 +60,18 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var Conferencelabel: UILabel!
     @IBOutlet weak var Studymeetnamelabel: UILabel!
     @IBOutlet weak var Studymeettextview: UITextView!
+    @IBOutlet weak var Studymeettextcountlabel: UILabel!
+    @IBOutlet weak var Studygoalnamelabel: UILabel!
+    @IBOutlet weak var Studygoaltextview: UITextView!
+    @IBOutlet weak var Studygoaltextcountlabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.EnrollMentscrollview.isScrollEnabled = true
         self.EnrollMentscrollview.delegate = self
+        self.Studymeettextview.delegate = self
+        self.Studygoaltextview.delegate = self
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
@@ -214,11 +222,50 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate {
         var paragraphStyle2 = NSMutableParagraphStyle()
         paragraphStyle2.lineHeightMultiple = 1.15
         self.Conferencelabel.attributedText = NSAttributedString(string: "협의 예정", attributes: [NSAttributedString.Key.kern: -0.77,NSAttributedString.Key.paragraphStyle: paragraphStyle2])
-        self.Studymeettextview.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        self.Studymeetnamelabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
+        self.Studymeetnamelabel.attributedText = NSAttributedString(string: "스터디 모임 이름", attributes: [NSAttributedString.Key.kern : -0.88])
         self.Studymeettextview.layer.borderWidth = 1
         self.Studymeettextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
         self.Studymeettextview.layer.cornerRadius = 4
         self.Studymeettextview.layer.masksToBounds = true
+        self.Studymeettextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        self.Studymeettextcountlabel.attributedText = NSAttributedString(string: "0 / 20", attributes: [NSAttributedString.Key.kern : -0.66])
+        self.Studygoalnamelabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
+        self.Studygoalnamelabel.attributedText = NSAttributedString(string: "스터디 목표", attributes: [NSAttributedString.Key.kern : -0.88])
+        self.Studygoaltextview.layer.borderWidth = 1
+        self.Studygoaltextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.Studygoaltextview.layer.masksToBounds = true
+        self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
         
+    }
+    public func textviewPlaceholder() {
+        var textparagraphStyle = NSMutableParagraphStyle()
+        textparagraphStyle.lineHeightMultiple = 1.15
+        if self.Studymeettextview.text == "텍스트를 입력하세요" {
+            self.Studymeettextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.Studymeettextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
+        }else if self.Studygoaltextview.text == "텍스트를 입력하세요" {
+            self.Studygoaltextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.Studygoaltextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
+        }
+        
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.textviewPlaceholder()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count + 1 <= 20 {
+            textView.isEditable = true
+            self.Studymeettextcountlabel.text = "\(textView.text.count + 1) / 20"
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let StringRange = Range(range, in: currentText) else { return false }
+        let changedText = currentText.replacingCharacters(in: StringRange, with: text)
+        
+        return changedText.count <= 20
     }
 }

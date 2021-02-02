@@ -554,6 +554,35 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 / 20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB9-XF-liC">
+                                                <rect key="frame" x="366" y="1420" width="29" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="스터디 목표" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTa-U0-p0R">
+                                                <rect key="frame" x="20" y="1544" width="74" height="16"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JZM-1u-KMe">
+                                                <rect key="frame" x="20" y="1580" width="374" height="69"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 / 60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bX-NJ-vSU">
+                                                <rect key="frame" x="366" y="1544" width="29" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -693,9 +722,13 @@
                         <outlet property="StudyKindInfolabel" destination="hfp-iR-0a1" id="qxq-Xs-cpX"/>
                         <outlet property="StudyTermlabel" destination="bWv-Hj-5Ri" id="fT3-kF-HAS"/>
                         <outlet property="Studyarealabel" destination="U7m-y5-fI6" id="w3h-wC-fMD"/>
+                        <outlet property="Studygoalnamelabel" destination="VTa-U0-p0R" id="bV5-Yt-QvO"/>
+                        <outlet property="Studygoaltextcountlabel" destination="6bX-NJ-vSU" id="lrp-dh-7cF"/>
+                        <outlet property="Studygoaltextview" destination="JZM-1u-KMe" id="wpl-qL-AKs"/>
                         <outlet property="Studylastdatebtn" destination="MK9-9v-HXM" id="MMP-cs-1dM"/>
                         <outlet property="Studylastdatelabel" destination="T0w-pV-rHD" id="h7b-Bb-1h9"/>
                         <outlet property="Studymeetnamelabel" destination="Uxy-sN-f7w" id="phM-Iw-gWh"/>
+                        <outlet property="Studymeettextcountlabel" destination="NB9-XF-liC" id="NqU-qi-Ls5"/>
                         <outlet property="Studymeettextview" destination="Vrg-AV-ctI" id="G47-KF-nDP"/>
                         <outlet property="Studystartdatebtn" destination="ycb-S9-CjV" id="bjE-dL-zdO"/>
                         <outlet property="Studystartdatelabel" destination="JCb-xs-LAT" id="YNI-lf-4xZ"/>
