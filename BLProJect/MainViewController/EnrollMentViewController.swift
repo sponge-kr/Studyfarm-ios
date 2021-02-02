@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate {
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
     @IBOutlet weak var RecruitmentInfoLine: UIView!
@@ -64,6 +63,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var Studygoalnamelabel: UILabel!
     @IBOutlet weak var Studygoaltextview: UITextView!
     @IBOutlet weak var Studygoaltextcountlabel: UILabel!
+    @IBOutlet weak var StudyIntroducenamelabel: UILabel!
+    @IBOutlet weak var StudyIntroducetextview: UITextView!
+    @IBOutlet weak var StudyIntroducecountlabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -72,6 +74,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.EnrollMentscrollview.delegate = self
         self.Studymeettextview.delegate = self
         self.Studygoaltextview.delegate = self
+        self.StudyIntroducetextview.delegate = self
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
@@ -234,38 +237,77 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studygoalnamelabel.attributedText = NSAttributedString(string: "스터디 목표", attributes: [NSAttributedString.Key.kern : -0.88])
         self.Studygoaltextview.layer.borderWidth = 1
         self.Studygoaltextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.Studymeettextview.layer.cornerRadius = 4
         self.Studygoaltextview.layer.masksToBounds = true
         self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
-        
+        self.Studygoaltextcountlabel.attributedText = NSAttributedString(string: "0 / 60", attributes: [NSAttributedString.Key.kern : -0.66])
+        self.StudyIntroducenamelabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
+        self.StudyIntroducenamelabel.attributedText = NSAttributedString(string: "스터디 소개", attributes: [NSAttributedString.Key.kern : -0.88])
+        self.StudyIntroducetextview.layer.borderWidth = 1
+        self.StudyIntroducetextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.StudyIntroducetextview.layer.cornerRadius = 4
+        self.StudyIntroducetextview.layer.masksToBounds = true
+        self.StudyIntroducetextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle2,NSAttributedString.Key.font:UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        self.StudyIntroducecountlabel.attributedText = NSAttributedString(string: "0 / 1000", attributes: [NSAttributedString.Key.kern : -0.66])
     }
-    public func textviewPlaceholder() {
+    
+    //만약에 다른 텍스트를 눌렀어 그러면 위에 텍스트는 플레이스 홀더를 보이게하게 만들어야해 하지만 위에 텍스트가 써있는 상태라면 플레이스 홀더는 지우고 텍스트만 보이는 형태로
+    func textViewDidBeginEditing(_ textView: UITextView) {
         var textparagraphStyle = NSMutableParagraphStyle()
         textparagraphStyle.lineHeightMultiple = 1.15
-        if self.Studymeettextview.text == "텍스트를 입력하세요" {
+        if textView.tag == 1 && textView.text == "텍스트를 입력하세요" {
             self.Studymeettextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.Studymeettextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
-        }else if self.Studygoaltextview.text == "텍스트를 입력하세요" {
+        }else if textView.tag == 2 && textView.text == "텍스트를 입력하세요" {
             self.Studygoaltextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.Studygoaltextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
+        }else if textView.tag == 3 && textView.text == "텍스트를 입력하세요"{
+            self.StudyIntroducetextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.StudyIntroducetextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         }
         
     }
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        self.textviewPlaceholder()
+    func textViewDidEndEditing(_ textView: UITextView) {
+        var textparagraphStyle = NSMutableParagraphStyle()
+        textparagraphStyle.lineHeightMultiple = 1.15
+        if textView.tag == 1 && textView.text == "" {
+            self.Studymeettextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        }else if textView.tag == 2 && textView.text == "" {
+            self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        }
     }
     
+    
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.count + 1 <= 20 {
-            textView.isEditable = true
-            self.Studymeettextcountlabel.text = "\(textView.text.count + 1) / 20"
+        if textView.tag == 1 {
+            self.Studymeettextcountlabel.text = "\(self.Studymeettextview.text.count) / 20"
+        }else if textView.tag == 2{
+            self.Studygoaltextcountlabel.text = "\(self.Studygoaltextview.text.count) / 60"
+        }else if textView.tag == 3{
+            self.StudyIntroducecountlabel.text = "\(self.StudyIntroducetextview.text.count) / 1000"
         }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        guard let StringRange = Range(range, in: currentText) else { return false }
-        let changedText = currentText.replacingCharacters(in: StringRange, with: text)
-        
-        return changedText.count <= 20
+        if textView.tag == 1{
+            let currentText = textView.text ?? ""
+            guard let StringRange = Range(range, in: currentText) else { return false }
+            let changedText = currentText.replacingCharacters(in: StringRange, with: text)
+            
+            return changedText.count <= 20
+        }else if textView.tag == 2{
+            let cureentText2 = textView.text ?? ""
+            guard let StringRange = Range(range, in: cureentText2) else { return false }
+            let changedText = cureentText2.replacingCharacters(in: StringRange, with: text)
+            
+            return changedText.count <= 60
+        }else if textView.tag == 3{
+            let cureentText3 = textView.text ?? ""
+            guard let StringRange = Range(range, in: cureentText3) else {return false}
+            let changeText = cureentText3.replacingCharacters(in: StringRange, with: text)
+            
+            return changeText.count <= 1000
+        }
+        return true
     }
 }
