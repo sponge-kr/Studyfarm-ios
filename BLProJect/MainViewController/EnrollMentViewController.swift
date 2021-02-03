@@ -73,7 +73,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let pickerView = UIPickerView()
         pickerView.tag = 1
         let pickerToolView = UIToolbar()
-        let pickerToolbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(doneTapped))
+        let pickerToolbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(RemoveFromToolbar))
         let pickerToolbuttonFiexed = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         pickerView.delegate = self
         pickerToolView.sizeToFit()
@@ -108,11 +108,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
     }
-    @objc func doneTapped() {
+    @objc func RemoveFromToolbar() {
+        self.RecruitmentBtn.resignFirstResponder()
+    }
 
-                 print("done tapped")
-
-             }
     
     public func SetupInitLayout() {
         self.RecruitmentInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -139,7 +138,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.ReviewExampleLabel.attributedText = NSAttributedString(string: "가입 신청한 사람을 검토하고, 승인된 사람들과 모임을 진행해요.", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle3,NSAttributedString.Key.kern:-0.66])
         self.Recruitmentlabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
         self.Recruitmentlabel.attributedText = NSAttributedString(string: "모집 인원", attributes: [NSAttributedString.Key.kern : -0.88])
-        self.RecruitmentBtn.setAttributedTitle(NSAttributedString(string: "6 명", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0)]), for: .normal)
+        self.RecruitmentBtn.setTitle("6 명", for: .normal)
+        self.RecruitmentBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16)
+//        self.Recruitmentareabtn
+        self.RecruitmentBtn.setTitleColor( UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.RecruitmentBtn.layer.borderWidth = 1.0
         self.RecruitmentBtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
         self.RecruitmentBtn.layer.cornerRadius = 4
@@ -324,7 +326,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             })
         }
     }
-    
+        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
+        
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -334,7 +339,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         return PickerData.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return PickerData[row]
+        return PickerData[row].trimmingCharacters(in: .whitespaces)
     }
     
     
