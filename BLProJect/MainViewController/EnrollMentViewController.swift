@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate {
+class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
     @IBOutlet weak var RecruitmentInfoLine: UIView!
     @IBOutlet weak var Participantlabel: UILabel!
@@ -18,7 +18,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var ReviewLabel: UILabel!
     @IBOutlet weak var ReviewExampleLabel: UILabel!
     @IBOutlet weak var ReviewBtn: UIButton!
-    @IBOutlet weak var RecruitmentBtn: UIButton!
+    
+    @IBOutlet weak var RecruitmentBtn: PickerButton!
     @IBOutlet weak var Recruitmentlabel: UILabel!
     @IBOutlet weak var LimitBtn: UIButton!
     @IBOutlet weak var Limitlabel: UILabel!
@@ -68,6 +69,23 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyIntroducecountlabel: UILabel!
     @IBOutlet weak var Studypostbtn: UIButton!
     
+    @IBAction func Createpickerview(_ sender: PickerButton) {
+        let pickerView = UIPickerView()
+        pickerView.tag = 1
+        let pickerToolView = UIToolbar()
+        let pickerToolbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(doneTapped))
+        let pickerToolbuttonFiexed = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        pickerView.delegate = self
+        pickerToolView.sizeToFit()
+        pickerToolView.barTintColor = UIColor.darkGray
+        pickerToolView.tintColor = UIColor.white
+        pickerToolView.setItems([pickerToolbuttonFiexed,pickerToolbutton], animated: false)
+        pickerToolView.isUserInteractionEnabled = true
+        sender.inputAccessoryView = pickerToolView
+        sender.inputView = pickerView
+    }
+
+    let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +108,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
     }
-    
+    @objc func doneTapped() {
+
+                 print("done tapped")
+
+             }
     
     public func SetupInitLayout() {
         self.RecruitmentInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -257,22 +279,64 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = false
             self.ReviewBtn.isSelected = false
         }else{
-            self.FirstComeBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
-            sender.isSelected = true
-            self.ReviewBtn.isSelected = false
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.FirstComeBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+                    sender.isSelected = true
+                    self.ReviewBtn.isSelected = false
+                    self.FirstComeBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.FirstComeBtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
+            
         }
     }
+    
+    @objc func CreatePickerView(){
+        let PickerView = UIPickerView()
+        PickerView.delegate = self
+        let PickerToolbar = UIToolbar()
+        let PickerToolbarBtn = UIBarButtonItem(title: "선택", style: .plain, target: self, action: nil)
+        PickerToolbar.setItems([PickerToolbarBtn], animated: true)
+        PickerToolbar.isUserInteractionEnabled = true
+        PickerToolbar.sizeToFit()
+        
+    }
+    
     
     @objc func ReviewBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
             self.FirstComeBtn.isSelected = false
         }else{
-            self.ReviewBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
-            sender.isSelected = true
-            self.FirstComeBtn.isSelected = false
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.ReviewBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+                    sender.isSelected = true
+                    self.FirstComeBtn.isSelected = false
+                    self.ReviewBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.ReviewBtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
         }
     }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return PickerData.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return PickerData[row]
+    }
+    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         var textparagraphStyle = NSMutableParagraphStyle()
@@ -332,4 +396,31 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
         return true
     }
+}
+
+
+
+class PickerButton : UIButton {
+    var PickerView = UIView()
+    var PickerToolView = UIView()
+    
+    override var inputView: UIView {
+        get {
+            return self.PickerView
+        }set {
+            self.PickerView = newValue
+            self.becomeFirstResponder()
+        }
+    }
+    override var inputAccessoryView: UIView {
+        get {
+            return self.PickerToolView
+        }set {
+            self.PickerToolView = newValue
+        }
+    }
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
 }

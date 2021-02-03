@@ -260,12 +260,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRx-bf-XkB">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRx-bf-XkB" customClass="PickerButton" customModule="스터디팜" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="318" width="374" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="iB0-E5-FPZ"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="Createpickerview:" destination="D5a-sn-alv" eventType="touchUpInside" id="Q4Y-dR-CaE"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPO-kM-HBW">
                                                 <rect key="frame" x="23" y="383" width="16" height="16"/>
@@ -727,7 +730,7 @@
                         <outlet property="Onlinelabel" destination="yE3-Dq-o0Y" id="xGy-m5-gWU"/>
                         <outlet property="Participantlabel" destination="skw-DL-DHZ" id="yjG-Dg-Xe9"/>
                         <outlet property="Progresslabel" destination="dxU-xv-WMt" id="iA9-bp-UmN"/>
-                        <outlet property="RecruitmentBtn" destination="IRx-bf-XkB" id="Agn-Qc-ZZj"/>
+                        <outlet property="RecruitmentBtn" destination="IRx-bf-XkB" id="Q7B-M9-tn6"/>
                         <outlet property="RecruitmentInfoLine" destination="yUZ-5z-AEW" id="OTS-8G-rFt"/>
                         <outlet property="RecruitmentInfolabel" destination="cKV-z5-orM" id="rD9-he-GBx"/>
                         <outlet property="Recruitmentareabtn" destination="MXZ-nE-9WJ" id="zX7-qb-PVm"/>
