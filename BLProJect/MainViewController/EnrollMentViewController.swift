@@ -18,7 +18,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var ReviewLabel: UILabel!
     @IBOutlet weak var ReviewExampleLabel: UILabel!
     @IBOutlet weak var ReviewBtn: UIButton!
-    
     @IBOutlet weak var RecruitmentBtn: PickerButton!
     @IBOutlet weak var Recruitmentlabel: UILabel!
     @IBOutlet weak var LimitBtn: UIButton!
@@ -32,7 +31,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var Onlinelabel: UILabel!
     @IBOutlet weak var Recruitmentarealabel: UILabel!
     @IBOutlet weak var EnrollMentscrollview: UIScrollView!
-    @IBOutlet weak var Recruitmentareabtn: UIButton!
+    @IBOutlet weak var Recruitmentareabtn: PickerButton!
     @IBOutlet weak var Studyarealabel: UILabel!
     @IBOutlet weak var StudyCafesearchbar: UISearchBar!
     @IBOutlet weak var StudyCafeExamplelabel: UILabel!
@@ -71,11 +70,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
-        pickerView.tag = 1
         let pickerToolView = UIToolbar()
         let pickerToolbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(RemoveFromToolbar))
         let pickerToolbuttonFiexed = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         pickerView.delegate = self
+        pickerView.tag = 1
         pickerToolView.sizeToFit()
         pickerToolView.barTintColor = UIColor.darkGray
         pickerToolView.tintColor = UIColor.white
@@ -84,7 +83,21 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         sender.inputAccessoryView = pickerToolView
         sender.inputView = pickerView
     }
-
+    @IBAction func Createareapickerview(_ sender: PickerButton) {
+        let pickerView = UIPickerView()
+        let pickerToolbar = UIToolbar()
+        let pickerToolbarbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(RemoveFromAreaToolbar))
+        let pickerToolbarFiexed = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        pickerView.delegate = self
+        pickerView.tag = 2
+        pickerToolbar.sizeToFit()
+        pickerToolbar.barTintColor = UIColor.darkGray
+        pickerToolbar.tintColor = UIColor.white
+        pickerToolbar.isUserInteractionEnabled = true
+        pickerToolbar.setItems([pickerToolbarFiexed,pickerToolbarbutton], animated: false)
+        sender.inputAccessoryView = pickerToolbar
+        sender.inputView = pickerView
+    }
     let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
     
     override func viewDidLoad() {
@@ -97,6 +110,13 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
+        UtilApi.shared.UtilStudyCategoryCall { result in
+            print("카테고리 데이터 입니다\(result.content)")
+        }
+        self.ReviewBtn.addTarget(self, action: #selector(self.ReviewBtnCheck(_:)), for: .touchUpInside)
+        self.FirstComeBtn.addTarget(self, action: #selector(self.FirstComeBtnCheck(_:)), for: .touchUpInside)
+        self.OfflineCheckbtn.addTarget(self, action: #selector(self.OfflineBtnCheck), for: .touchUpInside)
+        self.OnlineCheckbtn.addTarget(self, action: #selector(self.OnlineBtnCheck(_:)), for: .touchUpInside)
     }
     
     public func NavigationLayou() {
@@ -108,11 +128,12 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
     }
+    @objc func RemoveFromAreaToolbar(){
+        self.Recruitmentareabtn.resignFirstResponder()
+    }
     @objc func RemoveFromToolbar() {
         self.RecruitmentBtn.resignFirstResponder()
     }
-
-    
     public func SetupInitLayout() {
         self.RecruitmentInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.RecruitmentInfolabel.attributedText = NSAttributedString(string: "모집 정보", attributes: [NSAttributedString.Key.kern: -1.21])
@@ -126,7 +147,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         paragraphStyle2.lineHeightMultiple = 1.25
         self.FirstComeLabel.attributedText = NSAttributedString(string: "선착순 모집", attributes: [NSAttributedString.Key.kern:-0.77, NSAttributedString.Key.paragraphStyle: paragraphStyle2])
         self.FirstComeLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.FirstComeBtn.addTarget(self, action: #selector(self.FirstComeBtnCheck(_:)), for: .touchUpInside)
         var paragraphStyle3 = NSMutableParagraphStyle()
         paragraphStyle3.lineHeightMultiple = 1.54
         self.FirstComeExampleLabel.attributedText = NSAttributedString(string: "선착순으로 모집 인원이 다 차면 모임이 생성돼요.", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle3, NSAttributedString.Key.kern: -0.66])
@@ -134,13 +154,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         paragraphStyle4.lineHeightMultiple = 1.66
         self.ReviewLabel.attributedText = NSAttributedString(string: "검토 후 승인", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle2,NSAttributedString.Key.kern:-0.77])
         self.ReviewLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.ReviewBtn.addTarget(self, action: #selector(self.ReviewBtnCheck(_:)), for: .touchUpInside)
         self.ReviewExampleLabel.attributedText = NSAttributedString(string: "가입 신청한 사람을 검토하고, 승인된 사람들과 모임을 진행해요.", attributes: [NSAttributedString.Key.paragraphStyle:paragraphStyle3,NSAttributedString.Key.kern:-0.66])
         self.Recruitmentlabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
         self.Recruitmentlabel.attributedText = NSAttributedString(string: "모집 인원", attributes: [NSAttributedString.Key.kern : -0.88])
         self.RecruitmentBtn.setTitle("6 명", for: .normal)
         self.RecruitmentBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16)
-//        self.Recruitmentareabtn
         self.RecruitmentBtn.setTitleColor( UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.RecruitmentBtn.layer.borderWidth = 1.0
         self.RecruitmentBtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
@@ -276,16 +294,49 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studypostbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
     }
     
+    @objc func OfflineBtnCheck(_ sender: UIButton){
+        if sender.isSelected {
+            sender.isSelected = false
+        }else{
+            self.OnlineCheckbtn.isSelected = false
+            sender.isSelected = true
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.OfflineCheckbtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+                    self.OfflineCheckbtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.OfflineCheckbtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
+        }
+    }
+    @objc func OnlineBtnCheck(_ sender: UIButton){
+        if sender.isSelected {
+            sender.isSelected = false
+        }else{
+            self.OfflineCheckbtn.isSelected = false
+            sender.isSelected = true
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.OnlineCheckbtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
+                    self.OnlineCheckbtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.OnlineCheckbtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
+        }
+    }
     @objc func FirstComeBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
-            self.ReviewBtn.isSelected = false
         }else{
+            sender.isSelected = true
+            self.ReviewBtn.isSelected = false
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
                     self.FirstComeBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
-                    sender.isSelected = true
-                    self.ReviewBtn.isSelected = false
                     self.FirstComeBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
@@ -296,28 +347,15 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
     }
     
-    @objc func CreatePickerView(){
-        let PickerView = UIPickerView()
-        PickerView.delegate = self
-        let PickerToolbar = UIToolbar()
-        let PickerToolbarBtn = UIBarButtonItem(title: "선택", style: .plain, target: self, action: nil)
-        PickerToolbar.setItems([PickerToolbarBtn], animated: true)
-        PickerToolbar.isUserInteractionEnabled = true
-        PickerToolbar.sizeToFit()
-        
-    }
-    
-    
     @objc func ReviewBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
-            self.FirstComeBtn.isSelected = false
         }else{
+            sender.isSelected = true
+            self.FirstComeBtn.isSelected = false
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
                     self.ReviewBtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
-                    sender.isSelected = true
-                    self.FirstComeBtn.isSelected = false
                     self.ReviewBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {

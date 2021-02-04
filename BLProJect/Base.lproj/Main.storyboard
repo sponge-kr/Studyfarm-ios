@@ -361,12 +361,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXZ-nE-9WJ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXZ-nE-9WJ" customClass="PickerButton" customModule="스터디팜" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="710" width="374" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="rAV-Nw-Uvj"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="Createareapickerview:" destination="D5a-sn-alv" eventType="touchUpInside" id="yrU-cj-NBH"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스터디 진행 장소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7m-y5-fI6">
                                                 <rect key="frame" x="20" y="795" width="104" height="23"/>
@@ -733,7 +736,7 @@
                         <outlet property="RecruitmentBtn" destination="IRx-bf-XkB" id="Q7B-M9-tn6"/>
                         <outlet property="RecruitmentInfoLine" destination="yUZ-5z-AEW" id="OTS-8G-rFt"/>
                         <outlet property="RecruitmentInfolabel" destination="cKV-z5-orM" id="rD9-he-GBx"/>
-                        <outlet property="Recruitmentareabtn" destination="MXZ-nE-9WJ" id="zX7-qb-PVm"/>
+                        <outlet property="Recruitmentareabtn" destination="MXZ-nE-9WJ" id="shs-C3-42m"/>
                         <outlet property="Recruitmentarealabel" destination="dcV-cB-x5C" id="rIb-7y-iJK"/>
                         <outlet property="Recruitmentlabel" destination="UYe-p4-IqB" id="NOh-XU-QwW"/>
                         <outlet property="ReviewBtn" destination="hvC-HT-4Pf" id="F4j-uJ-qmd"/>
