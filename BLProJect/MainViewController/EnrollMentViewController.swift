@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
+class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource {
+    @IBOutlet var StudyCategoryView: StudyCategoryView!
+    @IBOutlet weak var StudyCategorytableview: UITableView!
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
     @IBOutlet weak var RecruitmentInfoLine: UIView!
     @IBOutlet weak var Participantlabel: UILabel!
@@ -67,7 +69,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyIntroducetextview: UITextView!
     @IBOutlet weak var StudyIntroducecountlabel: UILabel!
     @IBOutlet weak var Studypostbtn: UIButton!
-    
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
         let pickerToolView = UIToolbar()
@@ -99,7 +100,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         sender.inputView = pickerView
     }
     let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
-    
+    public var StudyCategoryModel = [StudyContentsContainer]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.EnrollMentscrollview.isScrollEnabled = true
@@ -110,13 +111,19 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
+        self.StudyCategorytableview.delegate = self
+        self.StudyCategorytableview.dataSource = self
+        let nibCell = UINib(nibName: "StudyCategoryTableViewCell", bundle: nil)
+        self.StudyCategorytableview.register(nibCell, forCellReuseIdentifier: "StudyCategoryCell")
         UtilApi.shared.UtilStudyCategoryCall { result in
-            print("카테고리 데이터 입니다\(result.content)")
+            self.StudyCategoryModel = result
+            self.StudyCategorytableview.reloadData()
         }
         self.ReviewBtn.addTarget(self, action: #selector(self.ReviewBtnCheck(_:)), for: .touchUpInside)
         self.FirstComeBtn.addTarget(self, action: #selector(self.FirstComeBtnCheck(_:)), for: .touchUpInside)
         self.OfflineCheckbtn.addTarget(self, action: #selector(self.OfflineBtnCheck), for: .touchUpInside)
         self.OnlineCheckbtn.addTarget(self, action: #selector(self.OnlineBtnCheck(_:)), for: .touchUpInside)
+        self.StudyKindInfobtn.addTarget(self, action: #selector(self.AddCategoryView), for: .touchUpInside)
     }
     
     public func NavigationLayou() {
@@ -128,12 +135,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
     }
-    @objc func RemoveFromAreaToolbar(){
-        self.Recruitmentareabtn.resignFirstResponder()
-    }
-    @objc func RemoveFromToolbar() {
-        self.RecruitmentBtn.resignFirstResponder()
-    }
+    
     public func SetupInitLayout() {
         self.RecruitmentInfolabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.RecruitmentInfolabel.attributedText = NSAttributedString(string: "모집 정보", attributes: [NSAttributedString.Key.kern: -1.21])
@@ -328,6 +330,33 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             })
         }
     }
+    
+    @objc func AddCategoryView() {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        self.StudyCategoryView.HandlerAreaView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.StudyCategoryView.HandlerAreaView.frame = self.view.frame
+        self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+        window?.addSubview(self.StudyCategoryView.HandlerAreaView)
+        window?.addSubview(self.StudyCategorytableview)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveFromCategoryView(recognizer:)))
+        self.StudyCategoryView.HandlerAreaView.addGestureRecognizer(tapGesture)
+        self.StudyCategoryView.HandlerAreaView.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.StudyCategoryView.HandlerAreaView.alpha = 0.5
+            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 2, width: screenSize.width, height: screenSize.height / 2)
+            
+        }, completion: nil)
+    }
+    
+    @objc func RemoveFromCategoryView(recognizer: UITapGestureRecognizer){
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.StudyCategoryView.HandlerAreaView.alpha = 0
+            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+        }, completion: nil)
+    }
+    
     @objc func FirstComeBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
@@ -364,9 +393,28 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             })
         }
     }
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
-        
+    @objc func RemoveFromAreaToolbar(){
+        self.Recruitmentareabtn.resignFirstResponder()
+    }
+    @objc func RemoveFromToolbar() {
+        self.RecruitmentBtn.resignFirstResponder()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.StudyCategoryModel.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let StudyCategoryCell = tableView.dequeueReusableCell(withIdentifier: "StudyCategoryCell", for: indexPath) as? StudyCategoryTableViewCell
+        StudyCategoryCell?.StudyLabel.text = self.StudyCategoryModel[indexPath.row].name
+        return StudyCategoryCell!
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
+            
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -438,6 +486,16 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             return changeText.count <= 1000
         }
         return true
+    }
+}
+
+class StudyCategoryView: UIView {
+    @IBOutlet weak var HandlerAreaView: UIView!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }
 

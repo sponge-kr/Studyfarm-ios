@@ -99,7 +99,7 @@ class UtilApi {
             }
     }
     
-    public func UtilStudyCategoryCall(completionHandler: @escaping(StudyCategoryReuslts) -> ()){
+    public func UtilStudyCategoryCall(completionHandler: @escaping([StudyContentsContainer]) -> ()){
         AF.request("http://3.214.168.45:8080/api/v1/utils/categories", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .responseJSON { (response) in
                 debugPrint(response)
@@ -108,7 +108,7 @@ class UtilApi {
                     do {
                         let CategoryData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let CateogryInstance = try JSONDecoder().decode(StudyCategoryResponse.self, from: CategoryData)
-                        completionHandler(CateogryInstance.result)
+                        completionHandler(CateogryInstance.result.content)
                     } catch {
                         print(error.localizedDescription)
                     }

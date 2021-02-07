@@ -408,7 +408,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEB-TU-dk2">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEB-TU-dk2" customClass="PickerButton" customModule="스터디팜" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="1004" width="374" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="K7E-rX-JkU"/>
@@ -744,6 +744,8 @@
                         <outlet property="ReviewLabel" destination="vHb-vu-Qd3" id="I1A-SY-12O"/>
                         <outlet property="StudyCafeExamplelabel" destination="TTP-mB-AjR" id="xSZ-ip-TEb"/>
                         <outlet property="StudyCafesearchbar" destination="3UO-By-0RO" id="8Nl-Gl-h92"/>
+                        <outlet property="StudyCategoryView" destination="pmt-GV-Nen" id="Udn-Et-Dxz"/>
+                        <outlet property="StudyCategorytableview" destination="IiR-FF-cAg" id="E3K-rf-zV7"/>
                         <outlet property="StudyDiffcultyView" destination="yer-CL-DZ5" id="NN4-oj-hlH"/>
                         <outlet property="StudyDiffcultybtn1" destination="2cC-CE-oGt" id="xxu-di-ejH"/>
                         <outlet property="StudyDiffcultybtn2" destination="RPN-hh-NKi" id="Izi-c4-Joz"/>
@@ -758,7 +760,7 @@
                         <outlet property="StudyIntroducenamelabel" destination="Yfy-3m-rq4" id="sxY-na-wQB"/>
                         <outlet property="StudyIntroducetextview" destination="zYo-Rh-yWv" id="Fvl-Op-CTQ"/>
                         <outlet property="StudyKindExamplelabel" destination="RQH-sF-AHf" id="yEZ-09-0c7"/>
-                        <outlet property="StudyKindInfobtn" destination="MEB-TU-dk2" id="KUi-kc-6Zm"/>
+                        <outlet property="StudyKindInfobtn" destination="MEB-TU-dk2" id="DV2-uG-ppR"/>
                         <outlet property="StudyKindInfolabel" destination="hfp-iR-0a1" id="qxq-Xs-cpX"/>
                         <outlet property="StudyTermlabel" destination="bWv-Hj-5Ri" id="fT3-kF-HAS"/>
                         <outlet property="Studyarealabel" destination="U7m-y5-fI6" id="w3h-wC-fMD"/>
@@ -776,6 +778,42 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-aX-Exn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="pmt-GV-Nen" customClass="StudyCategoryView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNm-5x-FFb">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="178"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZ1-In-Y28">
+                            <rect key="frame" x="0.0" y="534" width="414" height="66"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IiR-FF-cAg">
+                            <rect key="frame" x="0.0" y="71" width="414" height="314"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <prototypes>
+                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EaA-YS-N4X" customClass="StudyCategoryTableViewCell" customModule="스터디팜" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EaA-YS-N4X" id="RR0-sL-0XW">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </tableViewCellContentView>
+                                </tableViewCell>
+                            </prototypes>
+                        </tableView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Hg3-aX-YHK"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="HandlerAreaView" destination="eNm-5x-FFb" id="xIO-lH-iyY"/>
+                    </connections>
+                </view>
             </objects>
             <point key="canvasLocation" x="2753.6231884057975" y="545.75892857142856"/>
         </scene>

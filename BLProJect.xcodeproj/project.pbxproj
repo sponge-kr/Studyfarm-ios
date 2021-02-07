@@ -74,6 +74,8 @@
 		FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74525C68C0700AE82CD /* Rectangle@1x.png */; };
 		FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78325C6CABD00AE82CD /* searchbar@1x.png */; };
 		FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */; };
+		FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */; };
+		FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
 		FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */; };
@@ -205,6 +207,8 @@
 		FF70E74525C68C0700AE82CD /* Rectangle@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@1x.png"; sourceTree = "<group>"; };
 		FF70E78325C6CABD00AE82CD /* searchbar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@1x.png"; sourceTree = "<group>"; };
 		FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
+		FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
 		FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollMentViewController.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 		D149391924E7FA06004D661C /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FF92ECF925CFE1C400D93CD7 /* Mainxib */,
 				D1F85CCB24C45B1100E1F7BE /* ViewController.swift */,
 				FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */,
 			);
@@ -503,6 +508,15 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		FF92ECF925CFE1C400D93CD7 /* Mainxib */ = {
+			isa = PBXGroup;
+			children = (
+				FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */,
+				FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */,
+			);
+			path = Mainxib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -679,6 +693,7 @@
 				FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */,
 				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
 				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
+				FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
 				FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */,
 				FFBA6F1925C7F6E8004783C6 /* Groupnext@3x.png in Resources */,
@@ -869,6 +884,7 @@
 				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
 				FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
+				FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
