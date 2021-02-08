@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8592967225B2AA24000C21E8 /* SignUpViewController2.swift */; };
+		8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */; };
 		85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 85BC73F525A9930B005830A1 /* .swiftlint.yml */; };
 		B3736A40B4AA06F10FEE8FFC /* Pods_BLProJectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */; };
 		D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800BF25646FDF00B8E5A1 /* check@1x.png */; };
@@ -131,6 +133,8 @@
 		24331572F816F95482D908EB /* Pods-BLProJect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect.debug.xcconfig"; path = "Target Support Files/Pods-BLProJect/Pods-BLProJect.debug.xcconfig"; sourceTree = "<group>"; };
 		2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8592967225B2AA24000C21E8 /* SignUpViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController2.swift; sourceTree = "<group>"; };
+		8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController2.storyboard; sourceTree = "<group>"; };
 		85BC73F525A9930B005830A1 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8B06AAB1AFD73814B119A973 /* Pods-BLProJect-BLProJectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect-BLProJectUITests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLProJect_BLProJectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +295,8 @@
 				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
+				8592967225B2AA24000C21E8 /* SignUpViewController2.swift */,
+				8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -664,6 +670,7 @@
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				FF70E73325C6879200AE82CD /* triangle@3x.png in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
+				8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */,
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
@@ -901,6 +908,7 @@
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
 				FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */,
+				8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
