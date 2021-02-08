@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import Combine
 import Alamofire
 import SwiftKeychainWrapper
 
@@ -40,6 +39,33 @@ struct StudyCategoryData {
     var childrenName: String? // 주제 명
 }
 
+struct StudyCategoryResponse: Codable {
+    var result: StudyCategoryReuslts
+}
+
+struct StudyCategoryReuslts: Codable {
+    var content: [StudyContentsContainer]
+}
+struct StudyContentsContainer: Codable {
+    let code: Int?
+    let name: String?
+    let children:[StudyChildrenContainer]?
+    enum CodingKeys : String,CodingKey {
+        case code
+        case name
+        case children
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.code = try? values.decode(Int.self, forKey: .code)
+        self.name = try? values.decode(String.self, forKey: .name)
+        self.children = try? values.decode([StudyChildrenContainer].self, forKey: .children)
+    }
+}
+struct StudyChildrenContainer: Codable {
+    var code: Int
+    var name: String
+}
 class UtilApi {
     
     static let shared = UtilApi()
@@ -50,11 +76,8 @@ class UtilApi {
     public var stateCodeModel = StateCodeData()
     public var stateCityCodeModel = StateCityCodeData()
     public var resetEmailModel = ResetEmailData()
-    public var studyCategoryModel = StudyCategoryData()
     
-    private init() {
-        
-    }
+    private init() {}
     
     // MARK: - 스터디 시도 리스트 조회 함수 구현(GET)
     public func UtilStatesCiteCodeCall(completionHandler: @escaping (Result<StateCodeData,Error>) -> ()) {
@@ -76,29 +99,26 @@ class UtilApi {
             }
     }
     
-    // MARK: - 스터디 리스트 조회 함수 구현(GET)
-    public func UtilStudyCategoryCall(completionHandler: @escaping(Result<StudyCategoryData, Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/utils/categories", method: .get, headers: headers)
-            .response { response in
+    public func UtilStudyCategoryCall(completionHandler: @escaping([StudyContentsContainer]) -> ()){
+        AF.request("http://3.214.168.45:8080/api/v1/utils/categories", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+            .responseJSON { (response) in
                 debugPrint(response)
-                switch response.result {
-                case .success(let value):
-                    let CategoryJson = JSON(value)
-                    self.studyCategoryModel.code = CategoryJson["code"].intValue
-                    self.studyCategoryModel.message = CategoryJson["message"].stringValue
-                    for (_, subJson):(String, JSON) in CategoryJson["result"]["content"] {
-                        self.studyCategoryModel.contentCode = CategoryJson["code"].intValue
-                        self.studyCategoryModel.contentName = CategoryJson["name"].stringValue
-                        self.studyCategoryModel.childrenCode = CategoryJson["children"]["code"].intValue
-                        self.studyCategoryModel.childrenName = CategoryJson["children"]["name"].stringValue
-                        completionHandler(.success(self.studyCategoryModel))
+                switch response.result{
+                case.success(let value):
+                    do {
+                        let CategoryData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let CateogryInstance = try JSONDecoder().decode(StudyCategoryResponse.self, from: CategoryData)
+                        completionHandler(CateogryInstance.result.content)
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                case .failure(let error):
+                case.failure(let error):
                     print(error.localizedDescription)
-                    completionHandler(.failure(error))
                 }
             }
     }
+    
+    
     
     // MARK: - 이메일 전송 함수 구현(POST)
     public func UtilSendResetEmailCall(EmailParamter: Parameters, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {

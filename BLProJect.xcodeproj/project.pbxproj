@@ -74,10 +74,26 @@
 		FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74325C68C0700AE82CD /* Rectangle@3x.png */; };
 		FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74425C68C0700AE82CD /* Rectangle@2x.png */; };
 		FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E74525C68C0700AE82CD /* Rectangle@1x.png */; };
+		FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78325C6CABD00AE82CD /* searchbar@1x.png */; };
+		FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */; };
+		FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */; };
+		FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */; };
 		FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */; };
 		FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */; };
 		FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */; };
 		FFB2EED225C5559100DBFCBE /* NavigationBackbutton@1x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FFB2EED125C5559100DBFCBE /* NavigationBackbutton@1x.jpg */; };
+		FFBA6F0625C7F693004783C6 /* Group@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F0525C7F692004783C6 /* Group@1x.png */; };
+		FFBA6F0C25C7F698004783C6 /* Group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F0A25C7F698004783C6 /* Group@2x.png */; };
+		FFBA6F0D25C7F698004783C6 /* Group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F0B25C7F698004783C6 /* Group@3x.png */; };
+		FFBA6F1225C7F6E3004783C6 /* Groupnext@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F1125C7F6E3004783C6 /* Groupnext@1x.png */; };
+		FFBA6F1825C7F6E8004783C6 /* Groupnext@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F1625C7F6E8004783C6 /* Groupnext@2x.png */; };
+		FFBA6F1925C7F6E8004783C6 /* Groupnext@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F1725C7F6E8004783C6 /* Groupnext@3x.png */; };
+		FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */; };
+		FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */; };
+		FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */; };
+		FFBA6F3225C805BC004783C6 /* GrayEllipse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */; };
+		FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */; };
+		FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */; };
 		FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */; };
 		FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */; };
 		FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */; };
@@ -90,6 +106,9 @@
 		FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
+		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
+		FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212025C963B500ED7660 /* RedCheck@2x.png */; };
+		FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212525C963BA00ED7660 /* RedCheck@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,10 +209,26 @@
 		FF70E74325C68C0700AE82CD /* Rectangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@3x.png"; sourceTree = "<group>"; };
 		FF70E74425C68C0700AE82CD /* Rectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@2x.png"; sourceTree = "<group>"; };
 		FF70E74525C68C0700AE82CD /* Rectangle@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle@1x.png"; sourceTree = "<group>"; };
+		FF70E78325C6CABD00AE82CD /* searchbar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@1x.png"; sourceTree = "<group>"; };
+		FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
+		FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		FFB06A222593AE45005BFEAD /* unCheckGray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@1x.png"; sourceTree = "<group>"; };
 		FFB06A232593AE45005BFEAD /* unCheckGray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckGray@2x.png"; sourceTree = "<group>"; };
 		FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollMentViewController.swift; sourceTree = "<group>"; };
 		FFB2EED125C5559100DBFCBE /* NavigationBackbutton@1x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "NavigationBackbutton@1x.jpg"; sourceTree = "<group>"; };
+		FFBA6F0525C7F692004783C6 /* Group@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group@1x.png"; sourceTree = "<group>"; };
+		FFBA6F0A25C7F698004783C6 /* Group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group@2x.png"; sourceTree = "<group>"; };
+		FFBA6F0B25C7F698004783C6 /* Group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group@3x.png"; sourceTree = "<group>"; };
+		FFBA6F1125C7F6E3004783C6 /* Groupnext@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Groupnext@1x.png"; sourceTree = "<group>"; };
+		FFBA6F1625C7F6E8004783C6 /* Groupnext@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Groupnext@2x.png"; sourceTree = "<group>"; };
+		FFBA6F1725C7F6E8004783C6 /* Groupnext@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Groupnext@3x.png"; sourceTree = "<group>"; };
+		FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedEllipse@1x.png"; sourceTree = "<group>"; };
+		FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedEllipse@2x.png"; path = "../../../Downloads/RedEllipse@2x.png"; sourceTree = "<group>"; };
+		FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "RedEllipse@3x.png"; path = "../../../Downloads/RedEllipse@3x.png"; sourceTree = "<group>"; };
+		FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@1x.png"; sourceTree = "<group>"; };
+		FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@2x.png"; sourceTree = "<group>"; };
+		FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@3x.png"; sourceTree = "<group>"; };
 		FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserInformationViewController.storyboard; sourceTree = "<group>"; };
 		FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -206,6 +241,9 @@
 		FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@1x.png"; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
+		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
+		FFF5212025C963B500ED7660 /* RedCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@2x.png"; sourceTree = "<group>"; };
+		FFF5212525C963BA00ED7660 /* RedCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,8 +291,8 @@
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
 				FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */,
-				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */,
+				FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */,
 				FF331DA0259B67FB00BD8C33 /* UserInformationViewController.swift */,
 				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
 				8592967225B2AA24000C21E8 /* SignUpViewController2.swift */,
@@ -266,6 +304,7 @@
 		D149391924E7FA06004D661C /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FF92ECF925CFE1C400D93CD7 /* Mainxib */,
 				D1F85CCB24C45B1100E1F7BE /* ViewController.swift */,
 				FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */,
 			);
@@ -381,6 +420,23 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFF5212525C963BA00ED7660 /* RedCheck@3x.png */,
+				FFF5212025C963B500ED7660 /* RedCheck@2x.png */,
+				FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */,
+				FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */,
+				FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */,
+				FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */,
+				FFBA6F2C25C7F891004783C6 /* RedEllipse@3x.png */,
+				FFBA6F2725C7F872004783C6 /* RedEllipse@2x.png */,
+				FFBA6F1D25C7F83B004783C6 /* RedEllipse@1x.png */,
+				FFBA6F1625C7F6E8004783C6 /* Groupnext@2x.png */,
+				FFBA6F1725C7F6E8004783C6 /* Groupnext@3x.png */,
+				FFBA6F1125C7F6E3004783C6 /* Groupnext@1x.png */,
+				FFBA6F0A25C7F698004783C6 /* Group@2x.png */,
+				FFBA6F0B25C7F698004783C6 /* Group@3x.png */,
+				FFBA6F0525C7F692004783C6 /* Group@1x.png */,
+				FF70E78B25C6CBC000AE82CD /* searchbar@2x.png */,
+				FF70E78325C6CABD00AE82CD /* searchbar@1x.png */,
 				FF70E74525C68C0700AE82CD /* Rectangle@1x.png */,
 				FF70E74425C68C0700AE82CD /* Rectangle@2x.png */,
 				FF70E74325C68C0700AE82CD /* Rectangle@3x.png */,
@@ -456,6 +512,15 @@
 				FF331D81259B34BD00BD8C33 /* Roboto-ThinItalic.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		FF92ECF925CFE1C400D93CD7 /* Mainxib */ = {
+			isa = PBXGroup;
+			children = (
+				FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */,
+				FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */,
+			);
+			path = Mainxib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,20 +636,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF331D8D259B34BD00BD8C33 /* Roboto-ThinItalic.ttf in Resources */,
+				FFBA6F0D25C7F698004783C6 /* Group@3x.png in Resources */,
 				FF331D8B259B34BD00BD8C33 /* Roboto-Thin.ttf in Resources */,
 				FFC0B08A25A763DE00D21482 /* genderunCheck.png in Resources */,
 				FF331D8F259B34BD00BD8C33 /* Roboto-LightItalic.ttf in Resources */,
 				D1F85CD424C45B1300E1F7BE /* LaunchScreen.storyboard in Resources */,
 				D1F85D1224CDC96200E1F7BE /* Vector@3x.png in Resources */,
+				FFBA6F3225C805BC004783C6 /* GrayEllipse@1x.png in Resources */,
+				FF70E78C25C6CBC000AE82CD /* searchbar@2x.png in Resources */,
 				FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */,
+				FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */,
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
 				FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
 				FFC0B02725A4F70C00D21482 /* NotoSansKR-Light.otf in Resources */,
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
+				FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */,
 				FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */,
 				FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
+				FFBA6F0625C7F693004783C6 /* Group@1x.png in Resources */,
+				FFBA6F1825C7F6E8004783C6 /* Groupnext@2x.png in Resources */,
 				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
 				FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */,
 				FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */,
@@ -592,6 +664,8 @@
 				FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */,
+				FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */,
+				FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				FF70E73325C6879200AE82CD /* triangle@3x.png in Resources */,
@@ -600,6 +674,7 @@
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
+				FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */,
 				FFB2EED225C5559100DBFCBE /* NavigationBackbutton@1x.jpg in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
@@ -609,7 +684,10 @@
 				FF331D87259B34BD00BD8C33 /* Roboto-Bold.ttf in Resources */,
 				D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */,
 				FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */,
+				FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */,
 				FF331D8C259B34BD00BD8C33 /* Roboto-MediumItalic.ttf in Resources */,
+				FFBA6F0C25C7F698004783C6 /* Group@2x.png in Resources */,
+				FFBA6F1225C7F6E3004783C6 /* Groupnext@1x.png in Resources */,
 				FF70E73125C6879200AE82CD /* triangle@1x.png in Resources */,
 				FF331D742599067E00BD8C33 /* Email@1x.png in Resources */,
 				FF331D732599067E00BD8C33 /* Email@2x.png in Resources */,
@@ -619,10 +697,15 @@
 				FF70E73225C6879200AE82CD /* triangle@2x.png in Resources */,
 				FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */,
 				FF331D8A259B34BD00BD8C33 /* Roboto-BlackItalic.ttf in Resources */,
+				FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */,
 				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
 				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
+				FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
+				FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */,
+				FFBA6F1925C7F6E8004783C6 /* Groupnext@3x.png in Resources */,
 				FF331D88259B34BD00BD8C33 /* Roboto-Black.ttf in Resources */,
+				FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
 				FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */,
 				FF331D90259B34BD00BD8C33 /* Roboto-Italic.ttf in Resources */,
@@ -808,6 +891,7 @@
 				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
 				FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
+				FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
