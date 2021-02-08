@@ -336,16 +336,41 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let screenSize = UIScreen.main.bounds.size
         self.StudyCategoryView.HandlerAreaView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         self.StudyCategoryView.HandlerAreaView.frame = self.view.frame
-        self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+        self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
+        self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
+        self.StudyCategoryView.ConfirmBtn.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.85, width: self.StudyCategorytableview.frame.size.width, height: 90)
+        self.StudyCategoryView.ConfirmBtn.titleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
+        self.StudyCategoryView.ConfirmBtn.setAttributedTitle(NSAttributedString(string: "완료", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16)]), for: .normal)
+        self.StudyCategoryView.Headerlabel.attributedText = NSAttributedString(string: "스터디 종류", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)])
+        self.StudyCategorytableview.isScrollEnabled = false
+        self.StudyCategoryView.ConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.StudyCategoryView.Headerlabel.frame = CGRect(x: self.StudyCategoryView.Headerlabel.frame.origin.x, y: self.StudyCategoryView.Headerlabel.frame.origin.y, width: self.StudyCategoryView.Headerlabel.frame.size.width, height: self.StudyCategoryView.Headerlabel.frame.size.height)
+        self.StudyCategoryView.Headerlabel.textAlignment = .left
+        self.StudyCategoryView.ConfirmBtn.tintColor = UIColor.white
+        self.StudyCategoryView.ConfirmBtn.layer.masksToBounds = true
         window?.addSubview(self.StudyCategoryView.HandlerAreaView)
         window?.addSubview(self.StudyCategorytableview)
+        window?.addSubview(self.StudyCategoryView.HeaderView)
+        self.StudyCategoryView.HeaderView.addSubview(self.StudyCategoryView.Headerlabel)
+        self.StudyCategorytableview.addSubview(self.StudyCategoryView.ConfirmBtn)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveFromCategoryView(recognizer:)))
         self.StudyCategoryView.HandlerAreaView.addGestureRecognizer(tapGesture)
+        self.StudyCategoryView.ConfirmBtn.addTarget(self, action: #selector(self.ConfirmRemoveCategoryView(_:)), for: .touchUpInside)
         self.StudyCategoryView.HandlerAreaView.alpha = 0
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.StudyCategoryView.HandlerAreaView.alpha = 0.5
-            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 2, width: screenSize.width, height: screenSize.height / 2)
-            
+            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.8, width: screenSize.width, height: screenSize.height / 1.8)
+            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.65, width: screenSize.width, height: 50)
+//            self.StudyCategoryView.ConfirmBtn.frame = CGRect(x: 0, y: screenSize.height - self.StudyCategoryView.ConfirmBtn.frame.size.height, width: screenSize.width, height: self.StudyCategoryView.ConfirmBtn.frame.size.height)
+        }, completion: nil)
+    }
+    
+    @objc func ConfirmRemoveCategoryView(_ sender : UIButton){
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.StudyCategoryView.HandlerAreaView.alpha = 0
+            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
+            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
         }, completion: nil)
     }
     
@@ -353,7 +378,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let screenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.StudyCategoryView.HandlerAreaView.alpha = 0
-            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
+            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
         }, completion: nil)
     }
     
@@ -491,8 +517,13 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
 
 class StudyCategoryView: UIView {
     @IBOutlet weak var HandlerAreaView: UIView!
+    @IBOutlet weak var ConfirmBtn: UIButton!
+    @IBOutlet weak var HeaderView: UIView!
+    @IBOutlet weak var Headerlabel: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
