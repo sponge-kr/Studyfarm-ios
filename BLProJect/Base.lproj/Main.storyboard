@@ -718,6 +718,7 @@
                     <size key="freeformSize" width="414" height="2270"/>
                     <connections>
                         <outlet property="Conferencelabel" destination="l6Z-Xh-UGv" id="c2a-vA-9vd"/>
+                        <outlet property="ContainerView" destination="UT9-6X-orp" id="SZD-k9-CwC"/>
                         <outlet property="DetailInfoLine" destination="3W6-0r-pNu" id="cdC-rB-HBR"/>
                         <outlet property="DetailInfolabel" destination="4WW-86-Yqy" id="62c-v0-bgv"/>
                         <outlet property="EnrollMentscrollview" destination="BC6-lz-5G7" id="xSm-Tv-c82"/>
@@ -760,6 +761,7 @@
                         <outlet property="StudyIntroducenamelabel" destination="Yfy-3m-rq4" id="sxY-na-wQB"/>
                         <outlet property="StudyIntroducetextview" destination="zYo-Rh-yWv" id="Fvl-Op-CTQ"/>
                         <outlet property="StudyKindExamplelabel" destination="RQH-sF-AHf" id="yEZ-09-0c7"/>
+                        <outlet property="StudyKindInfoTopconstraint" destination="rr4-p3-iIk" id="PwO-qw-ICj"/>
                         <outlet property="StudyKindInfobtn" destination="MEB-TU-dk2" id="DV2-uG-ppR"/>
                         <outlet property="StudyKindInfolabel" destination="hfp-iR-0a1" id="qxq-Xs-cpX"/>
                         <outlet property="StudyTermlabel" destination="bWv-Hj-5Ri" id="fT3-kF-HAS"/>

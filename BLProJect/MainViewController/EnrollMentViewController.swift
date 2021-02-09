@@ -9,6 +9,7 @@
 import UIKit
 
 class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource {
+    @IBOutlet weak var ContainerView: UIView!
     @IBOutlet var StudyCategoryView: StudyCategoryView!
     @IBOutlet weak var StudyCategorytableview: UITableView!
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
@@ -69,6 +70,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyIntroducetextview: UITextView!
     @IBOutlet weak var StudyIntroducecountlabel: UILabel!
     @IBOutlet weak var Studypostbtn: UIButton!
+    @IBOutlet weak var StudyKindInfoTopconstraint: NSLayoutConstraint!
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
         let pickerToolView = UIToolbar()
@@ -207,10 +209,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyCafesearchbar.layer.cornerRadius = 4
         self.StudyCafesearchbar.searchTextField.attributedPlaceholder = NSAttributedString(string: "스터디룸 검색하기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)])
         self.StudyCafesearchbar.setImage(UIImage(named: "searchbar@2x.png"), for: .search, state: .normal)
-        self.StudyCafeExamplelabel.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        self.StudyCafeExamplelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.StudyCafeExamplelabel.lineBreakMode = .byWordWrapping
         self.StudyCafeExamplelabel.numberOfLines = 2
-        self.StudyCafeExamplelabel.attributedText = NSAttributedString(string: "모집 지역과 스터디 진행 장소를 같은 지역으로 맞춰주세요.\n비대면 스터디의 경우 진행 플랫폼을 입력해주세요.", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle: paragraphStyle5])
+        self.StudyCafeExamplelabel.attributedText = NSAttributedString(string: "모집 지역과 스터디 진행 장소를 같은 지역으로 맞춰주세요.", attributes: [NSAttributedString.Key.kern: -0.66])
         self.StudyKindInfolabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
         self.StudyKindInfolabel.attributedText = NSAttributedString(string: "어떤 스터디를 모집할까요?", attributes: [NSAttributedString.Key.kern : -0.88])
         self.StudyKindInfobtn.setAttributedTitle(NSAttributedString(string: "선택", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0)]), for: .normal)
@@ -236,6 +238,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
         self.StudyDiffcultylabel4.attributedText = NSAttributedString(string: "상급", attributes: [NSAttributedString.Key.kern: -0.77])
     }
+    
+    
+    
     public func SetStudyInitLayout(){
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.54
@@ -302,6 +307,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }else{
             self.OnlineCheckbtn.isSelected = false
             sender.isSelected = true
+            self.Recruitmentarealabel.isHidden = false
+            self.Recruitmentareabtn.isHidden = false
+            self.Studyarealabel.isHidden = false
+            self.StudyCafesearchbar.isHidden = false
+            self.StudyCafeExamplelabel.isHidden = false
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
                     self.OfflineCheckbtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
@@ -309,6 +319,14 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
                     self.OfflineCheckbtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.Recruitmentarealabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.Studyarealabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.Recruitmentareabtn.translatesAutoresizingMaskIntoConstraints = false
+                    self.StudyKindInfolabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.StudyCafeExamplelabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.StudyKindInfoTopconstraint.constant = 40
                 }
             })
         }
@@ -319,6 +337,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }else{
             self.OfflineCheckbtn.isSelected = false
             sender.isSelected = true
+            self.Recruitmentareabtn.isHidden = true
+            self.Recruitmentarealabel.isHidden = true
+            self.Studyarealabel.isHidden = true
+            self.StudyCafesearchbar.isHidden = true
+            self.StudyCafeExamplelabel.isHidden = true
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
                     self.OnlineCheckbtn.setImage(UIImage(named: "RedCheck@1x.png"), for: .selected)
@@ -326,6 +349,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
                     self.OnlineCheckbtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyKindInfolabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.StudyKindInfoTopconstraint.constant = -260
+                    self.StudyKindInfolabel.layoutIfNeeded()
                 }
             })
         }
