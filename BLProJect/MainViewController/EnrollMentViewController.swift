@@ -126,6 +126,15 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.OfflineCheckbtn.addTarget(self, action: #selector(self.OfflineBtnCheck), for: .touchUpInside)
         self.OnlineCheckbtn.addTarget(self, action: #selector(self.OnlineBtnCheck(_:)), for: .touchUpInside)
         self.StudyKindInfobtn.addTarget(self, action: #selector(self.AddCategoryView), for: .touchUpInside)
+        self.StudyDiffcultybtn1.addTarget(self, action: #selector(self.difficultyBtnSelect(_:)), for: .touchUpInside)
+        self.StudyDiffcultybtn2.addTarget(self, action: #selector(self.difficultyBtnSelect2(_:)), for: .touchUpInside)
+        self.StudyDiffcultybtn3.addTarget(self, action: #selector(self.difficultyBtnSelect3(_:)), for: .touchUpInside)
+        self.StudyDiffcultybtn4.addTarget(self, action: #selector(self.difficultyBtnSelect4(_:)), for: .touchUpInside)
+        let Tapgesture = UITapGestureRecognizer(target: self, action: #selector(MyTapMethod(sender:)))
+        Tapgesture.numberOfTapsRequired = 1
+        Tapgesture.cancelsTouchesInView = false
+        Tapgesture.isEnabled = true
+        EnrollMentscrollview.addGestureRecognizer(Tapgesture)
     }
     
     public func NavigationLayou() {
@@ -389,7 +398,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyCategoryView.HandlerAreaView.alpha = 0.5
             self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.8, width: screenSize.width, height: screenSize.height / 1.8)
             self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.65, width: screenSize.width, height: 50)
-//            self.StudyCategoryView.ConfirmBtn.frame = CGRect(x: 0, y: screenSize.height - self.StudyCategoryView.ConfirmBtn.frame.size.height, width: screenSize.width, height: self.StudyCategoryView.ConfirmBtn.frame.size.height)
         }, completion: nil)
     }
     
@@ -447,13 +455,97 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             })
         }
     }
-    @objc func RemoveFromAreaToolbar(){
+    @objc
+    func RemoveFromAreaToolbar() {
         self.Recruitmentareabtn.resignFirstResponder()
     }
-    @objc func RemoveFromToolbar() {
+    @objc
+    func RemoveFromToolbar() {
         self.RecruitmentBtn.resignFirstResponder()
     }
     
+    @objc
+    func difficultyBtnSelect(_ sender : UIButton) {
+        if sender.tag == 1 {
+            sender.isSelected = true
+            self.StudyDiffcultybtn1.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+        }
+    }
+    
+    
+    func difficultyStepBar(move x:CGFloat, addLine x2: CGFloat) {
+        let path = UIBezierPath()
+        let layer = CAShapeLayer()
+        path.move(to: CGPoint(x: x, y: 2))
+        path.addLine(to: CGPoint(x: x2, y: 2))
+        layer.path = path.cgPath
+        layer.lineWidth = 5
+        layer.strokeColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 1
+        layer.add(animation, forKey: "StepBarAnimation")
+        self.StudyDiffcultyView.layer.addSublayer(layer)
+    }
+    
+    @objc
+    func difficultyBtnSelect2(_ sender : UIButton) {
+        if sender.tag == 2 {
+            sender.isSelected = true
+            print("difculrty2 클릭\(sender.isSelected)")
+        }
+    }
+    
+    @objc
+    func difficultyBtnSelect3(_ sender : UIButton) {
+        if sender.tag == 3 {
+            sender.isSelected = true
+            print("difculrty3 클릭\(sender.isSelected)")
+        }
+    }
+    
+    @objc
+    func difficultyBtnSelect4(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = true
+
+        }
+    }
+    @objc func MyTapMethod(sender: UITapGestureRecognizer) {
+        if sender.state == .recognized {
+            var touchLocation: CGPoint = sender.location(in: self.StudyDiffcultyView)
+            print("좌표 입니다 \(sender.location(in: self.StudyDiffcultyView))")
+            if self.StudyDiffcultybtn1.isSelected == true {
+                if self.StudyDiffcultybtn2.isSelected == true {
+                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                    self.StudyDiffcultybtn2.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
+                }else if self.StudyDiffcultybtn3.isSelected == true {
+                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                    self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
+                    self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
+                }else if self.StudyDiffcultybtn4.isSelected == true {
+                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                    self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .selected)
+                    self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .selected)
+                    self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
+                }
+            }else if self.StudyDiffcultybtn2.isSelected == true{
+                self.difficultyStepBar(move: self.StudyDiffcultybtn2.frame.origin.x, addLine: sqrt(pow(touchLocation.x, 2)))
+            }else if self.StudyDiffcultybtn3.isSelected == true{
+                self.difficultyStepBar(move: self.StudyDiffcultybtn3.frame.origin.x, addLine: sqrt(pow(touchLocation.x, 2)))
+            }
+        }
+        self.view.endEditing(true)
+
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.StudyCategoryModel.count
