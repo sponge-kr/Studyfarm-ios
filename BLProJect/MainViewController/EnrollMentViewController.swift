@@ -43,10 +43,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyKindExamplelabel: UILabel!
     @IBOutlet weak var StudyDiffcultylabel: UILabel!
     @IBOutlet weak var StudyDiffcultyView: UIView!
-    @IBOutlet weak var StudyDiffcultybtn1:
-        UIButton!
-    @IBOutlet weak var StudyDiffcultybtn2:
-        UIButton!
+    @IBOutlet weak var StudyDiffcultybtn1: UIButton!
+    @IBOutlet weak var StudyDiffcultybtn2: UIButton!
     @IBOutlet weak var StudyDiffcultybtn3: UIButton!
     @IBOutlet weak var StudyDiffcultybtn4: UIButton!
     @IBOutlet weak var StudyDiffcultylabel1: UILabel!
@@ -101,6 +99,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         sender.inputAccessoryView = pickerToolbar
         sender.inputView = pickerView
     }
+
     let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
     public var StudyCategoryModel = [StudyContentsContainer]()
     override func viewDidLoad() {
@@ -130,11 +129,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultybtn2.addTarget(self, action: #selector(self.difficultyBtnSelect2(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn3.addTarget(self, action: #selector(self.difficultyBtnSelect3(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn4.addTarget(self, action: #selector(self.difficultyBtnSelect4(_:)), for: .touchUpInside)
-        let Tapgesture = UITapGestureRecognizer(target: self, action: #selector(MyTapMethod(sender:)))
-        Tapgesture.numberOfTapsRequired = 1
-        Tapgesture.cancelsTouchesInView = false
-        Tapgesture.isEnabled = true
-        EnrollMentscrollview.addGestureRecognizer(Tapgesture)
+       
     }
     
     public func NavigationLayou() {
@@ -340,7 +335,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             })
         }
     }
-    @objc func OnlineBtnCheck(_ sender: UIButton){
+    @objc
+    func OnlineBtnCheck(_ sender: UIButton){
         if sender.isSelected {
             sender.isSelected = false
         }else{
@@ -368,7 +364,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
     }
     
-    @objc func AddCategoryView() {
+    @objc
+    func AddCategoryView() {
         let window = UIApplication.shared.windows.first
         let screenSize = UIScreen.main.bounds.size
         self.StudyCategoryView.HandlerAreaView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
@@ -401,7 +398,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
-    @objc func ConfirmRemoveCategoryView(_ sender : UIButton){
+    @objc
+    func ConfirmRemoveCategoryView(_ sender : UIButton){
         let screenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.StudyCategoryView.HandlerAreaView.alpha = 0
@@ -410,7 +408,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
-    @objc func RemoveFromCategoryView(recognizer: UITapGestureRecognizer){
+    @objc
+    func RemoveFromCategoryView(recognizer: UITapGestureRecognizer){
         let screenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.StudyCategoryView.HandlerAreaView.alpha = 0
@@ -419,7 +418,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
-    @objc func FirstComeBtnCheck(_ sender : UIButton){
+    @objc
+    func FirstComeBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
         }else{
@@ -438,7 +438,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
     }
     
-    @objc func ReviewBtnCheck(_ sender : UIButton){
+    @objc
+    func ReviewBtnCheck(_ sender : UIButton){
         if sender.isSelected {
             sender.isSelected = false
         }else{
@@ -466,14 +467,167 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     
     @objc
     func difficultyBtnSelect(_ sender : UIButton) {
-        if sender.tag == 1 {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.StudyDiffcultybtn1.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn4.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn3.setNeedsLayout()
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            print("difculrty1 클릭\(sender.isSelected)")
+        } else {
             sender.isSelected = true
+            print("difculrty1 클릭\(sender.isSelected)")
             self.StudyDiffcultybtn1.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StepBarisCheck()
+            self.StudyDiffcultyStepBar()
         }
     }
     
     
-    func difficultyStepBar(move x:CGFloat, addLine x2: CGFloat) {
+    @objc
+    func difficultyBtnSelect2(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            print("difculrty2 클릭\(sender.isSelected)")
+        } else {
+            sender.isSelected = true
+            print("difculrty2 클릭\(sender.isSelected)")
+            self.StudyDiffcultybtn2.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StepBarisCheck()
+            self.StudyDiffcultyStepBar()
+        }
+    }
+    
+    @objc
+    func difficultyBtnSelect3(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            print("difculrty3 클릭\(sender.isSelected)")
+        } else {
+            sender.isSelected = true
+            print("difculrty3 클릭\(sender.isSelected)")
+            self.StudyDiffcultybtn3.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StepBarisCheck()
+            self.StudyDiffcultyStepBar()
+        }
+    }
+    
+    @objc
+    func difficultyBtnSelect4(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultybtn4.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            print("difculrty4 클릭\(sender.isSelected)")
+        } else {
+            sender.isSelected = true
+            self.StudyDiffcultybtn3.isSelected = false
+            print("difculrty4 클릭\(sender.isSelected)")
+            self.StudyDiffcultybtn4.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StepBarisCheck()
+            self.StudyDiffcultyStepBar()
+        }
+    }
+    
+    
+    private func StudyDiffcultyStepBar(){
+        if self.StudyDiffcultybtn1.isSelected == true {
+            self.StudyDiffcultybtn1.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            if self.StudyDiffcultybtn1.isSelected == true  && self.StudyDiffcultybtn2.isSelected == true{
+                self.StudyDiffcultybtn3.isSelected = false
+                self.StudyDiffcultybtn4.isSelected = false
+                self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn2.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+                self.StudyDiffcultybtn1.setNeedsLayout()
+                self.StudyDiffcultybtn2.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn2.frame.origin.x - self.StudyDiffcultybtn1.frame.origin.x,2)))
+            }else if self.StudyDiffcultybtn3.isSelected == true && self.StudyDiffcultybtn1.isSelected == true {
+                self.StudyDiffcultybtn2.isSelected = false
+                self.StudyDiffcultybtn4.isSelected = false
+                self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn1.setNeedsLayout()
+                self.StudyDiffcultybtn2.setNeedsLayout()
+                self.StudyDiffcultybtn3.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn3.frame.origin.x - self.StudyDiffcultybtn1.frame.origin.x, 2)))
+            }else if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn1.isSelected == true{
+                self.StudyDiffcultybtn2.isSelected = false
+                self.StudyDiffcultybtn3.isSelected = false
+                self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
+                self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn1.setNeedsLayout()
+                self.StudyDiffcultybtn2.setNeedsLayout()
+                self.StudyDiffcultybtn3.setNeedsLayout()
+                self.StudyDiffcultybtn4.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn4.frame.origin.x - self.StudyDiffcultybtn1.frame.origin.x, 2)))
+            }
+        }else if self.StudyDiffcultybtn2.isSelected == true {
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            if self.StudyDiffcultybtn2.isSelected == true && self.StudyDiffcultybtn3.isSelected == true{
+                self.StudyDiffcultybtn1.isSelected = false
+                self.StudyDiffcultybtn4.isSelected = false
+                self.StudyDiffcultybtn2.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn2.setNeedsLayout()
+                self.StudyDiffcultybtn3.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn2.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn3.frame.origin.x, 2)))
+            }else if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn2.isSelected == true {
+                self.StudyDiffcultybtn1.isSelected = false
+                self.StudyDiffcultybtn3.isSelected = false
+                self.StudyDiffcultybtn2.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
+                self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn2.setNeedsLayout()
+                self.StudyDiffcultybtn3.setNeedsLayout()
+                self.StudyDiffcultybtn4.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn2.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn4.frame.origin.x, 2)))
+            }
+        }else if self.StudyDiffcultybtn3.isSelected == true {
+            self.StudyDiffcultyView.layer.sublayers = nil
+            self.StudyDiffcultyView.layer.setNeedsDisplay()
+            if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn3.isSelected == true{
+                self.StudyDiffcultybtn1.isSelected = false
+                self.StudyDiffcultybtn2.isSelected = false
+                self.StudyDiffcultybtn3.setImage(UIImage(named: "Group.png"), for: .selected)
+                self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyDiffcultybtn3.setNeedsLayout()
+                self.StudyDiffcultybtn4.setNeedsLayout()
+                self.difficultyStepBar(move: self.StudyDiffcultybtn3.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn4.frame.origin.x, 2)))
+            }
+        }
+    }
+   
+    private func StepBarisCheck(){
+        if self.StudyDiffcultybtn2.image(for: .normal)!.pngData() == UIImage(named: "RedEllipse.png")!.pngData() {
+            self.StudyDiffcultybtn2.isSelected = false
+        }
+        if self.StudyDiffcultybtn3.image(for: .normal)!.pngData() == UIImage(named: "RedEllipse.png")!.pngData() {
+            self.StudyDiffcultybtn3.isSelected = false
+        }
+    }
+    
+    private func difficultyStepBar(move x:CGFloat, addLine x2: CGFloat) {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
         path.move(to: CGPoint(x: x, y: 2))
@@ -487,64 +641,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         animation.duration = 1
         layer.add(animation, forKey: "StepBarAnimation")
         self.StudyDiffcultyView.layer.addSublayer(layer)
-    }
-    
-    @objc
-    func difficultyBtnSelect2(_ sender : UIButton) {
-        if sender.tag == 2 {
-            sender.isSelected = true
-            print("difculrty2 클릭\(sender.isSelected)")
-        }
-    }
-    
-    @objc
-    func difficultyBtnSelect3(_ sender : UIButton) {
-        if sender.tag == 3 {
-            sender.isSelected = true
-            print("difculrty3 클릭\(sender.isSelected)")
-        }
-    }
-    
-    @objc
-    func difficultyBtnSelect4(_ sender : UIButton) {
-        if sender.isSelected {
-            sender.isSelected = true
-
-        }
-    }
-    @objc func MyTapMethod(sender: UITapGestureRecognizer) {
-        if sender.state == .recognized {
-            var touchLocation: CGPoint = sender.location(in: self.StudyDiffcultyView)
-            print("좌표 입니다 \(sender.location(in: self.StudyDiffcultyView))")
-            if self.StudyDiffcultybtn1.isSelected == true {
-                if self.StudyDiffcultybtn2.isSelected == true {
-                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
-                    self.StudyDiffcultybtn2.setImage(UIImage(named: "Groupnext.png"), for: .selected)
-                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
-                }else if self.StudyDiffcultybtn3.isSelected == true {
-                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
-                    self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
-                    self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
-                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
-                }else if self.StudyDiffcultybtn4.isSelected == true {
-                    self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
-                    self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .selected)
-                    self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .selected)
-                    self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
-                    self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(touchLocation.x,2)))
-                }
-            }else if self.StudyDiffcultybtn2.isSelected == true{
-                self.difficultyStepBar(move: self.StudyDiffcultybtn2.frame.origin.x, addLine: sqrt(pow(touchLocation.x, 2)))
-            }else if self.StudyDiffcultybtn3.isSelected == true{
-                self.difficultyStepBar(move: self.StudyDiffcultybtn3.frame.origin.x, addLine: sqrt(pow(touchLocation.x, 2)))
-            }
-        }
-        self.view.endEditing(true)
-
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        self.StudyDiffcultyView.layoutIfNeeded()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -560,7 +658,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
-            
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
