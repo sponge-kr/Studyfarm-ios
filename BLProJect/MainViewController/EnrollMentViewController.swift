@@ -110,11 +110,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studymeettextview.delegate = self
         self.Studygoaltextview.delegate = self
         self.StudyIntroducetextview.delegate = self
+        self.StudyCategorytableview.delegate = self
+        self.StudyCategorytableview.dataSource = self
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
-        self.StudyCategorytableview.delegate = self
-        self.StudyCategorytableview.dataSource = self
         let nibCell = UINib(nibName: "StudyCategoryTableViewCell", bundle: nil)
         self.StudyCategorytableview.register(nibCell, forCellReuseIdentifier: "StudyCategoryCell")
         UtilApi.shared.UtilStudyCategoryCall { result in
@@ -766,6 +766,27 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.Studymeettextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
         }else if textView.tag == 2 && textView.text == "" {
             self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        }
+        if self.Studymeettextview.text.count < 2 {
+            self.Studymeettextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+            self.Studymeetnamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+        }else{
+            self.Studymeettextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+            self.Studymeetnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        }
+        if self.Studygoaltextview.text.count < 2  {
+            self.Studygoaltextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+            self.Studygoalnamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+        }else{
+            self.Studygoaltextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+            self.Studygoalnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        }
+        if self.StudyIntroducetextview.text.count < 2 {
+            self.StudyIntroducetextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+            self.StudyIntroducenamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+        }else{
+            self.StudyIntroducetextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+            self.StudyIntroducenamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         }
     }
     
