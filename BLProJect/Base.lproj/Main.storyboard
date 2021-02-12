@@ -502,34 +502,40 @@
                                                     <constraint firstAttribute="height" constant="58" id="zs6-Hn-LF7"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="스터디 진행 기간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWv-Hj-5Ri">
-                                                <rect key="frame" x="17" y="1238" width="105" height="16"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스터디 진행 기간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWv-Hj-5Ri">
+                                                <rect key="frame" x="17" y="1232" width="105" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="16" id="0Xq-jY-Tox"/>
+                                                    <constraint firstAttribute="width" constant="105" id="WXX-qK-vhL"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="시작 일시" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCb-xs-LAT">
-                                                <rect key="frame" x="22" y="1274" width="45" height="19"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시작 일시" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCb-xs-LAT">
+                                                <rect key="frame" x="22" y="1268" width="45" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="19" id="7RC-De-eaE"/>
+                                                    <constraint firstAttribute="width" constant="45" id="rw6-rQ-HF6"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycb-S9-CjV">
-                                                <rect key="frame" x="20" y="1298" width="162" height="45"/>
+                                                <rect key="frame" x="20" y="1292" width="162" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="마감 일시" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0w-pV-rHD">
-                                                <rect key="frame" x="196" y="1274" width="45" height="19"/>
+                                                <rect key="frame" x="196" y="1268" width="45" height="19"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK9-9v-HXM">
-                                                <rect key="frame" x="194" y="1298" width="162" height="45"/>
+                                                <rect key="frame" x="194" y="1292" width="162" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
@@ -620,6 +626,13 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmo-yV-TRg">
+                                                <rect key="frame" x="331" y="1113" width="65" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -649,6 +662,7 @@
                                             <constraint firstItem="U7m-y5-fI6" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="20" id="LWR-X5-jOx"/>
                                             <constraint firstItem="npg-6g-Uyd" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="15" id="Pg7-Rz-mTV"/>
                                             <constraint firstItem="3W6-0r-pNu" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="20" id="Pvi-br-yPw"/>
+                                            <constraint firstItem="JCb-xs-LAT" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="22" id="Q9n-nX-9Nl"/>
                                             <constraint firstItem="U7m-y5-fI6" firstAttribute="top" secondItem="MXZ-nE-9WJ" secondAttribute="bottom" constant="40" id="Qx2-Vd-Zql"/>
                                             <constraint firstItem="xn3-7l-bDx" firstAttribute="leading" secondItem="tPO-kM-HBW" secondAttribute="trailing" constant="6" id="RZB-Xy-hXF"/>
                                             <constraint firstItem="yE3-Dq-o0Y" firstAttribute="top" secondItem="ZDo-Kr-YdJ" secondAttribute="bottom" constant="10" id="Xgv-fR-ZOJ"/>
@@ -656,12 +670,14 @@
                                             <constraint firstItem="tPO-kM-HBW" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="23" id="YOW-mV-u21"/>
                                             <constraint firstItem="tPO-kM-HBW" firstAttribute="top" secondItem="IRx-bf-XkB" secondAttribute="bottom" constant="20" id="ZGb-Qo-wBD"/>
                                             <constraint firstItem="yWh-jA-6E6" firstAttribute="top" secondItem="dxU-xv-WMt" secondAttribute="bottom" constant="16" id="Zbr-5E-pIY"/>
+                                            <constraint firstItem="bWv-Hj-5Ri" firstAttribute="top" secondItem="npg-6g-Uyd" secondAttribute="bottom" constant="34" id="bMn-fJ-gz2"/>
                                             <constraint firstItem="IRx-bf-XkB" firstAttribute="top" secondItem="UYe-p4-IqB" secondAttribute="bottom" constant="12" id="bc0-mk-OtE"/>
                                             <constraint firstItem="ZDo-Kr-YdJ" firstAttribute="top" secondItem="dxU-xv-WMt" secondAttribute="bottom" constant="12" id="c7X-tj-ieK"/>
                                             <constraint firstItem="cKV-z5-orM" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="20" id="dSd-Nn-OjQ"/>
                                             <constraint firstItem="rKL-he-6mc" firstAttribute="top" secondItem="TL1-zY-qiq" secondAttribute="bottom" id="dsE-Pm-9Tw"/>
                                             <constraint firstItem="dcV-cB-x5C" firstAttribute="top" secondItem="yE3-Dq-o0Y" secondAttribute="bottom" constant="38" id="e2R-MM-sJL"/>
                                             <constraint firstItem="dxU-xv-WMt" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="20" id="e44-ej-DUB"/>
+                                            <constraint firstItem="JCb-xs-LAT" firstAttribute="top" secondItem="bWv-Hj-5Ri" secondAttribute="bottom" constant="20" id="eK2-YF-627"/>
                                             <constraint firstItem="cKV-z5-orM" firstAttribute="top" secondItem="UT9-6X-orp" secondAttribute="top" constant="40" id="fnr-Vs-dKp"/>
                                             <constraint firstItem="npg-6g-Uyd" firstAttribute="top" secondItem="ee4-ex-x1z" secondAttribute="bottom" constant="8" id="gGo-Wb-ZQ3"/>
                                             <constraint firstAttribute="trailing" secondItem="3UO-By-0RO" secondAttribute="trailing" constant="17" id="gMh-q1-uIB"/>
@@ -679,6 +695,7 @@
                                             <constraint firstItem="3W6-0r-pNu" firstAttribute="top" secondItem="4WW-86-Yqy" secondAttribute="bottom" constant="24" id="rtG-so-zNk"/>
                                             <constraint firstItem="IRx-bf-XkB" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="20" id="sWT-F2-3S4"/>
                                             <constraint firstItem="hvC-HT-4Pf" firstAttribute="top" secondItem="hHJ-mY-rfV" secondAttribute="bottom" constant="37" id="sYf-Hb-Tkp"/>
+                                            <constraint firstItem="bWv-Hj-5Ri" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="17" id="seO-ER-qjJ"/>
                                             <constraint firstItem="hvC-HT-4Pf" firstAttribute="leading" secondItem="UT9-6X-orp" secondAttribute="leading" constant="24" id="snq-WB-kWO"/>
                                             <constraint firstItem="ee4-ex-x1z" firstAttribute="top" secondItem="RQH-sF-AHf" secondAttribute="bottom" constant="40" id="t4h-zF-5gQ"/>
                                             <constraint firstAttribute="trailing" secondItem="3W6-0r-pNu" secondAttribute="trailing" constant="20" id="uQG-08-fLw"/>
@@ -765,6 +782,7 @@
                         <outlet property="StudyKindInfobtn" destination="MEB-TU-dk2" id="DV2-uG-ppR"/>
                         <outlet property="StudyKindInfolabel" destination="hfp-iR-0a1" id="qxq-Xs-cpX"/>
                         <outlet property="StudyTermlabel" destination="bWv-Hj-5Ri" id="fT3-kF-HAS"/>
+                        <outlet property="StudyUserDiffcultylabel" destination="pmo-yV-TRg" id="YuR-TG-coV"/>
                         <outlet property="Studyarealabel" destination="U7m-y5-fI6" id="w3h-wC-fMD"/>
                         <outlet property="Studygoalnamelabel" destination="VTa-U0-p0R" id="bV5-Yt-QvO"/>
                         <outlet property="Studygoaltextcountlabel" destination="6bX-NJ-vSU" id="lrp-dh-7cF"/>

@@ -47,6 +47,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyDiffcultybtn2: UIButton!
     @IBOutlet weak var StudyDiffcultybtn3: UIButton!
     @IBOutlet weak var StudyDiffcultybtn4: UIButton!
+    @IBOutlet weak var StudyUserDiffcultylabel: UILabel!
     @IBOutlet weak var StudyDiffcultylabel1: UILabel!
     @IBOutlet weak var StudyDiffcultylabel2: UILabel!
     @IBOutlet weak var StudyDiffcultylabel3: UILabel!
@@ -241,6 +242,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultylabel3.attributedText = NSAttributedString(string: "중급", attributes: [NSAttributedString.Key.kern : -0.77])
         self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
         self.StudyDiffcultylabel4.attributedText = NSAttributedString(string: "상급", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.StudyUserDiffcultylabel.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern : -0.66])
+        self.StudyUserDiffcultylabel.textAlignment = .center
     }
     
     
@@ -473,7 +476,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn4.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
-            self.StudyDiffcultybtn3.setNeedsLayout()
+            self.StudyDiffcultylabel1.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+            self.StepBarTextCheck()
             self.StudyDiffcultyView.layer.sublayers = nil
             self.StudyDiffcultyView.layer.setNeedsDisplay()
             print("difculrty1 클릭\(sender.isSelected)")
@@ -481,6 +485,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = true
             print("difculrty1 클릭\(sender.isSelected)")
             self.StudyDiffcultybtn1.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel1.text!)"
+            self.StudyUserDiffcultylabel.textAlignment = .right
+            self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.StudyDiffcultylabel1.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
             self.StepBarisCheck()
             self.StudyDiffcultyStepBar()
         }
@@ -493,6 +501,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = false
             self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultylabel2.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+            self.StepBarTextCheck()
             self.StudyDiffcultyView.layer.sublayers = nil
             self.StudyDiffcultyView.layer.setNeedsDisplay()
             print("difculrty2 클릭\(sender.isSelected)")
@@ -500,6 +510,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = true
             print("difculrty2 클릭\(sender.isSelected)")
             self.StudyDiffcultybtn2.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel2.text!)"
+            self.StudyUserDiffcultylabel.textAlignment = .right
+            self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
             self.StepBarisCheck()
             self.StudyDiffcultyStepBar()
         }
@@ -511,6 +525,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = false
             self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultylabel3.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+            self.StepBarTextCheck()
             self.StudyDiffcultyView.layer.sublayers = nil
             self.StudyDiffcultyView.layer.setNeedsDisplay()
             print("difculrty3 클릭\(sender.isSelected)")
@@ -518,6 +534,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = true
             print("difculrty3 클릭\(sender.isSelected)")
             self.StudyDiffcultybtn3.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel3.text!)"
+            self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.StudyUserDiffcultylabel.textAlignment = .right
+            self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
             self.StepBarisCheck()
             self.StudyDiffcultyStepBar()
         }
@@ -530,14 +550,20 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyDiffcultybtn2.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
             self.StudyDiffcultybtn4.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+            self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+            self.StepBarTextCheck()
             self.StudyDiffcultyView.layer.sublayers = nil
             self.StudyDiffcultyView.layer.setNeedsDisplay()
             print("difculrty4 클릭\(sender.isSelected)")
         } else {
             sender.isSelected = true
-            self.StudyDiffcultybtn3.isSelected = false
+//            self.StudyDiffcultybtn3.isSelected = false
             print("difculrty4 클릭\(sender.isSelected)")
             self.StudyDiffcultybtn4.setImage(UIImage(named: "RedCheck.png"), for: .selected)
+            self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel4.text!)"
+            self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.StudyUserDiffcultylabel.textAlignment = .right
+            self.StudyDiffcultylabel4.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
             self.StepBarisCheck()
             self.StudyDiffcultyStepBar()
         }
@@ -555,26 +581,43 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
                 self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn2.setImage(UIImage(named: "Groupnext.png"), for: .selected)
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "GrayEllipse.png"), for: .normal)
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel1.text!) ~ \(self.StudyDiffcultylabel2.text!)"
+                self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                 self.StudyDiffcultybtn1.setNeedsLayout()
                 self.StudyDiffcultybtn2.setNeedsLayout()
                 self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn2.frame.origin.x - self.StudyDiffcultybtn1.frame.origin.x,2)))
-            }else if self.StudyDiffcultybtn3.isSelected == true && self.StudyDiffcultybtn1.isSelected == true {
+            }else if self.StudyDiffcultybtn1.isSelected == true && self.StudyDiffcultybtn3.isSelected == true {
                 self.StudyDiffcultybtn2.isSelected = false
                 self.StudyDiffcultybtn4.isSelected = false
                 self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel1.text!) ~ \(self.StudyDiffcultylabel3.text!)"
+                self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
                 self.StudyDiffcultybtn1.setNeedsLayout()
                 self.StudyDiffcultybtn2.setNeedsLayout()
                 self.StudyDiffcultybtn3.setNeedsLayout()
                 self.difficultyStepBar(move: self.StudyDiffcultybtn1.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn3.frame.origin.x - self.StudyDiffcultybtn1.frame.origin.x, 2)))
-            }else if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn1.isSelected == true{
+            }else if self.StudyDiffcultybtn1.isSelected == true && self.StudyDiffcultybtn4.isSelected == true{
                 self.StudyDiffcultybtn2.isSelected = false
                 self.StudyDiffcultybtn3.isSelected = false
                 self.StudyDiffcultybtn1.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn2.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
                 self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel1.text!) ~ \(self.StudyDiffcultylabel4.text!)"
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
                 self.StudyDiffcultybtn1.setNeedsLayout()
                 self.StudyDiffcultybtn2.setNeedsLayout()
                 self.StudyDiffcultybtn3.setNeedsLayout()
@@ -589,15 +632,27 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
                 self.StudyDiffcultybtn4.isSelected = false
                 self.StudyDiffcultybtn2.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel2.text!) ~ \(self.StudyDiffcultylabel3.text!)"
+                self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
                 self.StudyDiffcultybtn2.setNeedsLayout()
                 self.StudyDiffcultybtn3.setNeedsLayout()
                 self.difficultyStepBar(move: self.StudyDiffcultybtn2.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn3.frame.origin.x, 2)))
-            }else if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn2.isSelected == true {
+            }else if self.StudyDiffcultybtn2.isSelected == true && self.StudyDiffcultybtn4.isSelected == true {
                 self.StudyDiffcultybtn1.isSelected = false
                 self.StudyDiffcultybtn3.isSelected = false
                 self.StudyDiffcultybtn2.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "RedEllipse.png"), for: .normal)
                 self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel2.text!) ~ \(self.StudyDiffcultylabel4.text!)"
+                self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
                 self.StudyDiffcultybtn2.setNeedsLayout()
                 self.StudyDiffcultybtn3.setNeedsLayout()
                 self.StudyDiffcultybtn4.setNeedsLayout()
@@ -606,18 +661,34 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }else if self.StudyDiffcultybtn3.isSelected == true {
             self.StudyDiffcultyView.layer.sublayers = nil
             self.StudyDiffcultyView.layer.setNeedsDisplay()
-            if self.StudyDiffcultybtn4.isSelected == true && self.StudyDiffcultybtn3.isSelected == true{
+            if self.StudyDiffcultybtn3.isSelected == true && self.StudyDiffcultybtn4.isSelected == true{
                 self.StudyDiffcultybtn1.isSelected = false
                 self.StudyDiffcultybtn2.isSelected = false
                 self.StudyDiffcultybtn3.setImage(UIImage(named: "Group.png"), for: .selected)
                 self.StudyDiffcultybtn4.setImage(UIImage(named: "Groupnext.png"), for: .selected)
+                self.StudyUserDiffcultylabel.text = "\(self.StudyDiffcultylabel3.text!) ~ \(self.StudyDiffcultylabel4.text!)"
+                self.StudyUserDiffcultylabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel3.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel4.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+                self.StudyDiffcultylabel1.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+                self.StudyDiffcultylabel2.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
                 self.StudyDiffcultybtn3.setNeedsLayout()
                 self.StudyDiffcultybtn4.setNeedsLayout()
                 self.difficultyStepBar(move: self.StudyDiffcultybtn3.frame.origin.x, addLine: sqrt(pow(self.StudyDiffcultybtn4.frame.origin.x, 2)))
             }
         }
     }
-   
+    
+    private func StepBarTextCheck() {
+        if self.StudyDiffcultybtn2.image(for: .normal)!.pngData() == UIImage(named: "GrayEllipse.png")!.pngData() {
+            self.StudyDiffcultylabel2.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        }
+        if self.StudyDiffcultybtn3.image(for: .normal)!.pngData() == UIImage(named: "GrayEllipse.png")!.pngData() {
+            self.StudyDiffcultylabel3.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        }
+        
+    }
+    
     private func StepBarisCheck(){
         if self.StudyDiffcultybtn2.image(for: .normal)!.pngData() == UIImage(named: "RedEllipse.png")!.pngData() {
             self.StudyDiffcultybtn2.isSelected = false
