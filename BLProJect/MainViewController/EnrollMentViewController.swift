@@ -130,6 +130,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultybtn2.addTarget(self, action: #selector(self.difficultyBtnSelect2(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn3.addTarget(self, action: #selector(self.difficultyBtnSelect3(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn4.addTarget(self, action: #selector(self.difficultyBtnSelect4(_:)), for: .touchUpInside)
+        self.LimitBtn.addTarget(self, action: #selector(self.LimitPersonBtnSelect(_:)), for: .touchUpInside)
+        self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
        
     }
     
@@ -569,6 +571,34 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
     }
     
+    @objc
+    func LimitPersonBtnSelect(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.LimitBtn.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.RecruitmentBtn.isEnabled = true
+        }else {
+            sender.isSelected = true
+            self.LimitBtn.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.RecruitmentBtn.isEnabled = false
+        }
+    }
+    
+    @objc
+    func LimitDateBtnSelect1(_ sender : UIButton) {
+        if  sender.isSelected {
+            sender.isSelected = false
+            self.Limitbtn2.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.Studystartdatebtn.isEnabled = true
+            self.Studylastdatebtn.isEnabled = true
+        } else {
+            sender.isSelected = true
+            self.Limitbtn2.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.Studystartdatebtn.isEnabled = false
+            self.Studylastdatebtn.isEnabled = false
+        }
+    }
+    
     
     private func StudyDiffcultyStepBar(){
         if self.StudyDiffcultybtn1.isSelected == true {
@@ -709,7 +739,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.duration = 1
+        animation.duration = 0.25
         layer.add(animation, forKey: "StepBarAnimation")
         self.StudyDiffcultyView.layer.addSublayer(layer)
         self.StudyDiffcultyView.layoutIfNeeded()
