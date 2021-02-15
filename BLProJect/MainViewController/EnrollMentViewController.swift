@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FSCalendar
 
-class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource {
+class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource,FSCalendarDelegate,FSCalendarDataSource {
     @IBOutlet weak var ContainerView: UIView!
     @IBOutlet var StudyCategoryView: StudyCategoryView!
     @IBOutlet weak var StudyCategorytableview: UITableView!
@@ -70,6 +71,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyIntroducecountlabel: UILabel!
     @IBOutlet weak var Studypostbtn: UIButton!
     @IBOutlet weak var StudyKindInfoTopconstraint: NSLayoutConstraint!
+    @IBOutlet weak var StudymeetExamplelabel: UILabel!
+    @IBOutlet weak var StudygoalExamplelabel: UILabel!
+    @IBOutlet weak var StudyIntroduceExamplelabel: UILabel!
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
         let pickerToolView = UIToolbar()
@@ -134,6 +138,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
        
     }
+    
+    
     
     public func NavigationLayou() {
         self.navigationItem.title = "스터디 만들기"
@@ -246,6 +252,12 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultylabel4.attributedText = NSAttributedString(string: "상급", attributes: [NSAttributedString.Key.kern: -0.77])
         self.StudyUserDiffcultylabel.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern : -0.66])
         self.StudyUserDiffcultylabel.textAlignment = .center
+        self.StudymeetExamplelabel.isHidden = true
+        self.StudymeetExamplelabel.textAlignment = .left
+        self.StudygoalExamplelabel.isHidden = true
+        self.StudygoalExamplelabel.textAlignment = .left
+        self.StudyIntroduceExamplelabel.isHidden = true
+        self.StudyIntroduceExamplelabel.textAlignment = .left
     }
     
     
@@ -581,6 +593,15 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = true
             self.LimitBtn.setImage(UIImage(named: "squarebox.png"), for: .selected)
             self.RecruitmentBtn.isEnabled = false
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.LimitBtn.setImage(UIImage(named: "squarebox.png"), for: .selected)
+                    self.LimitBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.LimitBtn.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
         }
     }
     
@@ -596,6 +617,15 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.Limitbtn2.setImage(UIImage(named: "squarebox.png"), for: .selected)
             self.Studystartdatebtn.isEnabled = false
             self.Studylastdatebtn.isEnabled = false
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
+                    self.Limitbtn2.setImage(UIImage(named: "squarebox.png"), for: .selected)
+                    self.Limitbtn2.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.Limitbtn2.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }
+            })
         }
     }
     
@@ -796,30 +826,45 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.Studymeettextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
         }else if textView.tag == 2 && textView.text == "" {
             self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+        }else if textView.tag == 3 && textView.text == "" {
+            self.StudyIntroducetextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
+            
         }
         if self.Studymeettextview.text.count < 2 {
             self.Studymeettextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
             self.Studymeetnamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudymeetExamplelabel.attributedText = NSAttributedString(string: "마감 일시는 시작 일시보다 뒤로 설정해주세요.", attributes: [NSAttributedString.Key.kern : -0.66])
+            self.StudymeetExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudymeetExamplelabel.isHidden = false
         }else{
             self.Studymeettextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.Studymeetnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.StudymeetExamplelabel.isHidden = true
         }
         if self.Studygoaltextview.text.count < 2  {
             self.Studygoaltextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
             self.Studygoalnamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudygoalExamplelabel.attributedText = NSAttributedString(string: "목표가 너무 짧습니다. ( 2자~ 60자 )", attributes: [NSAttributedString.Key.kern : -0.66])
+            self.StudygoalExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudygoalExamplelabel.isHidden = false
         }else{
             self.Studygoaltextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.Studygoalnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.StudygoalExamplelabel.isHidden = true
         }
         if self.StudyIntroducetextview.text.count < 2 {
             self.StudyIntroducetextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
             self.StudyIntroducenamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudyIntroduceExamplelabel.attributedText = NSAttributedString(string: "스터디 소개가 너무 짧습니다. ( 20자~ 1000자 )", attributes: [NSAttributedString.Key.kern : -0.66])
+            self.StudyIntroduceExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+            self.StudyIntroduceExamplelabel.isHidden = false
         }else{
             self.StudyIntroducetextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.StudyIntroducenamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+            self.StudyIntroduceExamplelabel.isHidden = true
+            
         }
     }
-    
     
     func textViewDidChange(_ textView: UITextView) {
         if textView.tag == 1 {
@@ -853,6 +898,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
         return true
     }
+    
 }
 
 class StudyCategoryView: UIView {

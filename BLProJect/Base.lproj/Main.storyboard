@@ -677,6 +677,27 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otj-vK-KTc">
+                                                <rect key="frame" x="24" y="1512" width="214" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7b-4j-f3M">
+                                                <rect key="frame" x="24" y="1657" width="170" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEE-a6-89l">
+                                                <rect key="frame" x="24" y="1888" width="224" height="19"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -854,6 +875,7 @@
                         <outlet property="StudyDiffcultylabel2" destination="rDg-WC-vH2" id="nyN-s6-f91"/>
                         <outlet property="StudyDiffcultylabel3" destination="Xe0-eC-SGu" id="dzf-EZ-nNa"/>
                         <outlet property="StudyDiffcultylabel4" destination="Cgs-4g-NOs" id="knD-xt-bov"/>
+                        <outlet property="StudyIntroduceExamplelabel" destination="JEE-a6-89l" id="uvu-z8-wdf"/>
                         <outlet property="StudyIntroducecountlabel" destination="mvK-nQ-dgf" id="Yy0-Q1-8x3"/>
                         <outlet property="StudyIntroducenamelabel" destination="Yfy-3m-rq4" id="sxY-na-wQB"/>
                         <outlet property="StudyIntroducetextview" destination="zYo-Rh-yWv" id="Fvl-Op-CTQ"/>
@@ -864,11 +886,13 @@
                         <outlet property="StudyTermlabel" destination="bWv-Hj-5Ri" id="fT3-kF-HAS"/>
                         <outlet property="StudyUserDiffcultylabel" destination="pmo-yV-TRg" id="YuR-TG-coV"/>
                         <outlet property="Studyarealabel" destination="U7m-y5-fI6" id="w3h-wC-fMD"/>
+                        <outlet property="StudygoalExamplelabel" destination="Y7b-4j-f3M" id="P5H-Rt-9y4"/>
                         <outlet property="Studygoalnamelabel" destination="VTa-U0-p0R" id="bV5-Yt-QvO"/>
                         <outlet property="Studygoaltextcountlabel" destination="6bX-NJ-vSU" id="lrp-dh-7cF"/>
                         <outlet property="Studygoaltextview" destination="JZM-1u-KMe" id="wpl-qL-AKs"/>
                         <outlet property="Studylastdatebtn" destination="MK9-9v-HXM" id="MMP-cs-1dM"/>
                         <outlet property="Studylastdatelabel" destination="T0w-pV-rHD" id="h7b-Bb-1h9"/>
+                        <outlet property="StudymeetExamplelabel" destination="otj-vK-KTc" id="M55-wx-yUL"/>
                         <outlet property="Studymeetnamelabel" destination="Uxy-sN-f7w" id="phM-Iw-gWh"/>
                         <outlet property="Studymeettextcountlabel" destination="NB9-XF-liC" id="NqU-qi-Ls5"/>
                         <outlet property="Studymeettextview" destination="Vrg-AV-ctI" id="G47-KF-nDP"/>

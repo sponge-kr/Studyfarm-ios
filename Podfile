@@ -15,6 +15,7 @@ target 'BLProJect' do
   pod 'SwiftKeychainWrapper'
   pod 'GoogleSignIn'
   pod 'SwiftLint'
+  pod 'FSCalendar'
 
   # Pods for BLProJect
 

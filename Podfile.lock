@@ -5,6 +5,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - FSCalendar (2.8.2)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -41,6 +42,7 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - FSCalendar
   - GoogleSignIn
   - KakaoSDKAuth
   - KakaoSDKCommon
@@ -57,6 +59,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AppAuth
+    - FSCalendar
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
@@ -75,6 +78,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
@@ -90,6 +94,6 @@ SPEC CHECKSUMS:
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 05b317cbdeea19b08d064ddbbb808a8efb5c932f
+PODFILE CHECKSUM: cde37f0891ffb04c711d4f65fb84bdc2e02084ae
 
 COCOAPODS: 1.10.0
