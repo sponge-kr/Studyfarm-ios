@@ -73,6 +73,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudyKindInfoTopconstraint: NSLayoutConstraint!
     @IBOutlet weak var StudymeetExamplelabel: UILabel!
     @IBOutlet weak var StudygoalExamplelabel: UILabel!
+    @IBOutlet var FirstDateCalendar: FSCalendar!
     @IBOutlet weak var StudyIntroduceExamplelabel: UILabel!
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
@@ -113,6 +114,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.EnrollMentscrollview.delegate = self
         self.Studymeettextview.delegate = self
         self.Studygoaltextview.delegate = self
+        self.FirstDateCalendar.delegate = self
+        self.FirstDateCalendar.dataSource = self
         self.StudyIntroducetextview.delegate = self
         self.StudyCategorytableview.delegate = self
         self.StudyCategorytableview.dataSource = self
@@ -136,7 +139,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyDiffcultybtn4.addTarget(self, action: #selector(self.difficultyBtnSelect4(_:)), for: .touchUpInside)
         self.LimitBtn.addTarget(self, action: #selector(self.LimitPersonBtnSelect(_:)), for: .touchUpInside)
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
-       
+        self.Studystartdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveTapgestureCalendar(recognizer:)))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     
@@ -415,6 +420,44 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
+    @objc
+    public func setFSCalendarLayoutInit(){
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        self.FirstDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        self.FirstDateCalendar.appearance.headerDateFormat = "YYYY년 M월"
+        self.FirstDateCalendar.appearance.headerTitleColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.FirstDateCalendar.appearance.weekdayTextColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.FirstDateCalendar.layer.borderWidth = 1.0
+        self.FirstDateCalendar.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.FirstDateCalendar.appearance.selectionColor = UIColor.black
+        self.FirstDateCalendar.appearance.todayColor = UIColor.black
+        self.FirstDateCalendar.layer.cornerRadius = 8
+        self.FirstDateCalendar.layer.shadowColor = UIColor.darkGray.cgColor
+        self.FirstDateCalendar.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.FirstDateCalendar.layer.shadowOpacity = 0.2
+        self.FirstDateCalendar.layer.shadowRadius = 4.0
+        self.FirstDateCalendar.layer.masksToBounds = true
+        self.FirstDateCalendar.appearance.weekdayFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.FirstDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
+        self.FirstDateCalendar.locale = Locale(identifier: "ko_KR")
+        self.FirstDateCalendar.allowsMultipleSelection = true
+        self.FirstDateCalendar.tag = 5
+        self.view.addSubview(self.FirstDateCalendar)
+        self.FirstDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.FirstDateCalendar.frame = CGRect(x: 20, y: screenSize.height - screenSize.height / 1.6, width: 340, height: 300)
+            self.view.addSubview(self.FirstDateCalendar)
+
+        }, completion: nil)
+    }
+    
+    @objc
+    func RemoveTapgestureCalendar(recognizer: UITapGestureRecognizer) {
+        if let viewWithTag = self.view.viewWithTag(5){
+            viewWithTag.removeFromSuperview()
+        }
+    }
     @objc
     func ConfirmRemoveCategoryView(_ sender : UIButton){
         let screenSize = UIScreen.main.bounds.size
@@ -897,6 +940,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             return changeText.count <= 1000
         }
         return true
+    }
+    public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let dateFormatter = DateFormatter()
+        
     }
     
 }

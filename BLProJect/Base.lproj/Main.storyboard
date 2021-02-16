@@ -843,6 +843,7 @@
                         <outlet property="FirstComeBtn" destination="hHJ-mY-rfV" id="Sxu-09-GmK"/>
                         <outlet property="FirstComeExampleLabel" destination="rKL-he-6mc" id="Bzb-V7-7LG"/>
                         <outlet property="FirstComeLabel" destination="TL1-zY-qiq" id="hOh-54-pIW"/>
+                        <outlet property="FirstDateCalendar" destination="PTs-hQ-fzr" id="AXT-bh-Fvo"/>
                         <outlet property="LimitBtn" destination="tPO-kM-HBW" id="hfb-nr-ZYc"/>
                         <outlet property="Limitbtn2" destination="hcr-E0-nGO" id="nJZ-Ze-aEm"/>
                         <outlet property="Limitlabel" destination="xn3-7l-bDx" id="q50-M8-tMU"/>
@@ -902,6 +903,23 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-aX-Exn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="PTs-hQ-fzr" customClass="FSCalendar">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="207"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="8ko-yy-Gsh"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="firstWeekday">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="headerHeight">
+                            <real key="value" value="-1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="weekdayHeight">
+                            <real key="value" value="-1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
                 <view contentMode="scaleToFill" id="pmt-GV-Nen" customClass="StudyCategoryView" customModule="스터디팜" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
