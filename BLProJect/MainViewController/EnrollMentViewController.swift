@@ -9,7 +9,7 @@
 import UIKit
 import FSCalendar
 
-class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource,FSCalendarDelegate,FSCalendarDataSource {
+class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var ContainerView: UIView!
     @IBOutlet var StudyCategoryView: StudyCategoryView!
     @IBOutlet weak var StudyCategorytableview: UITableView!
@@ -425,13 +425,14 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let window = UIApplication.shared.windows.first
         let screenSize = UIScreen.main.bounds.size
         self.FirstDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        self.FirstDateCalendar.appearance.headerDateFormat = "YYYY년 M월"
-        self.FirstDateCalendar.appearance.headerTitleColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
-        self.FirstDateCalendar.appearance.weekdayTextColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.FirstDateCalendar.appearance.headerDateFormat = "YYYY. MM"
+        self.FirstDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 20)
+        self.FirstDateCalendar.appearance.headerTitleColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.FirstDateCalendar.appearance.weekdayTextColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
         self.FirstDateCalendar.layer.borderWidth = 1.0
         self.FirstDateCalendar.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
-        self.FirstDateCalendar.appearance.selectionColor = UIColor.black
-        self.FirstDateCalendar.appearance.todayColor = UIColor.black
+        self.FirstDateCalendar.appearance.selectionColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.FirstDateCalendar.appearance.todayColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.FirstDateCalendar.layer.cornerRadius = 8
         self.FirstDateCalendar.layer.shadowColor = UIColor.darkGray.cgColor
         self.FirstDateCalendar.layer.shadowOffset = CGSize(width: 1, height: 1)
@@ -443,18 +444,27 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.FirstDateCalendar.locale = Locale(identifier: "ko_KR")
         self.FirstDateCalendar.allowsMultipleSelection = true
         self.FirstDateCalendar.tag = 5
-        self.view.addSubview(self.FirstDateCalendar)
+        self.FirstDateCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "CELL")
+        self.FirstDateCalendar.headerHeight = 68
+        self.FirstDateCalendar.calendarWeekdayView.frame = CGRect(x: self.FirstDateCalendar.calendarWeekdayView.frame.origin.x, y: self.FirstDateCalendar.calendarWeekdayView.frame.origin.y + 40, width: self.FirstDateCalendar.calendarWeekdayView.frame.size.width, height: self.FirstDateCalendar.calendarWeekdayView.frame.size.height)
+        let FirstCalendarBtn = UIButton(frame: CGRect(x: 20, y: 26, width: 8, height: 20))
+        FirstCalendarBtn.setTitle("", for: .normal)
+        FirstCalendarBtn.setImage(UIImage(named: "Navigation.png"), for: .normal)
+        FirstCalendarBtn.tintColor = UIColor.black
+        self.FirstDateCalendar.addSubview(FirstCalendarBtn)
+        window?.addSubview(self.FirstDateCalendar)
         self.FirstDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.FirstDateCalendar.frame = CGRect(x: 20, y: screenSize.height - screenSize.height / 1.6, width: 340, height: 300)
-            self.view.addSubview(self.FirstDateCalendar)
 
         }, completion: nil)
     }
     
+    
     @objc
     func RemoveTapgestureCalendar(recognizer: UITapGestureRecognizer) {
-        if let viewWithTag = self.view.viewWithTag(5){
+        let window = UIApplication.shared.windows.first
+        if let viewWithTag = window?.viewWithTag(5){
             viewWithTag.removeFromSuperview()
         }
     }
@@ -941,11 +951,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
         return true
     }
-    public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        
-    }
-    
+   
 }
 
 class StudyCategoryView: UIView {
@@ -989,3 +995,18 @@ class PickerButton : UIButton {
     }
     
 }
+
+extension EnrollMentViewController : FSCalendarDataSource,FSCalendarDelegate {
+    public func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let dateCell = calendar.dequeueReusableCell(withIdentifier: "CELL", for: date, at: position)
+        return dateCell
+        
+    }
+    
+    public func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentPage = calendar.currentPage
+        let month = Calendar.current.component(.month, from: currentPage)
+        let currnetPageSet = calendar.setCurrentPage(currentPage, animated: true)
+    }
+}
+
