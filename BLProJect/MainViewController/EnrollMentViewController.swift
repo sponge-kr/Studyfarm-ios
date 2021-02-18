@@ -74,6 +74,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudymeetExamplelabel: UILabel!
     @IBOutlet weak var StudygoalExamplelabel: UILabel!
     @IBOutlet var FirstDateCalendar: FSCalendar!
+    @IBOutlet var LastDateCalendar: FSCalendar!
     @IBOutlet weak var StudyIntroduceExamplelabel: UILabel!
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
@@ -107,6 +108,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     }
 
     let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
+    var FirstDate : Date? = nil
+    var LastDate : Date? = nil
     public var StudyCategoryModel = [StudyContentsContainer]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +119,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studygoaltextview.delegate = self
         self.FirstDateCalendar.delegate = self
         self.FirstDateCalendar.dataSource = self
+        self.LastDateCalendar.delegate = self
+        self.LastDateCalendar.dataSource = self
         self.StudyIntroducetextview.delegate = self
         self.StudyCategorytableview.delegate = self
         self.StudyCategorytableview.dataSource = self
@@ -140,7 +145,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.LimitBtn.addTarget(self, action: #selector(self.LimitPersonBtnSelect(_:)), for: .touchUpInside)
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
         self.Studystartdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
-        self.Studylastdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
+        self.Studylastdatebtn.addTarget(self, action: #selector(self.setLastFSCalendarLayoutInit), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveTapgestureCalendar(recognizer:)))
         self.view.addGestureRecognizer(tapGesture)
     }
@@ -150,8 +155,11 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let winodw = UIApplication.shared.windows.first
-        if let CalendarTag = winodw?.viewWithTag(5){
-            CalendarTag.removeFromSuperview()
+        if let FirstCalendarTag = winodw?.viewWithTag(5) {
+            FirstCalendarTag.removeFromSuperview()
+        }
+        if let LastCalnedarTag = winodw?.viewWithTag(6) {
+            LastCalnedarTag.removeFromSuperview()
         }
     }
 
@@ -285,7 +293,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyTermlabel.attributedText = NSAttributedString(string: "스터디 진행 기간", attributes: [NSAttributedString.Key.kern: -0.88])
         self.Studystartdatelabel.textColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
         self.Studystartdatelabel.attributedText = NSAttributedString(string: "시작 일시", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        self.Studystartdatebtn.setAttributedTitle(NSAttributedString(string: "날짜 선택", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size:16)]), for: .normal)
+        self.Studystartdatebtn.setTitle("날짜 선택", for: .normal)
+        self.Studystartdatebtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size:16)
         self.Studystartdatebtn.setTitleColor(UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0), for: .normal)
         self.Studystartdatebtn.layer.borderWidth = 1
         self.Studystartdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
@@ -297,7 +306,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studylastdatelabel.attributedText = NSAttributedString(string: "마감 일시", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.paragraphStyle:paragraphStyle])
         self.Studylastdatebtn.setTitle("날짜 선택", for: .normal)
         self.Studylastdatebtn.setTitleColor(UIColor(red: 111/255, green: 111/255, blue: 111/255, alpha: 1.0), for: .normal)
-        self.Studylastdatebtn.setAttributedTitle(NSAttributedString(string: "날짜 선택", attributes: [NSAttributedString.Key.kern: -0.66,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)]), for: .normal)
+        self.Studylastdatebtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size:16)
         self.Studylastdatebtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
         self.Studylastdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
         self.Studylastdatebtn.layer.borderWidth = 1.0
@@ -433,6 +442,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @objc
     public func setFSCalendarLayoutInit(){
         let window = UIApplication.shared.windows.first
+        if let LastCalendar = window?.viewWithTag(6){
+            LastCalendar.removeFromSuperview()
+        }
         let screenSize = UIScreen.main.bounds.size
         self.FirstDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
         self.FirstDateCalendar.appearance.headerDateFormat = "YYYY. MM"
@@ -453,7 +465,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.FirstDateCalendar.appearance.weekdayFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
         self.FirstDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
         self.FirstDateCalendar.locale = Locale(identifier: "ko_KR")
-        self.FirstDateCalendar.allowsMultipleSelection = true
+        self.FirstDateCalendar.allowsMultipleSelection = false
         self.FirstDateCalendar.tag = 5
         self.FirstDateCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "CELL")
         self.FirstDateCalendar.headerHeight = 68
@@ -462,7 +474,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         FirstCalendarBtn.setTitle("", for: .normal)
         FirstCalendarBtn.setImage(UIImage(named: "Navigation.png"), for: .normal)
         FirstCalendarBtn.tintColor = UIColor.black
-        FirstCalendarBtn.addTarget(self, action: #selector(self.MoveMonthCalendar), for: .touchUpInside)
+        FirstCalendarBtn.addTarget(self, action: #selector(self.MoveMonthFirstCalendar), for: .touchUpInside)
         self.FirstDateCalendar.addSubview(FirstCalendarBtn)
         window?.addSubview(self.FirstDateCalendar)
         self.FirstDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
@@ -472,14 +484,66 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
+    @objc
+    func setLastFSCalendarLayoutInit(){
+        let window = UIApplication.shared.windows.first
+        if let FirstCalendar = window?.viewWithTag(5){
+            FirstCalendar.removeFromSuperview()
+        }
+        let screenSize = UIScreen.main.bounds.size
+        self.LastDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        self.LastDateCalendar.appearance.headerDateFormat = "YYYY. MM"
+        self.LastDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 20)
+        self.LastDateCalendar.appearance.headerTitleColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.LastDateCalendar.appearance.weekdayTextColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
+        self.LastDateCalendar.layer.borderWidth = 1.0
+        self.LastDateCalendar.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.LastDateCalendar.appearance.selectionColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.LastDateCalendar.appearance.todayColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.LastDateCalendar.calendarWeekdayView.addBottomBorder(with: UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0), andWidth: 1)
+        self.LastDateCalendar.layer.cornerRadius = 8
+        self.LastDateCalendar.layer.shadowColor = UIColor.darkGray.cgColor
+        self.LastDateCalendar.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.LastDateCalendar.layer.shadowOpacity = 0.2
+        self.LastDateCalendar.layer.shadowRadius = 4.0
+        self.LastDateCalendar.layer.masksToBounds = true
+        self.LastDateCalendar.appearance.weekdayFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.LastDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
+        self.LastDateCalendar.locale = Locale(identifier: "ko_KR")
+        self.LastDateCalendar.allowsMultipleSelection = false
+        self.LastDateCalendar.tag = 6
+        self.LastDateCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "CELL")
+        self.LastDateCalendar.headerHeight = 68
+        self.LastDateCalendar.calendarWeekdayView.frame = CGRect(x: self.LastDateCalendar.calendarWeekdayView.frame.origin.x, y: self.LastDateCalendar.calendarWeekdayView.frame.origin.y - 50, width: self.LastDateCalendar.calendarWeekdayView.frame.size.width, height: self.LastDateCalendar.calendarWeekdayView.frame.size.height)
+        let LastCalendarBtn = UIButton(frame: CGRect(x: 20, y: 26, width: 8, height: 20))
+        LastCalendarBtn.setTitle("", for: .normal)
+        LastCalendarBtn.setImage(UIImage(named: "Navigation.png"), for: .normal)
+        LastCalendarBtn.tintColor = UIColor.black
+        LastCalendarBtn.addTarget(self, action: #selector(self.MoveMonthLastCalendar), for: .touchUpInside)
+        self.LastDateCalendar.addSubview(LastCalendarBtn)
+        window?.addSubview(self.LastDateCalendar)
+        self.LastDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.LastDateCalendar.frame = CGRect(x: 20, y: screenSize.height - screenSize.height / 1.6, width: 340, height: 300)
+
+        }, completion: nil)
+    }
+    
     
     
     @objc
-    func MoveMonthCalendar(){
+    func MoveMonthFirstCalendar(){
         let Month = self.FirstDateCalendar.currentPage
         let CalendarDate = Calendar(identifier: .gregorian)
-        let nextMonth : Date? = CalendarDate.date(byAdding: .month, value: -1, to: Month)
-        self.FirstDateCalendar.setCurrentPage(nextMonth!, animated: true)
+        let RemoveMonth : Date? = CalendarDate.date(byAdding: .month, value: -1, to: Month)
+        self.FirstDateCalendar.setCurrentPage(RemoveMonth!, animated: true)
+    }
+    @objc
+    func MoveMonthLastCalendar(){
+        let Month = self.LastDateCalendar.currentPage
+        let LastCalendarDate = Calendar(identifier: .gregorian)
+        let nextMonth : Date? = LastCalendarDate.date(byAdding: .month, value: +1, to: Month)
+        self.LastDateCalendar.setCurrentPage(nextMonth!, animated: true)
     }
         
     
@@ -1034,23 +1098,57 @@ extension EnrollMentViewController : FSCalendarDataSource,FSCalendarDelegate {
     public func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-DD"
+        if let FirstDidSelect = calendar.viewWithTag(5) {
+            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            UserDefaults.standard.set(dateFormatter.string(from: self.FirstDate!), forKey: "StartDate")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            self.FirstDateCalendar.today = self.FirstDate
+            
+        }
         print("선택 해체 했습니다 \(date)")
     }
     
     public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        let newDate = date.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
-        dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        UserDefaults.standard.set(dateFormatter.string(from: newDate), forKey: "StartDate")
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        self.FirstDateCalendar.today = newDate
-        self.FirstDateCalendar.appearance.todayColor = UIColor.white
-        self.FirstDateCalendar.appearance.titleTodayColor = UIColor.black
+        if let FirstCalendar = calendar.viewWithTag(5) {
+            let dateFormatter = DateFormatter()
+            self.FirstDate = date.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            UserDefaults.standard.set(dateFormatter.string(from: self.FirstDate!), forKey: "StartDate")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            self.FirstDateCalendar.today = self.FirstDate
+            self.FirstDateCalendar.allowsMultipleSelection = false
+            self.FirstDateCalendar.appearance.todayColor = UIColor.white
+            self.FirstDateCalendar.appearance.titleTodayColor = UIColor.black
+            print("StudyStartDate\(FirstDate)")
+            self.Studystartdatebtn.setTitle("\(dateFormatter.string(from: self.FirstDate!))", for: .normal)
+        }
+        if let LastCalendar = calendar.viewWithTag(6) {
+            let dateFormatter = DateFormatter()
+            self.LastDate = date.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            self.LastDateCalendar.today = self.LastDate
+            self.LastDateCalendar.allowsMultipleSelection = false
+            self.LastDateCalendar.appearance.todayColor = UIColor.white
+            self.LastDateCalendar.appearance.titleTodayColor = UIColor.black
+            print("StudyStartDate\(self.LastDate)")
+            self.Studylastdatebtn.setTitle("\(dateFormatter.string(from: self.LastDate!))", for: .normal)
+        }
+        if self.FirstDate != nil && self.LastDate != nil {
+            if self.FirstDate! > self.LastDate! {
+                self.Studylastdatebtn.layer.borderColor = UIColor(red: 237/255, green: 65/266, blue: 65/266, alpha: 1.0).cgColor
+            }
+            
+        }
     }
 }
-
 
 extension UIView {
     func addBottomBorder(with color: UIColor?, andWidth borderWidth: CGFloat) {

@@ -844,6 +844,7 @@
                         <outlet property="FirstComeExampleLabel" destination="rKL-he-6mc" id="Bzb-V7-7LG"/>
                         <outlet property="FirstComeLabel" destination="TL1-zY-qiq" id="hOh-54-pIW"/>
                         <outlet property="FirstDateCalendar" destination="PTs-hQ-fzr" id="AXT-bh-Fvo"/>
+                        <outlet property="LastDateCalendar" destination="Aqz-ga-JoC" id="f4S-Mb-tlU"/>
                         <outlet property="LimitBtn" destination="tPO-kM-HBW" id="hfb-nr-ZYc"/>
                         <outlet property="Limitbtn2" destination="hcr-E0-nGO" id="nJZ-Ze-aEm"/>
                         <outlet property="Limitlabel" destination="xn3-7l-bDx" id="q50-M8-tMU"/>
@@ -903,7 +904,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-aX-Exn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="PTs-hQ-fzr" customClass="FSCalendar">
+                <view tag="10" contentMode="scaleToFill" id="Aqz-ga-JoC" customClass="FSCalendar">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="207"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <viewLayoutGuide key="safeArea" id="FVb-dy-RMQ"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view tag="5" contentMode="scaleToFill" id="PTs-hQ-fzr" customClass="FSCalendar">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="207"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <viewLayoutGuide key="safeArea" id="8ko-yy-Gsh"/>
