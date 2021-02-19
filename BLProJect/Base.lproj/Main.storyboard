@@ -663,9 +663,7 @@
                                                     <constraint firstAttribute="height" constant="49" id="d3p-JT-nKz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <state key="normal" title="게시하기">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                </state>
+                                                <state key="normal" title="게시하기"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmo-yV-TRg">
                                                 <rect key="frame" x="331" y="1113" width="65" height="19"/>

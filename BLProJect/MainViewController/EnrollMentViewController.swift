@@ -146,10 +146,12 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
         self.Studystartdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
         self.Studylastdatebtn.addTarget(self, action: #selector(self.setLastFSCalendarLayoutInit), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveTapgestureCalendar(recognizer:)))
-        self.view.addGestureRecognizer(tapGesture)
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let ScrollVieWTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.ScrollViewHideKeyboard(recognizer:)))
+        self.EnrollMentscrollview.addGestureRecognizer(ScrollVieWTapGesture)
     }
-    
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -162,8 +164,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             LastCalnedarTag.removeFromSuperview()
         }
     }
-
-
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
         
     public func NavigationLayou() {
         self.navigationItem.title = "스터디 만들기"
@@ -343,7 +346,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.StudyIntroducecountlabel.attributedText = NSAttributedString(string: "0 / 1000", attributes: [NSAttributedString.Key.kern : -0.66])
         self.Studypostbtn.layer.cornerRadius = 8
         self.Studypostbtn.layer.masksToBounds = true
-        self.Studypostbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.Studypostbtn.isEnabled = false
+        self.Studypostbtn.setTitleColor(UIColor(red: 141/255, green: 141/255, blue: 141/255, alpha: 1.0), for: .normal)
+        self.Studypostbtn.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
     }
     
     @objc func OfflineBtnCheck(_ sender: UIButton){
@@ -439,6 +444,16 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
+    
+    @objc
+    public func ScrollViewHideKeyboard(recognizer: UITapGestureRecognizer){
+        self.Studymeettextview.resignFirstResponder()
+        self.Studygoaltextview.resignFirstResponder()
+        self.StudyIntroducetextview.resignFirstResponder()
+    }
+    
+    
+    
     @objc
     public func setFSCalendarLayoutInit(){
         let window = UIApplication.shared.windows.first
@@ -477,6 +492,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         FirstCalendarBtn.addTarget(self, action: #selector(self.MoveMonthFirstCalendar), for: .touchUpInside)
         self.FirstDateCalendar.addSubview(FirstCalendarBtn)
         window?.addSubview(self.FirstDateCalendar)
+        let RemoveCalendartapGesture = UITapGestureRecognizer(target: self, action: #selector(EnrollMentViewController.RemoveFristCalendarTapgestureCalendar(recognizer:)))
+        self.EnrollMentscrollview.addGestureRecognizer(RemoveCalendartapGesture)
         self.FirstDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.FirstDateCalendar.frame = CGRect(x: 20, y: screenSize.height - screenSize.height / 1.6, width: 340, height: 300)
@@ -521,6 +538,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         LastCalendarBtn.tintColor = UIColor.black
         LastCalendarBtn.addTarget(self, action: #selector(self.MoveMonthLastCalendar), for: .touchUpInside)
         self.LastDateCalendar.addSubview(LastCalendarBtn)
+        let RemoveLastCalendartapGesture = UITapGestureRecognizer(target: self, action: #selector(EnrollMentViewController.RemoveLastCaelndarTapgestureCalendar(recognizer:)))
+        self.EnrollMentscrollview.addGestureRecognizer(RemoveLastCalendartapGesture)
         window?.addSubview(self.LastDateCalendar)
         self.LastDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
@@ -528,7 +547,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
 
         }, completion: nil)
     }
-    
     
     
     @objc
@@ -546,14 +564,23 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.LastDateCalendar.setCurrentPage(nextMonth!, animated: true)
     }
         
-    
     @objc
-    func RemoveTapgestureCalendar(recognizer: UITapGestureRecognizer) {
-        let window = UIApplication.shared.windows.first
-        if let viewWithTag = window?.viewWithTag(5){
-            viewWithTag.removeFromSuperview()
+    func RemoveFristCalendarTapgestureCalendar(recognizer: UITapGestureRecognizer) {
+        let FirstCalendarwindow = UIApplication.shared.windows.first
+        if let FirstCalendar = FirstCalendarwindow?.viewWithTag(5){
+            FirstCalendar.removeFromSuperview()
         }
     }
+    @objc
+    func RemoveLastCaelndarTapgestureCalendar(recognizer : UITapGestureRecognizer) {
+        let LastCalendarWindow = UIApplication.shared.windows.first
+        if let LastCalendar = LastCalendarWindow?.viewWithTag(6){
+            LastCalendar.removeFromSuperview()
+        }
+        
+    }
+    
+    
     @objc
     func ConfirmRemoveCategoryView(_ sender : UIButton){
         let screenSize = UIScreen.main.bounds.size
@@ -619,6 +646,23 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @objc
     func RemoveFromToolbar() {
         self.RecruitmentBtn.resignFirstResponder()
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification : Notification){
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardViewEndFrame.height , right: 0.0)
+        EnrollMentscrollview.contentInset = contentInsets
+        EnrollMentscrollview.scrollIndicatorInsets = contentInsets
+    }
+    @objc
+    func keyboardWillHide(_ notification : Notification) {
+        let contentsInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        EnrollMentscrollview.contentInset = contentsInset
+        EnrollMentscrollview.scrollIndicatorInsets = contentsInset
     }
     
     @objc
@@ -957,6 +1001,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyIntroducetextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         }
         
+        
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         var textparagraphStyle = NSMutableParagraphStyle()
@@ -968,6 +1013,25 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }else if textView.tag == 3 && textView.text == "" {
             self.StudyIntroducetextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
             
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.tag == 1 {
+            self.Studymeettextcountlabel.text = "\(self.Studymeettextview.text.count) / 20"
+        }else if textView.tag == 2{
+            self.Studygoaltextcountlabel.text = "\(self.Studygoaltextview.text.count) / 60"
+        }else if textView.tag == 3{
+            self.StudyIntroducecountlabel.text = "\(self.StudyIntroducetextview.text.count) / 1000"
+        }
+        if self.Studymeettextview.text.count >= 2 && self.Studygoaltextview.text.count >= 2 && self.StudyIntroducetextview.text.count >= 20 {
+            self.Studypostbtn.isEnabled = true
+            self.Studypostbtn.setTitleColor(UIColor.white, for: .normal)
+            self.Studypostbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        }else{
+            self.Studypostbtn.isEnabled = false
+            self.Studypostbtn.setTitleColor(UIColor(red: 141/255, green: 141/255, blue: 141/255, alpha: 1.0), for: .normal)
+            self.Studypostbtn.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
         }
         if self.Studymeettextview.text.count < 2 {
             self.Studymeettextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
@@ -991,7 +1055,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.Studygoalnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudygoalExamplelabel.isHidden = true
         }
-        if self.StudyIntroducetextview.text.count < 2 {
+        if self.StudyIntroducetextview.text.count < 20 {
             self.StudyIntroducetextview.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
             self.StudyIntroducenamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
             self.StudyIntroduceExamplelabel.attributedText = NSAttributedString(string: "스터디 소개가 너무 짧습니다. ( 20자~ 1000자 )", attributes: [NSAttributedString.Key.kern : -0.66])
@@ -1002,16 +1066,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyIntroducenamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudyIntroduceExamplelabel.isHidden = true
             
-        }
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.tag == 1 {
-            self.Studymeettextcountlabel.text = "\(self.Studymeettextview.text.count) / 20"
-        }else if textView.tag == 2{
-            self.Studygoaltextcountlabel.text = "\(self.Studygoaltextview.text.count) / 60"
-        }else if textView.tag == 3{
-            self.StudyIntroducecountlabel.text = "\(self.StudyIntroducetextview.text.count) / 1000"
         }
     }
     
@@ -1037,7 +1091,8 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
         return true
     }
-   
+    
+    
 }
 
 class StudyCategoryView: UIView {
@@ -1144,6 +1199,8 @@ extension EnrollMentViewController : FSCalendarDataSource,FSCalendarDelegate {
         if self.FirstDate != nil && self.LastDate != nil {
             if self.FirstDate! > self.LastDate! {
                 self.Studylastdatebtn.layer.borderColor = UIColor(red: 237/255, green: 65/266, blue: 65/266, alpha: 1.0).cgColor
+            }else {
+                self.Studylastdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             }
             
         }
