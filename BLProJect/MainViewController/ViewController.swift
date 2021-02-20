@@ -92,8 +92,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let DetailSegue = segue.destination as? BLDetailViewController else { return  }
-        DetailSegue.Index = self.index!
+        guard let ResearchSegue = segue.destination as? StudyResearchViewController else { return }
+        ResearchSegue.Index = self.index!
     }
     
     
@@ -119,7 +119,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
         self.index = indexPath.row
-        self.performSegue(withIdentifier: "BLDetailVC", sender: nil)
+        self.performSegue(withIdentifier: "StudyResearch", sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

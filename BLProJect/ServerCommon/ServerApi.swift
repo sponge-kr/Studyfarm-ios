@@ -101,8 +101,9 @@ struct StudyDetailResponse : Codable {
 }
 
 struct StudyDetailResults: Codable {
-    let study_seq, recruit_number, views, member_check_type, progress_type, step: Int?
-    let title, content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str, start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str: String?
+    let views : Int
+    let study_seq, recruit_number, member_check_type, progress_type, step: Int?
+    let title, content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str, start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str: String
     let end_yn, is_my_study: Bool?
     let tags: [String]?
     let study_leader: StudyDetailContainer?
@@ -110,7 +111,8 @@ struct StudyDetailResults: Codable {
     let member_results: [StudyDetailMemberResultsContainer]?
 
     enum CodingKeys: String, CodingKey {
-        case study_seq, recruit_number, views, member_check_type, progress_type, step
+        case views
+        case study_seq, recruit_number, member_check_type, progress_type, step
         case title, content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str
         case start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str
         case end_yn, is_my_study
@@ -124,23 +126,23 @@ struct StudyDetailResults: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.study_seq = try? values.decode(Int.self, forKey: .study_seq)
         self.recruit_number = try? values.decode(Int.self, forKey: .recruit_number)
-        self.views = try? values.decode(Int.self, forKey: .views)
+        self.views = try values.decode(Int.self, forKey: .views)
         self.member_check_type = try? values.decode(Int.self, forKey: .member_check_type)
         self.progress_type = try? values.decode(Int.self, forKey: .progress_type)
         self.step = try? values.decode(Int.self, forKey: .step)
-        self.title = try? values.decode(String.self, forKey: .title)
-        self.content = try? values.decode(String.self, forKey: .content)
-        self.category_name = try? values.decode(String.self, forKey: .category_name)
-        self.topic_name = try? values.decode(String.self, forKey: .topic_name)
-        self.state_name = try? values.decode(String.self, forKey: .state_name)
-        self.city_name = try? values.decode(String.self, forKey: .city_name)
-        self.member_check_type_str = try? values.decode(String.self, forKey: .member_check_type_str)
-        self.progress_type_str = try? values.decode(String.self, forKey: .progress_type_str)
-        self.start_date = try? values.decode(String.self, forKey: .start_date)
-        self.end_date = try? values.decode(String.self, forKey: .end_date)
-        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
-        self.study_created_at_str = try? values.decode(String.self, forKey: .study_created_at_str)
-        self.study_updated_at_str = try? values.decode(String.self, forKey: .study_updated_at_str)
+        self.title = try values.decode(String.self, forKey: .title)
+        self.content = try values.decode(String.self, forKey: .content)
+        self.category_name = try values.decode(String.self, forKey: .category_name)
+        self.topic_name = try values.decode(String.self, forKey: .topic_name)
+        self.state_name = try values.decode(String.self, forKey: .state_name)
+        self.city_name = try values.decode(String.self, forKey: .city_name)
+        self.member_check_type_str = try values.decode(String.self, forKey: .member_check_type_str)
+        self.progress_type_str = try values.decode(String.self, forKey: .progress_type_str)
+        self.start_date = try values.decode(String.self, forKey: .start_date)
+        self.end_date = try values.decode(String.self, forKey: .end_date)
+        self.dateFormat = try values.decode(String.self, forKey: .dateFormat)
+        self.study_created_at_str = try values.decode(String.self, forKey: .study_created_at_str)
+        self.study_updated_at_str = try values.decode(String.self, forKey: .study_updated_at_str)
         self.end_yn = try? values.decode(Bool.self, forKey: .end_yn)
         self.is_my_study = try? values.decode(Bool.self, forKey: .is_my_study)
         self.tags = try? values.decode([String].self, forKey: .tags)

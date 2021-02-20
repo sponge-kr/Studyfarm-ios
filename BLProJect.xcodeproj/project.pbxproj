@@ -13,7 +13,6 @@
 		B3736A40B4AA06F10FEE8FFC /* Pods_BLProJectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2726BFFB38D15DF55941F800 /* Pods_BLProJectTests.framework */; };
 		D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800BF25646FDF00B8E5A1 /* check@1x.png */; };
 		D11800C52564703700B8E5A1 /* uncheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D11800C42564703700B8E5A1 /* uncheck@1x.png */; };
-		D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12655D524E3D52A00C95256 /* BLDetailViewController.swift */; };
 		D149391724E7CA36004D661C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391624E7CA36004D661C /* LoginViewController.swift */; };
 		D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D149391B24E7FA61004D661C /* SignupViewController.swift */; };
 		D14A273325653F2D00CE460D /* uncheck@0.5.png in Resources */ = {isa = PBXBuildFile; fileRef = D14A273225653F2D00CE460D /* uncheck@0.5.png */; };
@@ -48,6 +47,9 @@
 		D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */; };
 		D939A4367B9FCE91492E3EDB /* Pods_BLProJect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */; };
 		FB5B368149491471BFC3D997 /* Pods_BLProJect_BLProJectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */; };
+		FF2425EC25E11EC100A76850 /* calendar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425EB25E11EC100A76850 /* calendar@1x.png */; };
+		FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F025E11EC700A76850 /* calendar@2x.png */; };
+		FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F525E11ECD00A76850 /* calendar@3x.png */; };
 		FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */; };
 		FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */; };
 		FF331D732599067E00BD8C33 /* Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF331D712599067D00BD8C33 /* Email@2x.png */; };
@@ -68,6 +70,7 @@
 		FF3D1A4025D96AF100BFB82C /* squarebox@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3D1A3F25D96AF100BFB82C /* squarebox@1x.png */; };
 		FF3D1A4525D96AF500BFB82C /* squarebox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3D1A4425D96AF500BFB82C /* squarebox@2x.png */; };
 		FF3D1A4725D96AFA00BFB82C /* squarebox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3D1A4625D96AFA00BFB82C /* squarebox@3x.png */; };
+		FF3D1A7A25DFC21E00BFB82C /* StudyResearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3D1A7925DFC21B00BFB82C /* StudyResearchViewController.swift */; };
 		FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */; };
 		FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */; };
 		FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */; };
@@ -107,6 +110,9 @@
 		FFC0B08A25A763DE00D21482 /* genderunCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B08925A763DE00D21482 /* genderunCheck.png */; };
 		FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09325A765D100D21482 /* genderunCheckgray@4x.png */; };
 		FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */; };
+		FFCA27A725DFCB010053ECDD /* modified@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27A625DFCB010053ECDD /* modified@1x.png */; };
+		FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */; };
+		FFCA27B125DFCB3F0053ECDD /* modified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27B025DFCB3F0053ECDD /* modified@3x.png */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
@@ -144,7 +150,6 @@
 		9C4EA45A336E1BFD8AB5FDC4 /* Pods-BLProJect-BLProJectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJect-BLProJectUITests.release.xcconfig"; path = "Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D11800BF25646FDF00B8E5A1 /* check@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@1x.png"; sourceTree = "<group>"; };
 		D11800C42564703700B8E5A1 /* uncheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheck@1x.png"; sourceTree = "<group>"; };
-		D12655D524E3D52A00C95256 /* BLDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLDetailViewController.swift; sourceTree = "<group>"; };
 		D149391624E7CA36004D661C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D149391B24E7FA61004D661C /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		D149391F24EAD251004D661C /* 스터디팜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "스터디팜.entitlements"; sourceTree = "<group>"; };
@@ -186,6 +191,9 @@
 		D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLViewModel.swift; sourceTree = "<group>"; };
 		F2192852FD2B28CCDB99D81B /* Pods-BLProJectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.release.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69BDC8880EC0FE7F25666E2 /* Pods-BLProJectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF2425EB25E11EC100A76850 /* calendar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@1x.png"; sourceTree = "<group>"; };
+		FF2425F025E11EC700A76850 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
+		FF2425F525E11ECD00A76850 /* calendar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@3x.png"; sourceTree = "<group>"; };
 		FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesApi.swift; sourceTree = "<group>"; };
 		FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		FF331D712599067D00BD8C33 /* Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Email@2x.png"; sourceTree = "<group>"; };
@@ -206,6 +214,7 @@
 		FF3D1A3F25D96AF100BFB82C /* squarebox@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "squarebox@1x.png"; sourceTree = "<group>"; };
 		FF3D1A4425D96AF500BFB82C /* squarebox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "squarebox@2x.png"; sourceTree = "<group>"; };
 		FF3D1A4625D96AFA00BFB82C /* squarebox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "squarebox@3x.png"; sourceTree = "<group>"; };
+		FF3D1A7925DFC21B00BFB82C /* StudyResearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyResearchViewController.swift; sourceTree = "<group>"; };
 		FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@2x.png"; sourceTree = "<group>"; };
 		FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@3x.png"; sourceTree = "<group>"; };
 		FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@1x.png"; sourceTree = "<group>"; };
@@ -245,6 +254,9 @@
 		FFC0B08925A763DE00D21482 /* genderunCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = genderunCheck.png; sourceTree = "<group>"; };
 		FFC0B09325A765D100D21482 /* genderunCheckgray@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@4x.png"; sourceTree = "<group>"; };
 		FFC0B09E25A771EE00D21482 /* genderunCheckgray@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "genderunCheckgray@1x.png"; sourceTree = "<group>"; };
+		FFCA27A625DFCB010053ECDD /* modified@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@1x.png"; sourceTree = "<group>"; };
+		FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@2x.png"; sourceTree = "<group>"; };
+		FFCA27B025DFCB3F0053ECDD /* modified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@3x.png"; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
@@ -313,6 +325,7 @@
 				FF92ECF925CFE1C400D93CD7 /* Mainxib */,
 				D1F85CCB24C45B1100E1F7BE /* ViewController.swift */,
 				FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */,
+				FF3D1A7925DFC21B00BFB82C /* StudyResearchViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -400,7 +413,6 @@
 				D1F85CD024C45B1300E1F7BE /* Assets.xcassets */,
 				D1F85CD224C45B1300E1F7BE /* LaunchScreen.storyboard */,
 				D1F85CD524C45B1300E1F7BE /* Info.plist */,
-				D12655D524E3D52A00C95256 /* BLDetailViewController.swift */,
 			);
 			path = BLProJect;
 			sourceTree = "<group>";
@@ -426,6 +438,12 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF2425EB25E11EC100A76850 /* calendar@1x.png */,
+				FF2425F025E11EC700A76850 /* calendar@2x.png */,
+				FFCA27B025DFCB3F0053ECDD /* modified@3x.png */,
+				FF2425F525E11ECD00A76850 /* calendar@3x.png */,
+				FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */,
+				FFCA27A625DFCB010053ECDD /* modified@1x.png */,
 				FF3D1A4625D96AFA00BFB82C /* squarebox@3x.png */,
 				FF3D1A4425D96AF500BFB82C /* squarebox@2x.png */,
 				FF3D1A3F25D96AF100BFB82C /* squarebox@1x.png */,
@@ -677,6 +695,7 @@
 				FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */,
 				FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */,
 				FF3D1A4725D96AFA00BFB82C /* squarebox@3x.png in Resources */,
+				FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
 				FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */,
 				FF70E73325C6879200AE82CD /* triangle@3x.png in Resources */,
@@ -695,9 +714,11 @@
 				FF331D87259B34BD00BD8C33 /* Roboto-Bold.ttf in Resources */,
 				D1F85D1124CDC96200E1F7BE /* Vector@2x.png in Resources */,
 				FFC0B09425A765D100D21482 /* genderunCheckgray@4x.png in Resources */,
+				FFCA27B125DFCB3F0053ECDD /* modified@3x.png in Resources */,
 				FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */,
 				FF331D8C259B34BD00BD8C33 /* Roboto-MediumItalic.ttf in Resources */,
 				FFBA6F0C25C7F698004783C6 /* Group@2x.png in Resources */,
+				FF2425EC25E11EC100A76850 /* calendar@1x.png in Resources */,
 				FFBA6F1225C7F6E3004783C6 /* Groupnext@1x.png in Resources */,
 				FF70E73125C6879200AE82CD /* triangle@1x.png in Resources */,
 				FF331D742599067E00BD8C33 /* Email@1x.png in Resources */,
@@ -720,7 +741,10 @@
 				FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
 				FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */,
+				FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */,
 				FF331D90259B34BD00BD8C33 /* Roboto-Italic.ttf in Resources */,
+				FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */,
+				FFCA27A725DFCB010053ECDD /* modified@1x.png in Resources */,
 				D14A273325653F2D00CE460D /* uncheck@0.5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -911,6 +935,7 @@
 				D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */,
 				D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */,
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,
+				FF3D1A7A25DFC21E00BFB82C /* StudyResearchViewController.swift in Sources */,
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
 				D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
@@ -918,7 +943,6 @@
 				D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */,
 				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
-				D12655D624E3D52A00C95256 /* BLDetailViewController.swift in Sources */,
 				FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */,
 				8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
