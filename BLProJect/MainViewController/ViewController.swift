@@ -103,7 +103,6 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let MainCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BLMainCell", for: indexPath) as? BLMainCollectionViewCell
-        
         DispatchQueue.main.async {
             MainCell?.CellSubject.text = self.StudyModel[indexPath.row].title
             MainCell?.CellHuman.text = self.StudyModel[indexPath.row].study_leader?.nickname
@@ -118,7 +117,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
-        self.index = indexPath.row
+        self.index = indexPath.row + 1
         self.performSegue(withIdentifier: "StudyResearch", sender: nil)
     }
     

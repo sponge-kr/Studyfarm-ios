@@ -31,6 +31,17 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyTypecontentlabel: UILabel!
     @IBOutlet weak var StudyAreaImageView: UIImageView!
     @IBOutlet weak var StudyAreatilelabel: UILabel!
+    @IBOutlet weak var StudyUserImageView: UIImageView!
+    @IBOutlet weak var StudyUsertitlelabel: UILabel!
+    @IBOutlet weak var StudyUsercontentlabel: UILabel!
+    @IBOutlet weak var StudyDefaultView: UIView!
+    @IBOutlet weak var StudyRecruitmenttitlelabel: UILabel!
+    @IBOutlet weak var StudyRecruitTypeImageView: UIImageView!
+    @IBOutlet weak var StudyRecruitTypetitlelabel: UILabel!
+    @IBOutlet weak var StudyRecruitTypecontentlabel: UILabel!
+    @IBOutlet weak var StudyRecruitRankImageView: UIImageView!
+    @IBOutlet weak var StudyRecruitRanktitlelabel: UILabel!
+    @IBOutlet weak var StudyRecruitRankcontentlabel: UILabel!
     var Index: Int = 1
     
     var StudyDetailModel : StudyDetailResults?
@@ -40,7 +51,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyResearchScrollview.isScrollEnabled = true
         self.StudyResearchScrollview.delegate = self
         self.NavigationLayout()
-        ServerApi.shared.StudyDetailCall(study_seq: Index + 1) { result in
+        ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
                 self.StudyDetailModel = result
                 self.setInitLayout()
@@ -74,6 +85,8 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     }
     
     public func setInitLayout() {
+        var paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.0
         self.StudyTopicnamelabel.attributedText = NSAttributedString(string: "\(self.StudyDetailModel!.topic_name)", attributes: [NSAttributedString.Key.kern : -0.66])
         self.StudyTopicnamelabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)
         self.StudyTopicnamelabel.textAlignment = .left
@@ -97,7 +110,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyGoalViewlabel.textColor = UIColor(red: 123/255, green: 120/255, blue: 255/255, alpha: 1.0)
         self.StudyGoalViewlabel.attributedText = NSAttributedString(string: "목표", attributes: [NSAttributedString.Key.kern : -0.77])
         self.StudyGoalViewContentlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.StudyGoalViewContentlabel.text = "직장인 스터디인만큼 높은 퀄리티를 목표로 합니다. 집에서도 많은 작업 부탁드립니다"
+        self.StudyGoalViewContentlabel.attributedText = NSAttributedString(string: "\(self.StudyDetailModel!.objective)", attributes: [NSAttributedString.Key.kern : -0.77])
         self.StudyGoalViewContentlabel.numberOfLines = 0
         self.StudyGoalViewlabel.lineBreakMode = .byCharWrapping
         self.StudyContentTextView.isEditable = false
@@ -111,14 +124,14 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyIntroducetitlelabel.attributedText = NSAttributedString(string: "스터디 진행 정보", attributes: [NSAttributedString.Key.kern : -0.77])
         self.StudyProcesstitlelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.StudyProcesstitlelabel.textAlignment = .left
-        self.StudyProcesstitlelabel.attributedText = NSAttributedString(string: "진행 일정", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyProcesstitlelabel.attributedText = NSAttributedString(string: "진행 일정", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
         self.StudyProcessImageView.image = UIImage(named: "calendar.png")
         self.StudyProcessImageView.contentMode = .scaleAspectFill
         self.StudyTypeImageView.image = UIImage(named: "calendar.png")
         self.StudyTypeImageView.contentMode = .scaleAspectFill
         self.StudyTypetitlelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.StudyTypetitlelabel.textAlignment = .left
-        self.StudyTypetitlelabel.attributedText = NSAttributedString(string: "진행 유형", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyTypetitlelabel.attributedText = NSAttributedString(string: "진행 유형", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
         self.StudyProcesscontentlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         let startdate = self.StudyDetailModel!.start_date.replacingOccurrences(of: "-", with: ".", options: .literal, range: nil)
         let enddate = self.StudyDetailModel!.end_date.replacingOccurrences(of: "-", with: ".", options: .literal, range: nil)
@@ -130,8 +143,62 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyAreaImageView.contentMode = .scaleAspectFill
         self.StudyAreatilelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.StudyAreatilelabel.textAlignment = .left
-        self.StudyAreatilelabel.attributedText = NSAttributedString(string: "장소", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyAreatilelabel.attributedText = NSAttributedString(string: "장소", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        self.StudyUserImageView.image = UIImage(named: "user.png")
+        self.StudyUserImageView.contentMode = .scaleAspectFill
+        self.StudyUsertitlelabel.textAlignment = .left
+        self.StudyUsertitlelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.StudyUsertitlelabel.attributedText = NSAttributedString(string: "인원", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        self.StudyUsercontentlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.StudyUsercontentlabel.textAlignment = .left
+        self.StudyUsercontentlabel.attributedText = NSAttributedString(string: "\(self.StudyDetailModel!.recruit_number)명", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyDefaultView.layer.borderWidth = 1
+        self.StudyDefaultView.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
+        self.StudyRecruitmenttitlelabel.attributedText = NSAttributedString(string: "모집 정보", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyRecruitmenttitlelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.StudyRecruitmenttitlelabel.numberOfLines = 0
+        self.StudyRecruitTypeImageView.image = UIImage(named: "calendar.png")
+        self.StudyRecruitTypeImageView.contentMode = .scaleAspectFill
+        self.StudyRecruitTypetitlelabel.attributedText = NSAttributedString(string: "모집 유형", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        self.StudyRecruitTypetitlelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.StudyRecruitTypecontentlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.StudyRecruitTypecontentlabel.attributedText = NSAttributedString(string: "\(self.StudyDetailModel!.member_check_type_str)", attributes: [NSAttributedString.Key.kern : -0.77])
+        self.StudyRecruitTypecontentlabel.numberOfLines = 0
+        self.StudyRecruitRankImageView.image = UIImage(named: "calendar.png")
+        self.StudyRecruitRankImageView.contentMode = .scaleAspectFill
+        self.StudyRecruitRanktitlelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.StudyRecruitRanktitlelabel.attributedText = NSAttributedString(string: "모집 등급", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.paragraphStyle : paragraphStyle])
+        self.StudyRecruitRankcontentlabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.StudyRecruitRankcontentlabel.numberOfLines = 0
+        self.StepsIndexScribe()
         
     }
-
+    private func StepsIndexScribe() {
+        if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 1 {
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초급 ~ 초중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 2 {
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초급 ~ 중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 3{
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }
+        if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 1 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 2 {
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초중급 ~ 중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 1 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 3 {
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초중급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }
+        if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 2 &&
+            self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 3 {
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "중급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }
+        if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.count <= 1{
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 1 && self.StudyDetailModel!.steps.count <= 1{
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "초중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 2 && self.StudyDetailModel!.steps.count <= 1{
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "중급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }else if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 3 && self.StudyDetailModel!.steps.count <= 1{
+            self.StudyRecruitRankcontentlabel.attributedText = NSAttributedString(string: "상급", attributes: [NSAttributedString.Key.kern : -0.77])
+        }
+    }
 }
+

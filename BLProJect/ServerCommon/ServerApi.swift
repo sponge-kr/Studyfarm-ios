@@ -101,19 +101,21 @@ struct StudyDetailResponse : Codable {
 }
 
 struct StudyDetailResults: Codable {
-    let views : Int
-    let study_seq, recruit_number, member_check_type, progress_type, step: Int?
-    let title, content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str, start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str: String
-    let end_yn, is_my_study: Bool?
-    let tags: [String]?
-    let study_leader: StudyDetailContainer?
-    let study_in_place: StudyDetailPlaceContainer?
-    let member_results: [StudyDetailMemberResultsContainer]?
+    var views,recruit_number : Int
+    var study_seq, member_check_type, progress_type, step: Int?
+    var steps : [Int]
+    var title, objective ,content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str, start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str: String
+    var end_yn, is_my_study: Bool?
+    var tags: [String]?
+    var study_leader: StudyDetailContainer?
+    var study_in_place: StudyDetailPlaceContainer?
+    var member_results: [StudyDetailMemberResultsContainer]?
 
     enum CodingKeys: String, CodingKey {
         case views
+        case steps
         case study_seq, recruit_number, member_check_type, progress_type, step
-        case title, content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str
+        case title, objective ,content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str
         case start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str
         case end_yn, is_my_study
         case tags
@@ -125,12 +127,14 @@ struct StudyDetailResults: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.study_seq = try? values.decode(Int.self, forKey: .study_seq)
-        self.recruit_number = try? values.decode(Int.self, forKey: .recruit_number)
+        self.recruit_number = try values.decode(Int.self, forKey: .recruit_number)
         self.views = try values.decode(Int.self, forKey: .views)
+        self.steps = try values.decode([Int].self, forKey: .steps)
         self.member_check_type = try? values.decode(Int.self, forKey: .member_check_type)
         self.progress_type = try? values.decode(Int.self, forKey: .progress_type)
         self.step = try? values.decode(Int.self, forKey: .step)
         self.title = try values.decode(String.self, forKey: .title)
+        self.objective = try values.decode(String.self, forKey: .objective)
         self.content = try values.decode(String.self, forKey: .content)
         self.category_name = try values.decode(String.self, forKey: .category_name)
         self.topic_name = try values.decode(String.self, forKey: .topic_name)
@@ -145,6 +149,7 @@ struct StudyDetailResults: Codable {
         self.study_updated_at_str = try values.decode(String.self, forKey: .study_updated_at_str)
         self.end_yn = try? values.decode(Bool.self, forKey: .end_yn)
         self.is_my_study = try? values.decode(Bool.self, forKey: .is_my_study)
+//        self.is_ignore_recruit = try? values.decode(Bool.self, forKey: .is_ignore_recruit)
         self.tags = try? values.decode([String].self, forKey: .tags)
         self.study_leader = try? values.decode(StudyDetailContainer.self, forKey: .study_leader)
         self.study_in_place = try? values.decode(StudyDetailPlaceContainer.self, forKey: .study_in_place)

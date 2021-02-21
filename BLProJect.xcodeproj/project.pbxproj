@@ -50,6 +50,9 @@
 		FF2425EC25E11EC100A76850 /* calendar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425EB25E11EC100A76850 /* calendar@1x.png */; };
 		FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F025E11EC700A76850 /* calendar@2x.png */; };
 		FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F525E11ECD00A76850 /* calendar@3x.png */; };
+		FF2425FB25E12B4A00A76850 /* user@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425FA25E12B4A00A76850 /* user@1x.png */; };
+		FF24260025E12B5000A76850 /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425FF25E12B5000A76850 /* user@2x.png */; };
+		FF24260525E12B5600A76850 /* user@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF24260425E12B5600A76850 /* user@3x.png */; };
 		FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */; };
 		FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */; };
 		FF331D732599067E00BD8C33 /* Email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF331D712599067D00BD8C33 /* Email@2x.png */; };
@@ -194,6 +197,9 @@
 		FF2425EB25E11EC100A76850 /* calendar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@1x.png"; sourceTree = "<group>"; };
 		FF2425F025E11EC700A76850 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
 		FF2425F525E11ECD00A76850 /* calendar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@3x.png"; sourceTree = "<group>"; };
+		FF2425FA25E12B4A00A76850 /* user@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@1x.png"; sourceTree = "<group>"; };
+		FF2425FF25E12B5000A76850 /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
+		FF24260425E12B5600A76850 /* user@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@3x.png"; sourceTree = "<group>"; };
 		FF2D07B125C27D0A00C5D90C /* RepliesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesApi.swift; sourceTree = "<group>"; };
 		FF331D6C2598C81E00BD8C33 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
 		FF331D712599067D00BD8C33 /* Email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Email@2x.png"; sourceTree = "<group>"; };
@@ -438,6 +444,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF2425FA25E12B4A00A76850 /* user@1x.png */,
+				FF2425FF25E12B5000A76850 /* user@2x.png */,
+				FF24260425E12B5600A76850 /* user@3x.png */,
 				FF2425EB25E11EC100A76850 /* calendar@1x.png */,
 				FF2425F025E11EC700A76850 /* calendar@2x.png */,
 				FFCA27B025DFCB3F0053ECDD /* modified@3x.png */,
@@ -680,12 +689,14 @@
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
 				FF3D1A4525D96AF500BFB82C /* squarebox@2x.png in Resources */,
 				FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */,
+				FF24260525E12B5600A76850 /* user@3x.png in Resources */,
 				FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */,
 				FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */,
 				D1F85D0E24CDC90B00E1F7BE /* Vector.png in Resources */,
 				FFBA6F0625C7F693004783C6 /* Group@1x.png in Resources */,
 				FFBA6F1825C7F6E8004783C6 /* Groupnext@2x.png in Resources */,
 				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
+				FF2425FB25E12B4A00A76850 /* user@1x.png in Resources */,
 				FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */,
 				FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
@@ -702,6 +713,7 @@
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */,
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
+				FF24260025E12B5000A76850 /* user@2x.png in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
 				FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */,
