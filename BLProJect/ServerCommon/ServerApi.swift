@@ -102,10 +102,10 @@ struct StudyDetailResponse : Codable {
 
 struct StudyDetailResults: Codable {
     var views,recruit_number : Int
-    var study_seq, member_check_type, progress_type, step: Int?
+    var study_seq, member_check_type, progress_type: Int?
     var steps : [Int]
     var title, objective ,content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str, start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str: String
-    var end_yn, is_my_study: Bool?
+    var end_yn, is_my_study,is_ignore_recruit: Bool?
     var tags: [String]?
     var study_leader: StudyDetailContainer?
     var study_in_place: StudyDetailPlaceContainer?
@@ -114,10 +114,10 @@ struct StudyDetailResults: Codable {
     enum CodingKeys: String, CodingKey {
         case views
         case steps
-        case study_seq, recruit_number, member_check_type, progress_type, step
+        case study_seq, recruit_number, member_check_type, progress_type
         case title, objective ,content, category_name, topic_name, state_name, city_name, member_check_type_str, progress_type_str
         case start_date, end_date, dateFormat, study_created_at_str, study_updated_at_str
-        case end_yn, is_my_study
+        case end_yn, is_my_study, is_ignore_recruit
         case tags
         case study_leader
         case study_in_place
@@ -132,7 +132,6 @@ struct StudyDetailResults: Codable {
         self.steps = try values.decode([Int].self, forKey: .steps)
         self.member_check_type = try? values.decode(Int.self, forKey: .member_check_type)
         self.progress_type = try? values.decode(Int.self, forKey: .progress_type)
-        self.step = try? values.decode(Int.self, forKey: .step)
         self.title = try values.decode(String.self, forKey: .title)
         self.objective = try values.decode(String.self, forKey: .objective)
         self.content = try values.decode(String.self, forKey: .content)
@@ -149,7 +148,7 @@ struct StudyDetailResults: Codable {
         self.study_updated_at_str = try values.decode(String.self, forKey: .study_updated_at_str)
         self.end_yn = try? values.decode(Bool.self, forKey: .end_yn)
         self.is_my_study = try? values.decode(Bool.self, forKey: .is_my_study)
-//        self.is_ignore_recruit = try? values.decode(Bool.self, forKey: .is_ignore_recruit)
+        self.is_ignore_recruit = try? values.decode(Bool.self, forKey: .is_ignore_recruit)
         self.tags = try? values.decode([String].self, forKey: .tags)
         self.study_leader = try? values.decode(StudyDetailContainer.self, forKey: .study_leader)
         self.study_in_place = try? values.decode(StudyDetailPlaceContainer.self, forKey: .study_in_place)
@@ -158,33 +157,33 @@ struct StudyDetailResults: Codable {
 }
 
 struct StudyDetailContainer: Codable {
-    var users_seq: Int
-    var email: String
-    var nickname: String
-    var gender: String
-    var age: Int
-    var interesting: [StudyDetailInterestingContainer]
-    var simple_introduce: String
-    var profile: String
-    var user_info_process: Bool
-    var user_city_info: [StudyDetailCityInfoContainer]
-    var user_created_at: String
-    var user_updated_at: String
-    var user_active: Bool
+    var users_seq: Int?
+    var email: String?
+    var nickname: String?
+    var gender: String?
+    var age: Int?
+    var interesting: [StudyDetailInterestingContainer]?
+    var simple_introduce: String?
+    var profile: String?
+    var user_info_process: Bool?
+    var user_city_info: [StudyDetailCityInfoContainer]?
+    var user_created_at: String?
+    var user_updated_at: String?
+    var user_active: Bool?
 }
 
 struct StudyDetailInterestingContainer: Codable {
-    var code: Int
-    var name: String
-    var skill_level: Int
-    var parent_code: Int
+    var code: Int?
+    var name: String?
+    var skill_level: Int?
+    var parent_code: Int?
 }
 
 struct StudyDetailCityInfoContainer: Codable {
-    var state_code: Int
-    var state_name: String
-    var city_code: Int
-    var city_name: String
+    var state_code: Int?
+    var state_name: String?
+    var city_code: Int?
+    var city_name: String?
 }
 struct StudyDetailPlaceContainer: Codable {
     var studycafe_seq: Int

@@ -799,7 +799,6 @@
                         <outlet property="FirstComeExampleLabel" destination="rKL-he-6mc" id="Bzb-V7-7LG"/>
                         <outlet property="FirstComeLabel" destination="TL1-zY-qiq" id="hOh-54-pIW"/>
                         <outlet property="FirstDateCalendar" destination="PTs-hQ-fzr" id="AXT-bh-Fvo"/>
-                        <outlet property="LastDateCalendar" destination="Aqz-ga-JoC" id="f4S-Mb-tlU"/>
                         <outlet property="LimitBtn" destination="tPO-kM-HBW" id="hfb-nr-ZYc"/>
                         <outlet property="Limitbtn2" destination="hcr-E0-nGO" id="nJZ-Ze-aEm"/>
                         <outlet property="Limitlabel" destination="xn3-7l-bDx" id="q50-M8-tMU"/>
@@ -808,6 +807,7 @@
                         <outlet property="OnlineCheckbtn" destination="nvq-yG-lhv" id="2bj-V7-xZ1"/>
                         <outlet property="Onlinelabel" destination="yE3-Dq-o0Y" id="xGy-m5-gWU"/>
                         <outlet property="Participantlabel" destination="skw-DL-DHZ" id="yjG-Dg-Xe9"/>
+                        <outlet property="ProcessMonthView" destination="W6B-6q-p6Q" id="fmP-6s-DOC"/>
                         <outlet property="Progresslabel" destination="dxU-xv-WMt" id="iA9-bp-UmN"/>
                         <outlet property="RecruitmentBtn" destination="IRx-bf-XkB" id="Q7B-M9-tn6"/>
                         <outlet property="RecruitmentInfoLine" destination="yUZ-5z-AEW" id="OTS-8G-rFt"/>
@@ -859,12 +859,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFv-aX-Exn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view tag="10" contentMode="scaleToFill" id="Aqz-ga-JoC" customClass="FSCalendar">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="207"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <viewLayoutGuide key="safeArea" id="FVb-dy-RMQ"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
                 <view tag="5" contentMode="scaleToFill" id="PTs-hQ-fzr" customClass="FSCalendar">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="207"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -881,6 +875,52 @@
                             <real key="value" value="-1"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" id="W6B-6q-p6Q" customClass="ProcessView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24D-hI-rWO">
+                            <rect key="frame" x="0.0" y="112" width="414" height="227"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="227" id="OZk-BS-BDN"/>
+                            </constraints>
+                        </pickerView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="진행 기간" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaF-NR-bPA">
+                            <rect key="frame" x="173.5" y="16" width="67.5" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="M7e-jc-M51"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTY-kt-mhZ">
+                            <rect key="frame" x="10" y="372" width="394" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="s3s-I3-Xre"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Lnx-If-i3D"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="24D-hI-rWO" firstAttribute="top" secondItem="Lnx-If-i3D" secondAttribute="top" constant="68" id="ATV-2w-1r8"/>
+                        <constraint firstItem="24D-hI-rWO" firstAttribute="trailing" secondItem="Lnx-If-i3D" secondAttribute="trailing" id="C0n-6s-6j2"/>
+                        <constraint firstItem="Lnx-If-i3D" firstAttribute="trailing" secondItem="vTY-kt-mhZ" secondAttribute="trailing" constant="10" id="KgA-Qm-aVO"/>
+                        <constraint firstItem="24D-hI-rWO" firstAttribute="leading" secondItem="Lnx-If-i3D" secondAttribute="leading" id="aE6-aq-NRC"/>
+                        <constraint firstItem="FaF-NR-bPA" firstAttribute="centerX" secondItem="W6B-6q-p6Q" secondAttribute="centerX" id="eWV-Dc-F8B"/>
+                        <constraint firstItem="vTY-kt-mhZ" firstAttribute="top" secondItem="24D-hI-rWO" secondAttribute="bottom" constant="33" id="qNG-Jq-BGP"/>
+                        <constraint firstItem="FaF-NR-bPA" firstAttribute="top" secondItem="W6B-6q-p6Q" secondAttribute="top" constant="16" id="svW-Il-eow"/>
+                        <constraint firstItem="vTY-kt-mhZ" firstAttribute="leading" secondItem="Lnx-If-i3D" secondAttribute="leading" constant="10" id="vfw-Xm-wBI"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="ProcessPickerView" destination="24D-hI-rWO" id="gIc-N4-NHc"/>
+                        <outlet property="ProcessViewConfirmBtn" destination="vTY-kt-mhZ" id="bop-79-6OU"/>
+                        <outlet property="ProcessViewTitlelabel" destination="FaF-NR-bPA" id="djS-IK-Qef"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" id="pmt-GV-Nen" customClass="StudyCategoryView" customModule="스터디팜" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
@@ -1148,12 +1188,87 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vgV-ge-ggh">
+                                                        <rect key="frame" x="11.5" y="244" width="10" height="11"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ue0-0B-daV">
+                                                        <rect key="frame" x="28" y="243" width="53" height="14"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-zy-Q15">
+                                                        <rect key="frame" x="124" y="243" width="90" height="14"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="290" id="hKQ-XA-yzc"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjA-w5-N3s">
+                                                <rect key="frame" x="20" y="900" width="57" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8w-9j-RLv">
+                                                <rect key="frame" x="89" y="900" width="50" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytY-1d-o9P">
+                                                <rect key="frame" x="151" y="900" width="50" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bze-6W-VlU">
+                                                <rect key="frame" x="213" y="900" width="50" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUY-1I-fsk">
+                                                <rect key="frame" x="275" y="900" width="50" height="26"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EEe-48-Xno">
+                                                <rect key="frame" x="20" y="956" width="374" height="74"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="349-ez-xJE">
+                                                        <rect key="frame" x="19" y="18" width="36" height="36"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmV-Wu-r6l">
+                                                        <rect key="frame" x="75" y="20" width="80" height="14"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUE-Fb-i29">
+                                                        <rect key="frame" x="75" y="40" width="94" height="12"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jy4-1T-l8n">
+                                                <rect key="frame" x="24" y="1077" width="41" height="16"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -1207,10 +1322,16 @@
                         <outlet property="StudyAreaImageView" destination="XWE-9j-fIf" id="vLC-Ws-ddU"/>
                         <outlet property="StudyAreanamelabel" destination="Ljj-KW-8rn" id="flc-ar-wvm"/>
                         <outlet property="StudyAreatilelabel" destination="m0G-Zf-fyL" id="1i7-y2-ZeR"/>
+                        <outlet property="StudyCommentCountlabel" destination="jy4-1T-l8n" id="DGI-eK-jcI"/>
                         <outlet property="StudyContentTextView" destination="wHN-4e-xKK" id="eBY-MZ-cOc"/>
                         <outlet property="StudyContentTitlelabel" destination="0Zc-Ep-dfS" id="Pgg-TL-zaK"/>
                         <outlet property="StudyCreateDatelabel" destination="cYR-X0-r7u" id="YU5-ds-Sjy"/>
                         <outlet property="StudyDefaultView" destination="q3q-Ad-Tkd" id="mrk-0f-I25"/>
+                        <outlet property="StudyDetailTagButton" destination="vjA-w5-N3s" id="9Uy-go-XyN"/>
+                        <outlet property="StudyDetailTagButton2" destination="D8w-9j-RLv" id="T7d-L8-rp5"/>
+                        <outlet property="StudyDetailTagButton3" destination="ytY-1d-o9P" id="qAK-cG-6aW"/>
+                        <outlet property="StudyDetailTagButton4" destination="bze-6W-VlU" id="oTK-62-IJs"/>
+                        <outlet property="StudyDetailTagButton5" destination="wUY-1I-fsk" id="IaM-IF-D4c"/>
                         <outlet property="StudyGoalView" destination="blt-f4-1tV" id="7Dz-MB-Yj0"/>
                         <outlet property="StudyGoalViewContentlabel" destination="aTK-bM-R0A" id="I9K-fx-rMN"/>
                         <outlet property="StudyGoalViewlabel" destination="pIe-SS-siZ" id="Fs2-H5-5d2"/>
@@ -1219,12 +1340,15 @@
                         <outlet property="StudyProcessImageView" destination="BLv-cg-Ldx" id="paC-8L-3YA"/>
                         <outlet property="StudyProcesscontentlabel" destination="P0j-uk-Tsg" id="SlB-xG-8On"/>
                         <outlet property="StudyProcesstitlelabel" destination="cqU-MB-dQU" id="GBD-Ro-Oes"/>
+                        <outlet property="StudyRecruitDateImageView" destination="vgV-ge-ggh" id="f08-1y-ebG"/>
+                        <outlet property="StudyRecruitDatetitlelabel" destination="ue0-0B-daV" id="EvC-IO-fLB"/>
                         <outlet property="StudyRecruitRankImageView" destination="1b6-wS-0Q8" id="jg3-JT-goV"/>
                         <outlet property="StudyRecruitRankcontentlabel" destination="F6t-Vy-VOY" id="T12-m9-yTt"/>
                         <outlet property="StudyRecruitRanktitlelabel" destination="ECL-I0-ceQ" id="359-I6-rPh"/>
                         <outlet property="StudyRecruitTypeImageView" destination="MXw-Tt-by5" id="NBr-Qn-Ane"/>
                         <outlet property="StudyRecruitTypecontentlabel" destination="q8a-47-HH3" id="1yp-1W-IHV"/>
                         <outlet property="StudyRecruitTypetitlelabel" destination="Rg5-u7-dKq" id="zDQ-sj-Q1R"/>
+                        <outlet property="StudyRecruitcontentlabel" destination="Tfo-zy-Q15" id="znc-md-bP8"/>
                         <outlet property="StudyRecruitmenttitlelabel" destination="TSc-xG-WaA" id="3x4-v9-cJJ"/>
                         <outlet property="StudyResearchContentView" destination="rlQ-CF-eeB" id="KBs-eU-rmm"/>
                         <outlet property="StudyResearchScrollview" destination="An0-3K-ST3" id="xeo-SX-jYq"/>
@@ -1236,6 +1360,10 @@
                         <outlet property="StudyUserImageView" destination="DwG-Ox-62w" id="yw5-GE-jNS"/>
                         <outlet property="StudyUsercontentlabel" destination="0NF-Pf-GXz" id="tXx-t2-Icr"/>
                         <outlet property="StudyUsertitlelabel" destination="vnO-NY-5r7" id="trh-c2-8OC"/>
+                        <outlet property="StudyleaderIntroducelabel" destination="HUE-Fb-i29" id="sDo-1m-aQq"/>
+                        <outlet property="StudyleaderNicknamelabel" destination="zmV-Wu-r6l" id="nbf-6G-N3c"/>
+                        <outlet property="StudyleaderProfileImageView" destination="349-ez-xJE" id="Wfp-Ie-fIF"/>
+                        <outlet property="StudyleaderProfileView" destination="EEe-48-Xno" id="9T4-Rm-sTU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uMb-jb-1Jw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

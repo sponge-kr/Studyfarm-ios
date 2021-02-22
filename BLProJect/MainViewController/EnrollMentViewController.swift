@@ -74,8 +74,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet weak var StudymeetExamplelabel: UILabel!
     @IBOutlet weak var StudygoalExamplelabel: UILabel!
     @IBOutlet var FirstDateCalendar: FSCalendar!
-    @IBOutlet var LastDateCalendar: FSCalendar!
     @IBOutlet weak var StudyIntroduceExamplelabel: UILabel!
+    @IBOutlet var ProcessMonthView: ProcessView!
+    var MonthContainerView = UIView()
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
         let pickerToolView = UIToolbar()
@@ -108,6 +109,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     }
 
     let PickerData = ["1 명","2 명","3 명","4 명","5 명","6 명","7 명","8 명","9 명","10 명"]
+    let MonthPickerData = ["1개월","2개월","3개월","4개월","5개월","6개월","7개월","8개월","9개월","10개월","11개월","12개월"]
     var FirstDate : Date? = nil
     var LastDate : Date? = nil
     public var StudyCategoryModel = [StudyContentsContainer]()
@@ -119,8 +121,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Studygoaltextview.delegate = self
         self.FirstDateCalendar.delegate = self
         self.FirstDateCalendar.dataSource = self
-        self.LastDateCalendar.delegate = self
-        self.LastDateCalendar.dataSource = self
         self.StudyIntroducetextview.delegate = self
         self.StudyCategorytableview.delegate = self
         self.StudyCategorytableview.dataSource = self
@@ -145,7 +145,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.LimitBtn.addTarget(self, action: #selector(self.LimitPersonBtnSelect(_:)), for: .touchUpInside)
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
         self.Studystartdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
-        self.Studylastdatebtn.addTarget(self, action: #selector(self.setLastFSCalendarLayoutInit), for: .touchUpInside)
+        self.Studylastdatebtn.addTarget(self, action: #selector(self.LastMonthPickerView), for: .touchUpInside)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -159,9 +159,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let winodw = UIApplication.shared.windows.first
         if let FirstCalendarTag = winodw?.viewWithTag(5) {
             FirstCalendarTag.removeFromSuperview()
-        }
-        if let LastCalnedarTag = winodw?.viewWithTag(6) {
-            LastCalnedarTag.removeFromSuperview()
         }
     }
     deinit {
@@ -444,6 +441,58 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
+    @objc
+    private func LastMonthPickerView(){
+        let FirstCalendarwindow = UIApplication.shared.windows.first
+        if let FirstCalendardisappear = FirstCalendarwindow?.viewWithTag(5) {
+            FirstCalendardisappear.removeFromSuperview()
+        }
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        self.MonthContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.MonthContainerView.frame = self.view.frame
+        self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.2)
+        window?.addSubview(self.MonthContainerView)
+        window?.addSubview(self.ProcessMonthView)
+        self.ProcessMonthView.layer.cornerRadius = 20
+        self.ProcessMonthView.layer.masksToBounds = true
+        self.ProcessMonthView.ProcessPickerView.delegate = self
+        self.ProcessMonthView.ProcessPickerView.tag = 3
+        self.ProcessMonthView.ProcessViewTitlelabel.textColor = UIColor(red: 54/255, green: 54/255, blue: 54/255, alpha: 1.0)
+        self.ProcessMonthView.ProcessViewTitlelabel.textAlignment = .left
+        self.ProcessMonthView.ProcessViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.ProcessMonthView.ProcessViewConfirmBtn.setTitleColor(UIColor.white, for: .normal)
+        self.ProcessMonthView.ProcessViewConfirmBtn.setTitle("확인", for: .normal)
+        self.ProcessMonthView.ProcessViewConfirmBtn.layer.cornerRadius = 8
+        self.ProcessMonthView.ProcessViewConfirmBtn.layer.masksToBounds = true
+        self.MonthContainerView.alpha = 0
+        let MonthViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveMonthView(_:)))
+        self.MonthContainerView.addGestureRecognizer(MonthViewTapGesture)
+        self.ProcessMonthView.ProcessViewConfirmBtn.addTarget(self, action: #selector(self.MonthConfirmBtn(_:)), for: .touchUpInside)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.MonthContainerView.alpha = 0.5
+            self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height / 2.5 + self.view.safeAreaInsets.bottom, width: screenSize.width, height: self.ProcessMonthView.frame.size.height)
+        }, completion: nil)
+        
+    }
+    
+    @objc
+    public func MonthConfirmBtn(_ sender : UIButton) {
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.MonthContainerView.alpha = 0
+            self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
+        }, completion: nil)
+    }
+    
+    @objc
+    public func RemoveMonthView(_ recognizer: UITapGestureRecognizer){
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.MonthContainerView.alpha = 0
+            self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
+        }, completion: nil)
+    }
     
     @objc
     public func ScrollViewHideKeyboard(recognizer: UITapGestureRecognizer){
@@ -457,9 +506,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @objc
     public func setFSCalendarLayoutInit(){
         let window = UIApplication.shared.windows.first
-        if let LastCalendar = window?.viewWithTag(6){
-            LastCalendar.removeFromSuperview()
-        }
         let screenSize = UIScreen.main.bounds.size
         self.FirstDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
         self.FirstDateCalendar.appearance.headerDateFormat = "YYYY. MM"
@@ -501,53 +547,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }, completion: nil)
     }
     
-    @objc
-    func setLastFSCalendarLayoutInit(){
-        let window = UIApplication.shared.windows.first
-        if let FirstCalendar = window?.viewWithTag(5){
-            FirstCalendar.removeFromSuperview()
-        }
-        let screenSize = UIScreen.main.bounds.size
-        self.LastDateCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        self.LastDateCalendar.appearance.headerDateFormat = "YYYY. MM"
-        self.LastDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 20)
-        self.LastDateCalendar.appearance.headerTitleColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
-        self.LastDateCalendar.appearance.weekdayTextColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
-        self.LastDateCalendar.layer.borderWidth = 1.0
-        self.LastDateCalendar.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
-        self.LastDateCalendar.appearance.selectionColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.LastDateCalendar.appearance.todayColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.LastDateCalendar.calendarWeekdayView.addBottomBorder(with: UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0), andWidth: 1)
-        self.LastDateCalendar.layer.cornerRadius = 8
-        self.LastDateCalendar.layer.shadowColor = UIColor.darkGray.cgColor
-        self.LastDateCalendar.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.LastDateCalendar.layer.shadowOpacity = 0.2
-        self.LastDateCalendar.layer.shadowRadius = 4.0
-        self.LastDateCalendar.layer.masksToBounds = true
-        self.LastDateCalendar.appearance.weekdayFont = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
-        self.LastDateCalendar.appearance.headerTitleFont = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 16)
-        self.LastDateCalendar.locale = Locale(identifier: "ko_KR")
-        self.LastDateCalendar.allowsMultipleSelection = false
-        self.LastDateCalendar.tag = 6
-        self.LastDateCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "CELL")
-        self.LastDateCalendar.headerHeight = 68
-        self.LastDateCalendar.calendarWeekdayView.frame = CGRect(x: self.LastDateCalendar.calendarWeekdayView.frame.origin.x, y: self.LastDateCalendar.calendarWeekdayView.frame.origin.y - 50, width: self.LastDateCalendar.calendarWeekdayView.frame.size.width, height: self.LastDateCalendar.calendarWeekdayView.frame.size.height)
-        let LastCalendarBtn = UIButton(frame: CGRect(x: 20, y: 26, width: 8, height: 20))
-        LastCalendarBtn.setTitle("", for: .normal)
-        LastCalendarBtn.setImage(UIImage(named: "Navigation.png"), for: .normal)
-        LastCalendarBtn.tintColor = UIColor.black
-        LastCalendarBtn.addTarget(self, action: #selector(self.MoveMonthLastCalendar), for: .touchUpInside)
-        self.LastDateCalendar.addSubview(LastCalendarBtn)
-        let RemoveLastCalendartapGesture = UITapGestureRecognizer(target: self, action: #selector(EnrollMentViewController.RemoveLastCaelndarTapgestureCalendar(recognizer:)))
-        self.EnrollMentscrollview.addGestureRecognizer(RemoveLastCalendartapGesture)
-        window?.addSubview(self.LastDateCalendar)
-        self.LastDateCalendar.frame = CGRect(x: 0, y: screenSize.height, width: 300, height: 300)
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-            self.LastDateCalendar.frame = CGRect(x: 20, y: screenSize.height - screenSize.height / 1.6, width: 340, height: 300)
-
-        }, completion: nil)
-    }
-    
     
     @objc
     func MoveMonthFirstCalendar(){
@@ -555,13 +554,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         let CalendarDate = Calendar(identifier: .gregorian)
         let RemoveMonth : Date? = CalendarDate.date(byAdding: .month, value: -1, to: Month)
         self.FirstDateCalendar.setCurrentPage(RemoveMonth!, animated: true)
-    }
-    @objc
-    func MoveMonthLastCalendar(){
-        let Month = self.LastDateCalendar.currentPage
-        let LastCalendarDate = Calendar(identifier: .gregorian)
-        let nextMonth : Date? = LastCalendarDate.date(byAdding: .month, value: +1, to: Month)
-        self.LastDateCalendar.setCurrentPage(nextMonth!, animated: true)
     }
         
     @objc
@@ -571,15 +563,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             FirstCalendar.removeFromSuperview()
         }
     }
-    @objc
-    func RemoveLastCaelndarTapgestureCalendar(recognizer : UITapGestureRecognizer) {
-        let LastCalendarWindow = UIApplication.shared.windows.first
-        if let LastCalendar = LastCalendarWindow?.viewWithTag(6){
-            LastCalendar.removeFromSuperview()
-        }
-        
-    }
-    
     
     @objc
     func ConfirmRemoveCategoryView(_ sender : UIButton){
@@ -971,8 +954,79 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
-        
+        if pickerView.tag == 1 {
+            self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
+        }else if pickerView.tag == 2 {
+           //
+        }else {
+            
+            self.Studylastdatebtn.setTitle(MonthPickerData[row], for: .normal)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            if MonthPickerData[row] == "1개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +1, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "2개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +2, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "3개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +3, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "4개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +4, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "5개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +5, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "6개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +6, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "7개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +7, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "8개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +8, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "9개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +9, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "10개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +10, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "11개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +11, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            } else if MonthPickerData[row] == "12개월" {
+                let CalendarData = Calendar(identifier: .gregorian)
+                self.LastDate = CalendarData.date(byAdding: .month, value: +12, to: self.FirstDate!)
+                self.LastDate = self.LastDate!.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
+                UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
+            }
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -980,10 +1034,23 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return PickerData.count
+        if pickerView.tag == 1 {
+            return PickerData.count
+        } else if pickerView.tag == 2 {
+            return PickerData.count
+        } else {
+            return MonthPickerData.count
+        }
+       
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return PickerData[row].trimmingCharacters(in: .whitespaces)
+        if pickerView.tag == 1 {
+            return PickerData[row].trimmingCharacters(in: .whitespaces)
+        } else if pickerView.tag == 2 {
+            return PickerData[row].trimmingCharacters(in: .whitespaces)
+        } else {
+            return MonthPickerData[row].trimmingCharacters(in: .whitespaces)
+        }
     }
     
     
@@ -993,10 +1060,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         if textView.tag == 1 && textView.text == "텍스트를 입력하세요" {
             self.Studymeettextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.Studymeettextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
-        }else if textView.tag == 2 && textView.text == "텍스트를 입력하세요" {
+        } else if textView.tag == 2 && textView.text == "텍스트를 입력하세요" {
             self.Studygoaltextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.Studygoaltextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
-        }else if textView.tag == 3 && textView.text == "텍스트를 입력하세요"{
+        } else if textView.tag == 3 && textView.text == "텍스트를 입력하세요"{
             self.StudyIntroducetextview.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudyIntroducetextview.attributedText = NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.88,NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         }
@@ -1008,9 +1075,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         textparagraphStyle.lineHeightMultiple = 1.15
         if textView.tag == 1 && textView.text == "" {
             self.Studymeettextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.kern:-0.88, NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor : UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
-        }else if textView.tag == 2 && textView.text == "" {
+        } else if textView.tag == 2 && textView.text == "" {
             self.Studygoaltextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
-        }else if textView.tag == 3 && textView.text == "" {
+        } else if textView.tag == 3 && textView.text == "" {
             self.StudyIntroducetextview.attributedText = NSAttributedString(string: "텍스트를 입력하세요", attributes: [NSAttributedString.Key.paragraphStyle:textparagraphStyle,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)])
             
         }
@@ -1019,16 +1086,16 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     func textViewDidChange(_ textView: UITextView) {
         if textView.tag == 1 {
             self.Studymeettextcountlabel.text = "\(self.Studymeettextview.text.count) / 20"
-        }else if textView.tag == 2{
+        } else if textView.tag == 2{
             self.Studygoaltextcountlabel.text = "\(self.Studygoaltextview.text.count) / 60"
-        }else if textView.tag == 3{
+        } else if textView.tag == 3{
             self.StudyIntroducecountlabel.text = "\(self.StudyIntroducetextview.text.count) / 1000"
         }
         if self.Studymeettextview.text.count >= 2 && self.Studygoaltextview.text.count >= 2 && self.StudyIntroducetextview.text.count >= 20 {
             self.Studypostbtn.isEnabled = true
             self.Studypostbtn.setTitleColor(UIColor.white, for: .normal)
             self.Studypostbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        }else{
+        } else {
             self.Studypostbtn.isEnabled = false
             self.Studypostbtn.setTitleColor(UIColor(red: 141/255, green: 141/255, blue: 141/255, alpha: 1.0), for: .normal)
             self.Studypostbtn.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
@@ -1039,7 +1106,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudymeetExamplelabel.attributedText = NSAttributedString(string: "마감 일시는 시작 일시보다 뒤로 설정해주세요.", attributes: [NSAttributedString.Key.kern : -0.66])
             self.StudymeetExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
             self.StudymeetExamplelabel.isHidden = false
-        }else{
+        } else {
             self.Studymeettextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.Studymeetnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudymeetExamplelabel.isHidden = true
@@ -1050,7 +1117,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudygoalExamplelabel.attributedText = NSAttributedString(string: "목표가 너무 짧습니다. ( 2자~ 60자 )", attributes: [NSAttributedString.Key.kern : -0.66])
             self.StudygoalExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
             self.StudygoalExamplelabel.isHidden = false
-        }else{
+        } else {
             self.Studygoaltextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.Studygoalnamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudygoalExamplelabel.isHidden = true
@@ -1061,7 +1128,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.StudyIntroduceExamplelabel.attributedText = NSAttributedString(string: "스터디 소개가 너무 짧습니다. ( 20자~ 1000자 )", attributes: [NSAttributedString.Key.kern : -0.66])
             self.StudyIntroduceExamplelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
             self.StudyIntroduceExamplelabel.isHidden = false
-        }else{
+        } else {
             self.StudyIntroducetextview.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
             self.StudyIntroducenamelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
             self.StudyIntroduceExamplelabel.isHidden = true
@@ -1076,13 +1143,13 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             let changedText = currentText.replacingCharacters(in: StringRange, with: text)
             
             return changedText.count <= 20
-        }else if textView.tag == 2{
+        } else if textView.tag == 2{
             let cureentText2 = textView.text ?? ""
             guard let StringRange = Range(range, in: cureentText2) else { return false }
             let changedText = cureentText2.replacingCharacters(in: StringRange, with: text)
             
             return changedText.count <= 60
-        }else if textView.tag == 3{
+        } else if textView.tag == 3{
             let cureentText3 = textView.text ?? ""
             guard let StringRange = Range(range, in: cureentText3) else {return false}
             let changeText = cureentText3.replacingCharacters(in: StringRange, with: text)
@@ -1137,6 +1204,21 @@ class PickerButton : UIButton {
     
 }
 
+
+class ProcessView : UIView {
+    @IBOutlet weak var ProcessPickerView: UIPickerView!
+    @IBOutlet weak var ProcessViewTitlelabel: UILabel!
+    @IBOutlet weak var ProcessViewConfirmBtn: UIButton!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+
+
 extension EnrollMentViewController : FSCalendarDataSource,FSCalendarDelegate {
     public func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
         let dateCell = calendar.dequeueReusableCell(withIdentifier: "CELL", for: date, at: position)
@@ -1180,29 +1262,6 @@ extension EnrollMentViewController : FSCalendarDataSource,FSCalendarDelegate {
             self.FirstDateCalendar.appearance.titleTodayColor = UIColor.black
             print("StudyStartDate\(FirstDate)")
             self.Studystartdatebtn.setTitle("\(dateFormatter.string(from: self.FirstDate!))", for: .normal)
-        }
-        if let LastCalendar = calendar.viewWithTag(6) {
-            let dateFormatter = DateFormatter()
-            self.LastDate = date.addingTimeInterval(TimeInterval(NSTimeZone.local.secondsFromGMT()))
-            dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            UserDefaults.standard.set(dateFormatter.string(from: self.LastDate!), forKey: "LastDate")
-            dateFormatter.dateFormat = "yyyy.MM.dd"
-            self.LastDateCalendar.today = self.LastDate
-            self.LastDateCalendar.allowsMultipleSelection = false
-            self.LastDateCalendar.appearance.todayColor = UIColor.white
-            self.LastDateCalendar.appearance.titleTodayColor = UIColor.black
-            print("StudyStartDate\(self.LastDate)")
-            self.Studylastdatebtn.setTitle("\(dateFormatter.string(from: self.LastDate!))", for: .normal)
-        }
-        if self.FirstDate != nil && self.LastDate != nil {
-            if self.FirstDate! > self.LastDate! {
-                self.Studylastdatebtn.layer.borderColor = UIColor(red: 237/255, green: 65/266, blue: 65/266, alpha: 1.0).cgColor
-            }else {
-                self.Studylastdatebtn.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
-            }
-            
         }
     }
 }
