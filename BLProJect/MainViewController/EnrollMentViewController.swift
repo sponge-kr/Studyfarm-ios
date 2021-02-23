@@ -11,8 +11,6 @@ import FSCalendar
 
 class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var ContainerView: UIView!
-    @IBOutlet var StudyCategoryView: StudyCategoryView!
-    @IBOutlet weak var StudyCategorytableview: UITableView!
     @IBOutlet weak var RecruitmentInfolabel: UILabel!
     @IBOutlet weak var RecruitmentInfoLine: UIView!
     @IBOutlet weak var Participantlabel: UILabel!
@@ -76,7 +74,9 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     @IBOutlet var FirstDateCalendar: FSCalendar!
     @IBOutlet weak var StudyIntroduceExamplelabel: UILabel!
     @IBOutlet var ProcessMonthView: ProcessView!
-    var MonthContainerView = UIView()
+    @IBOutlet var InterestingUserView: InterestingView!
+    @IBOutlet var RecruitAreaUserView: RecruitAreaView!
+    var EnrollMentContainerView = UIView()
     @IBAction func Createpickerview(_ sender: PickerButton) {
         let pickerView = UIPickerView()
         let pickerToolView = UIToolbar()
@@ -90,21 +90,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         pickerToolView.setItems([pickerToolbuttonFiexed,pickerToolbutton], animated: false)
         pickerToolView.isUserInteractionEnabled = true
         sender.inputAccessoryView = pickerToolView
-        sender.inputView = pickerView
-    }
-    @IBAction func Createareapickerview(_ sender: PickerButton) {
-        let pickerView = UIPickerView()
-        let pickerToolbar = UIToolbar()
-        let pickerToolbarbutton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(RemoveFromAreaToolbar))
-        let pickerToolbarFiexed = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        pickerView.delegate = self
-        pickerView.tag = 2
-        pickerToolbar.sizeToFit()
-        pickerToolbar.barTintColor = UIColor.darkGray
-        pickerToolbar.tintColor = UIColor.white
-        pickerToolbar.isUserInteractionEnabled = true
-        pickerToolbar.setItems([pickerToolbarFiexed,pickerToolbarbutton], animated: false)
-        sender.inputAccessoryView = pickerToolbar
         sender.inputView = pickerView
     }
 
@@ -122,22 +107,14 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.FirstDateCalendar.delegate = self
         self.FirstDateCalendar.dataSource = self
         self.StudyIntroducetextview.delegate = self
-        self.StudyCategorytableview.delegate = self
-        self.StudyCategorytableview.dataSource = self
         self.NavigationLayou()
         self.SetupInitLayout()
         self.SetStudyInitLayout()
-        let nibCell = UINib(nibName: "StudyCategoryTableViewCell", bundle: nil)
-        self.StudyCategorytableview.register(nibCell, forCellReuseIdentifier: "StudyCategoryCell")
-        UtilApi.shared.UtilStudyCategoryCall { result in
-            self.StudyCategoryModel = result
-            self.StudyCategorytableview.reloadData()
-        }
         self.ReviewBtn.addTarget(self, action: #selector(self.ReviewBtnCheck(_:)), for: .touchUpInside)
         self.FirstComeBtn.addTarget(self, action: #selector(self.FirstComeBtnCheck(_:)), for: .touchUpInside)
         self.OfflineCheckbtn.addTarget(self, action: #selector(self.OfflineBtnCheck), for: .touchUpInside)
         self.OnlineCheckbtn.addTarget(self, action: #selector(self.OnlineBtnCheck(_:)), for: .touchUpInside)
-        self.StudyKindInfobtn.addTarget(self, action: #selector(self.AddCategoryView), for: .touchUpInside)
+        self.StudyKindInfobtn.addTarget(self, action: #selector(self.AddInterestingView), for: .touchUpInside)
         self.StudyDiffcultybtn1.addTarget(self, action: #selector(self.difficultyBtnSelect(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn2.addTarget(self, action: #selector(self.difficultyBtnSelect2(_:)), for: .touchUpInside)
         self.StudyDiffcultybtn3.addTarget(self, action: #selector(self.difficultyBtnSelect3(_:)), for: .touchUpInside)
@@ -146,6 +123,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.Limitbtn2.addTarget(self, action: #selector(self.LimitDateBtnSelect1(_:)), for: .touchUpInside)
         self.Studystartdatebtn.addTarget(self, action: #selector(self.setFSCalendarLayoutInit), for: .touchUpInside)
         self.Studylastdatebtn.addTarget(self, action: #selector(self.LastMonthPickerView), for: .touchUpInside)
+        self.Recruitmentareabtn.addTarget(self, action: #selector(self.AddRecruitAreaView), for: .touchUpInside)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(EnrollMentViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -408,36 +386,132 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     }
     
     @objc
-    func AddCategoryView() {
+    func AddRecruitAreaView() {
         let window = UIApplication.shared.windows.first
         let screenSize = UIScreen.main.bounds.size
-        self.StudyCategoryView.HandlerAreaView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        self.StudyCategoryView.HandlerAreaView.frame = self.view.frame
-        self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
-        self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
-        self.StudyCategoryView.ConfirmBtn.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.85, width: self.StudyCategorytableview.frame.size.width, height: 90)
-        self.StudyCategoryView.ConfirmBtn.titleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
-        self.StudyCategoryView.ConfirmBtn.setAttributedTitle(NSAttributedString(string: "완료", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16)]), for: .normal)
-        self.StudyCategoryView.Headerlabel.attributedText = NSAttributedString(string: "스터디 종류", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-SemiBold",size: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)])
-        self.StudyCategorytableview.isScrollEnabled = false
-        self.StudyCategoryView.ConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.StudyCategoryView.Headerlabel.frame = CGRect(x: self.StudyCategoryView.Headerlabel.frame.origin.x, y: self.StudyCategoryView.Headerlabel.frame.origin.y, width: self.StudyCategoryView.Headerlabel.frame.size.width, height: self.StudyCategoryView.Headerlabel.frame.size.height)
-        self.StudyCategoryView.Headerlabel.textAlignment = .left
-        self.StudyCategoryView.ConfirmBtn.tintColor = UIColor.white
-        self.StudyCategoryView.ConfirmBtn.layer.masksToBounds = true
-        window?.addSubview(self.StudyCategoryView.HandlerAreaView)
-        window?.addSubview(self.StudyCategorytableview)
-        window?.addSubview(self.StudyCategoryView.HeaderView)
-        self.StudyCategoryView.HeaderView.addSubview(self.StudyCategoryView.Headerlabel)
-        self.StudyCategorytableview.addSubview(self.StudyCategoryView.ConfirmBtn)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveFromCategoryView(recognizer:)))
-        self.StudyCategoryView.HandlerAreaView.addGestureRecognizer(tapGesture)
-        self.StudyCategoryView.ConfirmBtn.addTarget(self, action: #selector(self.ConfirmRemoveCategoryView(_:)), for: .touchUpInside)
-        self.StudyCategoryView.HandlerAreaView.alpha = 0
+        self.EnrollMentContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.EnrollMentContainerView.frame = self.view.frame
+        self.RecruitAreaUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.0)
+        window?.addSubview(self.EnrollMentContainerView)
+        window?.addSubview(self.RecruitAreaUserView)
+        self.RecruitAreaUserView.layer.cornerRadius = 15
+        self.RecruitAreaUserView.layer.masksToBounds = true
+        self.RecruitAreaUserView.RecruitTitlelabel.text = "모집 지역"
+        self.RecruitAreaUserView.RecruitTitlelabel.textColor = UIColor(red: 54/255, green: 54/255, blue: 54/255, alpha: 1.0)
+        self.RecruitAreaUserView.RecruitAreaBtn.layer.borderWidth = 1
+        self.RecruitAreaUserView.RecruitAreaBtn.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
+        self.RecruitAreaUserView.RecruitAreaBtn.layer.cornerRadius = 4
+        self.RecruitAreaUserView.RecruitAreaBtn.layer.masksToBounds = true
+        self.RecruitAreaUserView.RecruitAreaBtn.setTitle("서울 강남구", for: .normal)
+        self.RecruitAreaUserView.RecruitAreaBtn.setTitleColor(UIColor(red: 96/255, green: 96/255, blue: 96/255, alpha: 1.0), for: .normal)
+        self.RecruitAreaUserView.RecruitAreaBtn1.layer.cornerRadius = 4
+        self.RecruitAreaUserView.RecruitAreaBtn1.layer.masksToBounds = true
+        self.RecruitAreaUserView.RecruitAreaBtn1.setTitle("서울 강동구", for: .normal)
+        self.RecruitAreaUserView.RecruitAreaBtn1.setTitleColor(UIColor.white, for: .normal)
+        self.RecruitAreaUserView.RecruitAreaBtn1.backgroundColor = UIColor(red: 123/255, green: 120/255, blue: 255/255, alpha: 1.0)
+        self.RecruitAreaUserView.RecruitExamplelabel.text = "내 지역은 ‘마이페이지’에서 변경할 수 있어요."
+        self.RecruitAreaUserView.RecruitExamplelabel.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
+        self.RecruitAreaUserView.RecruitConfirmBtn.setTitle("확인", for: .normal)
+        self.RecruitAreaUserView.RecruitConfirmBtn.setTitleColor(UIColor.white, for: .normal)
+        self.RecruitAreaUserView.RecruitConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.RecruitAreaUserView.RecruitConfirmBtn.layer.cornerRadius = 8
+        self.RecruitAreaUserView.RecruitConfirmBtn.layer.masksToBounds = true
+        self.RecruitAreaUserView.RecruitConfirmBtn.addTarget(self, action: #selector(self.RemoveRecruitAreaConfirmBtn(_:)), for: .touchUpInside)
+        let RecruitAreaTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveFromRecruitAreaView(recognizer:)))
+        self.EnrollMentContainerView.addGestureRecognizer(RecruitAreaTapGesture)
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.StudyCategoryView.HandlerAreaView.alpha = 0.5
-            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.8, width: screenSize.width, height: screenSize.height / 1.8)
-            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.65, width: screenSize.width, height: 50)
+            self.EnrollMentContainerView.alpha = 0.5
+            self.RecruitAreaUserView.frame = CGRect(x: 0, y: screenSize.height / 1.9 + self.view.safeAreaInsets.bottom, width: screenSize.width, height: self.RecruitAreaUserView.frame.size.height)
+        }, completion: nil)
+        
+    }
+    
+    @objc
+    func RemoveRecruitAreaConfirmBtn(_ sender : UIButton) {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.EnrollMentContainerView.alpha = 0
+            self.RecruitAreaUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.9)
+            self.navigationItem.hidesBackButton = false
+        }, completion: nil)
+    }
+    
+    @objc
+    func RemoveFromRecruitAreaView(recognizer: UITapGestureRecognizer) {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.EnrollMentContainerView.alpha = 0
+            self.RecruitAreaUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.9)
+            self.navigationItem.hidesBackButton = false
+        }, completion: nil)
+    }
+    
+    @objc
+    func AddInterestingView() {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
+        self.EnrollMentContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.EnrollMentContainerView.frame = self.view.frame
+        self.InterestingUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.5)
+        window?.addSubview(self.EnrollMentContainerView)
+        window?.addSubview(self.InterestingUserView)
+        self.navigationItem.hidesBackButton = true
+        self.InterestingUserView.layer.cornerRadius = 15
+        self.InterestingUserView.layer.masksToBounds = true
+        self.InterestingUserView.InterestingTitlelabel.text = "내 관심 스터디"
+        self.InterestingUserView.InterestingTitlelabel.textColor = UIColor(red: 54/255, green: 54/255, blue: 54/255, alpha: 1.0)
+        self.InterestingUserView.InterestingUserBtn.layer.cornerRadius = 4
+        self.InterestingUserView.InterestingUserBtn.layer.masksToBounds = true
+        self.InterestingUserView.InterestingUserBtn.layer.borderWidth = 1
+        self.InterestingUserView.InterestingUserBtn.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
+        self.InterestingUserView.InterestingUserBtn.setTitle("요리 > 제빵", for: .normal)
+        self.InterestingUserView.InterestingUserBtn.setTitleColor(UIColor(red: 96/255, green: 96/255, blue: 96/255, alpha: 1.0), for: .normal)
+        self.InterestingUserView.InterestingUserBtn1.setTitle("프로그래밍 > 앱개발", for: .normal)
+        self.InterestingUserView.InterestingUserBtn1.setTitleColor(UIColor.white, for: .normal)
+        self.InterestingUserView.InterestingUserBtn1.backgroundColor = UIColor(red: 123/255, green: 120/255, blue: 255/255, alpha: 1.0)
+        self.InterestingUserView.InterestingUserBtn1.layer.cornerRadius = 4
+        self.InterestingUserView.InterestingUserBtn1.layer.masksToBounds = true
+        self.InterestingUserView.InterestingUserBtn2.layer.cornerRadius = 4
+        self.InterestingUserView.InterestingUserBtn2.layer.masksToBounds = true
+        self.InterestingUserView.InterestingUserBtn2.layer.borderWidth = 1
+        self.InterestingUserView.InterestingUserBtn2.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0).cgColor
+        self.InterestingUserView.InterestingUserBtn2.setTitle("어학 > 토익", for: .normal)
+        self.InterestingUserView.InterestingUserBtn2.setTitleColor(UIColor(red: 96/255, green: 96/255, blue: 96/255, alpha: 1.0), for: .normal)
+        self.InterestingUserView.InterestingExamplelabel.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
+        self.InterestingUserView.InterestingExamplelabel.attributedText = NSAttributedString(string: "내 관심 스터디는 ‘마이페이지’에서 변경할 수 있어요.", attributes: [NSAttributedString.Key.kern : -0.55])
+        self.InterestingUserView.InterestingConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.InterestingUserView.InterestingConfirmBtn.setTitle("확인", for: .normal)
+        self.InterestingUserView.InterestingConfirmBtn.setTitleColor(UIColor.white, for: .normal)
+        self.InterestingUserView.InterestingConfirmBtn.layer.cornerRadius = 8
+        self.InterestingUserView.InterestingConfirmBtn.layer.masksToBounds = true
+        let InterestingViewGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveFromInterestingView(recognizer:)))
+        self.EnrollMentContainerView.addGestureRecognizer(InterestingViewGesture)
+        self.InterestingUserView.InterestingConfirmBtn.addTarget(self, action: #selector(self.InterestingConfirmBtn(_:)), for: .touchUpInside)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.EnrollMentContainerView.alpha = 0.5
+            self.InterestingUserView.frame = CGRect(x: 0, y: screenSize.height / 2.5 + self.view.safeAreaInsets.bottom, width: screenSize.width, height: self.InterestingUserView.frame.size.height)
+        }, completion: nil)
+    }
+    
+    @objc
+    func InterestingConfirmBtn(_ sender : UIButton){
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.EnrollMentContainerView.alpha = 0
+            self.InterestingUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
+            self.navigationItem.hidesBackButton = false
+        }, completion: nil)
+    }
+    
+    @objc
+    func RemoveFromInterestingView(recognizer: UITapGestureRecognizer){
+        let screenSize = UIScreen.main.bounds.size
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.EnrollMentContainerView.alpha = 0
+            self.InterestingUserView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
+            self.navigationItem.hidesBackButton = false
         }, completion: nil)
     }
     
@@ -449,15 +523,15 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         }
         let window = UIApplication.shared.windows.first
         let screenSize = UIScreen.main.bounds.size
-        self.MonthContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        self.MonthContainerView.frame = self.view.frame
+        self.EnrollMentContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        self.EnrollMentContainerView.frame = self.view.frame
         self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.2)
-        window?.addSubview(self.MonthContainerView)
+        window?.addSubview(self.EnrollMentContainerView)
         window?.addSubview(self.ProcessMonthView)
         self.ProcessMonthView.layer.cornerRadius = 20
         self.ProcessMonthView.layer.masksToBounds = true
         self.ProcessMonthView.ProcessPickerView.delegate = self
-        self.ProcessMonthView.ProcessPickerView.tag = 3
+        self.ProcessMonthView.ProcessPickerView.tag = 2
         self.ProcessMonthView.ProcessViewTitlelabel.textColor = UIColor(red: 54/255, green: 54/255, blue: 54/255, alpha: 1.0)
         self.ProcessMonthView.ProcessViewTitlelabel.textAlignment = .left
         self.ProcessMonthView.ProcessViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
@@ -465,12 +539,12 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         self.ProcessMonthView.ProcessViewConfirmBtn.setTitle("확인", for: .normal)
         self.ProcessMonthView.ProcessViewConfirmBtn.layer.cornerRadius = 8
         self.ProcessMonthView.ProcessViewConfirmBtn.layer.masksToBounds = true
-        self.MonthContainerView.alpha = 0
+        self.EnrollMentContainerView.alpha = 0
         let MonthViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.RemoveMonthView(_:)))
-        self.MonthContainerView.addGestureRecognizer(MonthViewTapGesture)
+        self.EnrollMentContainerView.addGestureRecognizer(MonthViewTapGesture)
         self.ProcessMonthView.ProcessViewConfirmBtn.addTarget(self, action: #selector(self.MonthConfirmBtn(_:)), for: .touchUpInside)
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.MonthContainerView.alpha = 0.5
+            self.EnrollMentContainerView.alpha = 0.5
             self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height / 2.5 + self.view.safeAreaInsets.bottom, width: screenSize.width, height: self.ProcessMonthView.frame.size.height)
         }, completion: nil)
         
@@ -480,7 +554,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     public func MonthConfirmBtn(_ sender : UIButton) {
         let screenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.MonthContainerView.alpha = 0
+            self.EnrollMentContainerView.alpha = 0
             self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
         }, completion: nil)
     }
@@ -489,7 +563,7 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     public func RemoveMonthView(_ recognizer: UITapGestureRecognizer){
         let screenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.MonthContainerView.alpha = 0
+            self.EnrollMentContainerView.alpha = 0
             self.ProcessMonthView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2.5)
         }, completion: nil)
     }
@@ -562,26 +636,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         if let FirstCalendar = FirstCalendarwindow?.viewWithTag(5){
             FirstCalendar.removeFromSuperview()
         }
-    }
-    
-    @objc
-    func ConfirmRemoveCategoryView(_ sender : UIButton){
-        let screenSize = UIScreen.main.bounds.size
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.StudyCategoryView.HandlerAreaView.alpha = 0
-            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
-            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
-        }, completion: nil)
-    }
-    
-    @objc
-    func RemoveFromCategoryView(recognizer: UITapGestureRecognizer){
-        let screenSize = UIScreen.main.bounds.size
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.StudyCategoryView.HandlerAreaView.alpha = 0
-            self.StudyCategorytableview.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.8)
-            self.StudyCategoryView.HeaderView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: 50)
-        }, completion: nil)
     }
     
     @objc
@@ -952,14 +1006,10 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
         return StudyCategoryCell!
     }
     
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             self.RecruitmentBtn.setTitle(PickerData[row], for: .normal)
-        }else if pickerView.tag == 2 {
-           //
-        }else {
-            
+        } else {
             self.Studylastdatebtn.setTitle(MonthPickerData[row], for: .normal)
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = NSTimeZone(name: "GMT") as TimeZone?
@@ -1036,8 +1086,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
             return PickerData.count
-        } else if pickerView.tag == 2 {
-            return PickerData.count
         } else {
             return MonthPickerData.count
         }
@@ -1045,8 +1093,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
-            return PickerData[row].trimmingCharacters(in: .whitespaces)
-        } else if pickerView.tag == 2 {
             return PickerData[row].trimmingCharacters(in: .whitespaces)
         } else {
             return MonthPickerData[row].trimmingCharacters(in: .whitespaces)
@@ -1162,20 +1208,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
     
 }
 
-class StudyCategoryView: UIView {
-    @IBOutlet weak var HandlerAreaView: UIView!
-    @IBOutlet weak var ConfirmBtn: UIButton!
-    @IBOutlet weak var HeaderView: UIView!
-    @IBOutlet weak var Headerlabel: UILabel!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
 
 
 
@@ -1211,6 +1243,36 @@ class ProcessView : UIView {
     @IBOutlet weak var ProcessViewConfirmBtn: UIButton!
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+class InterestingView : UIView {
+    @IBOutlet weak var InterestingTitlelabel: UILabel!
+    @IBOutlet weak var InterestingUserBtn: UIButton!
+    @IBOutlet weak var InterestingUserBtn1: UIButton!
+    @IBOutlet weak var InterestingUserBtn2: UIButton!
+    @IBOutlet weak var InterestingExamplelabel: UILabel!
+    @IBOutlet weak var InterestingConfirmBtn: UIButton!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+class RecruitAreaView : UIView {
+    @IBOutlet weak var RecruitTitlelabel: UILabel!
+    @IBOutlet weak var RecruitAreaBtn: UIButton!
+    @IBOutlet weak var RecruitAreaBtn1: UIButton!
+    @IBOutlet weak var RecruitExamplelabel: UILabel!
+    @IBOutlet weak var RecruitConfirmBtn: UIButton!
+    override init(frame: CGRect) {
+        super .init(frame: frame)
+        
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)

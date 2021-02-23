@@ -324,9 +324,6 @@
                                                     <constraint firstAttribute="height" constant="45" id="rAV-Nw-Uvj"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="Createareapickerview:" destination="D5a-sn-alv" eventType="touchUpInside" id="yrU-cj-NBH"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스터디 진행 장소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7m-y5-fI6">
                                                 <rect key="frame" x="20" y="795" width="104" height="23"/>
@@ -799,6 +796,7 @@
                         <outlet property="FirstComeExampleLabel" destination="rKL-he-6mc" id="Bzb-V7-7LG"/>
                         <outlet property="FirstComeLabel" destination="TL1-zY-qiq" id="hOh-54-pIW"/>
                         <outlet property="FirstDateCalendar" destination="PTs-hQ-fzr" id="AXT-bh-Fvo"/>
+                        <outlet property="InterestingUserView" destination="zeA-WO-UA9" id="ez7-xH-qA0"/>
                         <outlet property="LimitBtn" destination="tPO-kM-HBW" id="hfb-nr-ZYc"/>
                         <outlet property="Limitbtn2" destination="hcr-E0-nGO" id="nJZ-Ze-aEm"/>
                         <outlet property="Limitlabel" destination="xn3-7l-bDx" id="q50-M8-tMU"/>
@@ -809,6 +807,7 @@
                         <outlet property="Participantlabel" destination="skw-DL-DHZ" id="yjG-Dg-Xe9"/>
                         <outlet property="ProcessMonthView" destination="W6B-6q-p6Q" id="fmP-6s-DOC"/>
                         <outlet property="Progresslabel" destination="dxU-xv-WMt" id="iA9-bp-UmN"/>
+                        <outlet property="RecruitAreaUserView" destination="WAq-2e-LdV" id="M8M-1M-Kbc"/>
                         <outlet property="RecruitmentBtn" destination="IRx-bf-XkB" id="Q7B-M9-tn6"/>
                         <outlet property="RecruitmentInfoLine" destination="yUZ-5z-AEW" id="OTS-8G-rFt"/>
                         <outlet property="RecruitmentInfolabel" destination="cKV-z5-orM" id="rD9-he-GBx"/>
@@ -820,8 +819,6 @@
                         <outlet property="ReviewLabel" destination="vHb-vu-Qd3" id="I1A-SY-12O"/>
                         <outlet property="StudyCafeExamplelabel" destination="TTP-mB-AjR" id="xSZ-ip-TEb"/>
                         <outlet property="StudyCafesearchbar" destination="3UO-By-0RO" id="8Nl-Gl-h92"/>
-                        <outlet property="StudyCategoryView" destination="pmt-GV-Nen" id="Udn-Et-Dxz"/>
-                        <outlet property="StudyCategorytableview" destination="IiR-FF-cAg" id="E3K-rf-zV7"/>
                         <outlet property="StudyDiffcultyView" destination="yer-CL-DZ5" id="NN4-oj-hlH"/>
                         <outlet property="StudyDiffcultybtn1" destination="2cC-CE-oGt" id="xxu-di-ejH"/>
                         <outlet property="StudyDiffcultybtn2" destination="RPN-hh-NKi" id="Izi-c4-Joz"/>
@@ -922,57 +919,157 @@
                         <outlet property="ProcessViewTitlelabel" destination="FaF-NR-bPA" id="djS-IK-Qef"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" id="pmt-GV-Nen" customClass="StudyCategoryView" customModule="스터디팜" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                <view contentMode="scaleToFill" id="zeA-WO-UA9" customClass="InterestingView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNm-5x-FFb">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZ1-In-Y28">
-                            <rect key="frame" x="0.0" y="526" width="414" height="74"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W29-Ao-VJf">
+                            <rect key="frame" x="20" y="103" width="374" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="z86-I8-5uj"/>
+                            </constraints>
                             <state key="normal" title="Button"/>
                         </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="54S-qO-co1">
-                            <rect key="frame" x="0.0" y="168" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ix-8i-lEA">
-                                    <rect key="frame" x="144" y="12" width="126" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IiR-FF-cAg">
-                            <rect key="frame" x="0.0" y="212" width="414" height="314"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <prototypes>
-                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EaA-YS-N4X" customClass="StudyCategoryTableViewCell" customModule="스터디팜" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EaA-YS-N4X" id="RR0-sL-0XW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </tableViewCellContentView>
-                                </tableViewCell>
-                            </prototypes>
-                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixJ-Lm-6Jh">
+                            <rect key="frame" x="153" y="15" width="108" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="dzA-oW-ZbP"/>
+                                <constraint firstAttribute="width" constant="108" id="knV-0i-ffN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGN-GU-ncq">
+                            <rect key="frame" x="20" y="153" width="374" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="5uw-74-PqW"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1Q-dg-coZ">
+                            <rect key="frame" x="20" y="203" width="374" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="s9y-Lc-WMO"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JS5-oH-4QU">
+                            <rect key="frame" x="20" y="251" width="188" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="RL7-jv-Peu"/>
+                                <constraint firstAttribute="width" constant="188" id="wbQ-Ry-GPp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="10"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wmd-VQ-YlU">
+                            <rect key="frame" x="10" y="338" width="394" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="tci-jj-iiD"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="Hg3-aX-YHK"/>
+                    <viewLayoutGuide key="safeArea" id="Z3q-vR-JnE"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="ixJ-Lm-6Jh" firstAttribute="centerX" secondItem="zeA-WO-UA9" secondAttribute="centerX" id="7Mc-06-gTJ"/>
+                        <constraint firstItem="gGN-GU-ncq" firstAttribute="top" secondItem="W29-Ao-VJf" secondAttribute="bottom" constant="10" id="7lF-uz-D20"/>
+                        <constraint firstItem="JS5-oH-4QU" firstAttribute="top" secondItem="D1Q-dg-coZ" secondAttribute="bottom" constant="8" id="86Z-zj-scI"/>
+                        <constraint firstItem="W29-Ao-VJf" firstAttribute="leading" secondItem="Z3q-vR-JnE" secondAttribute="leading" constant="20" id="9Ux-gx-S0F"/>
+                        <constraint firstItem="ixJ-Lm-6Jh" firstAttribute="top" secondItem="zeA-WO-UA9" secondAttribute="top" constant="15" id="Cae-P1-MyM"/>
+                        <constraint firstItem="D1Q-dg-coZ" firstAttribute="top" secondItem="gGN-GU-ncq" secondAttribute="bottom" constant="10" id="Fdt-Lm-Qsw"/>
+                        <constraint firstItem="Z3q-vR-JnE" firstAttribute="trailing" secondItem="W29-Ao-VJf" secondAttribute="trailing" constant="20" id="PgO-rO-a6V"/>
+                        <constraint firstItem="JS5-oH-4QU" firstAttribute="leading" secondItem="Z3q-vR-JnE" secondAttribute="leading" constant="20" id="QOS-EA-bd3"/>
+                        <constraint firstItem="D1Q-dg-coZ" firstAttribute="leading" secondItem="Z3q-vR-JnE" secondAttribute="leading" constant="20" id="QbJ-zG-pST"/>
+                        <constraint firstItem="Wmd-VQ-YlU" firstAttribute="leading" secondItem="Z3q-vR-JnE" secondAttribute="leading" constant="10" id="QmB-ds-pnu"/>
+                        <constraint firstItem="W29-Ao-VJf" firstAttribute="top" secondItem="Z3q-vR-JnE" secondAttribute="top" constant="59" id="Xeo-Vg-bM2"/>
+                        <constraint firstItem="Z3q-vR-JnE" firstAttribute="trailing" secondItem="D1Q-dg-coZ" secondAttribute="trailing" constant="20" id="ZLa-us-R6p"/>
+                        <constraint firstItem="gGN-GU-ncq" firstAttribute="leading" secondItem="Z3q-vR-JnE" secondAttribute="leading" constant="20" id="cSa-SX-PMP"/>
+                        <constraint firstItem="Wmd-VQ-YlU" firstAttribute="top" secondItem="JS5-oH-4QU" secondAttribute="bottom" constant="68" id="dKB-ex-r3c"/>
+                        <constraint firstItem="Z3q-vR-JnE" firstAttribute="trailing" secondItem="gGN-GU-ncq" secondAttribute="trailing" constant="20" id="fcV-fd-BAR"/>
+                        <constraint firstItem="Z3q-vR-JnE" firstAttribute="trailing" secondItem="Wmd-VQ-YlU" secondAttribute="trailing" constant="10" id="xiw-AC-pBJ"/>
+                    </constraints>
                     <connections>
-                        <outlet property="ConfirmBtn" destination="YZ1-In-Y28" id="HwO-E9-TkB"/>
-                        <outlet property="HandlerAreaView" destination="eNm-5x-FFb" id="xIO-lH-iyY"/>
-                        <outlet property="HeaderView" destination="54S-qO-co1" id="ccW-Pb-9pu"/>
-                        <outlet property="Headerlabel" destination="3Ix-8i-lEA" id="2iD-Lq-cGp"/>
+                        <outlet property="InterestingConfirmBtn" destination="Wmd-VQ-YlU" id="2mN-2A-asY"/>
+                        <outlet property="InterestingExamplelabel" destination="JS5-oH-4QU" id="iod-Ab-Me5"/>
+                        <outlet property="InterestingTitlelabel" destination="ixJ-Lm-6Jh" id="k3t-yN-X06"/>
+                        <outlet property="InterestingUserBtn" destination="W29-Ao-VJf" id="lm9-Ot-atu"/>
+                        <outlet property="InterestingUserBtn1" destination="gGN-GU-ncq" id="soE-6T-f4U"/>
+                        <outlet property="InterestingUserBtn2" destination="D1Q-dg-coZ" id="5sX-gW-DqM"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="WAq-2e-LdV" customClass="RecruitAreaView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="334"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyN-xb-XIq">
+                            <rect key="frame" x="171.5" y="16" width="71" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="lb3-Vy-XrS"/>
+                                <constraint firstAttribute="width" constant="71" id="xS9-IR-om9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94N-bx-3W9">
+                            <rect key="frame" x="20" y="119" width="374" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PHf-cp-gHq"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0c-iL-MC9">
+                            <rect key="frame" x="20" y="169" width="374" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="8yk-wM-CBY"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BT8-gE-cKf">
+                            <rect key="frame" x="20" y="214" width="182" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="182" id="Bzg-kg-hrH"/>
+                                <constraint firstAttribute="height" constant="19" id="WHE-j0-Ozq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="10"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ykh-Wp-fZJ">
+                            <rect key="frame" x="10" y="283" width="394" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="RZU-ob-vKk"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Usc-hh-p7F"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="s0c-iL-MC9" firstAttribute="top" secondItem="94N-bx-3W9" secondAttribute="bottom" constant="10" id="5by-67-ftD"/>
+                        <constraint firstItem="Ykh-Wp-fZJ" firstAttribute="top" secondItem="BT8-gE-cKf" secondAttribute="bottom" constant="50" id="9vL-KI-7To"/>
+                        <constraint firstItem="Usc-hh-p7F" firstAttribute="trailing" secondItem="Ykh-Wp-fZJ" secondAttribute="trailing" constant="10" id="F3G-mO-rUH"/>
+                        <constraint firstItem="Usc-hh-p7F" firstAttribute="trailing" secondItem="s0c-iL-MC9" secondAttribute="trailing" constant="20" id="GUL-LC-vsM"/>
+                        <constraint firstItem="Usc-hh-p7F" firstAttribute="trailing" secondItem="94N-bx-3W9" secondAttribute="trailing" constant="20" id="GwP-Hp-bbM"/>
+                        <constraint firstItem="BT8-gE-cKf" firstAttribute="leading" secondItem="Usc-hh-p7F" secondAttribute="leading" constant="20" id="TY8-Mq-wEA"/>
+                        <constraint firstItem="gyN-xb-XIq" firstAttribute="centerX" secondItem="WAq-2e-LdV" secondAttribute="centerX" id="YMn-xY-Z5z"/>
+                        <constraint firstItem="94N-bx-3W9" firstAttribute="top" secondItem="Usc-hh-p7F" secondAttribute="top" constant="75" id="aU8-JJ-RZm"/>
+                        <constraint firstItem="BT8-gE-cKf" firstAttribute="top" secondItem="s0c-iL-MC9" secondAttribute="bottom" constant="5" id="h4Y-n6-z1Q"/>
+                        <constraint firstItem="Ykh-Wp-fZJ" firstAttribute="leading" secondItem="Usc-hh-p7F" secondAttribute="leading" constant="10" id="kys-Pc-uTY"/>
+                        <constraint firstItem="s0c-iL-MC9" firstAttribute="leading" secondItem="Usc-hh-p7F" secondAttribute="leading" constant="20" id="mpU-BC-lWo"/>
+                        <constraint firstItem="94N-bx-3W9" firstAttribute="leading" secondItem="Usc-hh-p7F" secondAttribute="leading" constant="20" id="qEY-fe-fV2"/>
+                        <constraint firstItem="gyN-xb-XIq" firstAttribute="top" secondItem="WAq-2e-LdV" secondAttribute="top" constant="16" id="rtU-po-g7A"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="RecruitAreaBtn" destination="94N-bx-3W9" id="mMJ-dS-0g6"/>
+                        <outlet property="RecruitAreaBtn1" destination="s0c-iL-MC9" id="sNH-f0-hki"/>
+                        <outlet property="RecruitConfirmBtn" destination="Ykh-Wp-fZJ" id="i9W-dA-LFt"/>
+                        <outlet property="RecruitExamplelabel" destination="BT8-gE-cKf" id="2gC-zW-gWL"/>
+                        <outlet property="RecruitTitlelabel" destination="gyN-xb-XIq" id="q5I-zM-xzn"/>
                     </connections>
                 </view>
             </objects>
