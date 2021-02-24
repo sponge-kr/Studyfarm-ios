@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import Alamofire
 
-class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate {
-    
+class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var StudyResearchScrollview: UIScrollView!
     @IBOutlet weak var StudyResearchContentView: UIView!
     @IBOutlet weak var StudyTopicnamelabel: UILabel!
@@ -54,16 +54,26 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyleaderProfileImageView: UIImageView!
     @IBOutlet weak var StudyleaderNicknamelabel: UILabel!
     @IBOutlet weak var StudyleaderIntroducelabel: UILabel!
+    @IBOutlet weak var StudyDetailReplyView: UIView!
     @IBOutlet weak var StudyCommentCountlabel: UILabel!
-    var Index: Int = 1
+    @IBOutlet weak var StudyDetailReplyTextfiled: UITextField!
+    @IBOutlet weak var StudyDetailReplyTableView: UITableView!
+    @IBOutlet weak var StudyDetailReplyConfirmbtn: UIButton!
     
+    var Index: Int = 1
+    var ReplySize : CGFloat = 0.0
     var StudyDetailModel : StudyDetailResults?
     var TagCount : Int = 0
+    private var studyRepliesData = [RepliesContent]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.StudyContentTextView.delegate = self
         self.StudyResearchScrollview.isScrollEnabled = true
         self.StudyResearchScrollview.delegate = self
+        self.StudyDetailReplyTableView.delegate = self
+        self.StudyDetailReplyTableView.dataSource = self
+        let nibName = UINib(nibName: "StudyDetailRepliesTableViewCell", bundle: nil)
+        self.StudyDetailReplyTableView.register(nibName, forCellReuseIdentifier: "ReplyCell")
         self.NavigationLayout()
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
@@ -74,10 +84,23 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
                 self.StudyleaderSkillLevel()
             }
         }
-        print("인덱스 번호 입니다 \(Index)")
         
-        
+        self.ReplySize = self.StudyDetailReplyView.frame.size.height
+        self.setReplyLayout()
+        let RepliesParam : Parameters = [
+            "size" : 5,
+            "page" : 0
+        ]
+        let Replies = RepliesParams(size: 5, page: 0)
+        RepliesApi.shared.StudyRepliesCall(study_seq: Index, RepliesParamter: RepliesParam) { result in
+            DispatchQueue.main.async {
+                self.studyRepliesData = result
+                self.StudyDetailReplyTableView.reloadData()
+                print("댓글 데이터 체크 입니다\(self.studyRepliesData)")
+            }
+        }
     }
+    
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -88,6 +111,15 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.StudyDetailReplyView.frame = CGRect(x: 0, y: self.StudyResearchScrollview.contentOffset.y + self.view.frame.size.height - self.view.frame.origin.y, width: self.StudyDetailReplyView.frame.size.width, height: self.StudyDetailReplyView.frame.size.height + self.view.safeAreaInsets.bottom)
+        let ReplyViewInset = UIEdgeInsets(top: 0, left: 0, bottom:self.ReplySize, right: 0)
+        self.StudyResearchScrollview.contentInset =  ReplyViewInset
+        self.StudyResearchScrollview.scrollIndicatorInsets = ReplyViewInset
+    }
+    
+    
     
     private func NavigationLayout() {
         let RightNavigationButton = UIBarButtonItem(image: UIImage(named: "modified.png"), style: .plain, target: self, action: nil)
@@ -100,6 +132,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.titleTextAttributes = NavigationAttribute
         self.navigationItem.rightBarButtonItem = RightNavigationButton
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     public func setInitLayout() {
@@ -135,6 +168,8 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyContentTextView.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.StudyContentTextView.attributedText = NSAttributedString(string: "\(self.StudyDetailModel!.content)", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Regular", size: 14)])
         self.StudyContentTextView.isScrollEnabled = false
+        self.StudyContentTextView.sizeToFit()
+        self.StudyContentTextView.translatesAutoresizingMaskIntoConstraints = true
         self.StudyIntroduceView.layer.borderWidth = 1
         self.StudyIntroduceView.layer.borderColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0).cgColor
         self.StudyIntroducetitlelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -219,6 +254,24 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             }
         }
     }
+    
+    
+    private func setReplyLayout() {
+        self.StudyDetailReplyTextfiled.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
+        self.StudyDetailReplyTextfiled.layer.borderWidth = 1
+        self.StudyDetailReplyTextfiled.layer.cornerRadius = 5
+        self.StudyDetailReplyTextfiled.layer.masksToBounds = true
+        self.StudyDetailReplyTextfiled.attributedPlaceholder = NSAttributedString(string: "댓글을 남겨보세요.", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.foregroundColor : UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)])
+        let TextFiledInsetView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 0))
+        self.StudyDetailReplyTextfiled.leftView = TextFiledInsetView
+        self.StudyDetailReplyTextfiled.leftViewMode = .always
+        self.StudyDetailReplyConfirmbtn.setAttributedTitle(NSAttributedString(string: "등록", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14)]), for: .normal)
+        self.StudyDetailReplyConfirmbtn.setTitleColor(UIColor.white, for: .normal)
+        self.StudyDetailReplyConfirmbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.StudyDetailReplyConfirmbtn.layer.cornerRadius = 3
+        self.StudyDetailReplyConfirmbtn.layer.masksToBounds = true
+    }
+    
     
     private func StepsIndexScribe() {
         if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 1 {
@@ -377,5 +430,23 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             self.StudyDetailTagButton5.layer.cornerRadius = 12
             self.StudyDetailTagButton5.layer.masksToBounds = true
         }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.studyRepliesData.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let DetailCell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as? StudyDetailRepliesTableViewCell
+        
+        
+        
+        DetailCell?.StudyRepliesUserNickname.text = self.studyRepliesData[indexPath.row].dateFormat
+        DetailCell?.StudyRepliesUserDate.text = self.studyRepliesData[indexPath.row].reply_created_at
+        DetailCell?.StudyRepliesUserContent.text = self.studyRepliesData[indexPath.row].content
+        
+        return DetailCell!
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
     }
 }

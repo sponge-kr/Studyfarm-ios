@@ -47,6 +47,8 @@
 		D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */; };
 		D939A4367B9FCE91492E3EDB /* Pods_BLProJect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D0E2FC06B444CC3F559593 /* Pods_BLProJect.framework */; };
 		FB5B368149491471BFC3D997 /* Pods_BLProJect_BLProJectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F8BBCA735CDACD21EF04A3 /* Pods_BLProJect_BLProJectUITests.framework */; };
+		FF0EA19625E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0EA19425E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift */; };
+		FF0EA19725E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0EA19525E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib */; };
 		FF2425EC25E11EC100A76850 /* calendar@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425EB25E11EC100A76850 /* calendar@1x.png */; };
 		FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F025E11EC700A76850 /* calendar@2x.png */; };
 		FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF2425F525E11ECD00A76850 /* calendar@3x.png */; };
@@ -194,6 +196,8 @@
 		D1F85D1424CDE51200E1F7BE /* BLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLViewModel.swift; sourceTree = "<group>"; };
 		F2192852FD2B28CCDB99D81B /* Pods-BLProJectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.release.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69BDC8880EC0FE7F25666E2 /* Pods-BLProJectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLProJectTests.debug.xcconfig"; path = "Target Support Files/Pods-BLProJectTests/Pods-BLProJectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF0EA19425E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRepliesTableViewCell.swift; sourceTree = "<group>"; };
+		FF0EA19525E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyDetailRepliesTableViewCell.xib; sourceTree = "<group>"; };
 		FF2425EB25E11EC100A76850 /* calendar@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@1x.png"; sourceTree = "<group>"; };
 		FF2425F025E11EC700A76850 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
 		FF2425F525E11ECD00A76850 /* calendar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@3x.png"; sourceTree = "<group>"; };
@@ -555,6 +559,8 @@
 			children = (
 				FF92ED0425CFE57300D93CD7 /* StudyCategoryTableViewCell.swift */,
 				FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */,
+				FF0EA19425E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift */,
+				FF0EA19525E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib */,
 			);
 			path = Mainxib;
 			sourceTree = "<group>";
@@ -702,6 +708,7 @@
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
 				FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
+				FF0EA19725E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib in Resources */,
 				FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */,
 				FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */,
 				FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */,
@@ -956,6 +963,7 @@
 				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
 				FF331DA1259B67FB00BD8C33 /* UserInformationViewController.swift in Sources */,
+				FF0EA19625E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift in Sources */,
 				8592967325B2AA24000C21E8 /* SignUpViewController2.swift in Sources */,
 				D1B4633A255FA3F80063D714 /* oAuthApi.swift in Sources */,
 			);
