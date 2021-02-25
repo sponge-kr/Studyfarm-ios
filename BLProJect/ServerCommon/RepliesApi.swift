@@ -10,46 +10,49 @@ import UIKit
 import Alamofire
 
 
-struct RepliesResponse: Codable {
+struct RepliesResponse : Codable {
     var result: RepliesResult
 }
-struct RepliesResult: Codable {
+struct RepliesResult : Codable {
     var content: [RepliesContent]
 }
-struct RepliesContent: Codable {
+struct RepliesContent : Codable {
     let seq: Int?
-    let content,dateFormat: String
-    let is_parent,is_my_reply: Bool
-    let reply_created_at,reply_updated_at : String
-    let writer: RepliesChildrenCotainer
+    let writer: RepliesWriterCotainer?
+    let content, dateFormat , reply_created_at , reply_updated_at: String?
+    let is_parent, is_my_reply: Bool?
+    let children: [RepliesChildrenContainer]?
     
     enum CodingKeys: String,CodingKey {
         case seq
-        case content,dateFormat
-        case reply_created_at,reply_updated_at
-        case is_parent,is_my_reply
         case writer
+        case content,dateFormat,reply_created_at,reply_updated_at
+        case is_parent,is_my_reply
+        case children
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.seq = try values.decode(Int.self, forKey: .seq)
-        self.content = try values.decode(String.self, forKey: .content)
-        self.dateFormat = try values.decode(String.self, forKey: .dateFormat)
-        self.is_parent = try values.decode(Bool.self, forKey: .is_parent)
-        self.is_my_reply = try values.decode(Bool.self, forKey: .is_my_reply)
-        self.reply_created_at = try values.decode(String.self, forKey: .reply_created_at)
-        self.reply_updated_at = try values.decode(String.self, forKey: .reply_updated_at)
-        self.writer = try values.decode(RepliesChildrenCotainer.self, forKey: .writer)
+        self.seq = try? values.decode(Int.self, forKey: .seq)
+        self.writer = try? values.decode(RepliesWriterCotainer.self, forKey: .writer)
+        self.content = try? values.decode(String.self, forKey: .content)
+        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
+        self.is_parent = try? values.decode(Bool.self, forKey: .is_parent)
+        self.is_my_reply = try? values.decode(Bool.self, forKey: .is_my_reply)
+        self.reply_created_at = try? values.decode(String.self, forKey: .reply_created_at)
+        self.reply_updated_at = try? values.decode(String.self, forKey: .reply_updated_at)
+        self.children = try? values.decode([RepliesChildrenContainer].self, forKey: .children)
     }
 }
 
-struct RepliesChildrenCotainer:Codable {
+struct RepliesWriterCotainer : Codable {
     var users_seq: Int?
     var email: String?
-    var nickname: String?
+    var name : String?
+    var nickname : String?
     var gender: String?
     var age: Int?
-    var interesting: [RepliesChildreninInterestingContainer]?
+    var born_date: String?
+    var interesting: [RepliesInterestingContainer]?
     var simple_introduce: String?
     var profile: String?
     var user_info_process: Bool?
@@ -58,30 +61,28 @@ struct RepliesChildrenCotainer:Codable {
     var user_updated_at: String?
     var user_active: String?
 }
-struct RepliesChildreninInterestingContainer: Codable {
-    var name: String
-    var skill_level: Int
-    
+struct RepliesChildrenContainer : Codable {
+    var seq: Int?
+    var content: String?
+    var reply_created_at: String?
+    var reply_updated_at: String?
+    var dateFormat: String?
+    var is_parent: Bool?
+    var is_my_reply: Bool?
 }
 
-struct RepliesChildreninCityInfoContainer: Codable {
-    var state_code: Int
-    var state_name: String
-    var city_code: Int
-    var city_name: String
+struct RepliesInterestingContainer : Codable {
+    var code: Int?
+    var name: String?
+    var skill_level: Int?
+    var parent_code: Int?
 }
 
-struct RepliesInterestingContainer: Codable {
-    var code: Int
-    var name: String
-    var skill_level: Int
-    var parent_code: Int
-}
-struct RepliesCityInfoContainer: Codable {
-    var state_code: Int
-    var state_name: String
-    var city_code: Int
-    var city_name: String
+struct RepliesChildreninCityInfoContainer : Codable {
+    var state_code: Int?
+    var state_name: String?
+    var city_code: Int?
+    var city_name: String?
 }
 
 struct RepliesParams: Encodable {

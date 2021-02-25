@@ -72,6 +72,8 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyResearchScrollview.delegate = self
         self.StudyDetailReplyTableView.delegate = self
         self.StudyDetailReplyTableView.dataSource = self
+        self.StudyDetailReplyTableView.estimatedRowHeight = 300
+        self.StudyDetailReplyTableView.isScrollEnabled = false
         let nibName = UINib(nibName: "StudyDetailRepliesTableViewCell", bundle: nil)
         self.StudyDetailReplyTableView.register(nibName, forCellReuseIdentifier: "ReplyCell")
         self.NavigationLayout()
@@ -101,8 +103,10 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         }
     }
     
-    
-    
+    override func viewDidLayoutSubviews() {
+        self.StudyDetailReplyTableView.frame.size.height = self.StudyDetailReplyTableView.contentSize.height
+    }
+        
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         self.StudyTopicnamelabel.text = ""
@@ -117,6 +121,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         let ReplyViewInset = UIEdgeInsets(top: 0, left: 0, bottom:self.ReplySize, right: 0)
         self.StudyResearchScrollview.contentInset =  ReplyViewInset
         self.StudyResearchScrollview.scrollIndicatorInsets = ReplyViewInset
+
     }
     
     
@@ -429,8 +434,10 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             self.StudyDetailTagButton5.layer.borderWidth = 1
             self.StudyDetailTagButton5.layer.cornerRadius = 12
             self.StudyDetailTagButton5.layer.masksToBounds = true
+            self.StudyDetailReplyTableView.rowHeight = 100
         }
     }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.studyRepliesData.count
     }
@@ -447,6 +454,6 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         return DetailCell!
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return UITableView.automaticDimension
     }
 }

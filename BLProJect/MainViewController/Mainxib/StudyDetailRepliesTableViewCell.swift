@@ -18,7 +18,6 @@ class StudyDetailRepliesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.ReplyCellLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,7 +26,15 @@ class StudyDetailRepliesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.ReplyCellLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
 
     private func ReplyCellLayout(){
         self.StudyRepliesUserNickname.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
