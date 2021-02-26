@@ -59,7 +59,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyDetailReplyTextfiled: UITextField!
     @IBOutlet weak var StudyDetailReplyTableView: UITableView!
     @IBOutlet weak var StudyDetailReplyConfirmbtn: UIButton!
-    
+    @IBOutlet weak var StudyDetailReplyTableViewHeight: NSLayoutConstraint!
     var Index: Int = 1
     var ReplySize : CGFloat = 0.0
     var StudyDetailModel : StudyDetailResults?
@@ -73,9 +73,12 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyDetailReplyTableView.delegate = self
         self.StudyDetailReplyTableView.dataSource = self
         self.StudyDetailReplyTableView.estimatedRowHeight = 300
+        self.StudyDetailReplyTableView.rowHeight = 91
         self.StudyDetailReplyTableView.isScrollEnabled = false
         let nibName = UINib(nibName: "StudyDetailRepliesTableViewCell", bundle: nil)
         self.StudyDetailReplyTableView.register(nibName, forCellReuseIdentifier: "ReplyCell")
+        self.StudyDetailReplyTableView.separatorInset.right = 20
+        self.StudyDetailReplyTableView.separatorInset.left = 20
         self.NavigationLayout()
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
@@ -98,13 +101,18 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             DispatchQueue.main.async {
                 self.studyRepliesData = result
                 self.StudyDetailReplyTableView.reloadData()
+                self.ReplyLayoutInit()
                 print("댓글 데이터 체크 입니다\(self.studyRepliesData)")
+                self.StudyIntroduceView.translatesAutoresizingMaskIntoConstraints = false
+                self.StudyDetailReplyTableView.translatesAutoresizingMaskIntoConstraints = true
+                self.StudyDetailReplyTableView.frame.size = self.StudyDetailReplyTableView.contentSize
+                self.StudyDetailReplyTableViewHeight.constant = self.StudyDetailReplyTableView.contentSize.height
             }
         }
     }
     
     override func viewDidLayoutSubviews() {
-        self.StudyDetailReplyTableView.frame.size.height = self.StudyDetailReplyTableView.contentSize.height
+        print("스터디 댓글 테이블뷰 높이 값 입니다\(self.StudyDetailReplyTableView.contentSize.height)")
     }
         
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -434,10 +442,20 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             self.StudyDetailTagButton5.layer.borderWidth = 1
             self.StudyDetailTagButton5.layer.cornerRadius = 12
             self.StudyDetailTagButton5.layer.masksToBounds = true
-            self.StudyDetailReplyTableView.rowHeight = 100
         }
     }
+    
+    private func ReplyLayoutInit(){
+        let StudyCommenetAttribute = NSMutableAttributedString()
+        StudyCommenetAttribute.append(NSAttributedString(string: "댓글", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.kern : -0.88]))
+        StudyCommenetAttribute.append(NSAttributedString(string: " \(self.studyRepliesData.count)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.kern : -0.88]))
+        self.StudyCommentCountlabel.attributedText = StudyCommenetAttribute
+    }
 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.studyRepliesData.count
     }
@@ -445,15 +463,10 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let DetailCell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as? StudyDetailRepliesTableViewCell
         
-        
-        
-        DetailCell?.StudyRepliesUserNickname.text = self.studyRepliesData[indexPath.row].dateFormat
+        DetailCell?.StudyRepliesUserNickname.text = self.studyRepliesData[indexPath.row].writer!.nickname
         DetailCell?.StudyRepliesUserDate.text = self.studyRepliesData[indexPath.row].reply_created_at
         DetailCell?.StudyRepliesUserContent.text = self.studyRepliesData[indexPath.row].content
         
         return DetailCell!
-    }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }

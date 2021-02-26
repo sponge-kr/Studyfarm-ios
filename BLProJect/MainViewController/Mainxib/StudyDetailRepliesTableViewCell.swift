@@ -14,10 +14,12 @@ class StudyDetailRepliesTableViewCell: UITableViewCell {
     @IBOutlet weak var StudyRepliesUserDate: UILabel!
     @IBOutlet weak var StudyRepliesUserContent: UILabel!
     @IBOutlet weak var StudyRepliesUserReplyBtn: UIButton!
+    @IBOutlet weak var StudyRepliesUserModifiedBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.ReplyCellLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,6 +49,5 @@ class StudyDetailRepliesTableViewCell: UITableViewCell {
         self.StudyRepliesUserReplyBtn.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.StudyRepliesUserReplyBtn.backgroundColor = UIColor.clear
         self.StudyRepliesUserReplyBtn.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
-        
     }
 }

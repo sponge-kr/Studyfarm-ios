@@ -11,35 +11,35 @@ import Alamofire
 
 
 struct RepliesResponse : Codable {
-    var result: RepliesResult
+    var result : RepliesResult
 }
 struct RepliesResult : Codable {
     var content: [RepliesContent]
 }
 struct RepliesContent : Codable {
     let seq: Int?
-    let writer: RepliesWriterCotainer?
-    let content, dateFormat , reply_created_at , reply_updated_at: String?
+    let dateFormat, content , reply_created_at , reply_updated_at: String?
     let is_parent, is_my_reply: Bool?
+    let writer: RepliesWriterCotainer?
     let children: [RepliesChildrenContainer]?
     
-    enum CodingKeys: String,CodingKey {
+    enum CodingKeys: String , CodingKey {
         case seq
-        case writer
         case content,dateFormat,reply_created_at,reply_updated_at
         case is_parent,is_my_reply
+        case writer
         case children
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.seq = try? values.decode(Int.self, forKey: .seq)
-        self.writer = try? values.decode(RepliesWriterCotainer.self, forKey: .writer)
         self.content = try? values.decode(String.self, forKey: .content)
         self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
         self.is_parent = try? values.decode(Bool.self, forKey: .is_parent)
         self.is_my_reply = try? values.decode(Bool.self, forKey: .is_my_reply)
         self.reply_created_at = try? values.decode(String.self, forKey: .reply_created_at)
         self.reply_updated_at = try? values.decode(String.self, forKey: .reply_updated_at)
+        self.writer = try? values.decode(RepliesWriterCotainer.self, forKey: .writer)
         self.children = try? values.decode([RepliesChildrenContainer].self, forKey: .children)
     }
 }
@@ -47,28 +47,27 @@ struct RepliesContent : Codable {
 struct RepliesWriterCotainer : Codable {
     var users_seq: Int?
     var email: String?
-    var name : String?
-    var nickname : String?
+    var nickname: String?
     var gender: String?
-    var age: Int?
-    var born_date: String?
+    var age: String?
     var interesting: [RepliesInterestingContainer]?
     var simple_introduce: String?
     var profile: String?
     var user_info_process: Bool?
-    var user_city_info: [RepliesChildreninCityInfoContainer]?
+    var user_city_info: [RepliesCityInfoContainer]?
     var user_created_at: String?
     var user_updated_at: String?
-    var user_active: String?
+    var user_active: Bool?
 }
 struct RepliesChildrenContainer : Codable {
     var seq: Int?
+    var writer : [RepliesChildrenWriterContainer]?
     var content: String?
-    var reply_created_at: String?
-    var reply_updated_at: String?
     var dateFormat: String?
     var is_parent: Bool?
     var is_my_reply: Bool?
+    var reply_created_at: String?
+    var reply_updated_at: String?
 }
 
 struct RepliesInterestingContainer : Codable {
@@ -78,13 +77,43 @@ struct RepliesInterestingContainer : Codable {
     var parent_code: Int?
 }
 
-struct RepliesChildreninCityInfoContainer : Codable {
+struct RepliesCityInfoContainer : Codable {
     var state_code: Int?
     var state_name: String?
     var city_code: Int?
     var city_name: String?
 }
 
+struct RepliesChildrenWriterContainer : Codable {
+    var users_seq : Int?
+    var email : String?
+    var nickname : String?
+    var gender : String?
+    var age : String?
+    var interesting : [RepliesChildrenInterestingContainer]?
+    var simple_introduce : String?
+    var profile : String?
+    var user_info_process : Bool?
+    var user_city_info : [RepliesChildrenCityInfoContainer]?
+    var user_created_at : String?
+    var user_updated_at : String?
+    var user_active : Bool?
+}
+
+struct RepliesChildrenInterestingContainer : Codable {
+    var code : Int?
+    var name : String?
+    var skill_level : Int?
+    var parent_code : String?
+    
+}
+
+struct RepliesChildrenCityInfoContainer : Codable {
+    var state_code : Int?
+    var state_name : String?
+    var city_code : Int?
+    var city_name : String?
+}
 struct RepliesParams: Encodable {
     var size: Int
     var page: Int

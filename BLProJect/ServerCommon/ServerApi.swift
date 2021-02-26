@@ -596,6 +596,7 @@ class ServerApi {
     // MARK: - Server StudyList 조회 요청 함수
     public func StudyListCall(completionHandler:  @escaping ([StudyContent]) -> ()) {
         AF.request("http://3.214.168.45:8080/api/v1/study", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
+            .validate()
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
