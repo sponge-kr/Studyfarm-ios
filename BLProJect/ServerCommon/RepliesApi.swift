@@ -119,6 +119,74 @@ struct RepliesParams: Encodable {
     var page: Int
 }
 
+
+
+//MARK- 스터디 댓글 단건 조회
+struct RepliesSingleResponse : Codable{
+    var result : RepliesSingleResult
+}
+
+struct RepliesSingleResult : Codable {
+    let seq : Int?
+    let writer : RepliesSingleWriterContainer?
+    let content , dateFormat ,reply_created_at , reply_updated_at: String?
+    let is_parent , is_my_reply : Bool?
+    let children : [RepliesSingleChildrenContainer]?
+    enum CodingKeys : String,CodingKey {
+        case seq
+        case writer
+        case content , dateFormat , reply_created_at ,reply_updated_at
+        case is_parent , is_my_reply
+        case children
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.seq = try? values.decode(Int.self, forKey: .seq)
+        self.writer = try? values.decode(RepliesSingleWriterContainer.self, forKey: .writer)
+        self.content = try? values.decode(String.self, forKey: .content)
+        self.dateFormat = try? values.decode(String.self, forKey: .dateFormat)
+        self.reply_created_at = try? values.decode(String.self, forKey: .reply_created_at)
+        self.reply_updated_at = try? values.decode(String.self, forKey: .reply_updated_at)
+        self.is_parent = try? values.decode(Bool.self, forKey: .is_parent)
+        self.is_my_reply = try? values.decode(Bool.self, forKey: .is_my_reply)
+        self.children = try? values.decode([RepliesSingleChildrenContainer].self, forKey: .children)
+    }
+}
+
+struct RepliesSingleWriterContainer : Codable{
+    var users_seq : Int?
+    var email : String?
+    var nickname : String?
+    var gender : String?
+    var age : String?
+    var simple_introduce : String?
+    var motto : String?
+    var profile : String?
+}
+
+struct RepliesSingleChildrenContainer : Codable{
+    var seq : Int?
+    var writer : RepliesSingleChildrenWriterContainer?
+    var content : String?
+    var dateFormat : String?
+    var is_parent : Bool?
+    var is_my_reply : Bool?
+    var reply_created_at : String?
+    var reply_updated_at : String?
+}
+
+struct RepliesSingleChildrenWriterContainer : Codable {
+    var users_seq : Int?
+    var email : String?
+    var nickname : String?
+    var gender : String?
+    var age : String?
+    var simple_introduce : String?
+    var motto : String?
+    var profile : String?
+}
+
+
 class RepliesApi {
     static let shared = RepliesApi()
     
@@ -142,6 +210,26 @@ class RepliesApi {
                 }
             }
         }
+    
+    public func StudySingleRepliesCall(study_seq : Int, completionHandler : @escaping(RepliesSingleResult) -> Void) {
+        AF.request("http://3.214.168.45:8080/api/v1/study-replies/\(study_seq)", method: .get, encoding: JSONEncoding.default, headers: TestHeaders)
+            .validate()
+            .responseJSON { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let RepliesSingleData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let RepliesSingleInstance = try JSONDecoder().decode(RepliesSingleResponse.self, from: RepliesSingleData)
+                        completionHandler(RepliesSingleInstance.result)
+                    } catch  {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
 }
 
 extension Encodable {

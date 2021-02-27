@@ -79,6 +79,12 @@
 		FF4CE64325E9169600C0ACF8 /* Modified@1X.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64225E9169600C0ACF8 /* Modified@1X.png */; };
 		FF4CE64825E9169B00C0ACF8 /* Modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64725E9169B00C0ACF8 /* Modified@2x.png */; };
 		FF4CE64D25E916A000C0ACF8 /* Modified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64C25E916A000C0ACF8 /* Modified@3x.png */; };
+		FF4CE65225EA2BBD00C0ACF8 /* Favorite@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE65125EA2BBC00C0ACF8 /* Favorite@1x.png */; };
+		FF4CE65725EA2BC100C0ACF8 /* Favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE65625EA2BC100C0ACF8 /* Favorite@2x.png */; };
+		FF4CE65C25EA2BC700C0ACF8 /* Favorite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE65B25EA2BC700C0ACF8 /* Favorite@3x.png */; };
+		FF4CE66125EA6B5700C0ACF8 /* Favorite_fill@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66025EA6B5500C0ACF8 /* Favorite_fill@1x.png */; };
+		FF4CE66625EA6B6400C0ACF8 /* Favorite_fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66525EA6B6300C0ACF8 /* Favorite_fill@2x.png */; };
+		FF4CE66B25EA6B6A00C0ACF8 /* Favorite_fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66A25EA6B6A00C0ACF8 /* Favorite_fill@3x.png */; };
 		FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */; };
 		FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */; };
 		FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */; };
@@ -231,6 +237,12 @@
 		FF4CE64225E9169600C0ACF8 /* Modified@1X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@1X.png"; path = "../../../Downloads/Modified@1X.png"; sourceTree = "<group>"; };
 		FF4CE64725E9169B00C0ACF8 /* Modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@2x.png"; path = "../../../Downloads/Modified@2x.png"; sourceTree = "<group>"; };
 		FF4CE64C25E916A000C0ACF8 /* Modified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@3x.png"; path = "../../../Downloads/Modified@3x.png"; sourceTree = "<group>"; };
+		FF4CE65125EA2BBC00C0ACF8 /* Favorite@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite@1x.png"; sourceTree = "<group>"; };
+		FF4CE65625EA2BC100C0ACF8 /* Favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite@2x.png"; sourceTree = "<group>"; };
+		FF4CE65B25EA2BC700C0ACF8 /* Favorite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite@3x.png"; sourceTree = "<group>"; };
+		FF4CE66025EA6B5500C0ACF8 /* Favorite_fill@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@1x.png"; sourceTree = "<group>"; };
+		FF4CE66525EA6B6300C0ACF8 /* Favorite_fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@2x.png"; sourceTree = "<group>"; };
+		FF4CE66A25EA6B6A00C0ACF8 /* Favorite_fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@3x.png"; sourceTree = "<group>"; };
 		FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@2x.png"; sourceTree = "<group>"; };
 		FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@3x.png"; sourceTree = "<group>"; };
 		FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@1x.png"; sourceTree = "<group>"; };
@@ -454,6 +466,12 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF4CE66A25EA6B6A00C0ACF8 /* Favorite_fill@3x.png */,
+				FF4CE66525EA6B6300C0ACF8 /* Favorite_fill@2x.png */,
+				FF4CE66025EA6B5500C0ACF8 /* Favorite_fill@1x.png */,
+				FF4CE65B25EA2BC700C0ACF8 /* Favorite@3x.png */,
+				FF4CE65625EA2BC100C0ACF8 /* Favorite@2x.png */,
+				FF4CE65125EA2BBC00C0ACF8 /* Favorite@1x.png */,
 				FF4CE64C25E916A000C0ACF8 /* Modified@3x.png */,
 				FF4CE64725E9169B00C0ACF8 /* Modified@2x.png */,
 				FF4CE64225E9169600C0ACF8 /* Modified@1X.png */,
@@ -723,6 +741,7 @@
 				FFC0B02625A4F70C00D21482 /* NotoSansKR-Regular.otf in Resources */,
 				FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */,
 				FFBA6F1E25C7F83B004783C6 /* RedEllipse@1x.png in Resources */,
+				FF4CE66B25EA6B6A00C0ACF8 /* Favorite_fill@3x.png in Resources */,
 				FF3D1A4725D96AFA00BFB82C /* squarebox@3x.png in Resources */,
 				FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
@@ -757,6 +776,8 @@
 				D18F6BCF24F27123001D53A1 /* SingUpAlertView.xib in Resources */,
 				FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */,
 				FFB06A242593AE45005BFEAD /* unCheckGray@1x.png in Resources */,
+				FF4CE65725EA2BC100C0ACF8 /* Favorite@2x.png in Resources */,
+				FF4CE65225EA2BBD00C0ACF8 /* Favorite@1x.png in Resources */,
 				FF70E73225C6879200AE82CD /* triangle@2x.png in Resources */,
 				FFB06A252593AE45005BFEAD /* unCheckGray@2x.png in Resources */,
 				FF331D8A259B34BD00BD8C33 /* Roboto-BlackItalic.ttf in Resources */,
@@ -766,10 +787,12 @@
 				FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */,
 				FF3D1A4025D96AF100BFB82C /* squarebox@1x.png in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
+				FF4CE66125EA6B5700C0ACF8 /* Favorite_fill@1x.png in Resources */,
 				FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */,
 				FFBA6F1925C7F6E8004783C6 /* Groupnext@3x.png in Resources */,
 				FF331D88259B34BD00BD8C33 /* Roboto-Black.ttf in Resources */,
 				FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */,
+				FF4CE66625EA6B6400C0ACF8 /* Favorite_fill@2x.png in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
 				FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */,
 				FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */,
@@ -777,6 +800,7 @@
 				FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */,
 				FFCA27A725DFCB010053ECDD /* modified@1x.png in Resources */,
 				D14A273325653F2D00CE460D /* uncheck@0.5.png in Resources */,
+				FF4CE65C25EA2BC700C0ACF8 /* Favorite@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

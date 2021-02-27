@@ -47,23 +47,20 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyRecruitcontentlabel: UILabel!
     @IBOutlet weak var StudyDetailTagButton: UIButton!
     @IBOutlet weak var StudyDetailTagButton2: UIButton!
-    @IBOutlet weak var StudyDetailTagButton3: UIButton!
-    @IBOutlet weak var StudyDetailTagButton4: UIButton!
-    @IBOutlet weak var StudyDetailTagButton5: UIButton!
     @IBOutlet weak var StudyleaderProfileView: UIView!
     @IBOutlet weak var StudyleaderProfileImageView: UIImageView!
     @IBOutlet weak var StudyleaderNicknamelabel: UILabel!
     @IBOutlet weak var StudyleaderIntroducelabel: UILabel!
-    @IBOutlet weak var StudyDetailReplyView: UIView!
     @IBOutlet weak var StudyCommentCountlabel: UILabel!
-    @IBOutlet weak var StudyDetailReplyTextfiled: UITextField!
     @IBOutlet weak var StudyDetailReplyTableView: UITableView!
-    @IBOutlet weak var StudyDetailReplyConfirmbtn: UIButton!
-    @IBOutlet weak var StudyDetailReplyTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var StudyDetailApllyExamplelabel: UILabel!
+    @IBOutlet weak var StudyDetailFavoritebtn: UIButton!
+    @IBOutlet weak var StudyDetailConfirmbtn: UIButton!
+    @IBOutlet weak var StudyDetailReplyViewmoreBtn: UIButton!
+    @IBOutlet weak var StudyDetailApllylabelTopConstraint: NSLayoutConstraint!
     var Index: Int = 1
-    var ReplySize : CGFloat = 0.0
-    var StudyDetailModel : StudyDetailResults?
     var TagCount : Int = 0
+    private var StudyDetailModel : StudyDetailResults?
     private var studyRepliesData = [RepliesContent]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,47 +69,47 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyResearchScrollview.delegate = self
         self.StudyDetailReplyTableView.delegate = self
         self.StudyDetailReplyTableView.dataSource = self
-        self.StudyDetailReplyTableView.estimatedRowHeight = 300
+        self.StudyDetailReplyTableView.estimatedRowHeight = UITableView.automaticDimension
         self.StudyDetailReplyTableView.rowHeight = 91
         self.StudyDetailReplyTableView.isScrollEnabled = false
+        self.StudyDetailReplyTableView.isUserInteractionEnabled = false
+        self.StudyIntroduceView.translatesAutoresizingMaskIntoConstraints = false
         let nibName = UINib(nibName: "StudyDetailRepliesTableViewCell", bundle: nil)
         self.StudyDetailReplyTableView.register(nibName, forCellReuseIdentifier: "ReplyCell")
         self.StudyDetailReplyTableView.separatorInset.right = 20
         self.StudyDetailReplyTableView.separatorInset.left = 20
         self.NavigationLayout()
+        self.ConfrimLayoutInit()
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
                 self.StudyDetailModel = result
                 self.setInitLayout()
                 self.StepsIndexScribe()
-                self.StudyTagHidden()
+                self.StudyTagLayout()
                 self.StudyleaderSkillLevel()
             }
         }
         
-        self.ReplySize = self.StudyDetailReplyView.frame.size.height
-        self.setReplyLayout()
         let RepliesParam : Parameters = [
-            "size" : 5,
-            "page" : 0
+            "size" : 10,
+            "page" : 1
         ]
-        let Replies = RepliesParams(size: 5, page: 0)
         RepliesApi.shared.StudyRepliesCall(study_seq: Index, RepliesParamter: RepliesParam) { result in
             DispatchQueue.main.async {
                 self.studyRepliesData = result
                 self.StudyDetailReplyTableView.reloadData()
                 self.ReplyLayoutInit()
                 print("댓글 데이터 체크 입니다\(self.studyRepliesData)")
-                self.StudyIntroduceView.translatesAutoresizingMaskIntoConstraints = false
-                self.StudyDetailReplyTableView.translatesAutoresizingMaskIntoConstraints = true
-                self.StudyDetailReplyTableView.frame.size = self.StudyDetailReplyTableView.contentSize
-                self.StudyDetailReplyTableViewHeight.constant = self.StudyDetailReplyTableView.contentSize.height
             }
         }
     }
     
     override func viewDidLayoutSubviews() {
         print("스터디 댓글 테이블뷰 높이 값 입니다\(self.StudyDetailReplyTableView.contentSize.height)")
+        self.StudyResearchScrollview.translatesAutoresizingMaskIntoConstraints = false
+        self.StudyResearchScrollview.contentSize = CGSize(width: self.view.frame.size.width, height: self.StudyDetailConfirmbtn.frame.origin.y + self.StudyDetailConfirmbtn.frame.size.height + self.view.safeAreaInsets.bottom)
+        self.StudyResearchScrollview.layoutIfNeeded()
+        
     }
         
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -125,11 +122,6 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.StudyDetailReplyView.frame = CGRect(x: 0, y: self.StudyResearchScrollview.contentOffset.y + self.view.frame.size.height - self.view.frame.origin.y, width: self.StudyDetailReplyView.frame.size.width, height: self.StudyDetailReplyView.frame.size.height + self.view.safeAreaInsets.bottom)
-        let ReplyViewInset = UIEdgeInsets(top: 0, left: 0, bottom:self.ReplySize, right: 0)
-        self.StudyResearchScrollview.contentInset =  ReplyViewInset
-        self.StudyResearchScrollview.scrollIndicatorInsets = ReplyViewInset
-
     }
     
     
@@ -250,6 +242,17 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             self.StudyleaderNicknamelabel.attributedText = NSAttributedString(string: "\(StudyleaderNickname)", attributes: [NSAttributedString.Key.kern : -0.77])
         }
         self.StudyleaderIntroducelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        let StudyApplyAttribute = NSMutableAttributedString()
+        StudyApplyAttribute.append(NSAttributedString(string: "선착순 모집 중!", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 12),NSAttributedString.Key.kern : -0.66]))
+        StudyApplyAttribute.append(NSAttributedString(string: " 신청하면 바로 참여되는 스터디에요. 😀", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.kern : -0.66]))
+        self.StudyDetailApllyExamplelabel.attributedText = StudyApplyAttribute
+        self.StudyDetailApllyExamplelabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.StudyDetailApllyExamplelabel.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
+        self.StudyDetailApllyExamplelabel.layer.cornerRadius = 7
+        self.StudyDetailApllyExamplelabel.layer.masksToBounds = true
+        self.StudyDetailReplyViewmoreBtn.setAttributedTitle(NSAttributedString(string: "더 보기 >", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.kern : -0.66]), for: .normal)
+        self.StudyDetailReplyViewmoreBtn.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
+        
     }
     
     private func StudyleaderSkillLevel(){
@@ -268,23 +271,20 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         }
     }
     
-    
-    private func setReplyLayout() {
-        self.StudyDetailReplyTextfiled.layer.borderColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0).cgColor
-        self.StudyDetailReplyTextfiled.layer.borderWidth = 1
-        self.StudyDetailReplyTextfiled.layer.cornerRadius = 5
-        self.StudyDetailReplyTextfiled.layer.masksToBounds = true
-        self.StudyDetailReplyTextfiled.attributedPlaceholder = NSAttributedString(string: "댓글을 남겨보세요.", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.foregroundColor : UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)])
-        let TextFiledInsetView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 0))
-        self.StudyDetailReplyTextfiled.leftView = TextFiledInsetView
-        self.StudyDetailReplyTextfiled.leftViewMode = .always
-        self.StudyDetailReplyConfirmbtn.setAttributedTitle(NSAttributedString(string: "등록", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14)]), for: .normal)
-        self.StudyDetailReplyConfirmbtn.setTitleColor(UIColor.white, for: .normal)
-        self.StudyDetailReplyConfirmbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.StudyDetailReplyConfirmbtn.layer.cornerRadius = 3
-        self.StudyDetailReplyConfirmbtn.layer.masksToBounds = true
+    private func ConfrimLayoutInit(){
+        self.StudyDetailFavoritebtn.layer.borderWidth = 1
+        self.StudyDetailFavoritebtn.layer.borderColor = UIColor(red: 123/255, green: 120/255, blue: 255/255, alpha: 1.0).cgColor
+        self.StudyDetailFavoritebtn.layer.cornerRadius = 4
+        self.StudyDetailFavoritebtn.layer.masksToBounds = true
+        self.StudyDetailFavoritebtn.setImage(UIImage(named: "Favorite.png"), for: .normal)
+        self.StudyDetailFavoritebtn.imageEdgeInsets = UIEdgeInsets(top: 17, left: 18, bottom: 16, right: 18)
+        self.StudyDetailFavoritebtn.setTitle("", for: .normal)
+        self.StudyDetailConfirmbtn.backgroundColor = UIColor(red: 255/255, green: 113/255, blue: 104/255, alpha: 1.0)
+        self.StudyDetailConfirmbtn.layer.cornerRadius = 4
+        self.StudyDetailConfirmbtn.layer.masksToBounds = true
+        self.StudyDetailConfirmbtn.setAttributedTitle(NSAttributedString(string: "가입 신청하기", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Bold", size: 14)]), for: .normal)
+        self.StudyDetailConfirmbtn.setTitleColor(UIColor.white, for: .normal)
     }
-    
     
     private func StepsIndexScribe() {
         if self.StudyDetailModel!.steps[self.StudyDetailModel!.steps.startIndex] == 0 && self.StudyDetailModel!.steps.index(before: self.StudyDetailModel!.steps.endIndex) == 1 {
@@ -314,135 +314,19 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         }
     }
     
-    private func StudyTagHidden(){
-        if self.StudyDetailModel!.tags!.count < 1 {
-            self.StudyDetailTagButton.isHidden = true
-            self.StudyDetailTagButton2.isHidden = true
-            self.StudyDetailTagButton3.isHidden = true
-            self.StudyDetailTagButton4.isHidden = true
-            self.StudyDetailTagButton5.isHidden = true
-        }else if self.StudyDetailModel!.tags!.count < 2 {
-            self.StudyDetailTagButton.isHidden = false
-            self.StudyDetailTagButton2.isHidden = true
-            self.StudyDetailTagButton3.isHidden = true
-            self.StudyDetailTagButton4.isHidden = true
-            self.StudyDetailTagButton5.isHidden = true
-            self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton.layer.borderWidth = 1
-            self.StudyDetailTagButton.layer.cornerRadius = 10
-            self.StudyDetailTagButton.layer.masksToBounds = true
-        }else if self.StudyDetailModel!.tags!.count < 3 {
-            self.StudyDetailTagButton.isHidden = false
-            self.StudyDetailTagButton2.isHidden = false
-            self.StudyDetailTagButton3.isHidden = true
-            self.StudyDetailTagButton4.isHidden = true
-            self.StudyDetailTagButton5.isHidden = true
-            self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton.layer.borderWidth = 1
-            self.StudyDetailTagButton.layer.cornerRadius = 10
-            self.StudyDetailTagButton.layer.masksToBounds = true
-            self.StudyDetailTagButton2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton2.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![1])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton2.layer.borderWidth = 1
-            self.StudyDetailTagButton2.layer.cornerRadius = 10
-            self.StudyDetailTagButton2.layer.masksToBounds = true
-        }else if self.StudyDetailModel!.tags!.count < 4 {
-            self.StudyDetailTagButton.isHidden = false
-            self.StudyDetailTagButton2.isHidden = false
-            self.StudyDetailTagButton3.isHidden = false
-            self.StudyDetailTagButton4.isHidden = true
-            self.StudyDetailTagButton5.isHidden = true
-            self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton.layer.borderWidth = 1
-            self.StudyDetailTagButton.layer.cornerRadius = 10
-            self.StudyDetailTagButton.layer.masksToBounds = true
-            self.StudyDetailTagButton2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton2.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![1])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton2.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton2.layer.borderWidth = 1
-            self.StudyDetailTagButton2.layer.cornerRadius = 10
-            self.StudyDetailTagButton2.layer.masksToBounds = true
-            self.StudyDetailTagButton3.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton3.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![2])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton3.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton3.layer.borderWidth = 1
-            self.StudyDetailTagButton3.layer.cornerRadius = 10
-            self.StudyDetailTagButton3.layer.masksToBounds = true
-        }else if self.StudyDetailModel!.tags!.count < 5 {
-            self.StudyDetailTagButton.isHidden = false
-            self.StudyDetailTagButton2.isHidden = false
-            self.StudyDetailTagButton3.isHidden = false
-            self.StudyDetailTagButton4.isHidden = false
-            self.StudyDetailTagButton5.isHidden = true
-            self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton.layer.borderWidth = 1
-            self.StudyDetailTagButton.layer.cornerRadius = 10
-            self.StudyDetailTagButton.layer.masksToBounds = true
-            self.StudyDetailTagButton2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton2.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![1])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton2.layer.borderWidth = 1
-            self.StudyDetailTagButton2.layer.cornerRadius = 10
-            self.StudyDetailTagButton2.layer.masksToBounds = true
-            self.StudyDetailTagButton3.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton3.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![2])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton3.layer.borderWidth = 1
-            self.StudyDetailTagButton3.layer.cornerRadius = 10
-            self.StudyDetailTagButton3.layer.masksToBounds = true
-            self.StudyDetailTagButton4.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton4.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![3])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton4.layer.borderWidth = 1
-            self.StudyDetailTagButton4.layer.cornerRadius = 10
-            self.StudyDetailTagButton4.layer.masksToBounds = true
-        }else if self.StudyDetailModel!.tags!.count < 6 {
-            self.StudyDetailTagButton.isHidden = false
-            self.StudyDetailTagButton2.isHidden = false
-            self.StudyDetailTagButton3.isHidden = false
-            self.StudyDetailTagButton4.isHidden = false
-            self.StudyDetailTagButton5.isHidden = false
-            self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton.layer.borderWidth = 1
-            self.StudyDetailTagButton.layer.cornerRadius = 12
-            self.StudyDetailTagButton.layer.masksToBounds = true
-            self.StudyDetailTagButton2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton2.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![1])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton2.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton2.layer.borderWidth = 1
-            self.StudyDetailTagButton2.layer.cornerRadius = 12
-            self.StudyDetailTagButton2.layer.masksToBounds = true
-            self.StudyDetailTagButton3.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton3.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![2])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton3.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton3.layer.borderWidth = 1
-            self.StudyDetailTagButton3.layer.cornerRadius = 12
-            self.StudyDetailTagButton3.layer.masksToBounds = true
-            self.StudyDetailTagButton4.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton4.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![3])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton4.layer.borderWidth = 1
-            self.StudyDetailTagButton4.layer.cornerRadius = 12
-            self.StudyDetailTagButton4.layer.masksToBounds = true
-            
-            self.StudyDetailTagButton5.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-            self.StudyDetailTagButton5.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![4])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
-            self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
-            self.StudyDetailTagButton5.layer.borderWidth = 1
-            self.StudyDetailTagButton5.layer.cornerRadius = 12
-            self.StudyDetailTagButton5.layer.masksToBounds = true
-        }
+    private func StudyTagLayout(){
+        self.StudyDetailTagButton.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![0])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
+        self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        self.StudyDetailTagButton.layer.borderWidth = 1
+        self.StudyDetailTagButton.layer.cornerRadius = 10
+        self.StudyDetailTagButton.layer.masksToBounds = true
+        self.StudyDetailTagButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.StudyDetailTagButton2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.StudyDetailTagButton2.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.tags![1])", attributes: [NSAttributedString.Key.kern : -0.77,NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
+        self.StudyDetailTagButton.layer.borderColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0).cgColor
+        self.StudyDetailTagButton2.layer.borderWidth = 1
+        self.StudyDetailTagButton2.layer.cornerRadius = 10
+        self.StudyDetailTagButton2.layer.masksToBounds = true
     }
     
     private func ReplyLayoutInit(){
@@ -450,8 +334,22 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         StudyCommenetAttribute.append(NSAttributedString(string: "댓글", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.kern : -0.88]))
         StudyCommenetAttribute.append(NSAttributedString(string: " \(self.studyRepliesData.count)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.kern : -0.88]))
         self.StudyCommentCountlabel.attributedText = StudyCommenetAttribute
+        if self.studyRepliesData.isEmpty == true {
+            self.StudyDetailReplyTableView.isHidden = true
+            self.StudyDetailApllylabelTopConstraint.constant = -83
+        } else {
+            self.StudyDetailReplyTableView.isHidden = false
+        }
     }
-
+    
+    @objc func MoreRepliesView(_ sender : UIButton) {
+        
+    }
+    
+    @objc func Favoritselect(_ sender : UIButton) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

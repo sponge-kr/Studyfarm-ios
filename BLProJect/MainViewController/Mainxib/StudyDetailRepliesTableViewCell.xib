@@ -35,47 +35,27 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LkU-Dc-jHA">
-                        <rect key="frame" x="142" y="18" width="100" height="12"/>
+                        <rect key="frame" x="142" y="18" width="150" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="KZa-c3-YjI"/>
-                            <constraint firstAttribute="width" constant="100" id="zAE-7d-PzW"/>
+                            <constraint firstAttribute="width" constant="150" id="zAE-7d-PzW"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAJ-RZ-VSs">
-                        <rect key="frame" x="54" y="37" width="244" height="33"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAJ-RZ-VSs">
+                        <rect key="frame" x="54" y="37" width="271" height="93"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="244" id="9iR-Vw-lO7"/>
-                            <constraint firstAttribute="height" constant="33" id="PoZ-eC-vGR"/>
+                            <constraint firstAttribute="width" constant="271" id="9iR-Vw-lO7"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZh-ES-mhg">
-                        <rect key="frame" x="54" y="74" width="45" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="12" id="GsW-98-Y26"/>
-                            <constraint firstAttribute="width" constant="45" id="j95-e8-xzR"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyb-TL-YRF">
-                        <rect key="frame" x="352" y="18" width="3" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="3" id="PEv-0z-zjR"/>
-                            <constraint firstAttribute="height" constant="12" id="Wvr-oh-jpP"/>
-                        </constraints>
-                        <state key="normal" backgroundImage="Modified.png"/>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="wyb-TL-YRF" firstAttribute="leading" secondItem="LkU-Dc-jHA" secondAttribute="trailing" constant="110" id="1TY-uh-Ces"/>
-                    <constraint firstItem="rZh-ES-mhg" firstAttribute="top" secondItem="yAJ-RZ-VSs" secondAttribute="bottom" constant="4" id="4Z6-4g-A5u"/>
                     <constraint firstItem="9tI-Ra-18b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="4Zj-T6-M0P"/>
-                    <constraint firstItem="rZh-ES-mhg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="54" id="77o-XS-gDG"/>
                     <constraint firstItem="yAJ-RZ-VSs" firstAttribute="leading" secondItem="9tI-Ra-18b" secondAttribute="trailing" constant="10" id="8PD-Vo-Fao"/>
                     <constraint firstItem="Sa5-BF-MaJ" firstAttribute="leading" secondItem="9tI-Ra-18b" secondAttribute="trailing" constant="8" symbolic="YES" id="K9G-KG-oj3"/>
                     <constraint firstItem="9tI-Ra-18b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="LXu-g6-rNZ"/>
@@ -84,22 +64,17 @@
                     <constraint firstAttribute="trailing" secondItem="yAJ-RZ-VSs" secondAttribute="trailing" constant="22" id="e4p-Pp-D2g"/>
                     <constraint firstItem="Sa5-BF-MaJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="egD-hV-Nna"/>
                     <constraint firstItem="yAJ-RZ-VSs" firstAttribute="top" secondItem="Sa5-BF-MaJ" secondAttribute="bottom" constant="7" id="lRC-l2-mVU"/>
-                    <constraint firstItem="wyb-TL-YRF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="xT7-ae-dSU"/>
+                    <constraint firstAttribute="bottom" secondItem="yAJ-RZ-VSs" secondAttribute="bottom" constant="20" id="snA-C3-KII"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="StudyRepliesUserContent" destination="yAJ-RZ-VSs" id="fOI-wc-pHJ"/>
                 <outlet property="StudyRepliesUserDate" destination="LkU-Dc-jHA" id="g9W-pe-hBY"/>
-                <outlet property="StudyRepliesUserModifiedBtn" destination="wyb-TL-YRF" id="IvU-dg-ePE"/>
                 <outlet property="StudyRepliesUserNickname" destination="Sa5-BF-MaJ" id="X8b-M7-wjN"/>
                 <outlet property="StudyRepliesUserProfile" destination="9tI-Ra-18b" id="dJo-UZ-iDk"/>
-                <outlet property="StudyRepliesUserReplyBtn" destination="rZh-ES-mhg" id="3gM-gj-20p"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="65.625"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Modified.png" width="3" height="12"/>
-    </resources>
 </document>
