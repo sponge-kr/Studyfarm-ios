@@ -809,13 +809,12 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             sender.isSelected = false
             self.LimitBtn.setImage(UIImage(named: "Rectangle.png"), for: .normal)
             self.RecruitmentBtn.isEnabled = true
-        }else {
+        } else {
             sender.isSelected = true
             self.LimitBtn.setImage(UIImage(named: "squarebox.png"), for: .selected)
             self.RecruitmentBtn.isEnabled = false
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
-                    self.LimitBtn.setImage(UIImage(named: "squarebox.png"), for: .selected)
                     self.LimitBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
@@ -839,7 +838,6 @@ class EnrollMentViewController: UIViewController, UIScrollViewDelegate,UITextVie
             self.Studylastdatebtn.isEnabled = false
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.25/0.5, relativeDuration: 0.5/0.5) {
-                    self.Limitbtn2.setImage(UIImage(named: "squarebox.png"), for: .selected)
                     self.Limitbtn2.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 }
                 UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {

@@ -60,6 +60,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyDetailApllylabelTopConstraint: NSLayoutConstraint!
     var Index: Int = 1
     var TagCount : Int = 0
+    var RepliesParam : Parameters = [:]
     private var StudyDetailModel : StudyDetailResults?
     private var studyRepliesData = [RepliesContent]()
     override func viewDidLoad() {
@@ -78,6 +79,8 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyDetailReplyTableView.register(nibName, forCellReuseIdentifier: "ReplyCell")
         self.StudyDetailReplyTableView.separatorInset.right = 20
         self.StudyDetailReplyTableView.separatorInset.left = 20
+        self.StudyDetailFavoritebtn.addTarget(self, action: #selector(self.Favoritselect(_:)), for: .touchUpInside)
+        self.StudyDetailReplyViewmoreBtn.addTarget(self, action: #selector(self.MoreRepliesView(_:)), for: .touchUpInside)
         self.NavigationLayout()
         self.ConfrimLayoutInit()
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
@@ -90,7 +93,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             }
         }
         
-        let RepliesParam : Parameters = [
+        self.RepliesParam  = [
             "size" : 10,
             "page" : 1
         ]
@@ -110,15 +113,6 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyResearchScrollview.contentSize = CGSize(width: self.view.frame.size.width, height: self.StudyDetailConfirmbtn.frame.origin.y + self.StudyDetailConfirmbtn.frame.size.height + self.view.safeAreaInsets.bottom)
         self.StudyResearchScrollview.layoutIfNeeded()
         
-    }
-        
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-        self.StudyTopicnamelabel.text = ""
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -342,12 +336,47 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         }
     }
     
-    @objc func MoreRepliesView(_ sender : UIButton) {
-        
+    @objc
+    func MoreRepliesView(_ sender : UIButton) {
+        guard let ReplyView = self.storyboard?.instantiateViewController(withIdentifier: "ReplyView") as? ReplyViewController else { return }
+        ReplyView.ReplyIndex = Index
+        ReplyView.ReplyParamter = RepliesParam
+        ReplyView.ReplyData = studyRepliesData
+        self.navigationController?.pushViewController(ReplyView, animated: true)
     }
     
-    @objc func Favoritselect(_ sender : UIButton) {
-        
+    @objc
+    func Favoritselect(_ sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.15/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor.white
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.3/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor.white
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor.white
+                }
+            })
+            self.StudyDetailFavoritebtn.setImage(UIImage(named: "Favorite.png"), for: .normal)
+        } else {
+            sender.isSelected = true
+            print("스터디 \(sender.isSelected)")
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.15/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor(red: 219/255, green: 218/255, blue: 255/255, alpha: 1.0)
+                    self.StudyDetailFavoritebtn.setImage(UIImage(named: "Favorite_fill.png"), for: .selected)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.3/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor(red: 219/255, green: 218/255, blue: 255/255, alpha: 1.0)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.5/0.5, relativeDuration: 0.5/0.5) {
+                    self.StudyDetailFavoritebtn.backgroundColor = UIColor(red: 219/255, green: 218/255, blue: 255/255, alpha: 1.0)
+                }
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

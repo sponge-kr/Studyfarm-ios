@@ -85,6 +85,9 @@
 		FF4CE66125EA6B5700C0ACF8 /* Favorite_fill@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66025EA6B5500C0ACF8 /* Favorite_fill@1x.png */; };
 		FF4CE66625EA6B6400C0ACF8 /* Favorite_fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66525EA6B6300C0ACF8 /* Favorite_fill@2x.png */; };
 		FF4CE66B25EA6B6A00C0ACF8 /* Favorite_fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE66A25EA6B6A00C0ACF8 /* Favorite_fill@3x.png */; };
+		FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */; };
+		FF4CE67625EB848800C0ACF8 /* RepliesAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */; };
+		FF4CE67725EB848800C0ACF8 /* RepliesAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */; };
 		FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */; };
 		FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */; };
 		FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */; };
@@ -243,6 +246,9 @@
 		FF4CE66025EA6B5500C0ACF8 /* Favorite_fill@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@1x.png"; sourceTree = "<group>"; };
 		FF4CE66525EA6B6300C0ACF8 /* Favorite_fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@2x.png"; sourceTree = "<group>"; };
 		FF4CE66A25EA6B6A00C0ACF8 /* Favorite_fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite_fill@3x.png"; sourceTree = "<group>"; };
+		FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesAllTableViewCell.swift; sourceTree = "<group>"; };
+		FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepliesAllTableViewCell.xib; sourceTree = "<group>"; };
 		FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@2x.png"; sourceTree = "<group>"; };
 		FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@3x.png"; sourceTree = "<group>"; };
 		FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@1x.png"; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 				D1F85CCB24C45B1100E1F7BE /* ViewController.swift */,
 				FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */,
 				FF3D1A7925DFC21B00BFB82C /* StudyResearchViewController.swift */,
+				FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -588,6 +595,8 @@
 				FF92ED0525CFE57300D93CD7 /* StudyCategoryTableViewCell.xib */,
 				FF0EA19425E65FD90051B350 /* StudyDetailRepliesTableViewCell.swift */,
 				FF0EA19525E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib */,
+				FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */,
+				FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */,
 			);
 			path = Mainxib;
 			sourceTree = "<group>";
@@ -732,6 +741,7 @@
 				D11800C025646FDF00B8E5A1 /* check@1x.png in Resources */,
 				FF2425FB25E12B4A00A76850 /* user@1x.png in Resources */,
 				FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */,
+				FF4CE67725EB848800C0ACF8 /* RepliesAllTableViewCell.xib in Resources */,
 				FF4CE64325E9169600C0ACF8 /* Modified@1X.png in Resources */,
 				FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
@@ -986,6 +996,7 @@
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
+				FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */,
 				D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */,
 				D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */,
 				D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */,
@@ -995,6 +1006,7 @@
 				D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,
+				FF4CE67625EB848800C0ACF8 /* RepliesAllTableViewCell.swift in Sources */,
 				D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */,
 				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
 				D1F85CF924C45EDD00E1F7BE /* BLMainCollectionViewCell.swift in Sources */,
