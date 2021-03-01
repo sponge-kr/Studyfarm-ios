@@ -1591,7 +1591,7 @@
                                             <constraint firstAttribute="width" constant="324" id="uWW-7R-4oK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nkm-BK-0D6">
                                         <rect key="frame" x="343" y="5" width="57" height="40"/>
@@ -1618,7 +1618,6 @@
                         <viewLayoutGuide key="safeArea" id="Vq6-Nx-lYD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="enO-8G-0Tf" firstAttribute="bottom" secondItem="Vq6-Nx-lYD" secondAttribute="bottom" constant="-50" id="0c1-V0-fvi"/>
                             <constraint firstItem="enO-8G-0Tf" firstAttribute="trailing" secondItem="Vq6-Nx-lYD" secondAttribute="trailing" id="83Q-gS-K1y"/>
                             <constraint firstItem="7vf-f4-h0Y" firstAttribute="trailing" secondItem="Vq6-Nx-lYD" secondAttribute="trailing" id="QG7-L2-HXv"/>
                             <constraint firstItem="7vf-f4-h0Y" firstAttribute="top" secondItem="enO-8G-0Tf" secondAttribute="bottom" id="ZgG-PN-Rll"/>
@@ -1631,6 +1630,7 @@
                     <navigationItem key="navigationItem" id="Nqt-yT-Utc"/>
                     <connections>
                         <outlet property="RepliesAllCommentAreaView" destination="7vf-f4-h0Y" id="dTv-g2-DPX"/>
+                        <outlet property="RepliesAllCommentBottomConstraint" destination="qJx-PO-7FD" id="BwQ-SU-kIU"/>
                         <outlet property="RepliesAllConfirmBtn" destination="Nkm-BK-0D6" id="Gfm-g5-2eK"/>
                         <outlet property="RepliesAllTextfield" destination="Vcq-5b-o6H" id="OYV-FH-yeE"/>
                         <outlet property="RepliesAlltabelview" destination="enO-8G-0Tf" id="Ow4-Ha-yjf"/>

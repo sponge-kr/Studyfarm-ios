@@ -8,11 +8,13 @@
 
 import UIKit
 import Alamofire
-class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     @IBOutlet weak var RepliesAlltabelview: UITableView!
     @IBOutlet weak var RepliesAllCommentAreaView: UIView!
+    @IBOutlet weak var RepliesAllCommentBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var RepliesAllTextfield: UITextField!
     @IBOutlet weak var RepliesAllConfirmBtn: UIButton!
+    public var isKeyboard : Bool = true
     var ReplyIndex : Int = 0
     public var ReplyParamter : Parameters?
     public var ReplyData = [RepliesContent]()
@@ -23,9 +25,22 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.RepliesAlltabelview.rowHeight = UITableView.automaticDimension
         self.RepliesAlltabelview.delegate = self
         self.RepliesAlltabelview.dataSource = self
+        self.RepliesAlltabelview.separatorInset.left = 20
+        self.RepliesAlltabelview.separatorInset.right = 20
+        self.RepliesAllTextfield.delegate = self
+        self.RepliesAlltabelview.separatorColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0)
         let nibName = UINib(nibName: "RepliesAllTableViewCell", bundle: nil)
         self.RepliesAlltabelview.register(nibName, forCellReuseIdentifier: "RepliesAllCell")
+        NotificationCenter.default.addObserver(self, selector: #selector(ReplyViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ReplyViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.RepliesAllConfirmBtn.addTarget(self, action: #selector(self.RepliesConfirm), for: .touchUpInside)
         self.ReplyAreaViewLayout()
+        self.RepliesAllTextfield.clearButtonMode = .whileEditing
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -53,6 +68,55 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.RepliesAllConfirmBtn.setTitleColor(UIColor.white, for: .normal)
         self.RepliesAllConfirmBtn.layer.cornerRadius = 3
         self.RepliesAllConfirmBtn.layer.masksToBounds = true
+        let TextFieldView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 0))
+        self.RepliesAllTextfield.leftView = TextFieldView
+        self.RepliesAllTextfield.leftViewMode = .always
+    }
+    
+    @objc
+    func RepliesConfirm(){
+        if self.RepliesAllTextfield.text == ""{
+            self.RepliesAllConfirmBtn.isEnabled = false
+        } else {
+            self.RepliesAllConfirmBtn.isEnabled = true
+            let Paramter = RepliesParameter(study_seq: self.ReplyIndex, content: self.RepliesAllTextfield.text!, parent_reply_seq: nil)
+            RepliesApi.shared.studyRepliesPostFetch(RepliesParamter: Paramter) {
+                DispatchQueue.main.async {
+                    print("댓글 등록 성공 하였습니다 ")
+                    self.RepliesAllTextfield.text = ""
+                }
+            }
+        }
+    }
+    
+    @objc
+    private func keyboardWillShow(_ notification : Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+            let keyboardHeight = keyboardValue.cgRectValue.height
+            print("keyboard 호출 ")
+        if self.isKeyboard == true {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: {
+                self.RepliesAllCommentBottomConstraint.constant -= (keyboardHeight - self.view.safeAreaInsets.bottom)
+                self.RepliesAllCommentAreaView.translatesAutoresizingMaskIntoConstraints = false
+                self.RepliesAllCommentAreaView.setNeedsLayout()
+            })
+        }
+        self.isKeyboard = false
+    }
+    
+    @objc
+    private func keyboardWillHide(_ notification : Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardHeight = keyboardValue.cgRectValue.height
+        if self.isKeyboard == false {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: {
+                self.RepliesAllCommentBottomConstraint.constant += keyboardHeight - self.view.safeAreaInsets.bottom
+                self.RepliesAllCommentAreaView.translatesAutoresizingMaskIntoConstraints = false
+                self.RepliesAllCommentAreaView.setNeedsLayout()
+            })
+        }
+        self.isKeyboard = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +129,7 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         RepliesAllCell?.RepliesAllUserNickname.text = self.ReplyData[indexPath.row].writer!.nickname
         RepliesAllCell?.RepliesAllUserDate.text = self.ReplyData[indexPath.row].reply_created_at
         RepliesAllCell?.RepliesAllUserContent.text = self.ReplyData[indexPath.row].content
+      
         
         return RepliesAllCell!
     }
@@ -72,5 +137,8 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

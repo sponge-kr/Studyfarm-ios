@@ -62,8 +62,17 @@
                         </constraints>
                         <state key="normal" title="Button"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bM-Bh-f8H">
+                        <rect key="frame" x="352" y="10" width="3" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="3" id="I09-yQ-vPb"/>
+                            <constraint firstAttribute="height" constant="12" id="Jfx-0v-oDT"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="4bM-Bh-f8H" secondAttribute="trailing" constant="20" id="0E7-JO-ByA"/>
                     <constraint firstAttribute="trailing" secondItem="NAO-sN-HCw" secondAttribute="trailing" constant="25" id="ADo-tP-PyG"/>
                     <constraint firstAttribute="bottom" secondItem="NAO-sN-HCw" secondAttribute="bottom" constant="33" id="ARd-t6-E3R"/>
                     <constraint firstItem="DwK-Ap-X25" firstAttribute="leading" secondItem="grU-dm-fy7" secondAttribute="trailing" constant="8" symbolic="YES" id="Dmf-Ei-L4K"/>
@@ -72,6 +81,7 @@
                     <constraint firstItem="DwK-Ap-X25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="QYd-cQ-3Lk"/>
                     <constraint firstItem="NAO-sN-HCw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="VDJ-vL-Bo9"/>
                     <constraint firstItem="grU-dm-fy7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="apM-GH-0Be"/>
+                    <constraint firstItem="4bM-Bh-f8H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="g0i-dW-nav"/>
                     <constraint firstItem="Mog-Dc-gQl" firstAttribute="leading" secondItem="DwK-Ap-X25" secondAttribute="trailing" constant="8" id="ktp-Y7-eCw"/>
                     <constraint firstItem="Mog-Dc-gQl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="oMF-e6-ulk"/>
                     <constraint firstItem="grU-dm-fy7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="vZr-TN-V1b"/>
@@ -84,6 +94,7 @@
                 <outlet property="RepliesAllUserContent" destination="NAO-sN-HCw" id="i4j-lF-Hx7"/>
                 <outlet property="RepliesAllUserDate" destination="Mog-Dc-gQl" id="w81-h4-naf"/>
                 <outlet property="RepliesAllUserImageView" destination="grU-dm-fy7" id="JFG-SK-HND"/>
+                <outlet property="RepliesAllUserModifedBtn" destination="4bM-Bh-f8H" id="q8R-H2-Sw9"/>
                 <outlet property="RepliesAllUserNickname" destination="DwK-Ap-X25" id="efG-dE-fPg"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="75.669642857142847"/>

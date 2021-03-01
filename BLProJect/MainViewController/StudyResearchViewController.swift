@@ -82,7 +82,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyDetailFavoritebtn.addTarget(self, action: #selector(self.Favoritselect(_:)), for: .touchUpInside)
         self.StudyDetailReplyViewmoreBtn.addTarget(self, action: #selector(self.MoreRepliesView(_:)), for: .touchUpInside)
         self.NavigationLayout()
-        self.ConfrimLayoutInit()
+        self.ConfrimLayoutInit()        
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
                 self.StudyDetailModel = result
@@ -107,6 +107,12 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.NavigationLayout()
+        self.StudyDetailReplyTableView.reloadData()
+    }
+    
     override func viewDidLayoutSubviews() {
         print("스터디 댓글 테이블뷰 높이 값 입니다\(self.StudyDetailReplyTableView.contentSize.height)")
         self.StudyResearchScrollview.translatesAutoresizingMaskIntoConstraints = false
@@ -117,7 +123,6 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
     }
-    
     
     
     private func NavigationLayout() {
@@ -349,6 +354,10 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     func Favoritselect(_ sender : UIButton) {
         if sender.isSelected {
             sender.isSelected = false
+            let DismantlingParamter = FavoriteDismantlingParamter(study_seq: self.Index)
+            FavoriteApi.shared.FavoriteDismantlingFetch(FavoriteDismantlingParamter: DismantlingParamter) {
+                print("찜 등록 헤체 되었습니다.")
+            }
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.15/0.5, relativeDuration: 0.5/0.5) {
                     self.StudyDetailFavoritebtn.backgroundColor = UIColor.white
@@ -363,6 +372,10 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             self.StudyDetailFavoritebtn.setImage(UIImage(named: "Favorite.png"), for: .normal)
         } else {
             sender.isSelected = true
+            let Paramter = FavoriteParamter(study_seq: self.Index)
+            FavoriteApi.shared.FavoriteModifedFetch(FavoriteParamter: Paramter) { result in
+                print("찜 등록 성공 하였습니다.")
+            }
             print("스터디 \(sender.isSelected)")
             UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [.allowUserInteraction], animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.15/0.5, relativeDuration: 0.5/0.5) {
