@@ -82,7 +82,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyDetailFavoritebtn.addTarget(self, action: #selector(self.Favoritselect(_:)), for: .touchUpInside)
         self.StudyDetailReplyViewmoreBtn.addTarget(self, action: #selector(self.MoreRepliesView(_:)), for: .touchUpInside)
         self.NavigationLayout()
-        self.ConfrimLayoutInit()        
+        self.ConfrimLayoutInit()
         ServerApi.shared.StudyDetailCall(study_seq: Index) { result in
             DispatchQueue.main.async {
                 self.StudyDetailModel = result
@@ -97,7 +97,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             "size" : 10,
             "page" : 1
         ]
-        RepliesApi.shared.StudyRepliesCall(study_seq: Index, RepliesParamter: RepliesParam) { result in
+        RepliesApi.shared.StudyRepliesCall(study_seq: self.Index, RepliesParamter: RepliesParam) { result in
             DispatchQueue.main.async {
                 self.studyRepliesData = result
                 self.StudyDetailReplyTableView.reloadData()
@@ -106,6 +106,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             }
         }
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

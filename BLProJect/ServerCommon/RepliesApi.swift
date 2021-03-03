@@ -243,21 +243,22 @@ class RepliesApi {
             }
     }
     
-    //MARK -댓글 등록(POST)
-    public func studyRepliesPostFetch(RepliesParamter : RepliesParameter , completionHandler : @escaping() -> Void) {
+    //MARK -댓글 등록(POST)    
+    public func studyRepliesPostFetch(RepliesParamter : RepliesParameter, completionHandler : @escaping(Result<Bool,Error>) -> ()) {
         AF.request("http://3.214.168.45:8080/api/v1/study-replies", method: .post, parameters: RepliesParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let value):
-                    print(value)
-                    completionHandler()
+                    completionHandler(.success(true))
                 case .failure(let error):
                     print(error.localizedDescription)
+                    completionHandler(.failure(error))
                 }
             }
     }
+    
     
     //MARK - 대댓글 등록(POST)
     public func studyRepliesChildrenFetch(RepliesChildrenParameter : RepliesChildrenParameter, completionHandler : @escaping() -> Void) {

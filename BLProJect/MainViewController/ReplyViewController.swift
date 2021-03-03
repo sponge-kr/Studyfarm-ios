@@ -27,6 +27,7 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.RepliesAlltabelview.dataSource = self
         self.RepliesAlltabelview.separatorInset.left = 20
         self.RepliesAlltabelview.separatorInset.right = 20
+        self.RepliesAllTextfield.clearButtonMode = .whileEditing
         self.RepliesAllTextfield.delegate = self
         self.RepliesAlltabelview.separatorColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0)
         let nibName = UINib(nibName: "RepliesAllTableViewCell", bundle: nil)
@@ -80,10 +81,23 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         } else {
             self.RepliesAllConfirmBtn.isEnabled = true
             let Paramter = RepliesParameter(study_seq: self.ReplyIndex, content: self.RepliesAllTextfield.text!, parent_reply_seq: nil)
-            RepliesApi.shared.studyRepliesPostFetch(RepliesParamter: Paramter) {
-                DispatchQueue.main.async {
-                    print("댓글 등록 성공 하였습니다 ")
-                    self.RepliesAllTextfield.text = ""
+            
+            
+            RepliesApi.shared.studyRepliesPostFetch(RepliesParamter: Paramter) { [weak self] result in
+                switch result {
+                case .success(let value):
+                    if value == true {
+                        RepliesApi.shared.StudyRepliesCall(study_seq: self!.ReplyIndex, RepliesParamter: self!.ReplyParamter!) { result in
+                            DispatchQueue.main.async {
+                                self?.ReplyData = result
+                                self?.RepliesAlltabelview.reloadData()
+                                self?.setNavigationLayouInit()
+                                self?.RepliesAllTextfield.text = ""
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
         }
