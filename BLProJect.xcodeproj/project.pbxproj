@@ -80,6 +80,7 @@
 		FF4396E625F24499009E0251 /* Areapin@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4396E525F24499009E0251 /* Areapin@1x.png */; };
 		FF4396EB25F244A0009E0251 /* Areapin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4396EA25F2449F009E0251 /* Areapin@2x.png */; };
 		FF4396F025F244A5009E0251 /* Areapin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4396EF25F244A5009E0251 /* Areapin@3x.png */; };
+		FF4396F525F3A63B009E0251 /* StudyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4396F425F3A63A009E0251 /* StudyMapViewController.swift */; };
 		FF4CE64325E9169600C0ACF8 /* Modified@1X.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64225E9169600C0ACF8 /* Modified@1X.png */; };
 		FF4CE64825E9169B00C0ACF8 /* Modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64725E9169B00C0ACF8 /* Modified@2x.png */; };
 		FF4CE64D25E916A000C0ACF8 /* Modified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE64C25E916A000C0ACF8 /* Modified@3x.png */; };
@@ -245,6 +246,7 @@
 		FF4396E525F24499009E0251 /* Areapin@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Areapin@1x.png"; sourceTree = "<group>"; };
 		FF4396EA25F2449F009E0251 /* Areapin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Areapin@2x.png"; sourceTree = "<group>"; };
 		FF4396EF25F244A5009E0251 /* Areapin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Areapin@3x.png"; sourceTree = "<group>"; };
+		FF4396F425F3A63A009E0251 /* StudyMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMapViewController.swift; sourceTree = "<group>"; };
 		FF4CE64225E9169600C0ACF8 /* Modified@1X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@1X.png"; path = "../../../Downloads/Modified@1X.png"; sourceTree = "<group>"; };
 		FF4CE64725E9169B00C0ACF8 /* Modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@2x.png"; path = "../../../Downloads/Modified@2x.png"; sourceTree = "<group>"; };
 		FF4CE64C25E916A000C0ACF8 /* Modified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Modified@3x.png"; path = "../../../Downloads/Modified@3x.png"; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				FFB2EECC25C5504400DBFCBE /* EnrollMentViewController.swift */,
 				FF3D1A7925DFC21B00BFB82C /* StudyResearchViewController.swift */,
 				FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */,
+				FF4396F425F3A63A009E0251 /* StudyMapViewController.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
 				D1B46354255FA4C90063D714 /* LoginViewModel.swift in Sources */,
 				D1F85D1524CDE51200E1F7BE /* BLViewModel.swift in Sources */,
+				FF4396F525F3A63B009E0251 /* StudyMapViewController.swift in Sources */,
 				FF02BECB25EBB7C800FBCA8A /* FavoriteApi.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,
 				FF4CE67625EB848800C0ACF8 /* RepliesAllTableViewCell.swift in Sources */,
