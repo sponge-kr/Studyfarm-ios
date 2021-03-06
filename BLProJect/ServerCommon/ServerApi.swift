@@ -108,7 +108,7 @@ struct StudyDetailResults: Codable {
     var end_yn, is_my_study,is_ignore_recruit: Bool?
     var tags: [String]?
     var study_leader: StudyDetailContainer?
-    var study_in_place: StudyDetailPlaceContainer?
+    var study_in_place: StudyDetailPlaceContainer
     var member_results: [StudyDetailMemberResultsContainer]?
 
     enum CodingKeys: String, CodingKey {
@@ -151,7 +151,7 @@ struct StudyDetailResults: Codable {
         self.is_ignore_recruit = try? values.decode(Bool.self, forKey: .is_ignore_recruit)
         self.tags = try? values.decode([String].self, forKey: .tags)
         self.study_leader = try? values.decode(StudyDetailContainer.self, forKey: .study_leader)
-        self.study_in_place = try? values.decode(StudyDetailPlaceContainer.self, forKey: .study_in_place)
+        self.study_in_place = try values.decode(StudyDetailPlaceContainer.self, forKey: .study_in_place)
         self.member_results = try? values.decode([StudyDetailMemberResultsContainer].self, forKey: .member_results)
     }
 }
@@ -192,8 +192,8 @@ struct StudyDetailPlaceContainer: Codable {
     var description: String
     var full_address: String
     var road_address: String
-    var x_location: String
-    var y_location: String
+    var x_location: Double
+    var y_location: Double
     var city_code: Int
     var city_name: String
     var bizhour: [StudyDetailbizhourContainer]
@@ -201,8 +201,6 @@ struct StudyDetailPlaceContainer: Codable {
     var images: [String]
     var menu_info: [StudyDetailMenuInfoContainer]
     var options: [String]
-    
-    
 }
 struct StudyDetailbizhourContainer: Codable {
     var type: String
@@ -219,18 +217,18 @@ struct StudyDetailMenuInfoContainer: Codable {
 }
 
 struct StudyDetailMemberResultsContainer: Codable {
-    var created_at: String
-    var updated_at: String
-    var actived_at: String
-    var is_study_leader: Bool
-    var status: Int
-    var users_seq: Int
-    var nickname: String
-    var email: String
-    var gender: String
-    var age: Int
-    var profile: String
-    var simple_introduce: String
+    var created_at: String?
+    var updated_at: String?
+    var actived_at: String?
+    var is_study_leader: Bool?
+    var status: Int?
+    var users_seq: Int?
+    var nickname: String?
+    var email: String?
+    var gender: String?
+    var age: Int?
+    var profile: String?
+    var simple_introduce: String?
 }
 
 // MARK: - 메인 스터디 등록 Paramter

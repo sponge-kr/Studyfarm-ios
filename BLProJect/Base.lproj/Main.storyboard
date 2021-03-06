@@ -1307,6 +1307,11 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzU-rF-Mrc">
+                                                        <rect key="frame" x="124" y="93" width="129" height="14"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Button"/>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1529,6 +1534,7 @@
                         <outlet property="StudyProcessImageView" destination="BLv-cg-Ldx" id="paC-8L-3YA"/>
                         <outlet property="StudyProcesscontentlabel" destination="P0j-uk-Tsg" id="SlB-xG-8On"/>
                         <outlet property="StudyProcesstitlelabel" destination="cqU-MB-dQU" id="GBD-Ro-Oes"/>
+                        <outlet property="StudyRecruitAreabtn" destination="uzU-rF-Mrc" id="Piy-qM-HqI"/>
                         <outlet property="StudyRecruitDateImageView" destination="vgV-ge-ggh" id="f08-1y-ebG"/>
                         <outlet property="StudyRecruitDatetitlelabel" destination="ue0-0B-daV" id="EvC-IO-fLB"/>
                         <outlet property="StudyRecruitRankImageView" destination="1b6-wS-0Q8" id="jg3-JT-goV"/>
@@ -1640,8 +1646,30 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3dk-qS-fCI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="I5a-gb-eZZ" customClass="ModifiedView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="65"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvK-Ic-UKc">
+                            <rect key="frame" x="7" y="9" width="46" height="12"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSV-ft-ODK">
+                            <rect key="frame" x="7" y="41" width="46" height="12"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="jch-5Z-vbS"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="UserDeletebtn" destination="uSV-ft-ODK" id="85E-Yg-PsY"/>
+                        <outlet property="UserModifiedbtn" destination="dvK-Ic-UKc" id="i0Q-rl-1NU"/>
+                    </connections>
+                </view>
             </objects>
-            <point key="canvasLocation" x="2850.7246376811595" y="1280.3571428571429"/>
+            <point key="canvasLocation" x="2929" y="1367"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="R3v-9R-wvs">

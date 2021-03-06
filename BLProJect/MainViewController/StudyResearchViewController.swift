@@ -39,6 +39,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
     @IBOutlet weak var StudyRecruitTypeImageView: UIImageView!
     @IBOutlet weak var StudyRecruitTypetitlelabel: UILabel!
     @IBOutlet weak var StudyRecruitTypecontentlabel: UILabel!
+    @IBOutlet weak var StudyRecruitAreabtn: UIButton!
     @IBOutlet weak var StudyRecruitRankImageView: UIImageView!
     @IBOutlet weak var StudyRecruitRanktitlelabel: UILabel!
     @IBOutlet weak var StudyRecruitRankcontentlabel: UILabel!
@@ -87,9 +88,11 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             DispatchQueue.main.async {
                 self.StudyDetailModel = result
                 self.setInitLayout()
+                self.StudyPlaceTypeInit()
                 self.StepsIndexScribe()
                 self.StudyTagLayout()
                 self.StudyleaderSkillLevel()
+                print("스터디 디테일 값 테스트 입니다 \(self.StudyDetailModel)")
             }
         }
         
@@ -97,6 +100,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             "size" : 10,
             "page" : 1
         ]
+        
         RepliesApi.shared.StudyRepliesCall(study_seq: self.Index, RepliesParamter: RepliesParam) { result in
             DispatchQueue.main.async {
                 self.studyRepliesData = result
@@ -105,6 +109,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
                 print("댓글 데이터 체크 입니다\(self.studyRepliesData)")
             }
         }
+        print("스터디 생명 주기 테스트 입니다 Viewdidload")
     }
 
     
@@ -112,6 +117,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         super.viewWillAppear(true)
         self.NavigationLayout()
         self.StudyDetailReplyTableView.reloadData()
+        print("스터디 생명 주기 테스트 입니다 ViewWillAppear")
     }
     
     override func viewDidLayoutSubviews() {
@@ -252,8 +258,17 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
         self.StudyDetailApllyExamplelabel.layer.masksToBounds = true
         self.StudyDetailReplyViewmoreBtn.setAttributedTitle(NSAttributedString(string: "더 보기 >", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.kern : -0.66]), for: .normal)
         self.StudyDetailReplyViewmoreBtn.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
-        
+        self.StudyRecruitAreabtn.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
     }
+    private func StudyPlaceTypeInit(){
+        if self.StudyDetailModel?.progress_type_str == "오프라인" {
+            self.StudyRecruitAreabtn.setAttributedTitle(NSAttributedString(string: "\(self.StudyDetailModel!.study_in_place.name)", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
+
+        } else {
+            self.StudyRecruitAreabtn.setAttributedTitle(NSAttributedString(string: "-", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
+        }
+    }
+    
     
     private func StudyleaderSkillLevel(){
         if let beginnerLeader = self.StudyDetailModel?.study_leader?.interesting?[0].skill_level {
@@ -270,6 +285,7 @@ class StudyResearchViewController: UIViewController,UITextViewDelegate,UIScrollV
             }
         }
     }
+    
     
     private func ConfrimLayoutInit(){
         self.StudyDetailFavoritebtn.layer.borderWidth = 1

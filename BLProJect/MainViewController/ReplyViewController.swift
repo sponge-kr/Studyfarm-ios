@@ -119,6 +119,13 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     @objc
+    private func selectModfiedView(_ sender : UIButton){
+        let RepliesCell = self.RepliesAlltabelview.dequeueReusableCell(withIdentifier: "RepliesAllCell", for: IndexPath(row: 0, section: 0)) as? RepliesAllTableViewCell
+        let ModifiedContiner = ModifiedView(frame: CGRect(x: RepliesCell!.RepliesAllUserModifedBtn.frame.origin.x, y: RepliesCell!.RepliesAllUserModifedBtn.frame.origin.y, width: 60, height: 65))
+        RepliesCell!.contentView.addSubview(ModifiedContiner)
+    }
+    
+    @objc
     private func keyboardWillHide(_ notification : Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         
@@ -143,8 +150,7 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         RepliesAllCell?.RepliesAllUserNickname.text = self.ReplyData[indexPath.row].writer!.nickname
         RepliesAllCell?.RepliesAllUserDate.text = self.ReplyData[indexPath.row].reply_created_at
         RepliesAllCell?.RepliesAllUserContent.text = self.ReplyData[indexPath.row].content
-      
-        
+        RepliesAllCell?.RepliesAllUserModifedBtn.addTarget(self, action: #selector(self.selectModfiedView(_:)), for: .touchUpInside)
         return RepliesAllCell!
     }
     
@@ -155,4 +161,42 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         textField.resignFirstResponder()
         return true
     }
+}
+
+
+
+class ModifiedView : UIView {
+    
+
+    @IBOutlet weak var UserModifiedbtn: UIButton!
+    @IBOutlet weak var UserDeletebtn: UIButton!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func setLayoutInit() {
+        self.UserModifiedbtn.setAttributedTitle(NSAttributedString(string: "수정하기", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
+        self.UserModifiedbtn.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
+        self.UserDeletebtn.setAttributedTitle(NSAttributedString(string: "삭제하기", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
+        self.UserDeletebtn.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
+        self.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+        let shadows = UIView()
+        shadows.frame = self.frame
+        shadows.clipsToBounds = false
+        self.addSubview(shadows)
+        let shadowPath = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 4)
+        self.layer.shadowPath = shadowPath.cgPath
+        self.layer.shadowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1).cgColor
+        self.layer.shadowOpacity = 1
+        self.layer.shadowRadius = 6
+        self.layer.shadowOffset = CGSize(width: 3, height: 3)
+        self.layer.bounds = shadows.bounds
+        self.layer.position = shadows.center
+        
+    }
+    
 }

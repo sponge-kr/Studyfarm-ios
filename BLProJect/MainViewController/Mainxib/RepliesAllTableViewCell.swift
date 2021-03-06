@@ -42,7 +42,7 @@ class RepliesAllTableViewCell: UITableViewCell {
         self.RepliesAllUserCommentBtn.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.RepliesAllUserCommentBtn.setAttributedTitle(NSAttributedString(string: "답글쓰기", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
         self.RepliesAllUserModifedBtn.setImage(UIImage(named: "Modified.png"), for: .normal)
+        self.RepliesAllUserModifedBtn.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
         self.RepliesAllUserCommentBtn.setTitle("", for: .normal)
     }
-    
 }
