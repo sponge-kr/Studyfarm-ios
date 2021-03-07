@@ -628,8 +628,8 @@
 				D1F85CC124C45B1100E1F7BE /* Frameworks */,
 				D1F85CC224C45B1100E1F7BE /* Resources */,
 				F2787BD322C3D247E612190D /* [CP] Embed Pods Frameworks */,
-				6FFA1CA2C1AA0B75656AFEB6 /* [CP] Copy Pods Resources */,
 				85BC73F125A9928F005830A1 /* ShellScript */,
+				9AFCE674EA89EBBB3A830C52 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -668,7 +668,7 @@
 				D1F85CE224C45B1300E1F7BE /* Frameworks */,
 				D1F85CE324C45B1300E1F7BE /* Resources */,
 				8CAB26C0DA9CCCAA5CE735FB /* [CP] Embed Pods Frameworks */,
-				2A6D62D1DFA442FDE137DB8A /* [CP] Copy Pods Resources */,
+				DC9A22A2E611996C519D17B0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -849,40 +849,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A6D62D1DFA442FDE137DB8A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6FFA1CA2C1AA0B75656AFEB6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		85BC73F125A9928F005830A1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,6 +905,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9AFCE674EA89EBBB3A830C52 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect/Pods-BLProJect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C843A508D8D5BE61970B9182 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -959,6 +942,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC9A22A2E611996C519D17B0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLProJect-BLProJectUITests/Pods-BLProJect-BLProJectUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DF66BAF2F45622EAFE56A0EF /* [CP] Check Pods Manifest.lock */ = {
@@ -1217,6 +1217,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.planet.BLProJect;
 				PRODUCT_NAME = "스터디팜";
 				SWIFT_VERSION = 5.0;

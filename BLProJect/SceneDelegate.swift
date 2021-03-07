@@ -16,7 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene, openURLContexts URLContexts : Set<UIOpenURLContext>){
-        
         //카카오 로그인 URL 값으로 호출
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
@@ -42,6 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let RootView = UIStoryboard(name: "Main", bundle: nil)
+            let MainTabbar = UITabBarController()
             let initalViewController = RootView.instantiateViewController(identifier: "MainView")
             let NavigationView = UINavigationController(rootViewController: initalViewController)
             self.window?.rootViewController = NavigationView

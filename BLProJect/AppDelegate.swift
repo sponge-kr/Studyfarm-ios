@@ -9,6 +9,7 @@
 import UIKit
 import KakaoSDKCommon
 import GoogleSignIn
+import NMapsMap
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        NMFAuthManager.shared().clientId = "aip62ew8k1"
         KakaoSDKCommon.initSDK(appKey: "df7d774e42d9231c6c056b0b57a56350")
         GIDSignIn.sharedInstance()?.clientID = "654690079324-snt380gsur4ups6f0f95s4qiuq89t8ae.apps.googleusercontent.com"
         
