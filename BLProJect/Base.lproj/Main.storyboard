@@ -13,6 +13,7 @@
         <!--Study Map View Controller-->
         <scene sceneID="DeJ-Vd-zYc">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BnP-2z-2Is" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MainView" id="O17-Q7-O9y" customClass="StudyMapViewController" customModule="스터디팜" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="otS-RP-nUa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -46,7 +47,6 @@
                         <outlet property="StudyMapView" destination="kDK-LX-91j" id="QEU-Ot-JYA"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BnP-2z-2Is" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1430.4347826086957" y="97.767857142857139"/>
         </scene>

@@ -20,6 +20,7 @@ class StudyMapViewController: UIViewController {
         super.viewDidLoad()
         self.setNavigationLayoutInit()
         self.setStudyFilterView()
+        self.setStudyMapLayout()
     }
     
     private func setNavigationLayoutInit(){
@@ -45,5 +46,12 @@ class StudyMapViewController: UIViewController {
         self.StudyFilterBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.StudyFilterBtn.layer.cornerRadius = 4
         self.StudyFilterBtn.layer.masksToBounds = true
+    }
+    
+    
+    private func setStudyMapLayout(){
+        let StudyMarker = NMFMarker()
+        StudyMarker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
+        StudyMarker.mapView = self.StudyMapView
     }
 }

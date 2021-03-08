@@ -204,7 +204,7 @@ class RepliesApi {
     static let shared = RepliesApi()
     public let TestHeaders : HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8","Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3FuZG5mZm8xQGdtYWlsLmNvbSIsImlzcyI6InN0dWR5ZmFybSIsImlhdCI6MTU5NzgwNDkyNCwibmFtZSI6IuyViOyerOyEsTEiLCJzZXEiOjEsImV4cCI6MTg4NTgwNDkyNH0.DxhHnJZ1rUQeyD7fRPhEy3XdngmOeSXno39s8u3YP1Y","Accept":"application/hal+json"]
     public func StudyRepliesCall(study_seq: Int, RepliesParamter:Parameters,completionHandler: @escaping([RepliesContent]) -> Void) {
-        AF.request("http://3.214.168.45:8080/api/v1/study-replies/study/\(study_seq)", method: .get, parameters: RepliesParamter, encoding: URLEncoding.queryString, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study-replies/study/\(study_seq)", method: .get, parameters: RepliesParamter, encoding: URLEncoding.queryString, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
@@ -224,7 +224,7 @@ class RepliesApi {
         }
     
     public func StudySingleRepliesCall(study_seq : Int, completionHandler : @escaping(RepliesSingleResult) -> Void) {
-        AF.request("http://3.214.168.45:8080/api/v1/study-replies/\(study_seq)", method: .get, encoding: JSONEncoding.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study-replies/\(study_seq)", method: .get, encoding: JSONEncoding.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
@@ -245,7 +245,7 @@ class RepliesApi {
     
     //MARK -댓글 등록(POST)    
     public func studyRepliesPostFetch(RepliesParamter : RepliesParameter, completionHandler : @escaping(Result<Bool,Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/study-replies", method: .post, parameters: RepliesParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study-replies", method: .post, parameters: RepliesParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
@@ -262,7 +262,7 @@ class RepliesApi {
     
     //MARK - 대댓글 등록(POST)
     public func studyRepliesChildrenFetch(RepliesChildrenParameter : RepliesChildrenParameter, completionHandler : @escaping() -> Void) {
-        AF.request("http://3.214.168.45:8080/api/v1/study-replies", method: .post, parameters: RepliesChildrenParameter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study-replies", method: .post, parameters: RepliesChildrenParameter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
