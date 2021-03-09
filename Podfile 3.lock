@@ -27,9 +27,6 @@ PODS:
   - KakaoSDKCommon/Network (2.4.0):
     - Alamofire (~> 5.1)
     - KakaoSDKCommon/Common (= 2.4.0)
-  - KakaoSDKUser (2.4.0):
-    - KakaoSDKAuth (= 2.4.0)
-    - KakaoSDKCommon (= 2.4.0)
   - NMapsMap (3.11.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
@@ -45,8 +42,8 @@ PODS:
 DEPENDENCIES:
   - FSCalendar
   - GoogleSignIn
+  - KakaoSDKAuth
   - KakaoSDKCommon
-  - KakaoSDKUser
   - NMapsMap
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
@@ -65,7 +62,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - KakaoSDKAuth
     - KakaoSDKCommon
-    - KakaoSDKUser
     - NMapsMap
     - RxCocoa
     - RxRelay
@@ -84,7 +80,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   KakaoSDKAuth: f0e4c40f76bb5ba9e975ea2cb205279fefa29986
   KakaoSDKCommon: 0e27a4819da0e5d29eec661c12e63b990c34a6f9
-  KakaoSDKUser: f68503fc60dd2a8bf0fd5ad37192db9e542af5dd
   NMapsMap: e6dbea85c2c195c7532deb637a5e90fd70f94fed
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
@@ -94,6 +89,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 1d9292299fbf2049e62932a0cfa98421ee4f4fd9
+PODFILE CHECKSUM: c0a7c2139c6ba25abec66556e8e4fe07cbec1453
 
 COCOAPODS: 1.10.0

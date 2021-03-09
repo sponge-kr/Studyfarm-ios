@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KakaoSDKAuth
+import KakaoSDKUser
 import GoogleSignIn
 import SnapKit
 import SwiftKeychainWrapper
@@ -323,7 +323,7 @@ class LoginViewController: UIViewController {
     
     
     @objc func KakaoLogin(){
-        AuthApi.shared.loginWithKakaoAccount(authType: .Reauthenticate) { (oAuthToken, error) in
+        UserApi.shared.loginWithKakaoAccount { (oAuthToken, error) in
             if let error = error {
                 print(error.localizedDescription)
             }else{
