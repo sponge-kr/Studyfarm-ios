@@ -205,7 +205,7 @@ class OAuthApi {
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
@@ -225,7 +225,7 @@ class OAuthApi {
         
     //MARK - oAuth Server 로그아웃 요청 함수(POST)
     public func AuthLogoutCall(completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
             .response { response in
                 switch response.result {
                 case.success(let value):
@@ -256,7 +256,7 @@ class OAuthApi {
     
     //MARK - oAuth Server 유저 등록 요청 함수(POST)
     public func AuthSignUpCall(SignUpParamter : SignUpParamter, completionHandler : @escaping (Result<SignUpDataModel,Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/user", method: .post, parameters: SignUpParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user", method: .post, parameters: SignUpParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -288,7 +288,7 @@ class OAuthApi {
     
     //MARK - oAuth Server 이메일 인증 버튼 함수(POST)
     public func AuthEmailCall(OAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -309,7 +309,7 @@ class OAuthApi {
     
     //MARK - 유저 인증 확인 함수 구현(GET)
     public func AuthCheckUserCall(CheckUser : String, completionHandler : @escaping(Result<UserCheckDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -329,7 +329,7 @@ class OAuthApi {
     
     //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
     public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -353,7 +353,7 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoLogin 함수(POST)
     public func AuthKakaoLoginCall(completionHandler : @escaping(Result<KakaoLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login/kakao", method: .post, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: Kakaotokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -378,7 +378,7 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoUser 등록 함수(POST)
     public func AuthkakaoSignUp(KakaoUserParamter : KakaoUserParamter, completionHandler : @escaping(Result<KakaoSingDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: Kakaotokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -401,7 +401,7 @@ class OAuthApi {
     }
     
     public func AuthGIDLoginCall(completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
             .response { response in
                 
             }
@@ -409,7 +409,7 @@ class OAuthApi {
     
     
     public func AuthGIDSignUp(GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{

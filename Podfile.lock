@@ -22,14 +22,6 @@ PODS:
     - KakaoSDKCommon (= 2.0.4)
   - KakaoSDKCommon (2.0.4):
     - Alamofire (~> 5.1)
-  - KakaoSDKUser (2.0.4):
-    - KakaoSDKAuth (= 2.0.4)
-    - KakaoSDKCommon (= 2.0.4)
-  - RxAlamofire (5.6.0):
-    - RxAlamofire/Core (= 5.6.0)
-  - RxAlamofire/Core (5.6.0):
-    - Alamofire (~> 5.1)
-    - RxSwift (~> 5.1)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -46,8 +38,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - KakaoSDKAuth
   - KakaoSDKCommon
-  - KakaoSDKUser
-  - RxAlamofire
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SnapKit (~> 5.0.0)
@@ -65,8 +55,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - KakaoSDKAuth
     - KakaoSDKCommon
-    - KakaoSDKUser
-    - RxAlamofire
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -84,8 +72,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   KakaoSDKAuth: 3a88e4a110243f8c6b9948c5ec85670c7acaebf6
   KakaoSDKCommon: 070472d0638ea6b28684a23c195e47015349e51b
-  KakaoSDKUser: 7951e09f9e6de3908ae2d7f8486290c8607c217a
-  RxAlamofire: f34ddbab56fa2a36f99737f4d4ecc22288a1384f
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -94,6 +80,6 @@ SPEC CHECKSUMS:
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: cde37f0891ffb04c711d4f65fb84bdc2e02084ae
+PODFILE CHECKSUM: 0e97da2269d85627d2550a0171162e46a6b228ff
 
 COCOAPODS: 1.10.0

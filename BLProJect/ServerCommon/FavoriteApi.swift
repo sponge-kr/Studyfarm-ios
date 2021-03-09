@@ -43,7 +43,7 @@ class FavoriteApi {
     
     //MARK - 스터디 찜등록(POST)
     public func FavoriteModifedFetch(FavoriteParamter : FavoriteParamter, completionHandler : @escaping(FavoriteResults) -> Void) {
-        AF.request("http://3.214.168.45:8080/api/v1/study/favorite", method: .post, parameters: FavoriteParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study/favorite", method: .post, parameters: FavoriteParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
@@ -65,7 +65,7 @@ class FavoriteApi {
     }
     //MARK - 스터디 찜해체(DELETE)
     public func FavoriteDismantlingFetch(FavoriteDismantlingParamter : FavoriteDismantlingParamter, completionHandler : @escaping() -> Void) {
-        AF.request("http://3.214.168.45:8080/api/v1/study/favorite", method: .delete, parameters: FavoriteDismantlingParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study/favorite", method: .delete, parameters: FavoriteDismantlingParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .validate()
             .responseJSON { response in
                 debugPrint(response)

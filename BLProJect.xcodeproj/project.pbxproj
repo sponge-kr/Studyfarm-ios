@@ -92,6 +92,7 @@
 		FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */; };
 		FF4CE67625EB848800C0ACF8 /* RepliesAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */; };
 		FF4CE67725EB848800C0ACF8 /* RepliesAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */; };
+		FF70A2F525F63EFB0075B345 /* Appicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FF70A2F425F63EFB0075B345 /* Appicon.jpg */; };
 		FF70E72825C6705C00AE82CD /* GrayCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */; };
 		FF70E72925C6705C00AE82CD /* GrayCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */; };
 		FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */; };
@@ -257,6 +258,7 @@
 		FF4CE66F25EB70B300C0ACF8 /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepliesAllTableViewCell.swift; sourceTree = "<group>"; };
 		FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepliesAllTableViewCell.xib; sourceTree = "<group>"; };
+		FF70A2F425F63EFB0075B345 /* Appicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Appicon.jpg; sourceTree = "<group>"; };
 		FF70E72525C6705C00AE82CD /* GrayCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@2x.png"; sourceTree = "<group>"; };
 		FF70E72625C6705C00AE82CD /* GrayCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@3x.png"; sourceTree = "<group>"; };
 		FF70E72725C6705C00AE82CD /* GrayCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayCheck@1x.png"; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF70A2F425F63EFB0075B345 /* Appicon.jpg */,
 				FF4396EF25F244A5009E0251 /* Areapin@3x.png */,
 				FF4396EA25F2449F009E0251 /* Areapin@2x.png */,
 				FF4396E525F24499009E0251 /* Areapin@1x.png */,
@@ -809,6 +812,7 @@
 				FFC0B09F25A771EF00D21482 /* genderunCheckgray@1x.png in Resources */,
 				FFC0B02825A4F70C00D21482 /* NotoSansKR-Thin.otf in Resources */,
 				FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */,
+				FF70A2F525F63EFB0075B345 /* Appicon.jpg in Resources */,
 				FF3D1A4025D96AF100BFB82C /* squarebox@1x.png in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
 				FF4CE66125EA6B5700C0ACF8 /* Favorite_fill@1x.png in Resources */,
@@ -1116,6 +1120,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution: kim Do hyun (XKA22N2KHA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1176,6 +1181,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution: kim Do hyun (XKA22N2KHA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1204,7 +1210,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "BLProJect/스터디팜.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = XKA22N2KHA;
 				INFOPLIST_FILE = BLProJect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1213,8 +1221,10 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.planet.BLProJect;
 				PRODUCT_NAME = "스터디팜";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1226,7 +1236,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "BLProJect/스터디팜.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = XKA22N2KHA;
 				INFOPLIST_FILE = BLProJect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1235,8 +1247,10 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.planet.BLProJect;
 				PRODUCT_NAME = "스터디팜";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

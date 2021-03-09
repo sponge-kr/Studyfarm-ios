@@ -81,7 +81,7 @@ class UtilApi {
     
     // MARK: - 스터디 시도 리스트 조회 함수 구현(GET)
     public func UtilStatesCiteCodeCall(completionHandler: @escaping (Result<StateCodeData,Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/utils/states", method: .get, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/utils/states", method: .get, headers: headers)
             .response { response in
                 switch response.result {
                 case.success(let value):
@@ -100,7 +100,7 @@ class UtilApi {
     }
     
     public func UtilStudyCategoryCall(completionHandler: @escaping([StudyContentsContainer]) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/utils/categories", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/utils/categories", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .responseJSON { (response) in
                 debugPrint(response)
                 switch response.result{
@@ -122,7 +122,7 @@ class UtilApi {
     
     // MARK: - 이메일 전송 함수 구현(POST)
     public func UtilSendResetEmailCall(EmailParamter: Parameters, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {

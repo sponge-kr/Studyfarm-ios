@@ -533,7 +533,7 @@ class ServerApi {
 
     
     public func StudyModifiedCall(ModifiedParamter: ModifiedParamater, completionHandler: @escaping(StudyModifiedResult) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/study/1", method: .put, parameters: ModifiedParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study/1", method: .put, parameters: ModifiedParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .responseJSON {  response in
                 debugPrint(response)
                 switch response.result{
@@ -552,7 +552,7 @@ class ServerApi {
     }
     
     public func StudyEnrollmentCall(EnrollParamter: EnrollParamater, completionHandler: @escaping (StudyEnrollment) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/study", method: .post, parameters: EnrollParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study", method: .post, parameters: EnrollParamter, encoder: JSONParameterEncoder.default, headers: TestHeaders)
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result{
@@ -571,7 +571,7 @@ class ServerApi {
     }
 
     public func StudyMyListCall(completionHandler: @escaping ([StudyMyInfoReuslt]) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/study/my", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study/my", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: TestHeaders)
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result{
@@ -593,7 +593,7 @@ class ServerApi {
     
     // MARK: - Server StudyList 조회 요청 함수
     public func StudyListCall(completionHandler:  @escaping ([StudyContent]) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/study?state_code=1&city_code=1&order_type=0&progress_type=1&page=1&size=10&steps=1%2C2", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/study?state_code=1&city_code=1&order_type=0&progress_type=1&page=1&size=10&steps=1%2C2", method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .validate()
             .responseJSON { response in
                 debugPrint(response)
@@ -613,7 +613,7 @@ class ServerApi {
     }
     
     public func StudyDetailCall(study_seq: Int, completionHandler: @escaping (StudyDetailResults) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/study/\(study_seq)", method: .get, headers: TestHeaders)
+        AF.request("http://3.214.168.45:3724/api/v1/study/\(study_seq)", method: .get, headers: TestHeaders)
             .responseJSON { response in
                 debugPrint(response)
                 switch response.result {

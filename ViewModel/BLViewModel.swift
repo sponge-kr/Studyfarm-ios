@@ -9,7 +9,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import RxAlamofire
 import Alamofire
 import SwiftyJSON
 
@@ -31,17 +30,4 @@ class BLViewModel {
         
     }
     
-    
-    private func ServerApiGet() {
-        RxAlamofire.request(.get, ServerURL)
-            .debug()
-            .subscribe(onNext: { [weak self] (json) in
-                let JsonData = JSON(json)
-                for (key,SubJson):(String,JSON) in JsonData["results"] {
-                    self?.BLModel.contents.append(SubJson["contents"].stringValue)
-                    self?.BLModel.age.append(SubJson["age"].stringValue)
-                    self?.BLModel.title.append(SubJson["title"].stringValue)
-                }
-        }).disposed(by: diposeBag)
-    }
 }

@@ -6,10 +6,8 @@ target 'BLProJect' do
   use_frameworks!
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKAuth'
-  pod 'KakaoSDKUser'
   pod 'SnapKit', '~> 5.0.0'
   pod 'RxSwift', '~> 5'
-  pod 'RxAlamofire'
   pod 'RxCocoa', '~> 5'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
