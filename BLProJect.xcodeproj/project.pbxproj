@@ -140,6 +140,8 @@
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
 		FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212025C963B500ED7660 /* RedCheck@2x.png */; };
 		FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212525C963BA00ED7660 /* RedCheck@3x.png */; };
+		FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFE31E25F9222C000A01B6 /* StudyMapTableViewCell.swift */; };
+		FFFFE32125F9222C000A01B6 /* StudyMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFFFE31F25F9222C000A01B6 /* StudyMapTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +308,8 @@
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
 		FFF5212025C963B500ED7660 /* RedCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@2x.png"; sourceTree = "<group>"; };
 		FFF5212525C963BA00ED7660 /* RedCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@3x.png"; sourceTree = "<group>"; };
+		FFFFE31E25F9222C000A01B6 /* StudyMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMapTableViewCell.swift; sourceTree = "<group>"; };
+		FFFFE31F25F9222C000A01B6 /* StudyMapTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyMapTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,6 +616,8 @@
 				FF0EA19525E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib */,
 				FF4CE67425EB848700C0ACF8 /* RepliesAllTableViewCell.swift */,
 				FF4CE67525EB848700C0ACF8 /* RepliesAllTableViewCell.xib */,
+				FFFFE31E25F9222C000A01B6 /* StudyMapTableViewCell.swift */,
+				FFFFE31F25F9222C000A01B6 /* StudyMapTableViewCell.xib */,
 			);
 			path = Mainxib;
 			sourceTree = "<group>";
@@ -780,6 +786,7 @@
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
 				FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */,
+				FFFFE32125F9222C000A01B6 /* StudyMapTableViewCell.xib in Resources */,
 				FFB2EED225C5559100DBFCBE /* NavigationBackbutton@1x.jpg in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
@@ -1011,6 +1018,7 @@
 				FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
 				FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */,
+				FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,

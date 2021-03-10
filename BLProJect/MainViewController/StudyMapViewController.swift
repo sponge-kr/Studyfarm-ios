@@ -10,7 +10,8 @@ import UIKit
 import NMapsMap
 
 
-class StudyMapViewController: UIViewController {
+class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+    
     
     
     @IBOutlet weak var StudyMapView: NMFMapView!
@@ -18,11 +19,29 @@ class StudyMapViewController: UIViewController {
     @IBOutlet weak var StudyFilterBtn: UIButton!
     @IBOutlet weak var StudyFilterBtn2: UIButton!
     @IBOutlet weak var StudyFilterBtn3: UIButton!
+    @IBOutlet weak var StudyMaptableView: UITableView!
+    @IBOutlet weak var StudyContainerView: UIView!
+    @IBOutlet weak var StudyContainertitlelabel: UILabel!
+    
+    
+    private var studyList = [StudyContent]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.StudyMaptableView.delegate = self
+        self.StudyMaptableView.dataSource = self
         self.setNavigationLayoutInit()
         self.setStudyFilterView()
         self.setStudyMapLayout()
+        self.setContainerView()
+        let nib = UINib(nibName: "StudyMapTableViewCell", bundle: nil)
+        self.StudyMaptableView.register(nib, forCellReuseIdentifier: "StudyMapCell")
+        DispatchQueue.main.async {
+            ServerApi.shared.StudyListCall { result in
+                self.studyList = result
+                self.StudyMaptableView.reloadData()
+            }
+        }
+        
     }
     
     private func setNavigationLayoutInit(){
@@ -68,8 +87,47 @@ class StudyMapViewController: UIViewController {
     }
     
     private func setStudyMapLayout(){
-        let StudyMarker = NMFMarker()
-        StudyMarker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-        StudyMarker.mapView = self.StudyMapView
+
+        
     }
+    private func setContainerView(){
+        self.StudyContainerView.layer.cornerRadius = 20
+        self.StudyContainerView.layer.masksToBounds = true
+        self.StudyContainertitlelabel.attributedText = NSAttributedString(string: "맟춤 스터디 추천", attributes: [NSAttributedString.Key.kern : -0.66])
+        self.StudyContainertitlelabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)
+        self.StudyContainertitlelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.studyList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let StudyCell = tableView.dequeueReusableCell(withIdentifier: "StudyMapCell", for: indexPath) as? StudyMapTableViewCell
+        StudyCell?.StudyMaptitlelabel.text = self.studyList[indexPath.row].title
+        StudyCell?.StudyMapContentlabel.text  = self.studyList[indexPath.row].content
+        DispatchQueue.global(qos: .default).async {
+        var StudyMarker = [NMFMarker]()
+        for index in 0...self.studyList.count {
+            let position = NMGLatLng(lat: self.studyList[indexPath.row].lng!, lng: self.studyList[indexPath.row].lat!)
+            let marker = NMFMarker(position: position)
+            marker.captionText = "test"
+            marker.isHideCollidedMarkers = true
+            StudyMarker.append(marker)
+        }
+        DispatchQueue.main.async { [weak self] in
+            for marker in StudyMarker {
+                marker.mapView = self?.StudyMapView
+            }
+        }
+    }
+        
+        return StudyCell!
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.estimatedRowHeight
+    }
+    
 }
+
