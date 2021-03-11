@@ -47,20 +47,54 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wy-tC-854">
+                        <rect key="frame" x="20" y="97" width="50" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="DE6-Nw-XEf"/>
+                            <constraint firstAttribute="height" constant="21" id="R0Q-nf-OsO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4f-kj-IQg">
+                        <rect key="frame" x="78" y="97" width="48" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="sqN-7M-ih7"/>
+                            <constraint firstAttribute="width" constant="48" id="ygE-V9-ERT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sql-Iv-ZmY">
+                        <rect key="frame" x="307" y="101" width="31" height="12"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="UE4-Uj-VnX" secondAttribute="bottom" constant="58" id="0Am-m5-MW9"/>
+                    <constraint firstAttribute="bottom" secondItem="A4f-kj-IQg" secondAttribute="bottom" constant="9" id="6nb-UB-c3O"/>
+                    <constraint firstItem="A4f-kj-IQg" firstAttribute="top" secondItem="msf-JM-7If" secondAttribute="bottom" constant="8" id="7YG-Uq-dLl"/>
+                    <constraint firstItem="3wy-tC-854" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LQo-g4-Jtn"/>
                     <constraint firstItem="vcs-G9-vd3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Z2Q-GP-AgC"/>
                     <constraint firstItem="UE4-Uj-VnX" firstAttribute="top" secondItem="vcs-G9-vd3" secondAttribute="bottom" constant="4" id="ZZo-9I-tuF"/>
-                    <constraint firstItem="msf-JM-7If" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ZrQ-7l-9Xc"/>
+                    <constraint firstItem="A4f-kj-IQg" firstAttribute="leading" secondItem="3wy-tC-854" secondAttribute="trailing" constant="8" id="bQe-zA-a4F"/>
                     <constraint firstItem="UE4-Uj-VnX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bgA-bl-jLb"/>
+                    <constraint firstItem="msf-JM-7If" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="duw-mh-lbO"/>
                     <constraint firstItem="msf-JM-7If" firstAttribute="top" secondItem="UE4-Uj-VnX" secondAttribute="bottom" constant="2" id="eC2-JT-Oeb"/>
+                    <constraint firstAttribute="bottom" secondItem="3wy-tC-854" secondAttribute="bottom" constant="9" id="m6a-bc-eSa"/>
+                    <constraint firstItem="3wy-tC-854" firstAttribute="top" secondItem="msf-JM-7If" secondAttribute="bottom" constant="8" id="sKT-j0-G65"/>
                     <constraint firstItem="vcs-G9-vd3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="tqH-Bo-qYy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="StudyMapCommentCount" destination="sql-Iv-ZmY" id="Fhd-gb-Ul5"/>
                 <outlet property="StudyMapContentlabel" destination="UE4-Uj-VnX" id="fDl-20-Gpo"/>
+                <outlet property="StudyMapInterestingbtn" destination="3wy-tC-854" id="CwI-QD-8gI"/>
+                <outlet property="StudyMaponOfflinebtn" destination="A4f-kj-IQg" id="aGf-Zk-A36"/>
                 <outlet property="StudyMapranklabel" destination="msf-JM-7If" id="nhd-QV-tZT"/>
                 <outlet property="StudyMaptitlelabel" destination="vcs-G9-vd3" id="Tyv-Av-6MO"/>
             </connections>

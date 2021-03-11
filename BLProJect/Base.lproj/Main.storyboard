@@ -36,10 +36,21 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObJ-vO-Pme">
+                                        <rect key="frame" x="380" y="15" width="20" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="kK0-Ja-kwu"/>
+                                            <constraint firstAttribute="width" constant="20" id="kPC-5J-3F6"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ObJ-vO-Pme" secondAttribute="bottom" constant="14" id="KYd-Yh-mrD"/>
+                                    <constraint firstItem="ObJ-vO-Pme" firstAttribute="top" secondItem="d5Z-kU-Sec" secondAttribute="top" constant="15" id="Vcn-uk-b2T"/>
                                     <constraint firstAttribute="height" constant="47" id="bFA-nZ-dIA"/>
+                                    <constraint firstAttribute="trailing" secondItem="ObJ-vO-Pme" secondAttribute="trailing" constant="14" id="ii1-VV-Mfh"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-LX-91j" customClass="NMFMapView">
@@ -75,10 +86,20 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRX-W6-xca">
+                                        <rect key="frame" x="177" y="8" width="60" height="4"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="0hd-9N-DB4"/>
+                                            <constraint firstAttribute="height" constant="4" id="far-rk-wyU"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="fRX-W6-xca" firstAttribute="top" secondItem="re0-Gn-Y0T" secondAttribute="top" constant="8" id="1XM-ad-2dh"/>
                                     <constraint firstAttribute="height" constant="397" id="KpY-fd-Ayp"/>
+                                    <constraint firstItem="fRX-W6-xca" firstAttribute="centerX" secondItem="re0-Gn-Y0T" secondAttribute="centerX" id="PqK-6v-1AV"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -98,12 +119,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="y6P-iv-qe3"/>
                     <connections>
+                        <outlet property="StudyContainerGestureView" destination="fRX-W6-xca" id="Ofh-Dg-aeB"/>
                         <outlet property="StudyContainerView" destination="re0-Gn-Y0T" id="exn-ip-qMW"/>
                         <outlet property="StudyContainertitlelabel" destination="Zwy-Xn-4Fc" id="Tdc-vl-cyi"/>
-                        <outlet property="StudyFilterBtn" destination="ngu-g1-LPX" id="e89-zx-0QG"/>
-                        <outlet property="StudyFilterBtn2" destination="gNp-HE-f9Q" id="Fet-by-vTt"/>
-                        <outlet property="StudyFilterBtn3" destination="GaA-hk-zI6" id="bCV-le-M92"/>
                         <outlet property="StudyFilterView" destination="d5Z-kU-Sec" id="Ilr-ol-UVN"/>
+                        <outlet property="StudyFilterbtn" destination="ObJ-vO-Pme" id="meq-oo-zf5"/>
+                        <outlet property="StudyFilterfirstbtn" destination="ngu-g1-LPX" id="9Ik-Wb-iSV"/>
+                        <outlet property="StudyFiltersecondbtn" destination="gNp-HE-f9Q" id="deS-BZ-T3B"/>
+                        <outlet property="StudyFilterthirdbtn" destination="GaA-hk-zI6" id="pyi-5X-qee"/>
                         <outlet property="StudyMapView" destination="kDK-LX-91j" id="QEU-Ot-JYA"/>
                         <outlet property="StudyMaptableView" destination="baJ-Sc-39G" id="sUB-dR-n4f"/>
                     </connections>

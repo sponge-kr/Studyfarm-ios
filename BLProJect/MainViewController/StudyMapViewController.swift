@@ -16,11 +16,13 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
     
     @IBOutlet weak var StudyMapView: NMFMapView!
     @IBOutlet weak var StudyFilterView: UIView!
-    @IBOutlet weak var StudyFilterBtn: UIButton!
-    @IBOutlet weak var StudyFilterBtn2: UIButton!
-    @IBOutlet weak var StudyFilterBtn3: UIButton!
+    @IBOutlet weak var StudyFilterfirstbtn: UIButton!
+    @IBOutlet weak var StudyFiltersecondbtn: UIButton!
+    @IBOutlet weak var StudyFilterthirdbtn: UIButton!
+    @IBOutlet weak var StudyFilterbtn: UIButton!
     @IBOutlet weak var StudyMaptableView: UITableView!
     @IBOutlet weak var StudyContainerView: UIView!
+    @IBOutlet weak var StudyContainerGestureView: UIView!
     @IBOutlet weak var StudyContainertitlelabel: UILabel!
     
     
@@ -31,7 +33,6 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.StudyMaptableView.dataSource = self
         self.setNavigationLayoutInit()
         self.setStudyFilterView()
-        self.setStudyMapLayout()
         self.setContainerView()
         let nib = UINib(nibName: "StudyMapTableViewCell", bundle: nil)
         self.StudyMaptableView.register(nib, forCellReuseIdentifier: "StudyMapCell")
@@ -67,28 +68,25 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.StudyFilterView.backgroundColor = UIColor(red: 249/255, green: 250/255, blue: 250/255, alpha: 1.0)
         self.StudyFilterView.layer.borderWidth = 1
         self.StudyFilterView.layer.borderColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1.0).cgColor
-        self.StudyFilterBtn.setAttributedTitle(NSAttributedString(string: "UX/UI", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
-        self.StudyFilterBtn.setTitleColor(UIColor.white, for: .normal)
-        self.StudyFilterBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.StudyFilterBtn.layer.cornerRadius = 4
-        self.StudyFilterBtn.layer.masksToBounds = true
-        self.StudyFilterBtn2.setAttributedTitle(NSAttributedString(string: "토익", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
-        self.StudyFilterBtn2.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
-        self.StudyFilterBtn2.backgroundColor = UIColor(red: 249/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        self.StudyFilterBtn2.layer.borderWidth = 1
-        self.StudyFilterBtn2.layer.borderColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0).cgColor
-        self.StudyFilterBtn2.layer.cornerRadius = 4
-        self.StudyFilterBtn2.layer.masksToBounds = true
-        self.StudyFilterBtn3.setAttributedTitle(NSAttributedString(string: "웹개발", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
-        self.StudyFilterBtn3.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.StudyFilterBtn3.setTitleColor(UIColor.white, for: .normal)
-        self.StudyFilterBtn3.layer.cornerRadius = 4
-        self.StudyFilterBtn3.layer.masksToBounds = true
-    }
-    
-    private func setStudyMapLayout(){
-
-        
+        self.StudyFilterfirstbtn.setAttributedTitle(NSAttributedString(string: "UX/UI", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
+        self.StudyFilterfirstbtn.setTitleColor(UIColor.white, for: .normal)
+        self.StudyFilterfirstbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.StudyFilterfirstbtn.layer.cornerRadius = 4
+        self.StudyFilterfirstbtn.layer.masksToBounds = true
+        self.StudyFiltersecondbtn.setAttributedTitle(NSAttributedString(string: "토익", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
+        self.StudyFiltersecondbtn.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.StudyFiltersecondbtn.backgroundColor = UIColor(red: 249/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        self.StudyFiltersecondbtn.layer.borderWidth = 1
+        self.StudyFiltersecondbtn.layer.borderColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0).cgColor
+        self.StudyFiltersecondbtn.layer.cornerRadius = 4
+        self.StudyFiltersecondbtn.layer.masksToBounds = true
+        self.StudyFilterthirdbtn.setAttributedTitle(NSAttributedString(string: "웹개발", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern : -0.77]), for: .normal)
+        self.StudyFilterthirdbtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.StudyFilterthirdbtn.setTitleColor(UIColor.white, for: .normal)
+        self.StudyFilterthirdbtn.layer.cornerRadius = 4
+        self.StudyFilterthirdbtn.layer.masksToBounds = true
+        self.StudyFilterbtn.setImage(UIImage(named: "filter.png"), for: .normal)
+        self.StudyFilterbtn.setTitle("", for: .normal)
     }
     private func setContainerView(){
         self.StudyContainerView.layer.cornerRadius = 20
@@ -96,6 +94,10 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.StudyContainertitlelabel.attributedText = NSAttributedString(string: "맟춤 스터디 추천", attributes: [NSAttributedString.Key.kern : -0.66])
         self.StudyContainertitlelabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)
         self.StudyContainertitlelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.StudyContainerGestureView.backgroundColor = UIColor(red: 215/255, green: 218/255, blue: 221/255, alpha: 1.0)
+        self.StudyContainerGestureView.layer.cornerRadius = 4
+        self.StudyContainerGestureView.layer.masksToBounds = true
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,6 +108,29 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
         let StudyCell = tableView.dequeueReusableCell(withIdentifier: "StudyMapCell", for: indexPath) as? StudyMapTableViewCell
         StudyCell?.StudyMaptitlelabel.text = self.studyList[indexPath.row].title
         StudyCell?.StudyMapContentlabel.text  = self.studyList[indexPath.row].content
+        if self.studyList[indexPath.row].steps?.startIndex == 0 && self.studyList[indexPath.row].steps?.endIndex == 1 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 초급 ~ 초중급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        } else if self.studyList[indexPath.row].steps?.startIndex == 0 && self.studyList[indexPath.row].steps?.endIndex == 2 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 초급 ~ 중급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        } else if self.studyList[indexPath.row].steps?.startIndex == 0 && self.studyList[indexPath.row].steps?.endIndex == 3 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 초급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        }
+        if self.studyList[indexPath.row].steps?.startIndex == 1 && self.studyList[indexPath.row].steps?.endIndex == 2 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 초중급 ~ 중급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        } else if self.studyList[indexPath.row].steps?.startIndex == 1 && self.studyList[indexPath.row].steps?.endIndex == 3 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 초중급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        }
+        if self.studyList[indexPath.row].steps?.startIndex == 2 && self.studyList[indexPath.row].steps?.endIndex == 3 {
+            StudyCell?.StudyMapranklabel.attributedText = NSAttributedString(string: "모집 등급: 중급 ~ 상급", attributes: [NSAttributedString.Key.kern : -0.6])
+            StudyCell?.StudyMapranklabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        }
+        StudyCell?.StudyMapInterestingbtn.setTitle("\(self.studyList[indexPath.row].tags![0])", for: .normal)
+        StudyCell?.StudyMaponOfflinebtn.setTitle("\(self.studyList[indexPath.row].tags![1])", for: .normal)
         DispatchQueue.global(qos: .default).async {
         var StudyMarker = [NMFMarker]()
         for index in 0...self.studyList.count {
