@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = UIWindow(windowScene: windowScene)
             let RootView = UIStoryboard(name: "Main", bundle: nil)
             let MainTabbar = UITabBarController()
-            let initalViewController = RootView.instantiateViewController(identifier: "MainView")
+            let initalViewController = RootView.instantiateViewController(identifier: "RootView")
             let NavigationView = UINavigationController(rootViewController: initalViewController)
             self.window?.rootViewController = NavigationView
             self.window?.makeKeyAndVisible()

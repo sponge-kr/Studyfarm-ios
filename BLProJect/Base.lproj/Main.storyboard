@@ -1817,16 +1817,22 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiY-81-uFK">
-                                <rect key="frame" x="20" y="244" width="253" height="24"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiY-81-uFK">
+                                <rect key="frame" x="20" y="207" width="214" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="l2s-qk-tz2"/>
+                                    <constraint firstAttribute="width" constant="214" id="yiO-SY-mL1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEs-DR-QCY">
-                                <rect key="frame" x="20" y="152" width="277" height="72"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEs-DR-QCY">
+                                <rect key="frame" x="20" y="125" width="277" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="277" id="XTB-YG-jt3"/>
+                                    <constraint firstAttribute="height" constant="72" id="lN2-ed-sca"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1884,23 +1890,29 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eup-7r-WHB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TiY-81-uFK" firstAttribute="leading" secondItem="Eup-7r-WHB" secondAttribute="leading" constant="20" id="Vk8-CC-gh7"/>
+                            <constraint firstItem="LEs-DR-QCY" firstAttribute="leading" secondItem="Eup-7r-WHB" secondAttribute="leading" constant="20" id="Xq8-pG-jUJ"/>
+                            <constraint firstItem="LEs-DR-QCY" firstAttribute="top" secondItem="Eup-7r-WHB" secondAttribute="top" constant="37" id="bQi-gb-KTR"/>
+                            <constraint firstItem="TiY-81-uFK" firstAttribute="top" secondItem="LEs-DR-QCY" secondAttribute="bottom" constant="10" id="ocz-zQ-9ma"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k13-lb-IHE"/>
                     <connections>
-                        <outlet property="googleLoginbutton" destination="EIw-rU-B99" id="D25-WT-hpV"/>
-                        <outlet property="kakaoLoginbutton" destination="6wD-nz-CMy" id="qGX-Q9-Biy"/>
-                        <outlet property="loginAutoswitch" destination="DDK-al-w1b" id="EZT-6G-pGR"/>
-                        <outlet property="loginAutotitlelabel" destination="8ch-aw-bP1" id="BNr-5K-Jm7"/>
-                        <outlet property="loginConfirmbutton" destination="B9d-Rl-Hl7" id="S7V-EY-KL5"/>
-                        <outlet property="loginDescriptionlabel" destination="qZ5-oo-IFc" id="eOg-Hz-69Z"/>
-                        <outlet property="loginEmailtextfiled" destination="c3B-Ww-8Wp" id="aJv-AW-lWE"/>
-                        <outlet property="loginGrayline" destination="im0-gN-s6l" id="jl2-lF-6oy"/>
-                        <outlet property="loginGraylines" destination="Ah9-JW-jG6" id="oVc-rN-1rh"/>
-                        <outlet property="loginPasswordtextfiled" destination="Qbw-Wi-5YZ" id="XM2-AM-tbw"/>
-                        <outlet property="loginSubheadlabel" destination="TiY-81-uFK" id="tMp-3H-QzF"/>
-                        <outlet property="loginSubtitlelabel" destination="LEs-DR-QCY" id="I1X-d2-kP7"/>
-                        <outlet property="naverLoginbutton" destination="6AV-MO-sMq" id="RL2-8x-HhL"/>
-                        <outlet property="signUpbutton" destination="5RR-TH-JyE" id="ciC-tm-nZ4"/>
+                        <outlet property="googleLoginButton" destination="EIw-rU-B99" id="P9J-vX-by3"/>
+                        <outlet property="kakaoLoginButton" destination="6wD-nz-CMy" id="BW3-hw-4lm"/>
+                        <outlet property="loginAutoLoginSwitch" destination="DDK-al-w1b" id="hAG-pY-WNU"/>
+                        <outlet property="loginAutoTitleLabel" destination="8ch-aw-bP1" id="d12-IH-wwx"/>
+                        <outlet property="loginConfirmButton" destination="B9d-Rl-Hl7" id="eo6-a1-Fi8"/>
+                        <outlet property="loginDescriptionLabel" destination="qZ5-oo-IFc" id="oHC-kz-q5R"/>
+                        <outlet property="loginEmailTextFiled" destination="c3B-Ww-8Wp" id="xRc-nC-0BT"/>
+                        <outlet property="loginFirstGrayLine" destination="im0-gN-s6l" id="CQR-fd-bIv"/>
+                        <outlet property="loginPasswordTextFiled" destination="Qbw-Wi-5YZ" id="d5l-tm-gAB"/>
+                        <outlet property="loginSecondGrayLine" destination="Ah9-JW-jG6" id="1ac-5q-oPP"/>
+                        <outlet property="loginSubTitleLabel" destination="TiY-81-uFK" id="DDl-il-Ex4"/>
+                        <outlet property="loginTitleLabel" destination="LEs-DR-QCY" id="F8W-ys-s2p"/>
+                        <outlet property="naverLoginButton" destination="6AV-MO-sMq" id="d7X-Ia-sjS"/>
+                        <outlet property="signUpButton" destination="5RR-TH-JyE" id="sgl-cT-w0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gn8-UB-bzU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

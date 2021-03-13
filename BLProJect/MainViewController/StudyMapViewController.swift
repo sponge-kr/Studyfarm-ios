@@ -97,8 +97,15 @@ class StudyMapViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.StudyContainerGestureView.backgroundColor = UIColor(red: 215/255, green: 218/255, blue: 221/255, alpha: 1.0)
         self.StudyContainerGestureView.layer.cornerRadius = 4
         self.StudyContainerGestureView.layer.masksToBounds = true
+        let containerPangesture = UIPanGestureRecognizer(target: self, action: nil)
         
     }
+    @objc func dragPanGesture(recognizer : UIPanGestureRecognizer) {
+//        if self.StudyContainerView.bounds.contains(<#T##point: CGPoint##CGPoint#>) {
+//            <#code#>
+//        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.studyList.count
