@@ -22,7 +22,7 @@ struct LoginResult: Codable {
     var user: LoginUserContainer?
 }
 struct LoginUserContainer: Codable {
-    let users_seq,age: Int?
+    let users_seq, age: Int?
     let email,nickname,gender,simple_introduce,profile,user_created_at,user_updated_at: String?
     let user_info_process,user_active: Bool?
     let interesting: [LoginInterestingContainer]?
@@ -82,126 +82,121 @@ struct LogoutDataModel {
 
 // MARK - 닉네임 중복확인 데이터 모델
 struct NickNameDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var exist : Bool = false
+    var code: Int = 0
+    var message: String = ""
+    var exist: Bool = false
 }
 
 //MARK - KakakoUser 데이터 모델
 struct KakaoSingDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var users_seq : Int = 0
-    var email : String = ""
-    var nickname  : String = ""
+    var code: Int = 0
+    var message: String = ""
+    var users_seq: Int = 0
+    var email: String = ""
+    var nickname: String = ""
 }
 //MARK - KakaoLogin 데이터 모델
 struct KakaoLoginDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var token : String = ""
-    var email : String = ""
-    var nickname : String = ""
+    var code: Int = 0
+    var message: String = ""
+    var email: String = ""
+    var nickname: String = ""
 }
 
 
-
+//MARK - GIDLogin 데이터 모델
 struct GIDLoginDataModel {
-    var code : Int = 0
-    var users_seq : Int = 0
-    var message : String = ""
-    var token : String = ""
-    var email : String = ""
-    var nickname : String = ""
+    var code: Int = 0
+    var users_seq: Int = 0
+    var message: String = ""
+    var email: String = ""
+    var nickname: String = ""
+    var gender: String = ""
 }
 
 //MARK - GIDLogin 데이터 모델
 struct GIDSignDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var users_seq : Int = 0
-    var nickname : String = ""
-    var email : String = ""
+    var code: Int = 0
+    var message: String = ""
+    var users_seq: Int = 0
+    var nickname: String = ""
+    var email: String = ""
 }
-
-
 //MARK - 회원가입 데이터
 struct SignUpDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var user_seq : Int = 0
-    var email : String = ""
-    var nickname : String = ""
-    var age : Int = 0
-    var gender : String = ""
-    var interesting_name : String = ""
-    var interesting_skill_level : String = ""
-    var born_date : String = ""
-    var simple_introduce : String = ""
-    var profile : String = ""
-    var user_active : Bool = false
+    var code: Int = 0
+    var message: String = ""
+    var user_seq: Int = 0
+    var email: String = ""
+    var nickname: String = ""
+    var age: Int = 0
+    var gender: String = ""
+    var interesting_name: String = ""
+    var interesting_skill_level: String = ""
+    var born_date: String = ""
+    var simple_introduce: String = ""
+    var profile: String = ""
+    var user_active: Bool = false
 }
 
 // MARK - 유저 체크 데이터
 struct UserCheckDataModel {
-    var code : Int = 0
-    var message : String = ""
-    var check_result : Bool = false
+    var code: Int = 0
+    var message: String = ""
+    var check_result: Bool = false
 }
 
 // MARK - 로그인 Paramter
-struct LoginParamter : Encodable {
-    var email : String
-    var password : String
+struct LoginParamter: Encodable {
+    var email: String
+    var password: String
 }
 
 // MARK - 회원가입 Paramter
 struct SignUpParamter : Encodable {
     var email : String
-    var password : String
-    var nickname : String
+    var password: String
+    var nickname: String
     var service_use_agree : Bool
 }
 
 // MARK - 회원가입 Email 인증 버튼 Paramter
-struct OAuthButtonParamter : Encodable {
-    var email : String
+struct OAuthButtonParamter: Encodable {
+    var email: String
 }
 
-
 //MARK - KakakoUser 등록 Paramater
-struct KakaoUserParamter : Encodable {
-    var nickname : String
-    var service_use_agree : Bool
+struct KakaoUserParamter: Encodable {
+    var nickname: String
+    var service_use_agree: Bool
 }
 
 //MARK - GIDUser 등록 Paramter
-struct GIDUserParamter : Encodable {
-    var nickname : String
-    var service_use_agree : Bool
+struct GIDUserParamter: Encodable {
+    var nickname: String
+    var service_use_agree: Bool
 }
-
 
 class OAuthApi {
     static let shared = OAuthApi()
-    fileprivate let headers : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8","Accept" : "application/hal+json"]
-    fileprivate let tokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","Authorization" : "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let Kakaotokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "Kakaotoken"))"]
-    fileprivate let GIDtokenheaders : HTTPHeaders = ["Content-Type" : "application/hal+json;charset=UTF-8","Accept":"application/hal+json","access_token" : "\(KeychainWrapper.standard.string(forKey: "GIDtoken"))"]
-    
+    fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
+    fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
+    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
+    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken")!)"]
     
     //MARK - 초기화
     private init(){}
     
     //MARK - DataModel Instace 초기화
     public var oAuthButtonModel = OAuthButtonDataModel()
-    public var LogoutModel = LogoutDataModel()
-    public var SignUpModel = SignUpDataModel()
-    public var KakaoModel = KakaoSingDataModel()
-    public var KakaoLoginModel = KakaoLoginDataModel()
-    public var NickNameModel = NickNameDataModel()
-    public var UserCheckModel = UserCheckDataModel()
-    public var GIDSignModel = GIDSignDataModel()
+    public var logoutModel = LogoutDataModel()
+    public var signUpModel = SignUpDataModel()
+    public var kakaoModel = KakaoSingDataModel()
+    public var kakaoLoginModel = KakaoLoginDataModel()
+    public var nickNameModel = NickNameDataModel()
+    public var userCheckModel = UserCheckDataModel()
+    public var gIDSignModel = GIDSignDataModel()
+    public var gIDLoginModel = GIDLoginDataModel()
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
@@ -230,14 +225,14 @@ class OAuthApi {
                 switch response.result {
                 case.success(let value):
                     let LogoutJson = JSON(value!)
-                    self.LogoutModel.code = LogoutJson["code"].intValue
-                    self.LogoutModel.message = LogoutJson["message"].stringValue
-                    self.LogoutModel.responseTime = LogoutJson["responseTime"].stringValue
-                    if self.LogoutModel.message == "로그인이 만료되었습니다." || self.LogoutModel.code == 401{
+                    self.logoutModel.code = LogoutJson["code"].intValue
+                    self.logoutModel.message = LogoutJson["message"].stringValue
+                    self.logoutModel.responseTime = LogoutJson["responseTime"].stringValue
+                    if self.logoutModel.message == "로그인이 만료되었습니다." || self.logoutModel.code == 401{
                         KeychainWrapper.standard.removeObject(forKey: "token")
-                        print("스터디팜 로그아웃 status code 값입니다 \(self.LogoutModel.code)")
-                        print("스터디팜 로그아웃 메세지 값입니다 \(self.LogoutModel.message)")
-                        completionHandler(.success(self.LogoutModel))
+                        print("스터디팜 로그아웃 status code 값입니다 \(self.logoutModel.code)")
+                        print("스터디팜 로그아웃 메세지 값입니다 \(self.logoutModel.message)")
+                        completionHandler(.success(self.logoutModel))
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -261,23 +256,23 @@ class OAuthApi {
                 debugPrint(response)
                 switch response.result {
                 case .success(let value):
-                    let SignJson = JSON(value!)
-                    self.SignUpModel.code = SignJson["code"].intValue
-                    self.SignUpModel.message = SignJson["message"].stringValue
-                    self.SignUpModel.email = SignJson["result"]["email"].stringValue
-                    self.SignUpModel.nickname = SignJson["result"]["nickname"].stringValue
-                    self.SignUpModel.gender = SignJson["result"]["gender"].stringValue
-                    self.SignUpModel.interesting_name = SignJson["result"]["interesting"]["name"].stringValue
-                    self.SignUpModel.interesting_skill_level = SignJson["result"]["interesting"]["skill_level"].stringValue
-                    self.SignUpModel.born_date = SignJson["result"]["born_date"].stringValue
-                    self.SignUpModel.user_active = SignJson["result"]["user_active"].boolValue
-                    print("스터디팜 회원가입 이메일 값입니다 \(self.SignUpModel.email)")
-                    print("스터디팜 회원가입 닉네임 값입니다 \(self.SignUpModel.nickname)")
-                    print("스터디팜 회원가입 나이 입니다 \(self.SignUpModel.age)")
-                    print("스터디팜 회원가입 성별 입니다 \(self.SignUpModel.gender)")
-                    print("스터디팜 회원가입 관심기술 정보 입니다 \(self.SignUpModel.interesting_name)")
-                    print("스터디팜 회원가입 기술 명 입니다 \(self.SignUpModel.interesting_skill_level)")
-                    completionHandler(.success(self.SignUpModel))
+                    let signJson = JSON(value!)
+                    self.signUpModel.code = signJson["code"].intValue
+                    self.signUpModel.message = signJson["message"].stringValue
+                    self.signUpModel.email = signJson["result"]["email"].stringValue
+                    self.signUpModel.nickname = signJson["result"]["nickname"].stringValue
+                    self.signUpModel.gender = signJson["result"]["gender"].stringValue
+                    self.signUpModel.interesting_name = signJson["result"]["interesting"]["name"].stringValue
+                    self.signUpModel.interesting_skill_level = signJson["result"]["interesting"]["skill_level"].stringValue
+                    self.signUpModel.born_date = signJson["result"]["born_date"].stringValue
+                    self.signUpModel.user_active = signJson["result"]["user_active"].boolValue
+                    print("스터디팜 회원가입 이메일 값입니다 \(self.signUpModel.email)")
+                    print("스터디팜 회원가입 닉네임 값입니다 \(self.signUpModel.nickname)")
+                    print("스터디팜 회원가입 나이 입니다 \(self.signUpModel.age)")
+                    print("스터디팜 회원가입 성별 입니다 \(self.signUpModel.gender)")
+                    print("스터디팜 회원가입 관심기술 정보 입니다 \(self.signUpModel.interesting_name)")
+                    print("스터디팜 회원가입 기술 명 입니다 \(self.signUpModel.interesting_skill_level)")
+                    completionHandler(.success(self.signUpModel))
                 case.failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
@@ -287,8 +282,8 @@ class OAuthApi {
     
     
     //MARK - oAuth Server 이메일 인증 버튼 함수(POST)
-    public func AuthEmailCall(OAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
+    public func AuthEmailCall(oAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:3724/api/v1/auth/auth-email-button", method: .post, parameters: oAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -308,17 +303,17 @@ class OAuthApi {
     }
     
     //MARK - 유저 인증 확인 함수 구현(GET)
-    public func AuthCheckUserCall(CheckUser : String, completionHandler : @escaping(Result<UserCheckDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
+    public func AuthCheckUserCall(checkUser : String, completionHandler : @escaping(Result<UserCheckDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-active?email=\(checkUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
                 case .success(let value):
-                    let CheckUserJson = JSON(value!)
-                    self.UserCheckModel.code = CheckUserJson["code"].intValue
-                    self.UserCheckModel.message = CheckUserJson["message"].stringValue
-                    self.UserCheckModel.check_result = CheckUserJson["result"]["check_result"].boolValue
-                    completionHandler(.success(self.UserCheckModel))
+                    let checkUserJson = JSON(value!)
+                    self.userCheckModel.code = checkUserJson["code"].intValue
+                    self.userCheckModel.message = checkUserJson["message"].stringValue
+                    self.userCheckModel.check_result = checkUserJson["result"]["check_result"].boolValue
+                    completionHandler(.success(self.userCheckModel))
                 case .failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
@@ -334,14 +329,14 @@ class OAuthApi {
                 debugPrint(response)
                 switch response.result{
                 case .success(let value):
-                    let NickNameJson = JSON(value!)
-                    self.NickNameModel.code = NickNameJson["code"].intValue
-                    self.NickNameModel.message = NickNameJson["message"].stringValue
-                    self.NickNameModel.exist = NickNameJson["result"]["exist"].boolValue
-                    print("스터디팜 닉네임 중복 확인 status code 값입니다 \(self.NickNameModel.code)")
-                    print("스터디팜 닉네임 중복 확인 message 값입니다 \(self.NickNameModel.message)")
-                    print("스터디팜 닉네임 중복 확인 exist(존재 여부) 값입니다 \(self.NickNameModel.exist)")
-                    completionHandler(.success(self.NickNameModel))
+                    let nickNameJson = JSON(value!)
+                    self.nickNameModel.code = nickNameJson["code"].intValue
+                    self.nickNameModel.message = nickNameJson["message"].stringValue
+                    self.nickNameModel.exist = nickNameJson["result"]["exist"].boolValue
+                    print("스터디팜 닉네임 중복 확인 status code 값입니다 \(self.nickNameModel.code)")
+                    print("스터디팜 닉네임 중복 확인 message 값입니다 \(self.nickNameModel.message)")
+                    print("스터디팜 닉네임 중복 확인 exist(존재 여부) 값입니다 \(self.nickNameModel.exist)")
+                    completionHandler(.success(self.nickNameModel))
                 case .failure(let error):
                 print(error.localizedDescription)
                     completionHandler(.failure(error))
@@ -353,22 +348,20 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoLogin 함수(POST)
     public func AuthKakaoLoginCall(completionHandler : @escaping(Result<KakaoLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: kakaoTokenHeaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
                 case.success(let value):
-                    let KakaoLoginJson = JSON(value!)
-                    self.KakaoLoginModel.code = KakaoLoginJson["code"].intValue
-                    self.KakaoLoginModel.message = KakaoLoginJson["message"].stringValue
-                    self.KakaoLoginModel.token = KakaoLoginJson["result"]["token"].stringValue
-                    self.KakaoLoginModel.email = KakaoLoginJson["result"]["user"]["email"].stringValue
-                    self.KakaoLoginModel.nickname = KakaoLoginJson["result"]["user"]["nickname"].stringValue
-                    print("카카오 로그인 status code 값입니다\(self.KakaoLoginModel.code)")
-                    print("카카오 로그인 토근 값입니다 \(self.KakaoLoginModel.token)")
-                    print("카카오 로그인 이메일 값입니다 \(self.KakaoLoginModel.email)")
-                    print("카카오 로그인 닉네임 값입니다 \(self.KakaoLoginModel.nickname)")
-                    completionHandler(.success(self.KakaoLoginModel))
+                    let kakaoLoginJson = JSON(value!)
+                    self.kakaoLoginModel.code = kakaoLoginJson["code"].intValue
+                    self.kakaoLoginModel.message = kakaoLoginJson["message"].stringValue
+                    self.kakaoLoginModel.email = kakaoLoginJson["result"]["user"]["email"].stringValue
+                    self.kakaoLoginModel.nickname = kakaoLoginJson["result"]["user"]["nickname"].stringValue
+                    print("카카오 로그인 status code 값입니다\(self.kakaoLoginModel.code)")
+                    print("카카오 로그인 이메일 값입니다 \(self.kakaoLoginModel.email)")
+                    print("카카오 로그인 닉네임 값입니다 \(self.kakaoLoginModel.nickname)")
+                    completionHandler(.success(self.kakaoLoginModel))
                 case.failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
@@ -378,21 +371,21 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoUser 등록 함수(POST)
     public func AuthkakaoSignUp(KakaoUserParamter : KakaoUserParamter, completionHandler : @escaping(Result<KakaoSingDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: kakaoTokenHeaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
                 case.success(let value):
-                    let KakaoSignJson = JSON(value!)
-                    self.KakaoModel.code = KakaoSignJson["code"].intValue
-                    self.KakaoModel.message = KakaoSignJson["message"].stringValue
-                    self.KakaoModel.users_seq = KakaoSignJson["result"]["users_seq"].intValue
-                    self.KakaoModel.email = KakaoSignJson["result"]["email"].stringValue
-                    self.KakaoModel.nickname = KakaoSignJson["nickname"].stringValue
-                    print("카카오 등록 nickname 값입니다 \(self.KakaoModel.nickname)")
-                    print("카카오 등록 email 값입니다 \(self.KakaoModel.email)")
-                    print("카카오 등록 Message 값입니다 \(self.KakaoModel.message)")
-                    completionHandler(.success(self.KakaoModel))
+                    let kakaoSignJson = JSON(value!)
+                    self.kakaoModel.code = kakaoSignJson["code"].intValue
+                    self.kakaoModel.message = kakaoSignJson["message"].stringValue
+                    self.kakaoModel.users_seq = kakaoSignJson["result"]["users_seq"].intValue
+                    self.kakaoModel.email = kakaoSignJson["result"]["email"].stringValue
+                    self.kakaoModel.nickname = kakaoSignJson["nickname"].stringValue
+                    print("카카오 등록 nickname 값입니다 \(self.kakaoModel.nickname)")
+                    print("카카오 등록 email 값입니다 \(self.kakaoModel.email)")
+                    print("카카오 등록 Message 값입니다 \(self.kakaoModel.message)")
+                    completionHandler(.success(self.kakaoModel))
                 case.failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
@@ -401,30 +394,48 @@ class OAuthApi {
     }
     
     public func AuthGIDLoginCall(completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: gIdTokenHeaders)
             .response { response in
-                
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let gIdLoginJson = JSON(value!)
+                    self.gIDLoginModel.code = gIdLoginJson["code"].intValue
+                    self.gIDLoginModel.message = gIdLoginJson["message"].stringValue
+                    self.gIDLoginModel.email = gIdLoginJson["result"]["user"]["email"].stringValue
+                    self.gIDLoginModel.nickname = gIdLoginJson["result"]["user"]["nickname"].stringValue
+                    self.gIDLoginModel.users_seq = gIdLoginJson["result"]["user"]["users_seq"].intValue
+                    print("구글 로그인 code 값 입니다 \(self.gIDLoginModel.code)")
+                    print("구글 로그인 message 값입니다 \(self.gIDLoginModel.message)")
+                    print("구글 로그인 email 값입니다 \(self.gIDLoginModel.email)")
+                    print("구글 로그인 users_seq \(self.gIDLoginModel.users_seq)")
+                    completionHandler(.success(self.gIDLoginModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+            
             }
     }
     
     
     public func AuthGIDSignUp(GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: gIdTokenHeaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
                 case.success(let value):
-                    let GIDSingJson = JSON(value!)
-                    self.GIDSignModel.code = GIDSingJson["code"].intValue
-                    self.GIDSignModel.message = GIDSingJson["message"].stringValue
-                    self.GIDSignModel.email = GIDSingJson["result"]["email"].stringValue
-                    self.GIDSignModel.nickname = GIDSingJson["result"]["nickname"].stringValue
-                    self.GIDSignModel.users_seq = GIDSingJson["result"]["users_seq"].intValue
-                    print("구글 등록 message 값입니다 \(self.GIDSignModel.message)")
-                    print("구글 등록 code 값입니다 \(self.GIDSignModel.code)")
-                    print("구글 등록 nickname 값입니다\(self.GIDSignModel.nickname)")
-                    print("구글 등록 email 값입니다 \(self.GIDSignModel.email)")
-                    completionHandler(.success(self.GIDSignModel))
+                    let gIdSingJson = JSON(value!)
+                    self.gIDSignModel.code = gIdSingJson["code"].intValue
+                    self.gIDSignModel.message = gIdSingJson["message"].stringValue
+                    self.gIDSignModel.email = gIdSingJson["result"]["email"].stringValue
+                    self.gIDSignModel.nickname = gIdSingJson["result"]["nickname"].stringValue
+                    self.gIDSignModel.users_seq = gIdSingJson["result"]["users_seq"].intValue
+                    print("구글 등록 message 값입니다 \(self.gIDSignModel.message)")
+                    print("구글 등록 code 값입니다 \(self.gIDSignModel.code)")
+                    print("구글 등록 nickname 값입니다\(self.gIDSignModel.nickname)")
+                    print("구글 등록 email 값입니다 \(self.gIDSignModel.email)")
+                    completionHandler(.success(self.gIDSignModel))
                 case .failure(let error):
                     print(error.localizedDescription)
                     completionHandler(.failure(error))

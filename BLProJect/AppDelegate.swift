@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NMFAuthManager.shared().clientId = "aip62ew8k1"
         KakaoSDKCommon.initSDK(appKey: "df7d774e42d9231c6c056b0b57a56350")
         GIDSignIn.sharedInstance()?.clientID = "654690079324-snt380gsur4ups6f0f95s4qiuq89t8ae.apps.googleusercontent.com"
-        
-        
-        // Override point for customization after application launch.
         return true
     }
 

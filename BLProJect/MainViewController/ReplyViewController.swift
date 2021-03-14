@@ -36,7 +36,6 @@ class ReplyViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         NotificationCenter.default.addObserver(self, selector: #selector(ReplyViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.RepliesAllConfirmBtn.addTarget(self, action: #selector(self.RepliesConfirm), for: .touchUpInside)
         self.ReplyAreaViewLayout()
-        self.RepliesAllTextfield.clearButtonMode = .whileEditing
         
     }
     

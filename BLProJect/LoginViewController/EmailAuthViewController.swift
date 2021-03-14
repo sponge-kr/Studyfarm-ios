@@ -149,7 +149,7 @@ class EmailAuthViewController: UIViewController {
     
     @objc private func UserAuchConfirmAction(){
         
-        OAuthApi.shared.AuthCheckUserCall(CheckUser: UserDefaults.standard.value(forKey: "service_use_email") as? String ?? "") { result in
+        OAuthApi.shared.AuthCheckUserCall(checkUser: UserDefaults.standard.value(forKey: "service_use_email") as? String ?? "") { result in
             switch result {
             case .success(let value):
                 if value.code == 200 && value.check_result == false {

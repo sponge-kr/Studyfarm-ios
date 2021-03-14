@@ -14,20 +14,24 @@ import SwiftKeychainWrapper
 import RxCocoa
 import RxSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelegate {
     @IBOutlet weak var loginConfirmButton: UIButton!
     @IBOutlet weak var loginTitleLabel: UILabel!
     @IBOutlet weak var loginSubTitleLabel: UILabel!
     @IBOutlet weak var loginFirstGrayLine: UIView!
     @IBOutlet weak var loginAutoTitleLabel: UILabel!
-    @IBOutlet weak var loginAutoLoginSwitch: UISwitch!
     @IBOutlet weak var loginSecondGrayLine: UIView!
     @IBOutlet weak var loginDescriptionLabel: UILabel!
+    @IBOutlet weak var loginAutoButton: UIButton!
+    @IBOutlet weak var loginEmailTextFiledTitle: UILabel!
     @IBOutlet weak var loginEmailTextFiled: UITextField!
     @IBOutlet weak var loginPasswordTextFiled: UITextField!
+    @IBOutlet weak var loginPasswordFindButton: UIButton!
+    @IBOutlet weak var loginPasswordTextFiledTitle: UILabel!
+    @IBOutlet weak var loginCorrectCheckLabel: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
-    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var signUpButton: UIButton!
     
     public var ErrorAlert : LoginAlertView!
@@ -36,7 +40,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loginEmailTextFiled.delegate = self
+        self.loginPasswordTextFiled.delegate = self
         self.setLoginLayout()
+        self.setGoogleSignIn()
         self.loginConfirmButton.addTarget(self, action: #selector(receiveLoginAPI), for: .touchUpInside)
         self.kakaoLoginButton.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
         self.signUpButton.addTarget(self, action: #selector(signUpTransform), for: .touchUpInside)
@@ -68,8 +75,6 @@ class LoginViewController: UIViewController {
         self.naverLoginButton.layer.masksToBounds = true
         self.kakaoLoginButton.layer.cornerRadius = self.kakaoLoginButton.frame.size.width / 2.0
         self.kakaoLoginButton.layer.masksToBounds = true
-        self.googleLoginButton.layer.cornerRadius = self.googleLoginButton.frame.size.width / 2.0
-        self.googleLoginButton.layer.masksToBounds = true
     }
     
     private func TextfiledBind() {
@@ -93,8 +98,44 @@ class LoginViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    private func kakaoAPICall() {
-        if KeychainWrapper.standard.string(forKey: "Kakaotoken") != nil{
+    private func setGoogleSignIn() {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.delegate = self
+        self.googleLoginButton.style = .standard
+    }
+    
+    private func googleApiCall() {
+        if KeychainWrapper.standard.string(forKey: "googleToken") != nil {
+            OAuthApi.shared.AuthGIDLoginCall { result in
+                switch result {
+                case .success(let value):
+                    print(value.code)
+                    if value.code == 401 {
+                        let googleParamter = GIDUserParamter(nickname: "Do-hyunkim", service_use_agree: true)
+                        OAuthApi.shared.AuthGIDSignUp(GIDUserParamter: googleParamter) { result in
+                            switch result {
+                            case .success(let value):
+                                print("구글 유저 동록 \(value.nickname)")
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                guard let MainVC = MainView else {return}
+                self.navigationController?.pushViewController(MainVC, animated: true)
+            }
+        }
+
+    }
+    
+    
+    private func kakaoApiCall() {
+        if KeychainWrapper.standard.string(forKey: "kakaoToken") != nil{
             OAuthApi.shared.AuthKakaoLoginCall { result in
                 switch result {
                 case.success(let value):
@@ -104,11 +145,9 @@ class LoginViewController: UIViewController {
                             switch result {
                             case.success(let value):
                                 print(value.email)
-                                
                             case.failure(let error):
                             print(error.localizedDescription)
                             }
-                            
                         }
                     }
                 case.failure(let error):
@@ -118,7 +157,6 @@ class LoginViewController: UIViewController {
                 guard let MainVC = MainView else {return}
                 self.navigationController?.pushViewController(MainVC, animated: true)
             }
-        
     }
 }
     
@@ -155,19 +193,40 @@ class LoginViewController: UIViewController {
         self.loginDescriptionLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1)
         self.loginDescriptionLabel.textAlignment = .center
         
+        self.loginEmailTextFiledTitle.text = "이메일"
+        self.loginEmailTextFiledTitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.loginEmailTextFiledTitle.textAlignment = .left
+        self.loginEmailTextFiledTitle.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.loginPasswordTextFiledTitle.text = "비밀번호"
+        self.loginPasswordTextFiledTitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.loginPasswordTextFiledTitle.textAlignment = .left
+        self.loginPasswordTextFiledTitle.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        
         self.loginEmailTextFiled.attributedPlaceholder = NSAttributedString(string: "이메일 주소 입력", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginEmailTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.loginEmailTextFiled.layer.borderWidth = 1.0
+        self.loginEmailTextFiled.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
+        self.loginEmailTextFiled.layer.cornerRadius = 4
+        self.loginEmailTextFiled.layer.masksToBounds = true
         self.loginEmailTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
         self.loginEmailTextFiled.leftViewMode = .always
+        self.loginEmailTextFiled.clearButtonMode = .whileEditing
         
         self.loginPasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "영문, 숫자 포함 6~16자로 조합해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginPasswordTextFiled.isSecureTextEntry = true
         self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.loginPasswordTextFiled.layer.borderWidth = 1.0
+        self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
+        self.loginPasswordTextFiled.layer.cornerRadius = 4
+        self.loginPasswordTextFiled.layer.masksToBounds = true
         self.loginPasswordTextFiled.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 11, height: 0))
         self.loginPasswordTextFiled.leftViewMode = .always
-        
+        self.loginCorrectCheckLabel.text = "이메일 / 비밀번호가 일치하지 않습니다."
+        self.loginCorrectCheckLabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+        self.loginCorrectCheckLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.loginCorrectCheckLabel.isHidden = true
+    
+        self.loginAutoButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
         self.loginAutoTitleLabel.text = "자동로그인"
         self.loginAutoTitleLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.loginAutoTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
@@ -175,7 +234,9 @@ class LoginViewController: UIViewController {
         self.loginAutoTitleLabel.textAlignment = .center
         
         self.signUpButton.setAttributedTitle(NSAttributedString(string: "이메일로 회원가입", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0),NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.kern : -0.66]), for: .normal)
-    
+        self.loginPasswordFindButton.setAttributedTitle(NSAttributedString(string: "비밀번호를 잊어버리셨나요?", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0),NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.kern : -0.66]), for: .normal)
+        
+        
         self.kakaoLoginButton.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
         self.kakaoLoginButton.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
         self.kakaoLoginButton.layer.cornerRadius = self.kakaoLoginButton.frame.size.width / 2.0
@@ -186,14 +247,26 @@ class LoginViewController: UIViewController {
         self.naverLoginButton.layer.cornerRadius = self.naverLoginButton.frame.size.width / 2.0
         self.naverLoginButton.layer.borderColor = UIColor.clear.cgColor
         
-        self.googleLoginButton.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
-        self.googleLoginButton.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
-        self.googleLoginButton.layer.cornerRadius = self.googleLoginButton.frame.size.width / 2.0
-        self.googleLoginButton.layer.borderColor = UIColor.clear.cgColor
         
         
     }
-    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("사용자가 로그인을 하지 않았습니다.\(error.localizedDescription)")
+            } else {
+                print(error.localizedDescription)
+            }
+            return
+        }
+        guard let googleToken = user.authentication.accessToken else { return }
+        print("구글 idToken 입니다\(googleToken)")
+        if googleToken != "" {
+            KeychainWrapper.standard.set(googleToken, forKey: "googleToken")
+            print("구글 토큰 입니다\(KeychainWrapper.standard.set(googleToken, forKey: "gooleToken"))")
+            self.googleApiCall()
+        }
+    }
     
     public func keyboardAddObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -227,10 +300,10 @@ class LoginViewController: UIViewController {
                 print(error.localizedDescription)
             }else{
                 _ = oAuthToken
-                guard let AccesToken = oAuthToken?.accessToken else { return }
-                if AccesToken != "" {
-                    KeychainWrapper.standard.set(AccesToken, forKey: "Kakaotoken")
-                    self.kakaoAPICall()
+                guard let accesToken = oAuthToken?.accessToken else { return }
+                if accesToken != "" {
+                    KeychainWrapper.standard.set(accesToken, forKey: "kakaoToken")
+                    self.kakaoApiCall()
                 }
             }
         }
@@ -259,13 +332,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+    
     @objc
     func showAccountView() {
         let signUpView = self.storyboard?.instantiateViewController(withIdentifier: "SignView") as? SignupViewController
         guard let signVC = signUpView else { return }
         self.navigationController?.pushViewController(signVC, animated: false)
     }
-    
     @IBAction func HideAlertView(_ sender: Any) {
         self.ErrorAlert.removeFromSuperview()
     }
