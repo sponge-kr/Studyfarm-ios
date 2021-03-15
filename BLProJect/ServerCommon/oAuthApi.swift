@@ -122,6 +122,30 @@ struct GIDSignDataModel {
     var nickname: String = ""
     var email: String = ""
 }
+
+//MARK - NaverLogin 데이터 모델
+struct NaverLoginDataModel {
+    var code: Int = 0
+    var users_seq: Int = 0
+    var email: String = ""
+    var nickname: String = ""
+    var gender: String = ""
+    var profile: String = ""
+}
+
+//MARK - NaverSign 데이터 모델
+struct NaverSignDataModel {
+    var code: Int = 0
+    var users_seq: Int = 0
+    var email: String = ""
+    var nickname: String = ""
+    var gender: String = ""
+    var profile: String = ""
+}
+
+
+
+
 //MARK - 회원가입 데이터
 struct SignUpDataModel {
     var code: Int = 0
@@ -176,13 +200,21 @@ struct GIDUserParamter: Encodable {
     var nickname: String
     var service_use_agree: Bool
 }
+//MARK - NaverUser 등록 Paramter
+struct NaverUserParamter: Encodable {
+    var nickname: String
+    var service_use_agree: Bool
+}
+
 
 class OAuthApi {
     static let shared = OAuthApi()
     fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
     fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
+    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken")!)"]
     fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken")!)"]
+    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken")!)"]
+    
     
     //MARK - 초기화
     private init(){}
@@ -197,6 +229,8 @@ class OAuthApi {
     public var userCheckModel = UserCheckDataModel()
     public var gIDSignModel = GIDSignDataModel()
     public var gIDLoginModel = GIDLoginDataModel()
+    public var naverLoginModel = NaverLoginDataModel()
+    public var naverSignModel = NaverSignDataModel()
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
@@ -443,4 +477,43 @@ class OAuthApi {
                 
             }
     }
+    
+    public func AuthNaverLoginCall(completionHandler : @escaping(Result<NaverLoginDataModel,Error>) -> () ) {
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/naver", method: .post, headers: naverTokenHeaders)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let naverLoginJson = JSON(value!)
+                    self.naverLoginModel.code = naverLoginJson["code"].intValue
+                    self.naverLoginModel.email = naverLoginJson["result"]["user"]["email"].stringValue
+                    self.naverLoginModel.nickname = naverLoginJson["result"]["user"]["nickname"].stringValue
+                    self.naverLoginModel.gender = naverLoginJson["result"]["user"]["gender"].stringValue
+                    self.naverLoginModel.profile = naverLoginJson["result"]["user"]["profile"].stringValue
+                    completionHandler(.success(self.naverLoginModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+                
+            }
+    }
+    public func AuthNaverSignUp(NaverUserParamter : NaverUserParamter, completionHandler : @escaping(Result<NaverSignDataModel,Error>) -> ()){
+        AF.request("http://3.214.168.45:3724/api/v1/user/naver", method: .post, parameters: NaverUserParamter, encoder: JSONParameterEncoder.default, headers: naverTokenHeaders)
+            .response { response in
+                switch response.result {
+                case .success(let value):
+                    let naverSingJson = JSON(value!)
+                    self.naverSignModel.code = naverSingJson["code"].intValue
+                    self.naverSignModel.email = naverSingJson["result"]["email"].stringValue
+                    self.naverSignModel.gender = naverSingJson["result"]["gender"].stringValue
+                    self.naverSignModel.nickname = naverSingJson["result"]["nickname"].stringValue
+                    self.naverSignModel.users_seq = naverSingJson["result"]["users_seq"].intValue
+                    self.naverSignModel.profile = naverSingJson["result"]["profile"].stringValue
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
+    
 }

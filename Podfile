@@ -15,6 +15,7 @@ target 'BLProJect' do
   pod 'SwiftLint'
   pod 'FSCalendar'
   pod 'NMapsMap'
+  pod 'naveridlogin-sdk-ios'
 
   # Pods for BLProJect
 

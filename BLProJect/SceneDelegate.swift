@@ -9,6 +9,7 @@
 import UIKit
 import KakaoSDKAuth
 import GoogleSignIn
+import NaverThirdPartyLogin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -29,6 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if url.contains("com.googleusercontent.apps") {
                 GIDSignIn.sharedInstance()?.handle(URLContexts.first?.url)
             }
+        }
+        if let url = URLContexts.first?.url {
+            NaverThirdPartyLoginConnection.getSharedInstance()?.receiveAccessToken(url)
         }
         
     }

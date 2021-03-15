@@ -138,6 +138,7 @@
 		FFCA27A725DFCB010053ECDD /* modified@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27A625DFCB010053ECDD /* modified@1x.png */; };
 		FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */; };
 		FFCA27B125DFCB3F0053ECDD /* modified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27B025DFCB3F0053ECDD /* modified@3x.png */; };
+		FFD33DF125FF8167003C3AE9 /* eye@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD33DF025FF8167003C3AE9 /* eye@1x.png */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
@@ -309,6 +310,7 @@
 		FFCA27A625DFCB010053ECDD /* modified@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@1x.png"; sourceTree = "<group>"; };
 		FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@2x.png"; sourceTree = "<group>"; };
 		FFCA27B025DFCB3F0053ECDD /* modified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@3x.png"; sourceTree = "<group>"; };
+		FFD33DF025FF8167003C3AE9 /* eye@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye@1x.png"; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFD33DF025FF8167003C3AE9 /* eye@1x.png */,
 				FF5D961525FA3AD400104C16 /* filter@3x.png */,
 				FF5D961025FA3ACE00104C16 /* filter@2x.png */,
 				FF5D960B25FA3A9C00104C16 /* filter@1x.png */,
@@ -758,6 +761,7 @@
 				FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
 				FFC0B02725A4F70C00D21482 /* NotoSansKR-Light.otf in Resources */,
+				FFD33DF125FF8167003C3AE9 /* eye@1x.png in Resources */,
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
 				FF3D1A4525D96AF500BFB82C /* squarebox@2x.png in Resources */,
 				FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */,

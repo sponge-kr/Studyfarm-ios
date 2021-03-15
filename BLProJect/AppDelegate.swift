@@ -10,6 +10,7 @@ import UIKit
 import KakaoSDKCommon
 import GoogleSignIn
 import NMapsMap
+import NaverThirdPartyLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NMFAuthManager.shared().clientId = "aip62ew8k1"
         KakaoSDKCommon.initSDK(appKey: "df7d774e42d9231c6c056b0b57a56350")
         GIDSignIn.sharedInstance()?.clientID = "654690079324-snt380gsur4ups6f0f95s4qiuq89t8ae.apps.googleusercontent.com"
+        
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        instance?.isNaverAppOauthEnable = true
+        instance?.isInAppOauthEnable = true
+        instance?.isOnlyPortraitSupportedInIphone()
+        instance?.serviceUrlScheme = kServiceAppUrlScheme
+        instance?.consumerKey = kConsumerKey
+        instance?.consumerSecret = kConsumerSecret
+        instance?.appName = kServiceAppName
+        return true
+    }
+    
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
+        
         return true
     }
 

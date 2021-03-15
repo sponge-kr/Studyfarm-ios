@@ -9,12 +9,12 @@
 import UIKit
 import KakaoSDKUser
 import GoogleSignIn
-import SnapKit
 import SwiftKeychainWrapper
+import NaverThirdPartyLogin
 import RxCocoa
 import RxSwift
 
-class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelegate {
+class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelegate, NaverThirdPartyLoginConnectionDelegate {
     @IBOutlet weak var loginConfirmButton: UIButton!
     @IBOutlet weak var loginTitleLabel: UILabel!
     @IBOutlet weak var loginSubTitleLabel: UILabel!
@@ -37,16 +37,18 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     public var ErrorAlert : LoginAlertView!
     var ViewModel : LoginViewModel = LoginViewModel()
     let disposeBag : DisposeBag = DisposeBag()
-    
+    let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loginEmailTextFiled.delegate = self
         self.loginPasswordTextFiled.delegate = self
+        
         self.setLoginLayout()
         self.setGoogleSignIn()
         self.loginConfirmButton.addTarget(self, action: #selector(receiveLoginAPI), for: .touchUpInside)
         self.kakaoLoginButton.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
         self.signUpButton.addTarget(self, action: #selector(signUpTransform), for: .touchUpInside)
+        self.naverLoginButton.addTarget(self, action: #selector(naverLoginAction(_:)), for: .touchUpInside)
         let tokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다", tokenKeyChain)
         if tokenKeyChain != nil {
@@ -111,7 +113,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .success(let value):
                     print(value.code)
                     if value.code == 401 {
-                        let googleParamter = GIDUserParamter(nickname: "Do-hyunkim", service_use_agree: true)
+                        let googleParamter = GIDUserParamter(nickname: "Do-hyunKim", service_use_agree: true)
                         OAuthApi.shared.AuthGIDSignUp(GIDUserParamter: googleParamter) { result in
                             switch result {
                             case .success(let value):
@@ -139,8 +141,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             OAuthApi.shared.AuthKakaoLoginCall { result in
                 switch result {
                 case.success(let value):
-                    if value.code == 400 {
-                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hsaa", service_use_agree: true)
+                    if value.code == 401 {
+                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hyunKim", service_use_agree: true)
                         OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result {
                             case.success(let value):
@@ -159,6 +161,34 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             }
     }
 }
+    
+    private func naverApiCall() {
+        if KeychainWrapper.standard.string(forKey: "naverToken") != nil {
+            OAuthApi.shared.AuthNaverLoginCall { result in
+                switch result {
+                case .success(let value):
+                    print("네이버 로그인 테스트 \(value.code)")
+                    if value.code == 401 {
+                        let naverParamter = NaverUserParamter(nickname: "Do-hyunkim", service_use_agree: true)
+                        OAuthApi.shared.AuthNaverSignUp(NaverUserParamter: naverParamter) { result in
+                            switch result {
+                            case .success(let value):
+                                print(value.email)
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                guard let MainVC = MainView else {return}
+                self.navigationController?.pushViewController(MainVC, animated: true)
+            }
+        }
+    }
+    
     
     // MARK: - 초기 로그인 Layout 구현
     private func setLoginLayout(){
@@ -212,6 +242,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.loginEmailTextFiled.leftViewMode = .always
         self.loginEmailTextFiled.clearButtonMode = .whileEditing
         
+        let passwordTextFiledleftButton = UIButton(type: .custom)
+        passwordTextFiledleftButton.setImage(UIImage(named: "eye.png"), for: .normal)
+        passwordTextFiledleftButton.setTitle("", for: .normal)
+        
+        self.loginPasswordTextFiled.rightView = passwordTextFiledleftButton
+        self.loginPasswordTextFiled.rightViewMode = .whileEditing
         self.loginPasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "영문, 숫자 포함 6~16자로 조합해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginPasswordTextFiled.isSecureTextEntry = true
         self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
@@ -247,9 +283,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.naverLoginButton.layer.cornerRadius = self.naverLoginButton.frame.size.width / 2.0
         self.naverLoginButton.layer.borderColor = UIColor.clear.cgColor
         
-        
-        
     }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
@@ -267,15 +302,45 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             self.googleApiCall()
         }
     }
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        guard let isVaildAccessToken = loginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+        if !isVaildAccessToken {
+            return
+        }
+        guard let naverToken = loginInstance?.accessToken else { return }
+        if naverToken != "" {
+            KeychainWrapper.standard.set(naverToken, forKey: "naverToken")
+            print("네이버 토큰 입니다\(KeychainWrapper.standard.set(naverToken, forKey: "naverToken"))")
+            self.naverApiCall()
+        }
+        
+    }
+    
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        loginInstance?.accessToken
+    }
+    
+    func oauth20ConnectionDidFinishDeleteToken() {
+        print("네이버 로그 아웃")
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        print(error.localizedDescription)
+    }
     
     public func keyboardAddObserver(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    @objc
+    private func naverLoginAction(_ sender : UIButton) {
+        loginInstance?.delegate = self
+        loginInstance?.requestThirdPartyLogin()
+    }
     
     @objc
-    func keyboardWillShow(_ notification : NSNotification){
+    func keyboardWillShow(_ notification : NSNotification) {
         if let keyboardFrame : NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardFrameRect = keyboardFrame.cgRectValue
             let keyboardFrameHeight = keyboardFrameRect.height
@@ -321,7 +386,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         let paramter = LoginParamter(email: self.loginEmailTextFiled.text!, password: self.loginPasswordTextFiled.text!)
         OAuthApi.shared.AuthLoginfetch(LoginParamter: paramter) { result in
             print(result.code)
-            if result.code == 200{
+            if result.code == 200 {
                 KeychainWrapper.standard.set(result.result!.token, forKey: "token")
                 let mainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView") as? ViewController
                 guard  let mainVC =  mainView else { return }
