@@ -25,7 +25,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     @IBOutlet weak var loginAutoButton: UIButton!
     @IBOutlet weak var loginEmailTextFiledTitle: UILabel!
     @IBOutlet weak var loginEmailTextFiled: UITextField!
-    @IBOutlet weak var loginPasswordTextFiled: UITextField!
+    @IBOutlet weak var loginPasswordTextFiled: CustomTextField!
     @IBOutlet weak var loginPasswordFindButton: UIButton!
     @IBOutlet weak var loginPasswordTextFiledTitle: UILabel!
     @IBOutlet weak var loginCorrectCheckLabel: UILabel!
@@ -42,13 +42,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         super.viewDidLoad()
         self.loginEmailTextFiled.delegate = self
         self.loginPasswordTextFiled.delegate = self
-        
+        loginInstance?.delegate = self
         self.setLoginLayout()
         self.setGoogleSignIn()
         self.loginConfirmButton.addTarget(self, action: #selector(receiveLoginAPI), for: .touchUpInside)
         self.kakaoLoginButton.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
         self.signUpButton.addTarget(self, action: #selector(signUpTransform), for: .touchUpInside)
         self.naverLoginButton.addTarget(self, action: #selector(naverLoginAction(_:)), for: .touchUpInside)
+        self.loginPasswordFindButton.addTarget(self, action: #selector(passwordForgetTransform), for: .touchUpInside)
         let tokenKeyChain = KeychainWrapper.standard.string(forKey: "token")
         print("TokenkeyChain 값 입니다", tokenKeyChain)
         if tokenKeyChain != nil {
@@ -118,6 +119,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                             switch result {
                             case .success(let value):
                                 print("구글 유저 동록 \(value.nickname)")
+                                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                                guard let MainVC = MainView else {return}
+                                self.navigationController?.pushViewController(MainVC, animated: true)
                             case .failure(let error):
                                 print(error.localizedDescription)
                             }
@@ -126,10 +130,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
-                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-                guard let MainVC = MainView else {return}
-                self.navigationController?.pushViewController(MainVC, animated: true)
             }
         }
 
@@ -147,6 +147,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                             switch result {
                             case.success(let value):
                                 print(value.email)
+                                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                                guard let MainVC = MainView else {return}
+                                self.navigationController?.pushViewController(MainVC, animated: true)
                             case.failure(let error):
                             print(error.localizedDescription)
                             }
@@ -155,9 +158,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case.failure(let error):
                     print(error.localizedDescription)
                 }
-                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-                guard let MainVC = MainView else {return}
-                self.navigationController?.pushViewController(MainVC, animated: true)
             }
     }
 }
@@ -174,6 +174,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                             switch result {
                             case .success(let value):
                                 print(value.email)
+                                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
+                                guard let MainVC = MainView else {return}
+                                self.navigationController?.pushViewController(MainVC, animated: true)
                             case .failure(let error):
                                 print(error.localizedDescription)
                             }
@@ -182,9 +185,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                let MainView = self.storyboard?.instantiateViewController(withIdentifier: "MainView")
-                guard let MainVC = MainView else {return}
-                self.navigationController?.pushViewController(MainVC, animated: true)
             }
         }
     }
@@ -242,12 +242,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.loginEmailTextFiled.leftViewMode = .always
         self.loginEmailTextFiled.clearButtonMode = .whileEditing
         
-        let passwordTextFiledleftButton = UIButton(type: .custom)
-        passwordTextFiledleftButton.setImage(UIImage(named: "eye.png"), for: .normal)
-        passwordTextFiledleftButton.setTitle("", for: .normal)
-        
-        self.loginPasswordTextFiled.rightView = passwordTextFiledleftButton
-        self.loginPasswordTextFiled.rightViewMode = .whileEditing
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 8, width: 24, height: 12))
+        rightButton.setImage(UIImage(named: "eye.png"), for: .normal)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        rightView.addSubview(rightButton)
+        self.loginPasswordTextFiled.rightView = rightView
+        self.loginPasswordTextFiled.rightViewMode = .always
         self.loginPasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "영문, 숫자 포함 6~16자로 조합해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginPasswordTextFiled.isSecureTextEntry = true
         self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
@@ -297,7 +297,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         guard let googleToken = user.authentication.accessToken else { return }
         print("구글 idToken 입니다\(googleToken)")
         if googleToken != "" {
-            KeychainWrapper.standard.set(googleToken, forKey: "googleToken")
             print("구글 토큰 입니다\(KeychainWrapper.standard.set(googleToken, forKey: "gooleToken"))")
             self.googleApiCall()
         }
@@ -335,7 +334,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     
     @objc
     private func naverLoginAction(_ sender : UIButton) {
-        loginInstance?.delegate = self
         loginInstance?.requestThirdPartyLogin()
     }
     
@@ -373,6 +371,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             }
         }
     }
+    @objc
+    private func passwordForgetTransform(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let findView = storyboard.instantiateViewController(withIdentifier: "PasswrodFindView") as? PasswordFindViewController
+        guard let findVC = findView else { return }
+        self.navigationController?.pushViewController(findVC, animated: true)
+    }
+    
     
     @objc
     func signUpTransform() {
@@ -407,5 +413,16 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     }
     @IBAction func HideAlertView(_ sender: Any) {
         self.ErrorAlert.removeFromSuperview()
+    }
+}
+
+
+class CustomTextField: UITextField {
+    func invalidate() {
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 8, width: 24, height: 12))
+        rightButton.setImage(UIImage(named: "eye.png"), for: .normal)
+        rightView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        rightView?.addSubview(rightButton)
+        rightViewMode = .always
     }
 }

@@ -81,10 +81,15 @@ struct LogoutDataModel {
 }
 
 // MARK - 닉네임 중복확인 데이터 모델
-struct NickNameDataModel {
+struct NickNameOverlapDataModel {
     var code: Int = 0
     var message: String = ""
-    var exist: Bool = false
+    var exist: Bool = true
+}
+struct EmailOverlapDataModel {
+    var code: Int = 0
+    var message: String = ""
+    var check_result: Bool = true
 }
 
 //MARK - KakakoUser 데이터 모델
@@ -143,9 +148,6 @@ struct NaverSignDataModel {
     var profile: String = ""
 }
 
-
-
-
 //MARK - 회원가입 데이터
 struct SignUpDataModel {
     var code: Int = 0
@@ -168,6 +170,11 @@ struct UserCheckDataModel {
     var code: Int = 0
     var message: String = ""
     var check_result: Bool = false
+}
+
+struct PasswordChageDataModel {
+    var code: Int = 0
+    var message: String = ""
 }
 
 // MARK - 로그인 Paramter
@@ -205,14 +212,17 @@ struct NaverUserParamter: Encodable {
     var nickname: String
     var service_use_agree: Bool
 }
-
+// MARK - Passwrod 변경 Paramter
+struct EmailParamter: Encodable{
+    var password: String
+}
 
 class OAuthApi {
     static let shared = OAuthApi()
     fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
     fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken")!)"]
-    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken")!)"]
+    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
+    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))"]
     fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken")!)"]
     
     
@@ -225,12 +235,14 @@ class OAuthApi {
     public var signUpModel = SignUpDataModel()
     public var kakaoModel = KakaoSingDataModel()
     public var kakaoLoginModel = KakaoLoginDataModel()
-    public var nickNameModel = NickNameDataModel()
+    public var nickNameModel = NickNameOverlapDataModel()
     public var userCheckModel = UserCheckDataModel()
     public var gIDSignModel = GIDSignDataModel()
     public var gIDLoginModel = GIDLoginDataModel()
     public var naverLoginModel = NaverLoginDataModel()
     public var naverSignModel = NaverSignDataModel()
+    public var passwordChangeModel = PasswordChageDataModel()
+    public var emailModel = EmailOverlapDataModel()
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
@@ -274,16 +286,18 @@ class OAuthApi {
                 }
             }
     }
+
+
     
-    
-    //MARK - oAtuh Server 프로필 업로드 요청 함수
+
+//MARK - oAtuh Server 프로필 업로드 요청 함수
     public func AuthProfileUploadCall(){
         
     }
     
     
-    
-    //MARK - oAuth Server 유저 등록 요청 함수(POST)
+
+//MARK - oAuth Server 유저 등록 요청 함수(POST)
     public func AuthSignUpCall(SignUpParamter : SignUpParamter, completionHandler : @escaping (Result<SignUpDataModel,Error>) -> ()) {
         AF.request("http://3.214.168.45:3724/api/v1/user", method: .post, parameters: SignUpParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
@@ -357,7 +371,7 @@ class OAuthApi {
     
     
     //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
-    public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameDataModel,Error>) -> ()){
+    public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameOverlapDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in
                 debugPrint(response)
@@ -378,6 +392,24 @@ class OAuthApi {
                 
             }
     }
+    public func AuthEmailOverlap(Email: String, completionHandler: @escaping(Result<EmailOverlapDataModel,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-email/\(Email)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let emailJson = JSON(value!)
+                    self.emailModel.code = emailJson["code"].intValue
+                    self.emailModel.message = emailJson["message"].stringValue
+                    self.emailModel.check_result = emailJson["result"]["check_result"].boolValue
+                    completionHandler(.success(self.emailModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+            }
+    }
+    
     
     
     //MARK - oAuth Server KakaoLogin 함수(POST)
@@ -490,6 +522,7 @@ class OAuthApi {
                     self.naverLoginModel.nickname = naverLoginJson["result"]["user"]["nickname"].stringValue
                     self.naverLoginModel.gender = naverLoginJson["result"]["user"]["gender"].stringValue
                     self.naverLoginModel.profile = naverLoginJson["result"]["user"]["profile"].stringValue
+                    print("네이버 로그인 Code 값 입니다\(self.naverLoginModel.code)")
                     completionHandler(.success(self.naverLoginModel))
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -501,6 +534,7 @@ class OAuthApi {
     public func AuthNaverSignUp(NaverUserParamter : NaverUserParamter, completionHandler : @escaping(Result<NaverSignDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:3724/api/v1/user/naver", method: .post, parameters: NaverUserParamter, encoder: JSONParameterEncoder.default, headers: naverTokenHeaders)
             .response { response in
+                debugPrint(response)
                 switch response.result {
                 case .success(let value):
                     let naverSingJson = JSON(value!)
@@ -510,10 +544,27 @@ class OAuthApi {
                     self.naverSignModel.nickname = naverSingJson["result"]["nickname"].stringValue
                     self.naverSignModel.users_seq = naverSingJson["result"]["users_seq"].intValue
                     self.naverSignModel.profile = naverSingJson["result"]["profile"].stringValue
+                    print("네이버 유저 이메일 입니다 \(self.naverSignModel.email)")
+                    completionHandler(.success(self.naverSignModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+            }
+    }
+    public func AuthPasswordChange(Email: String, EmailParamter: EmailParamter, completionHandler: @escaping(Result<PasswordChageDataModel,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724//api/v1/user/\(Email)/change-password", method: .put, parameters: EmailParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let passwordJson = JSON(value!)
+                    self.passwordChangeModel.code = passwordJson["code"].intValue
+                    self.passwordChangeModel.message = passwordJson["message"].stringValue
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
+        
     }
-    
 }

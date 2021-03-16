@@ -139,6 +139,7 @@
 		FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */; };
 		FFCA27B125DFCB3F0053ECDD /* modified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA27B025DFCB3F0053ECDD /* modified@3x.png */; };
 		FFD33DF125FF8167003C3AE9 /* eye@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD33DF025FF8167003C3AE9 /* eye@1x.png */; };
+		FFD33DFE25FFA8D5003C3AE9 /* PasswordFindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD33DFD25FFA8D5003C3AE9 /* PasswordFindViewController.swift */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
@@ -311,6 +312,7 @@
 		FFCA27AB25DFCB3A0053ECDD /* modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@2x.png"; sourceTree = "<group>"; };
 		FFCA27B025DFCB3F0053ECDD /* modified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@3x.png"; sourceTree = "<group>"; };
 		FFD33DF025FF8167003C3AE9 /* eye@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye@1x.png"; sourceTree = "<group>"; };
+		FFD33DFD25FFA8D5003C3AE9 /* PasswordFindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFindViewController.swift; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */,
 				8592967225B2AA24000C21E8 /* SignUpViewController2.swift */,
 				8592967725B2AA3F000C21E8 /* SignUpViewController2.storyboard */,
+				FFD33DFD25FFA8D5003C3AE9 /* PasswordFindViewController.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				D167D8F92562F758008BB495 /* SignupViewModel.swift in Sources */,
 				FF2D07B225C27D0A00C5D90C /* RepliesApi.swift in Sources */,
 				D1B46339255FA3F80063D714 /* UtilApi.swift in Sources */,
+				FFD33DFE25FFA8D5003C3AE9 /* PasswordFindViewController.swift in Sources */,
 				FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */,
 				FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,

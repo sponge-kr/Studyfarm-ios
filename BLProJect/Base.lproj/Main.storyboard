@@ -1859,7 +1859,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qbw-Wi-5YZ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qbw-Wi-5YZ" customClass="CustomTextField" customModule="스터디팜" customModuleProvider="target">
                                 <rect key="frame" x="20" y="382" width="374" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="fXl-0T-ZUv"/>
@@ -2014,7 +2014,7 @@
                         <outlet property="loginEmailTextFiledTitle" destination="TY5-nK-2rB" id="aMf-CN-dgq"/>
                         <outlet property="loginFirstGrayLine" destination="im0-gN-s6l" id="CQR-fd-bIv"/>
                         <outlet property="loginPasswordFindButton" destination="80w-zU-GfR" id="7eA-9k-lor"/>
-                        <outlet property="loginPasswordTextFiled" destination="Qbw-Wi-5YZ" id="d5l-tm-gAB"/>
+                        <outlet property="loginPasswordTextFiled" destination="Qbw-Wi-5YZ" id="266-oY-YlI"/>
                         <outlet property="loginPasswordTextFiledTitle" destination="CK7-GS-Ids" id="qWm-By-I0P"/>
                         <outlet property="loginSecondGrayLine" destination="Ah9-JW-jG6" id="1ac-5q-oPP"/>
                         <outlet property="loginSubTitleLabel" destination="TiY-81-uFK" id="DDl-il-Ex4"/>
@@ -2032,6 +2032,91 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="-780" y="98"/>
+        </scene>
+        <!--Password Find View Controller-->
+        <scene sceneID="cZK-CU-2qN">
+            <objects>
+                <viewController storyboardIdentifier="PasswrodFindView" id="3h3-vg-EYZ" customClass="PasswordFindViewController" customModule="스터디팜" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KcI-xn-nh7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUu-I7-6D1">
+                                <rect key="frame" x="20" y="68" width="127" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="NBf-sK-HU0"/>
+                                    <constraint firstAttribute="height" constant="36" id="a9u-jX-7at"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeE-tG-Upd">
+                                <rect key="frame" x="20" y="115" width="326" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="3Xk-5J-Aha"/>
+                                    <constraint firstAttribute="width" constant="326" id="dXO-Cl-J9j"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="msK-nV-30J">
+                                <rect key="frame" x="20" y="181" width="374" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="374" id="1Ms-79-VUu"/>
+                                    <constraint firstAttribute="height" constant="48" id="q1G-46-yad"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPP-NK-HLB">
+                                <rect key="frame" x="10" y="340" width="394" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="OYd-DM-ntb"/>
+                                    <constraint firstAttribute="width" constant="394" id="xuz-Aj-tbB"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpm-S0-P9s">
+                                <rect key="frame" x="26" y="237" width="157" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="Aj7-f1-xOw"/>
+                                    <constraint firstAttribute="width" constant="157" id="B4u-0O-tLF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BrP-6i-hvL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oeE-tG-Upd" firstAttribute="leading" secondItem="BrP-6i-hvL" secondAttribute="leading" constant="20" id="0dT-Gw-eOr"/>
+                            <constraint firstItem="BrP-6i-hvL" firstAttribute="trailing" secondItem="msK-nV-30J" secondAttribute="trailing" constant="20" id="4Og-s7-ttW"/>
+                            <constraint firstItem="BrP-6i-hvL" firstAttribute="trailing" secondItem="qPP-NK-HLB" secondAttribute="trailing" constant="10" id="J7q-o5-vA8"/>
+                            <constraint firstItem="msK-nV-30J" firstAttribute="top" secondItem="oeE-tG-Upd" secondAttribute="bottom" constant="42" id="Q4L-70-TpH"/>
+                            <constraint firstItem="cpm-S0-P9s" firstAttribute="leading" secondItem="BrP-6i-hvL" secondAttribute="leading" constant="26" id="Q7Z-JS-s66"/>
+                            <constraint firstItem="oeE-tG-Upd" firstAttribute="top" secondItem="WUu-I7-6D1" secondAttribute="bottom" constant="11" id="QRr-od-Hrv"/>
+                            <constraint firstItem="cpm-S0-P9s" firstAttribute="top" secondItem="msK-nV-30J" secondAttribute="bottom" constant="8" id="dyS-A5-Mab"/>
+                            <constraint firstItem="msK-nV-30J" firstAttribute="leading" secondItem="BrP-6i-hvL" secondAttribute="leading" constant="20" id="hAp-7k-J2p"/>
+                            <constraint firstItem="WUu-I7-6D1" firstAttribute="leading" secondItem="BrP-6i-hvL" secondAttribute="leading" constant="20" id="iyw-8r-bOL"/>
+                            <constraint firstItem="qPP-NK-HLB" firstAttribute="top" secondItem="cpm-S0-P9s" secondAttribute="bottom" constant="89" id="mTK-TM-5Dj"/>
+                            <constraint firstItem="WUu-I7-6D1" firstAttribute="top" secondItem="BrP-6i-hvL" secondAttribute="top" constant="24" id="ph9-Zm-Hu6"/>
+                            <constraint firstItem="qPP-NK-HLB" firstAttribute="leading" secondItem="BrP-6i-hvL" secondAttribute="leading" constant="10" id="t6k-h4-fDb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordFindConfirmButton" destination="qPP-NK-HLB" id="W19-lR-nS2"/>
+                        <outlet property="passwordFindEmailTextfiled" destination="msK-nV-30J" id="nPL-70-LD0"/>
+                        <outlet property="passwordFindIncorrectLabel" destination="cpm-S0-P9s" id="Ubt-Qp-Pc0"/>
+                        <outlet property="passwordFindSubTitleLabel" destination="oeE-tG-Upd" id="r51-uH-L4W"/>
+                        <outlet property="passwordFindTitleLabel" destination="WUu-I7-6D1" id="xq8-KL-LyG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oib-Kk-4Gf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-781.15942028985512" y="795.53571428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d0l-TZ-gdu">
