@@ -177,6 +177,13 @@ struct PasswordChageDataModel {
     var message: String = ""
 }
 
+struct EmailAuthCodeDataModel {
+    var message: String = ""
+    var code: String = ""
+    var email: String = ""
+    var expired_at: String = ""
+}
+
 // MARK - 로그인 Paramter
 struct LoginParamter: Encodable {
     var email: String
@@ -216,6 +223,10 @@ struct NaverUserParamter: Encodable {
 struct EmailParamter: Encodable{
     var password: String
 }
+struct EmailAuthCodeParamter: Encodable {
+    var email: String
+}
+
 
 class OAuthApi {
     static let shared = OAuthApi()
@@ -243,6 +254,7 @@ class OAuthApi {
     public var naverSignModel = NaverSignDataModel()
     public var passwordChangeModel = PasswordChageDataModel()
     public var emailModel = EmailOverlapDataModel()
+    public var AuthEmailCodeModel = EmailAuthCodeDataModel()
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
@@ -553,7 +565,7 @@ class OAuthApi {
             }
     }
     public func AuthPasswordChange(Email: String, EmailParamter: EmailParamter, completionHandler: @escaping(Result<PasswordChageDataModel,Error>) -> ()) {
-        AF.request("http://3.214.168.45:3724//api/v1/user/\(Email)/change-password", method: .put, parameters: EmailParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user/\(Email)/change-password", method: .put, parameters: EmailParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -567,4 +579,21 @@ class OAuthApi {
             }
         
     }
+    public func AuthEmailCode(EmailAuthCodeParamter: EmailAuthCodeParamter, completionHandler: @escaping(Result<EmailAuthCodeDataModel,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail/code", method: .post, parameters: EmailAuthCodeParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let emailCodeJson = JSON(value!)
+                    self.AuthEmailCodeModel.message = emailCodeJson["message"].stringValue
+                    self.AuthEmailCodeModel.code = emailCodeJson["result"]["code"].stringValue
+                    self.AuthEmailCodeModel.email = emailCodeJson["result"]["code"].stringValue
+                    self.AuthEmailCodeModel.expired_at = emailCodeJson["result"]["expired_at"].stringValue
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
+    
 }

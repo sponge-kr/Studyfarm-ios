@@ -70,6 +70,21 @@ class PasswordFindViewController: UIViewController,UITextFieldDelegate {
             case .success(let value):
                 if value.check_result == true {
                     UserDefaults.standard.set(self.passwordFindEmailTextfiled.text!, forKey: "authEmail")
+                    let resetEmailParamter = ResetEmailParamter(email: UserDefaults.standard.string(forKey: "authEmail")!)
+                    UtilApi.shared.UtilsendResetEmailCode(ResetEmailParamter: resetEmailParamter) { result in
+                        switch result {
+                        case .success(let value):
+                            if value.message == "성공하였습니다." {
+                                UserDefaults.standard.set(value.code, forKey: "authCode")
+                                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                                let AuthCodeView = storyBoard.instantiateViewController(withIdentifier: "AuthCodeView") as? AuthCodeViewController
+                                guard let AuthCodeVC = AuthCodeView else { return }
+                                self.navigationController?.pushViewController(AuthCodeVC, animated: true)
+                            }
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
                 } else {
                     self.passwordFindIncorrectLabel.isHidden = false
                 }

@@ -39,6 +39,13 @@ struct StudyCategoryData {
     var childrenName: String? // 주제 명
 }
 
+struct ResetEamilCodeData {
+    var code: String?
+    var message: String?
+    var email: String?
+    var expired_at: String?
+}
+
 struct StudyCategoryResponse: Codable {
     var result: StudyCategoryReuslts
 }
@@ -66,6 +73,11 @@ struct StudyChildrenContainer: Codable {
     var code: Int
     var name: String
 }
+struct ResetEmailParamter: Encodable{
+    var email: String
+}
+
+
 class UtilApi {
     
     static let shared = UtilApi()
@@ -76,6 +88,7 @@ class UtilApi {
     public var stateCodeModel = StateCodeData()
     public var stateCityCodeModel = StateCityCodeData()
     public var resetEmailModel = ResetEmailData()
+    public var resetEmailCodeModel = ResetEamilCodeData()
     
     private init() {}
     
@@ -119,7 +132,6 @@ class UtilApi {
     }
     
     
-    
     // MARK: - 이메일 전송 함수 구현(POST)
     public func UtilSendResetEmailCall(EmailParamter: Parameters, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {
         AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
@@ -139,4 +151,24 @@ class UtilApi {
                 }
             }
     }
+    public func UtilsendResetEmailCode(ResetEmailParamter: ResetEmailParamter, completionHandler: @escaping(Result<ResetEamilCodeData,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail/code", method: .post, parameters: ResetEmailParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let resetCodeJson = JSON(value)
+                    self.resetEmailCodeModel.message = resetCodeJson["message"].stringValue
+                    self.resetEmailCodeModel.code = resetCodeJson["result"]["code"].stringValue
+                    self.resetEmailCodeModel.email = resetCodeJson["result"]["email"].stringValue
+                    self.resetEmailCodeModel.expired_at = resetCodeJson["result"]["expired_at"].stringValue
+                    completionHandler(.success(self.resetEmailCodeModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(error))
+                }
+            }
+    }
+    
+    
 }

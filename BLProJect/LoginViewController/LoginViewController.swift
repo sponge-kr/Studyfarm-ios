@@ -231,8 +231,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.loginPasswordTextFiledTitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.loginPasswordTextFiledTitle.textAlignment = .left
         self.loginPasswordTextFiledTitle.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
-        
-        self.loginEmailTextFiled.attributedPlaceholder = NSAttributedString(string: "이메일 주소 입력", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginEmailTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.loginEmailTextFiled.layer.borderWidth = 1.0
         self.loginEmailTextFiled.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
@@ -248,7 +246,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         rightView.addSubview(rightButton)
         self.loginPasswordTextFiled.rightView = rightView
         self.loginPasswordTextFiled.rightViewMode = .always
-        self.loginPasswordTextFiled.attributedPlaceholder = NSAttributedString(string: "영문, 숫자 포함 6~16자로 조합해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Medium", size: 16)])
         self.loginPasswordTextFiled.isSecureTextEntry = true
         self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
         self.loginPasswordTextFiled.layer.borderWidth = 1.0
@@ -374,7 +371,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     @objc
     private func passwordForgetTransform(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let findView = storyboard.instantiateViewController(withIdentifier: "PasswrodFindView") as? PasswordFindViewController
+        let findView = storyboard.instantiateViewController(withIdentifier: "PasswordFindView") as? PasswordFindViewController
         guard let findVC = findView else { return }
         self.navigationController?.pushViewController(findVC, animated: true)
     }
