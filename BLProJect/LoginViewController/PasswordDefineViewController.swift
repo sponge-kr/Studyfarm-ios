@@ -37,6 +37,7 @@ class PasswordDefineViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.definePasswordTextfiled.delegate = self
         self.setLayoutInit()
+        self.passwordConfirmButton.addTarget(self, action: #selector(shouldChangePassword), for: .touchUpInside)
     }
     
     public func setLayoutInit() {
@@ -99,7 +100,7 @@ class PasswordDefineViewController: UIViewController,UITextFieldDelegate {
             switch result {
             case .success(let value):
                 if value.code == 200 {
-                    
+                    PasswordDefineAlertView.instance.presentAlert()
                 }
             case .failure(let error):
                 print(error.localizedDescription)

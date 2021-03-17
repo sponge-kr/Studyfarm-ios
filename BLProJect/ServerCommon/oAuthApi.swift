@@ -573,8 +573,10 @@ class OAuthApi {
                     let passwordJson = JSON(value!)
                     self.passwordChangeModel.code = passwordJson["code"].intValue
                     self.passwordChangeModel.message = passwordJson["message"].stringValue
+                    completionHandler(.success(self.passwordChangeModel))
                 case .failure(let error):
                     print(error.localizedDescription)
+                    completionHandler(.failure(error))
                 }
             }
         

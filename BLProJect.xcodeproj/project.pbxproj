@@ -143,6 +143,8 @@
 		FFD33E0326010D8D003C3AE9 /* AuthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD33E0226010D8C003C3AE9 /* AuthCodeViewController.swift */; };
 		FFD33E082602055C003C3AE9 /* PasswordDefineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD33E072602055B003C3AE9 /* PasswordDefineViewController.swift */; };
 		FFD33E0D26021AE5003C3AE9 /* secureeye@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD33E0C26021AE5003C3AE9 /* secureeye@1x.png */; };
+		FFD33E1326025306003C3AE9 /* PasswordDefineAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD33E1226025305003C3AE9 /* PasswordDefineAlertView.swift */; };
+		FFD33E1B26025344003C3AE9 /* PasswordDefineAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFD33E1A26025344003C3AE9 /* PasswordDefineAlertView.xib */; };
 		FFDC4886259BA44000FEB691 /* SignupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */; };
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
@@ -319,6 +321,8 @@
 		FFD33E0226010D8C003C3AE9 /* AuthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCodeViewController.swift; sourceTree = "<group>"; };
 		FFD33E072602055B003C3AE9 /* PasswordDefineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDefineViewController.swift; sourceTree = "<group>"; };
 		FFD33E0C26021AE5003C3AE9 /* secureeye@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "secureeye@1x.png"; sourceTree = "<group>"; };
+		FFD33E1226025305003C3AE9 /* PasswordDefineAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDefineAlertView.swift; sourceTree = "<group>"; };
+		FFD33E1A26025344003C3AE9 /* PasswordDefineAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordDefineAlertView.xib; sourceTree = "<group>"; };
 		FFDC4885259BA44000FEB691 /* SignupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignupViewController.storyboard; sourceTree = "<group>"; };
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		D149391824E7F9EF004D661C /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FFD33E11260252A3003C3AE9 /* Loginxib */,
 				D1B46352255FA4B40063D714 /* LoginMVMM */,
 				D149391624E7CA36004D661C /* LoginViewController.swift */,
 				D149391B24E7FA61004D661C /* SignupViewController.swift */,
@@ -646,6 +651,15 @@
 			path = Mainxib;
 			sourceTree = "<group>";
 		};
+		FFD33E11260252A3003C3AE9 /* Loginxib */ = {
+			isa = PBXGroup;
+			children = (
+				FFD33E1226025305003C3AE9 /* PasswordDefineAlertView.swift */,
+				FFD33E1A26025344003C3AE9 /* PasswordDefineAlertView.xib */,
+			);
+			path = Loginxib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -815,6 +829,7 @@
 				FFD33E0D26021AE5003C3AE9 /* secureeye@1x.png in Resources */,
 				FFFFE32125F9222C000A01B6 /* StudyMapTableViewCell.xib in Resources */,
 				FFB2EED225C5559100DBFCBE /* NavigationBackbutton@1x.jpg in Resources */,
+				FFD33E1B26025344003C3AE9 /* PasswordDefineAlertView.xib in Resources */,
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
 				FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */,
@@ -1052,6 +1067,7 @@
 				FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
+				FFD33E1326025306003C3AE9 /* PasswordDefineAlertView.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
 				FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */,
 				D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */,

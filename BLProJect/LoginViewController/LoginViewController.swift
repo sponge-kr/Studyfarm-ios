@@ -78,6 +78,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.naverLoginButton.layer.masksToBounds = true
         self.kakaoLoginButton.layer.cornerRadius = self.kakaoLoginButton.frame.size.width / 2.0
         self.kakaoLoginButton.layer.masksToBounds = true
+        
     }
     
     private func TextfiledBind() {
