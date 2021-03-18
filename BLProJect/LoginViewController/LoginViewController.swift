@@ -31,12 +31,30 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     @IBOutlet weak var loginCorrectCheckLabel: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var naverLoginButton: UIButton!
-    @IBOutlet weak var googleLoginButton: GIDSignInButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
     public var ErrorAlert : LoginAlertView!
     var ViewModel : LoginViewModel = LoginViewModel()
     let disposeBag : DisposeBag = DisposeBag()
+    
+    lazy var passwordRightView: UIView = {
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        rightView.addSubview(self.passwordRightButton)
+        rightView.tag = 0
+        return rightView
+    }()
+    
+    lazy var passwordRightButton: UIButton = {
+        let RightButton = UIButton(type: .custom)
+        RightButton.frame = CGRect(x: 0, y: 10, width: 24, height: 12)
+        RightButton.setImage(UIImage(named: "secureeye.png"), for: .normal)
+        RightButton.addTarget(self, action: #selector(isSecureTextEntryEnabled(sender:)), for: .touchUpInside)
+        return RightButton
+    }()
+    
+    
+    
     let loginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +63,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         loginInstance?.delegate = self
         self.setLoginLayout()
         self.setGoogleSignIn()
+        self.googleLoginButton.addTarget(self, action: #selector(didTapGIDLogin), for: .touchUpInside)
         self.loginConfirmButton.addTarget(self, action: #selector(receiveLoginAPI), for: .touchUpInside)
         self.kakaoLoginButton.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
         self.signUpButton.addTarget(self, action: #selector(signUpTransform), for: .touchUpInside)
@@ -78,7 +97,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.naverLoginButton.layer.masksToBounds = true
         self.kakaoLoginButton.layer.cornerRadius = self.kakaoLoginButton.frame.size.width / 2.0
         self.kakaoLoginButton.layer.masksToBounds = true
-        
+        self.googleLoginButton.layer.cornerRadius = self.googleLoginButton.frame.size.width / 2.0
+        self.googleLoginButton.layer.masksToBounds = true
     }
     
     private func TextfiledBind() {
@@ -105,8 +125,30 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     private func setGoogleSignIn() {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
-        self.googleLoginButton.style = .standard
     }
+    @objc private func didTapGIDLogin() {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    @objc
+    private func isSecureTextEntryEnabled( sender : UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.passwordRightButton.setImage(UIImage(named: "secureeye.png"), for: .normal)
+            self.loginPasswordTextFiled.rightView = self.passwordRightView
+            self.loginPasswordTextFiled.rightViewMode = .always
+            self.loginPasswordTextFiled.isSecureTextEntry = true
+            self.loginPasswordTextFiled.setNeedsLayout()
+        } else {
+            sender.isSelected = true
+            self.passwordRightButton.setImage(UIImage(named: "eye.png"), for: .selected)
+            self.loginPasswordTextFiled.rightView = self.passwordRightView
+            self.loginPasswordTextFiled.rightViewMode = .always
+            self.loginPasswordTextFiled.isSecureTextEntry = false
+            self.loginPasswordTextFiled.setNeedsLayout()
+        }
+    }
+    
     
     private func googleApiCall() {
         if KeychainWrapper.standard.string(forKey: "googleToken") != nil {
@@ -228,6 +270,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.loginEmailTextFiledTitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.loginEmailTextFiledTitle.textAlignment = .left
         self.loginEmailTextFiledTitle.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        
         self.loginPasswordTextFiledTitle.text = "비밀번호"
         self.loginPasswordTextFiledTitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.loginPasswordTextFiledTitle.textAlignment = .left
@@ -241,11 +284,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.loginEmailTextFiled.leftViewMode = .always
         self.loginEmailTextFiled.clearButtonMode = .whileEditing
         
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 8, width: 24, height: 12))
-        rightButton.setImage(UIImage(named: "eye.png"), for: .normal)
-        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        rightView.addSubview(rightButton)
-        self.loginPasswordTextFiled.rightView = rightView
+        self.loginPasswordTextFiled.rightView = self.passwordRightView
         self.loginPasswordTextFiled.rightViewMode = .always
         self.loginPasswordTextFiled.isSecureTextEntry = true
         self.loginPasswordTextFiled.layer.borderColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0).cgColor
@@ -272,14 +311,22 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         
         
         self.kakaoLoginButton.backgroundColor = UIColor(red: 255/255, green: 198/255, blue: 83/255, alpha: 1.0)
-        self.kakaoLoginButton.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(rawValue: 1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.kakaoLoginButton.setAttributedTitle(NSAttributedString(string: "카", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 26)]), for: .normal)
+        self.kakaoLoginButton.setTitleColor(UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17), for: .normal)
         self.kakaoLoginButton.layer.cornerRadius = self.kakaoLoginButton.frame.size.width / 2.0
         self.kakaoLoginButton.layer.borderColor = UIColor.clear.cgColor
         
         self.naverLoginButton.backgroundColor = UIColor(red: 42/255, green: 210/255, blue: 137/255, alpha: 1.0)
-        self.naverLoginButton.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 26, weight: UIFont.Weight(1.0)),NSAttributedString.Key.foregroundColor : UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17)]), for: .normal)
+        self.naverLoginButton.setAttributedTitle(NSAttributedString(string: "네", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 26)]), for: .normal)
+        self.naverLoginButton.setTitleColor(UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17), for: .normal)
         self.naverLoginButton.layer.cornerRadius = self.naverLoginButton.frame.size.width / 2.0
         self.naverLoginButton.layer.borderColor = UIColor.clear.cgColor
+        
+        self.googleLoginButton.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1.0)
+        self.googleLoginButton.setAttributedTitle(NSAttributedString(string: "구", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 26)]), for: .normal)
+        self.googleLoginButton.setTitleColor(UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 0.17), for: .normal)
+        self.googleLoginButton.layer.cornerRadius = self.naverLoginButton.frame.size.width / 2.0
+        self.googleLoginButton.layer.borderColor = UIColor.clear.cgColor
         
     }
     
@@ -352,7 +399,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             self.loginConfirmButton.frame = CGRect(x: self.loginConfirmButton.frame.origin.x, y: self.loginConfirmButton.frame.origin.y + keyboardFrameHight, width: self.loginConfirmButton.frame.size.width, height: self.loginConfirmButton.frame.size.height)
         }
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.loginEmailTextFiled.resignFirstResponder()
+        self.loginEmailTextFiled.resignFirstResponder()
+        return true
+    }
     
     @objc
     func kakaoLogin(){
@@ -413,7 +464,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
         self.ErrorAlert.removeFromSuperview()
     }
 }
-
 
 class CustomTextField: UITextField {
     func invalidate() {

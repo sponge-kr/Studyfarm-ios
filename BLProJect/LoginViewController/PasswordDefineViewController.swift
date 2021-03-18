@@ -93,6 +93,39 @@ class PasswordDefineViewController: UIViewController,UITextFieldDelegate {
     }
     
     
+    private func alertLayoutInit() {
+        let alertXib = PasswordDefineAlertView(nibName: "PasswordDefineAlertView", bundle: Bundle(for: PasswordDefineAlertView.self))
+        alertXib.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        alertXib.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.navigationController?.pushViewController(alertXib, animated: false)
+        alertXib.passwordAlertConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        alertXib.passwordAlertContainerView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+        alertXib.passwordAlertContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        alertXib.passwordAlertContainerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        alertXib.passwordAlertView.layer.cornerRadius = 4
+        alertXib.passwordAlertView.layer.masksToBounds = true
+        alertXib.passwordAlertTilteLabel.text = "비밀번호가 변경되었습니다."
+        alertXib.passwordAlertTilteLabel.textAlignment = .center
+        alertXib.passwordAlertTilteLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        alertXib.passwordAlertTilteLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        alertXib.passwordAlertSubTitleLabel.attributedText = NSAttributedString(string: "새로운 비밀번호로 로그인해주세요.", attributes: [NSAttributedString.Key.kern: -0.77])
+        alertXib.passwordAlertSubTitleLabel.textAlignment = .left
+        alertXib.passwordAlertSubTitleLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        alertXib.passwordAlertSubTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        alertXib.passwordAlertConfirmButton.setAttributedTitle(NSAttributedString(string: "확인", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 16)]), for: .normal)
+        alertXib.passwordAlertConfirmButton.setTitleColor(UIColor.white, for: .normal)
+        alertXib.passwordAlertConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        alertXib.passwordAlertConfirmButton.layer.cornerRadius = 8
+        alertXib.passwordAlertConfirmButton.layer.masksToBounds = true
+        alertXib.passwordAlertConfirmButton.addTarget(self, action: #selector(didPopToRootView), for: .touchUpInside)
+    }
+    
+    @objc
+    public func didPopToRootView() {
+        self.navigationController?.popToRootViewController(animated: false)
+    }
+    
+    
     @objc
     private func shouldChangePassword() {
         let ChageEmailParamter = EmailParamter(password: self.definePasswordTextfiled.text!)
@@ -100,7 +133,8 @@ class PasswordDefineViewController: UIViewController,UITextFieldDelegate {
             switch result {
             case .success(let value):
                 if value.code == 200 {
-                    PasswordDefineAlertView.instance.presentAlert()
+                    self.definePasswordTextfiled.resignFirstResponder()
+                    self.alertLayoutInit()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
