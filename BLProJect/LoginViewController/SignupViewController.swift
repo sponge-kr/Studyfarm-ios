@@ -88,6 +88,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         return signRightButton
     }()
     
+    lazy var agreementViewContainerView: UIView = {
+        let containerView = UIView(frame: self.view.frame)
+        containerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        containerView.tag = 1
+        return containerView
+    }()
     
     
     override func viewDidLoad() {
@@ -101,7 +107,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         self.signScrollView.delegate = self
         self.signScrollView.isScrollEnabled = false
         self.addKeyboardNotification()
-        
     }
     
     deinit {
@@ -219,75 +224,57 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     }
     
     public func AddAgreementView(){
-        let window = UIApplication.shared.keyWindow
-        let ScreenSize = UIScreen.main.bounds.size
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds.size
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.onCickTransparentView))
-        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height / 2)
+        self.AgreementView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+        window?.addSubview(self.agreementViewContainerView)
         window?.addSubview(self.AgreementView)
-        self.view.addGestureRecognizer(tapGesture)
+        self.agreementViewContainerView.addGestureRecognizer(tapGesture)
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.view.alpha = 0.5
-            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height - ScreenSize.height / 2, width: ScreenSize.width, height: ScreenSize.height / 2)
+            self.agreementViewContainerView.alpha = 0.5
+            self.AgreementView.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.9, width: screenSize.width, height: screenSize.height + self.view.safeAreaInsets.bottom)
         }, completion: nil)
     }
     
     
     public func AgreementViewLayout(){
         self.AgreementViewLabel.text = "약관 동의"
-        self.AgreementViewLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(rawValue: 1.0))
+        self.AgreementViewLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
         self.AgreementViewLabel.textAlignment = .left
         self.AgreementViewLabel.numberOfLines = 1
-        self.AgreementViewLabel.textColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1.0)
-        self.AgreementViewLabel.frame = CGRect(x: self.AgreementViewLabel.frame.origin.x, y: self.AgreementViewLabel.frame.origin.y, width: self.AgreementViewLabel.frame.size.width, height: self.AgreementViewLabel.frame.size.height)
+        self.AgreementViewLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         
         self.AgreementView.backgroundColor = UIColor.white
         self.AgreementView.layer.cornerRadius = 8
         self.AgreementViewFullLabel.text = "전체 동의"
-        self.AgreementViewFullLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(0.5))
+        self.AgreementViewFullLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 16)
         self.AgreementViewFullLabel.textAlignment = .left
         self.AgreementViewFullLabel.numberOfLines = 1
-        self.AgreementViewFullLabel.textColor = UIColor(red: 50/255, green: 43/255, blue: 43/255, alpha: 1.0)
-        self.AgreementViewFullLabel.frame = CGRect(x: self.AgreementViewFullLabel.frame.origin.x, y: self.AgreementViewFullLabel.frame.origin.y, width: self.AgreementViewFullLabel.frame.size.width, height: self.AgreementViewFullLabel.frame.size.height)
-        
-        self.AgreementViewLine.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
-        self.AgreementViewLine.frame = CGRect(x: self.AgreementViewLine.frame.origin.x, y: self.AgreementViewLine.frame.origin.y, width: self.AgreementViewLine.frame.size.width, height: self.AgreementViewLine.frame.size.height)
-        
-        
+        self.AgreementViewFullLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.AgreementViewLine.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0)
         self.AgreementViewTermsLabel.text = "스터디팜 이용약관 동의[필수]"
-        self.AgreementViewTermsLabel.font = UIFont.systemFont(ofSize: 14)
-        self.AgreementViewTermsLabel.textColor = UIColor(red: 87/255, green: 80/255, blue: 80/255, alpha: 1.0)
+        self.AgreementViewTermsLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.AgreementViewTermsLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.AgreementViewTermsLabel.numberOfLines = 1
-        self.AgreementViewTermsLabel.frame = CGRect(x: self.AgreementViewTermsLabel.frame.origin.x, y: self.AgreementViewTermsLabel.frame.origin.y, width: self.AgreementViewTermsLabel.frame.size.width, height: self.AgreementViewTermsLabel.frame.size.height)
-        
         self.AgreementViewTermsLabel2.text = "개인정보 수집이용 동의[필수]"
-        self.AgreementViewTermsLabel2.font = UIFont.systemFont(ofSize: 14)
-        self.AgreementViewTermsLabel2.textColor = UIColor(red: 87/255, green: 80/255, blue: 80/255, alpha: 1.0)
+        self.AgreementViewTermsLabel2.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.AgreementViewTermsLabel2.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.AgreementViewTermsLabel2.numberOfLines = 1
-        self.AgreementViewTermsLabel2.frame = CGRect(x: self.AgreementViewTermsLabel2.frame.origin.x, y: self.AgreementViewTermsLabel2.frame.origin.y, width: self.AgreementViewTermsLabel2.frame.size.width, height: self.AgreementViewTermsLabel2.frame.size.height)
-        
+    
         self.AgreementViewTermsLabel3.text = "개인정보 수집이용 동의[선택]"
-        self.AgreementViewTermsLabel3.font = UIFont.systemFont(ofSize: 14)
-        self.AgreementViewTermsLabel3.textColor = UIColor(red: 87/255, green: 80/255, blue: 80/255, alpha: 1.0)
+        self.AgreementViewTermsLabel3.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.AgreementViewTermsLabel3.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.AgreementViewTermsLabel3.numberOfLines = 1
-        self.AgreementViewTermsLabel3.frame = CGRect(x: self.AgreementViewTermsLabel3.frame.origin.x, y: self.AgreementViewTermsLabel3.frame.origin.y, width: self.AgreementViewTermsLabel3.frame.size.width, height: self.AgreementViewTermsLabel3.frame.size.height)
-        
         self.AgreementViewTermsLabel4.text = "마케팅 정보 수신 동의[선택]"
-        self.AgreementViewTermsLabel4.font = UIFont.systemFont(ofSize: 14)
-        self.AgreementViewTermsLabel4.textColor = UIColor(red: 87/255, green: 80/255, blue: 80/255, alpha: 1.0)
+        self.AgreementViewTermsLabel4.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.AgreementViewTermsLabel4.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.AgreementViewTermsLabel4.numberOfLines = 1
-        self.AgreementViewTermsLabel4.frame = CGRect(x: self.AgreementViewTermsLabel4.frame.origin.x, y: self.AgreementViewTermsLabel4.frame.origin.y, width: self.AgreementViewTermsLabel4.frame.size.width, height: self.AgreementViewTermsLabel4.frame.size.height)
-        
-        
-        self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
-        self.AgreementViewConfirmBtn.setAttributedTitle(NSAttributedString(string: "동의 후 계속하기", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(rawValue: 0.5)),NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
-        
-        self.AgreementViewConfirmBtn.layer.borderColor = UIColor.clear.cgColor
+        self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
+        self.AgreementViewConfirmBtn.setAttributedTitle(NSAttributedString(string: "다음", attributes: [NSAttributedString.Key.font : UIFont(name: "AppleSDGothicNeo-Bold", size: 16),NSAttributedString.Key.foregroundColor : UIColor.white]), for: .normal)
         self.AgreementViewConfirmBtn.layer.cornerRadius = 8
         self.AgreementViewConfirmBtn.isEnabled = false
         self.AgreementViewConfirmBtn.addTarget(self, action: #selector(ConfirmButtonSelect), for: .touchUpInside)
-        self.AgreementViewConfirmBtn.frame = CGRect(x: self.AgreementViewConfirmBtn.frame.origin.x, y: self.AgreementViewConfirmBtn.frame.origin.y, width: self.AgreementViewConfirmBtn.frame.size.width, height: self.AgreementViewConfirmBtn.frame.size.height)
-        
         self.AgreementViewTermsBtn.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.AgreementViewTermsBtn.addTarget(self, action: #selector(AgreementAllisSelect(sender:)), for: .touchUpInside)
         self.AgreementViewTermsBtn2.tintColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
@@ -311,123 +298,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         
     }
     
-    //MARK - 약관동의 화면 AutoLayout 코드3
-    private func AgreementViewAutoLayout(){
-        self.AgreementViewLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.bottom.equalTo(self.AgreementViewFullLabel.snp.top).offset(-37)
-            make.width.equalTo(245)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewFullLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewLabel.snp.bottom).offset(37)
-            make.left.equalTo(self.AgreementViewTermsBtn.snp.right).offset(12)
-            make.bottom.equalTo(self.AgreementViewTermsLabel.snp.top).offset(-34)
-            make.width.equalTo(63)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewLabel.snp.bottom).offset(37)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.right.equalTo(self.AgreementViewFullLabel.snp.left).offset(-12)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsBtn2.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.right.equalTo(self.AgreementViewTermsLabel.snp.left).offset(-12)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
-            make.left.equalTo(self.AgreementViewTermsBtn2.snp.right).offset(12)
-            make.bottom.equalTo(self.AgreementViewTermsLabel2.snp.top).offset(-17)
-            make.width.equalTo(171)
-            make.height.equalTo(24)
-        }
-        self.AcceptsTermsBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewLine.snp.bottom).offset(16)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
-            make.bottom.equalTo(self.AcceptsTermsBtn2.snp.top).offset(-16)
-            make.width.equalTo(34)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsBtn3.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsBtn2.snp.bottom).offset(17)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.right.equalTo(self.AgreementViewTermsLabel2.snp.left).offset(-12)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsLabel2.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsLabel.snp.bottom).offset(17)
-            make.left.equalTo(self.AgreementViewTermsBtn3.snp.right).offset(12)
-            make.bottom.equalTo(self.AgreementViewTermsLabel3.snp.top).offset(-17)
-            make.width.equalTo(171)
-            make.height.equalTo(24)
-        }
-        self.AcceptsTermsBtn2.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AcceptsTermsBtn.snp.bottom).offset(16)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
-            make.bottom.equalTo(self.AcceptsTermsBtn3.snp.top).offset(-16)
-            make.width.equalTo(34)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsBtn4.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsBtn3.snp.bottom).offset(17)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.right.equalTo(self.AgreementViewTermsLabel3.snp.left).offset(-12)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsLabel3.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsLabel2.snp.bottom).offset(17)
-            make.left.equalTo(self.AgreementViewTermsBtn4.snp.right).offset(12)
-            make.bottom.equalTo(self.AgreementViewTermsLabel4.snp.top).offset(-17)
-            make.width.equalTo(171)
-            make.height.equalTo(24)
-        }
-        self.AcceptsTermsBtn3.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AcceptsTermsBtn2.snp.bottom).offset(16)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
-            make.bottom.equalTo(self.AcceptsTermsBtn4.snp.top).offset(-19)
-            make.width.equalTo(34)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsBtn5.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsBtn4.snp.bottom).offset(17)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(31)
-            make.right.equalTo(self.AgreementViewTermsLabel4.snp.left).offset(-12)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewTermsLabel4.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsLabel3.snp.bottom).offset(17)
-            make.left.equalTo(self.AgreementViewTermsBtn5.snp.right).offset(12)
-            make.bottom.equalTo(self.AgreementViewConfirmBtn.snp.top).offset(-44)
-            make.width.equalTo(171)
-            make.height.equalTo(24)
-        }
-        self.AcceptsTermsBtn4.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AcceptsTermsBtn3.snp.bottom).offset(19)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-33)
-            make.bottom.equalTo(self.AgreementViewConfirmBtn.snp.top).offset(-44)
-            make.width.equalTo(34)
-            make.height.equalTo(24)
-        }
-        self.AgreementViewConfirmBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(self.AgreementViewTermsLabel4.snp.bottom).offset(44)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
-            make.height.equalTo(48)
-        }
-    }
-    
-    
-    
+
     
     public func addKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -438,6 +309,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     public func necessaryCheckAnimation(){
         if self.AgreementViewTermsBtn2.isSelected == true && self.AgreementViewTermsBtn3.isSelected == true {
             self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            UserDefaults.standard.set(true, forKey: "service_check")
             self.AgreementViewConfirmBtn.isEnabled = true
         }else{
             self.AgreementViewConfirmBtn.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
@@ -453,11 +325,13 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
             self.AgreementViewTermsBtn3.isSelected = true
             self.AgreementViewTermsBtn4.isSelected = true
             self.AgreementViewTermsBtn5.isSelected = true
+            UserDefaults.standard.set(true, forKey: "service_check")
         }else{
             self.AgreementViewTermsBtn2.isSelected = false
             self.AgreementViewTermsBtn3.isSelected = false
             self.AgreementViewTermsBtn4.isSelected = false
             self.AgreementViewTermsBtn5.isSelected = false
+            UserDefaults.standard.set(false, forKey: "service_check")
         }
     }
     
@@ -484,8 +358,10 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     }
     
     public func AgreememtButtonisSelect() {
-        if self.AgreementViewTermsBtn2.isSelected == false || self.AgreementViewTermsBtn3.isSelected == false || self.AgreementViewTermsBtn4.isSelected == false || self.AgreementViewTermsBtn5.isSelected == false{
+        if self.AgreementViewTermsBtn2.isSelected == false || self.AgreementViewTermsBtn3.isSelected == false || self.AgreementViewTermsBtn4.isSelected == false || self.AgreementViewTermsBtn5.isSelected == false {
             self.AgreementViewTermsBtn.isSelected = false
+        } else if self.AgreementViewTermsBtn2.isSelected == true && self.AgreementViewTermsBtn3.isSelected == true && self.AgreementViewTermsBtn4.isSelected == true && self.AgreementViewTermsBtn5.isSelected == true {
+            self.AgreementViewTermsBtn.isSelected = true
         }
         self.necessaryCheckAnimation()
         self.AgreementLayoutInit()
@@ -533,57 +409,79 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         
     }
     @objc func ConfirmButtonSelect(){
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             let ScreenSize = UIScreen.main.bounds.size
             self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
-        } completion: { (succes) in
-            if succes == true{
-                let Storyboard = UIStoryboard(name: "EmailAuthViewController", bundle: nil)
-                let EmailView = Storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
-                guard let EmailVC = EmailView else { return }
-                self.navigationController?.pushViewController(EmailVC, animated: true)
-                self.view.alpha = 1
-                self.view.backgroundColor = UIColor.systemBackground
+            let winodw = UIApplication.shared.windows.first
+            let SingParamter = SignUpParamter(email: self.signEmailtextfield.text!, password: self.signPasswordtextfield.text!, nickname: self.signNicknametextfield.text!, service_use_agree: UserDefaults.standard.bool(forKey: "service_check"))
+            OAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
+                switch  result{
+                case .success(let value):
+                    if value.code == 200 || value.message == "성공하였습니다."{
+                        self.signNicknameerrorlabel.textColor = UIColor.clear
+                        UserDefaults.standard.set(value.email, forKey: "service_use_email")
+                        if let removeContainerview = winodw?.viewWithTag(1) {
+                            removeContainerview.removeFromSuperview()
+                            self.view.setNeedsLayout()
+                        }
+                        let Storyboard = UIStoryboard(name: "EmailAuthViewController", bundle: nil)
+                        let EmailView = Storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
+                        guard let EmailVC = EmailView else { return }
+                        self.navigationController?.pushViewController(EmailVC, animated: true)
+                    }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
+                        DispatchQueue.main.async {
+                            if let removeContainerview = winodw?.viewWithTag(1) {
+                                removeContainerview.removeFromSuperview()
+                                self.view.setNeedsLayout()
+                            }
+                            self.signEmaillabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+                            self.signEmailerrorlabel.text = "이미 존재하는 이메일입니다."
+                            self.signEmailerrorlabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+                            self.signEmailtextfield.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+                            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+                        }
+                    }else if value.code == 400 && value.message == "이미 존재하는 닉네임입니다."{
+                        DispatchQueue.main.async {
+                            if let removeContainerview = winodw?.viewWithTag(1) {
+                                removeContainerview.removeFromSuperview()
+                                self.view.setNeedsLayout()
+                            }
+                            self.signNicknameerrorlabel.text = "이미 사용중 입니다."
+                            self.signNicknameerrorlabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+                            self.signNicknametextfield.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+                            self.signNicknamelabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+                            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+                        }
+                    }else if value.code == 400 && value.message == "비밀번호는 특수문자(!@#$%^&+=), 문자, 숫자를 포함한 8~15자리의 조합으로 입력해주세요." {
+                        if let removeContainerview = winodw?.viewWithTag(1) {
+                            removeContainerview.removeFromSuperview()
+                            self.view.setNeedsLayout()
+                        }
+                        self.signPassworderrorlabel.attributedText = NSAttributedString(string: "비밀번호는 특수문자(!@#$%^&+=), 문자, 숫자를 포함한 8~15자리의 조합으로 입력해주세요.", attributes: [NSAttributedString.Key.kern: -0.77])
+                        self.signPassworderrorlabel.textColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0)
+                        self.signPasswordtextfield.layer.borderColor = UIColor(red: 237/255, green: 65/255, blue: 65/255, alpha: 1.0).cgColor
+                        self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    
+                }
             }
-        }
+        })
     }
     @objc func CallServiceApi(){
+        self.signEmailtextfield.resignFirstResponder()
+        self.signPasswordtextfield.resignFirstResponder()
+        self.signNicknametextfield.resignFirstResponder()
         self.AgreementViewLayout()
         self.AddAgreementView()
-        self.AgreementViewAutoLayout()
-        let SingParamter = SignUpParamter(email: self.signEmailtextfield.text!, password: self.signPasswordtextfield.text!, nickname: self.signNicknametextfield.text!, service_use_agree: true)
-        OAuthApi.shared.AuthSignUpCall(SignUpParamter: SingParamter) { result in
-            switch  result{
-            case .success(let value):
-                if value.code == 200 || value.message == "성공하였습니다."{
-                    self.signNicknameerrorlabel.textColor = UIColor.clear
-                    self.AgreementViewLayout()
-                    self.AddAgreementView()
-                    self.AgreementViewAutoLayout()
-                    UserDefaults.standard.set(value.email, forKey: "service_use_email")
-                }else if value.code == 400 && value.message == "이미 존재하는 이메일입니다."{
-                    DispatchQueue.main.async {
-                        self.signEmailerrorlabel.text = "이미 존재하는 이메일입니다."
-                        self.signEmailerrorlabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-                    }
-                }else if value.code == 400 && value.message == "이미 존재하는 닉네임입니다."{
-                    DispatchQueue.main.async {
-                        self.signEmailerrorlabel.text = "이미 존재하는 닉네임입니다."
-                        self.signNicknameerrorlabel.textColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-                    }
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                
-            }
-        }
     }
     @objc func onCickTransparentView() {
         let ScreenSize = UIScreen.main.bounds.size
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.view.alpha = 1
-            self.view.backgroundColor = UIColor.systemBackground
-            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+            self.agreementViewContainerView.alpha = 0
+            self.AgreementView.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height / 1.9 )
         }, completion: nil)
     }
     
