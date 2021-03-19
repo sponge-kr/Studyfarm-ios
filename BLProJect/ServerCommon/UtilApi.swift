@@ -76,6 +76,10 @@ struct StudyChildrenContainer: Codable {
 struct ResetEmailParamter: Encodable{
     var email: String
 }
+struct AuthEmailSendParamter: Encodable {
+    var email: String
+}
+
 
 
 class UtilApi {
@@ -133,8 +137,8 @@ class UtilApi {
     
     
     // MARK: - 이메일 전송 함수 구현(POST)
-    public func UtilSendResetEmailCall(EmailParamter: Parameters, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {
-        AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoding: URLEncoding.queryString, headers: headers)
+    public func UtilSendResetEmailCall(EmailParamter: AuthEmailSendParamter, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail", method: .post, parameters: EmailParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {

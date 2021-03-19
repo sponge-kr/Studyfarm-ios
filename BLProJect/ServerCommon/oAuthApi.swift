@@ -234,7 +234,7 @@ class OAuthApi {
     fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
     fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
     fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))"]
-    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken")!)"]
+    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken"))"]
     
     
     //MARK - 초기화

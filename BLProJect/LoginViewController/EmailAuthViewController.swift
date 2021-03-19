@@ -13,7 +13,9 @@ import SnapKit
 class EmailAuthViewController: UIViewController {
     
     @IBOutlet weak var SendEmailLabel: UILabel!
+    @IBOutlet weak var SendEmailSubLabel: UILabel!
     @IBOutlet weak var SendEmailConfirmView: UIView!
+    @IBOutlet weak var SendEmailExampleView: UIView!
     @IBOutlet weak var SendEmailIconImage: UIImageView!
     @IBOutlet weak var SendEmailExampleLabel: UILabel!
     @IBOutlet weak var SendEmailConfirmButton: UIButton!
@@ -23,115 +25,58 @@ class EmailAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.Layoutinit()
-        self.EmailViewAutoLayout()
     }
     
     private func Layoutinit() {
         self.SendEmailLabel.text = "인증메일 발송 완료"
-        self.SendEmailLabel.font = UIFont(name: "Roboto-Bold", size: 26)
-        self.SendEmailLabel.tintColor = UIColor(red: 65/255, green: 61/266, blue: 61/255, alpha: 1.0)
-        self.SendEmailConfirmView.clipsToBounds = false
-        self.SendEmailConfirmView.layer.shadowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.09).cgColor
-        self.SendEmailConfirmView.layer.shadowOffset = CGSize(width: 0, height: 4)
-        self.SendEmailConfirmView.layer.shadowRadius = 16
-        self.SendEmailConfirmView.layer.shadowOpacity = 1
+        self.SendEmailLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
+        self.SendEmailLabel.tintColor = UIColor(red: 61/255, green: 61/266, blue: 61/255, alpha: 1.0)
+        self.SendEmailSubLabel.attributedText = NSAttributedString(string: "\(UserDefaults.standard.string(forKey: "service_use_email")!)으로 인증 메일을 발송했습니다.", attributes: [NSAttributedString.Key.kern: -0.7])
+        self.SendEmailSubLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.SendEmailSubLabel.textAlignment = .left
+        self.SendEmailSubLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         
-        self.SendEmailIconImage.image = UIImage(named: "Email@1x.png")
+        self.SendEmailConfirmView.backgroundColor = UIColor(red: 252/255, green: 252/255, blue: 252/255, alpha: 1.0)
+        self.SendEmailConfirmView.layer.masksToBounds = true
+        self.SendEmailConfirmView.layer.cornerRadius = 4
+        self.SendEmailConfirmView.layer.borderWidth = 1
+        self.SendEmailConfirmView.layer.borderColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1.0).cgColor
+        self.SendEmailIconImage.image = UIImage(named: "spongeEmail.png")
         self.SendEmailIconImage.contentMode = .scaleAspectFill
     
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.46
-        self.SendEmailExampleLabel.tintColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
-        self.SendEmailExampleLabel.textAlignment = .center
-        self.SendEmailExampleLabel.text = "메일함에서 인증 확인 버튼을 눌러주세요."
-        self.SendEmailExampleLabel.font = UIFont(name: "Roboto-Bold", size: 14)
+        self.SendEmailExampleView.backgroundColor = UIColor(red: 255/255, green: 220/255, blue: 220/255, alpha: 1.0)
+        self.SendEmailExampleView.layer.cornerRadius = self.SendEmailExampleView.frame.size.height / 2
+        self.SendEmailExampleView.layer.masksToBounds = true
+        self.SendEmailExampleLabel.textColor = UIColor(red: 251/255, green: 112/255, blue: 112/255, alpha: 1.0)
+        self.SendEmailExampleLabel.textAlignment = .left
+        self.SendEmailExampleLabel.attributedText = NSAttributedString(string: "메일함에서 [이메일 인증하기] 버튼을 눌러주세요.", attributes: [NSAttributedString.Key.kern: -0.6])
+        self.SendEmailExampleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
 
         self.SendEmailConfirmButton.setTitleColor(UIColor.white, for: .normal)
         self.SendEmailConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
-        self.SendEmailConfirmButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        self.SendEmailConfirmButton.setTitle("가입하기", for: .normal)
+        self.SendEmailConfirmButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        self.SendEmailConfirmButton.setTitle("다음", for: .normal)
         self.SendEmailConfirmButton.layer.cornerRadius = 8.0
+        self.SendEmailConfirmButton.layer.masksToBounds = true
         self.SendEmailConfirmButton.addTarget(self, action: #selector(UserAuchConfirmAction), for: .touchUpInside)
         
         self.SendEmailResetLabel.textAlignment = .left
-        self.SendEmailResetLabel.font = UIFont(name: "Roboto-Regular", size: 14)
-        self.SendEmailResetLabel.attributedText = NSAttributedString(string: "메일을 받지 못하셨나요?", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 147/255, green: 147/255, blue: 147/255, alpha: 1.0)])
+        self.SendEmailResetLabel.attributedText = NSAttributedString(string: "메일을 받지 못하셨나요?", attributes: [NSAttributedString.Key.kern: -0.66])
+        self.SendEmailResetLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.SendEmailResetLabel.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
         
         self.SendEmailResetButton.titleLabel?.textAlignment = .left
-        self.SendEmailResetButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 24)
-        self.SendEmailResetButton.setAttributedTitle(NSAttributedString(string: "인증 메일 다시 받기", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 147/255, green: 147/255, blue: 147/255, alpha: 1.0)]), for: .normal)
+        self.SendEmailResetButton.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
+        self.SendEmailResetButton.setAttributedTitle(NSAttributedString(string: "인증 메일 다시 받기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
         self.SendEmailResetButton.addTarget(self, action: #selector(SelectSendEmail), for: .touchUpInside)
         
-        
-        self.SendEmailQuestionButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        self.SendEmailQuestionButton.setAttributedTitle(NSAttributedString(string: "문의하기", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 147/255, green: 147/255, blue: 147/255, alpha: 1.0)]), for: .normal)
+        self.SendEmailQuestionButton.setAttributedTitle(NSAttributedString(string: "문의하기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 14)]), for: .normal)
+        self.SendEmailQuestionButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         
     }
-    
-    //MARK - 인증발송 화면 AutoLayout 코드3
-    private func EmailViewAutoLayout() {
-        self.SendEmailLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.snp.top).offset(112)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
-            make.bottom.equalTo(self.SendEmailConfirmView.snp.top).offset(-107)
-            make.width.equalTo(205)
-            make.height.equalTo(35)
-        }
-        self.SendEmailConfirmView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailLabel.snp.bottom).offset(107)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(40)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-39)
-            make.width.equalTo(335)
-            make.height.equalTo(184)
-        }
-        self.SendEmailIconImage.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailLabel.snp.bottom).offset(136)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(137)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-137)
-            make.bottom.equalTo(self.SendEmailExampleLabel.snp.top).offset(-17)
-            make.height.equalTo(79)
-        }
-        self.SendEmailExampleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailIconImage.snp.bottom).offset(17)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(71)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-69)
-            make.height.equalTo(24)
-        }
-        self.SendEmailResetLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailConfirmView.snp.bottom).offset(44)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(131)
-            make.bottom.equalTo(self.SendEmailResetButton.snp.top).offset(-4)
-            make.width.equalTo(153)
-            make.height.equalTo(24)
-        }
-        self.SendEmailResetButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailResetLabel.snp.bottom).offset(4)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(103)
-            make.bottom.equalTo(self.SendEmailConfirmButton.snp.top).offset(-44)
-            make.width.equalTo(188)
-            make.height.equalTo(22)
-        }
-        self.SendEmailConfirmButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailResetButton.snp.bottom).offset(44)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
-            make.height.equalTo(48)
-        }
-        self.SendEmailQuestionButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.SendEmailConfirmButton.snp.bottom).offset(45)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(157)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-159)
-            make.width.equalTo(59)
-            make.height.equalTo(24)
-            
-        }
-    }
-    
+        
     @objc private func SelectSendEmail() {
-        
-        let EmailParamter: Parameters = [
-            "email": UserDefaults.standard.value(forKey: "service_use_email") as? String
-        ]
+        let EmailParamter = AuthEmailSendParamter(email: UserDefaults.standard.string(forKey: "service_use_email")!)
         print(UserDefaults.standard.value(forKey: "service_use_email"))
         UtilApi.shared.UtilSendResetEmailCall(EmailParamter: EmailParamter) { result in
             switch result {
@@ -149,7 +94,7 @@ class EmailAuthViewController: UIViewController {
     
     @objc private func UserAuchConfirmAction(){
         
-        OAuthApi.shared.AuthCheckUserCall(checkUser: UserDefaults.standard.value(forKey: "service_use_email") as? String ?? "") { result in
+        OAuthApi.shared.AuthCheckUserCall(checkUser: UserDefaults.standard.string(forKey: "service_use_email")!) { result in
             switch result {
             case .success(let value):
                 if value.code == 200 && value.check_result == false {

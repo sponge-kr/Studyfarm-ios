@@ -224,6 +224,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                                 print(error.localizedDescription)
                             }
                         }
+                    } else if value.code == 200 {
+                        
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
