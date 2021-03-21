@@ -232,9 +232,9 @@ class OAuthApi {
     static let shared = OAuthApi()
     fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
     fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
-    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))"]
-    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken"))"]
+    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "kakaoToken")!)"]
+    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken")!)","id_token":"\(KeychainWrapper.standard.string(forKey: "googleIDToken")!)"]
+    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken")!)"]
     
     
     //MARK - 초기화
@@ -384,7 +384,9 @@ class OAuthApi {
     
     //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
     public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameOverlapDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        let Tempurl = "http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)"
+        let url : URL = URL(string: Tempurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+        AF.request(url, method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{

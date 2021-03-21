@@ -109,36 +109,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vth-i0-znB">
-                                                <rect key="frame" x="20" y="407" width="38" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="38" id="AjO-km-fZk"/>
-                                                    <constraint firstAttribute="height" constant="24" id="f6a-9W-Xn0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHo-y6-3RV">
-                                                <rect key="frame" x="20" y="443" width="374" height="48"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="TVd-dA-lmA"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlv-lM-s3c">
-                                                <rect key="frame" x="26" y="499" width="100" height="14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="NZ0-pI-Qkg"/>
-                                                    <constraint firstAttribute="height" constant="14" id="gOl-T5-gR0"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohc-vH-EqS">
-                                                <rect key="frame" x="10" y="555" width="394" height="49"/>
+                                                <rect key="frame" x="10" y="457" width="394" height="49"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="pU4-lb-AuF"/>
                                                 </constraints>
@@ -149,27 +121,21 @@
                                         <constraints>
                                             <constraint firstItem="q7T-EZ-qHU" firstAttribute="top" secondItem="6wC-Uw-bjh" secondAttribute="bottom" constant="42" id="3as-l0-8Xe"/>
                                             <constraint firstItem="gUO-wx-4I8" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="706-Iz-BHc"/>
-                                            <constraint firstItem="vth-i0-znB" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="89O-aR-BOX"/>
                                             <constraint firstAttribute="height" constant="818" id="8xO-GF-egi"/>
-                                            <constraint firstAttribute="trailing" secondItem="MHo-y6-3RV" secondAttribute="trailing" constant="20" id="926-o5-8Id"/>
-                                            <constraint firstItem="vth-i0-znB" firstAttribute="top" secondItem="VfF-aM-mcA" secondAttribute="bottom" constant="46" id="9Ww-12-QDX"/>
                                             <constraint firstAttribute="trailing" secondItem="ohc-vH-EqS" secondAttribute="trailing" constant="10" id="Abs-xa-KZK"/>
-                                            <constraint firstItem="ohc-vH-EqS" firstAttribute="top" secondItem="MHo-y6-3RV" secondAttribute="bottom" constant="64" id="CH0-P5-4lQ"/>
                                             <constraint firstItem="08c-lo-gKc" firstAttribute="top" secondItem="q7T-EZ-qHU" secondAttribute="bottom" constant="12" id="CM4-CS-YHD"/>
                                             <constraint firstItem="28N-ak-A3m" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="26" id="Ehc-xh-VqX"/>
-                                            <constraint firstItem="Mlv-lM-s3c" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="26" id="I4I-vy-ZVT"/>
                                             <constraint firstItem="08c-lo-gKc" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="Jd5-9e-Urj"/>
-                                            <constraint firstItem="Mlv-lM-s3c" firstAttribute="top" secondItem="MHo-y6-3RV" secondAttribute="bottom" constant="8" id="KOL-jo-E2B"/>
                                             <constraint firstItem="VfF-aM-mcA" firstAttribute="top" secondItem="zkT-ct-jYu" secondAttribute="bottom" constant="12" id="Lb9-EH-7gK"/>
                                             <constraint firstItem="zkT-ct-jYu" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="O17-Cc-qIp"/>
                                             <constraint firstItem="6wC-Uw-bjh" firstAttribute="top" secondItem="gUO-wx-4I8" secondAttribute="bottom" constant="11" id="O8R-nM-1TK"/>
                                             <constraint firstItem="ohc-vH-EqS" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="10" id="PXF-4A-5sc"/>
+                                            <constraint firstItem="ohc-vH-EqS" firstAttribute="top" secondItem="VfF-aM-mcA" secondAttribute="bottom" constant="96" id="V2e-oI-Jey"/>
                                             <constraint firstItem="q7T-EZ-qHU" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="VEw-8P-fDe"/>
                                             <constraint firstItem="6wC-Uw-bjh" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="XR2-IT-3iv"/>
                                             <constraint firstItem="frb-Lr-4NL" firstAttribute="top" secondItem="VfF-aM-mcA" secondAttribute="bottom" constant="8" id="XUG-og-yil"/>
                                             <constraint firstItem="zBy-qQ-hdS" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="26" id="YAX-Ez-pHU"/>
                                             <constraint firstAttribute="trailing" secondItem="08c-lo-gKc" secondAttribute="trailing" constant="20" id="bGJ-oy-Rwl"/>
-                                            <constraint firstItem="MHo-y6-3RV" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="20" id="fMJ-ot-zSa"/>
                                             <constraint firstAttribute="trailing" secondItem="VfF-aM-mcA" secondAttribute="trailing" constant="20" id="gp9-YX-uY1"/>
                                             <constraint firstItem="frb-Lr-4NL" firstAttribute="leading" secondItem="wdg-tw-wDB" secondAttribute="leading" constant="26" id="grb-ng-oGx"/>
                                             <constraint firstItem="zBy-qQ-hdS" firstAttribute="top" secondItem="08c-lo-gKc" secondAttribute="bottom" constant="8" id="gz0-FS-rRU"/>
@@ -177,7 +143,6 @@
                                             <constraint firstItem="zkT-ct-jYu" firstAttribute="top" secondItem="zBy-qQ-hdS" secondAttribute="bottom" constant="24" id="jn5-RR-giT"/>
                                             <constraint firstItem="28N-ak-A3m" firstAttribute="top" secondItem="zBy-qQ-hdS" secondAttribute="bottom" constant="8" id="mFq-fF-M4g"/>
                                             <constraint firstItem="gUO-wx-4I8" firstAttribute="top" secondItem="wdg-tw-wDB" secondAttribute="top" constant="30" id="pq1-QK-Bso"/>
-                                            <constraint firstItem="MHo-y6-3RV" firstAttribute="top" secondItem="vth-i0-znB" secondAttribute="bottom" constant="12" id="q7N-o0-lRe"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -202,33 +167,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="AcceptsTermsBtn" destination="5s4-me-Fn9" id="qn1-op-nbc"/>
-                        <outlet property="AcceptsTermsBtn2" destination="1YY-3c-tm7" id="XMF-wx-YLv"/>
-                        <outlet property="AcceptsTermsBtn3" destination="e2f-2l-SJ5" id="29F-Jq-yoR"/>
-                        <outlet property="AcceptsTermsBtn4" destination="srU-x7-dJm" id="Kpm-jJ-kcX"/>
                         <outlet property="AgreementView" destination="zCB-bX-0Qe" id="caM-J5-TSZ"/>
-                        <outlet property="AgreementViewConfirmBtn" destination="BY2-8s-dkx" id="oap-H9-1c5"/>
-                        <outlet property="AgreementViewFullLabel" destination="h2Q-ft-GmK" id="JMS-ka-j2i"/>
-                        <outlet property="AgreementViewLabel" destination="6A9-EZ-xCQ" id="CfT-6y-niv"/>
-                        <outlet property="AgreementViewLine" destination="x5r-oo-hDd" id="gsW-eP-Kpn"/>
-                        <outlet property="AgreementViewTermsBtn" destination="f3Q-Dy-cnR" id="WMg-MU-g92"/>
-                        <outlet property="AgreementViewTermsBtn2" destination="1ob-vS-u08" id="cas-vW-kM2"/>
-                        <outlet property="AgreementViewTermsBtn3" destination="bOS-tb-kgh" id="Xbv-cU-bDM"/>
-                        <outlet property="AgreementViewTermsBtn4" destination="d4r-Jf-Zrk" id="6sS-fJ-wZQ"/>
-                        <outlet property="AgreementViewTermsBtn5" destination="A8u-5u-Dlo" id="gRc-wt-MWw"/>
-                        <outlet property="AgreementViewTermsLabel" destination="AXu-sz-9FR" id="ebB-6c-x77"/>
-                        <outlet property="AgreementViewTermsLabel2" destination="Mq1-fi-pMK" id="bUX-Oj-rrK"/>
-                        <outlet property="AgreementViewTermsLabel3" destination="HXP-NR-YXI" id="TDB-vP-12Z"/>
-                        <outlet property="AgreementViewTermsLabel4" destination="D9x-Y8-Xl3" id="uJM-GN-j3G"/>
                         <outlet property="signConforbutton" destination="ohc-vH-EqS" id="4UJ-sp-RlS"/>
                         <outlet property="signEmailSubLabel" destination="zBy-qQ-hdS" id="Pcs-8u-hbp"/>
                         <outlet property="signEmailerrorLabelTopConstraint" destination="jn5-RR-giT" id="9kO-k7-QMx"/>
                         <outlet property="signEmailerrorlabel" destination="28N-ak-A3m" id="0Km-FD-hkc"/>
                         <outlet property="signEmaillabel" destination="q7T-EZ-qHU" id="IHV-Td-D97"/>
                         <outlet property="signEmailtextfield" destination="08c-lo-gKc" id="DQH-r3-y0B"/>
-                        <outlet property="signNicknameerrorlabel" destination="Mlv-lM-s3c" id="br5-Nq-Bcs"/>
-                        <outlet property="signNicknamelabel" destination="vth-i0-znB" id="tva-kj-RyQ"/>
-                        <outlet property="signNicknametextfield" destination="MHo-y6-3RV" id="8Og-Mz-TDD"/>
                         <outlet property="signPassworderrorlabel" destination="frb-Lr-4NL" id="4mi-AJ-g8q"/>
                         <outlet property="signPasswordlabel" destination="zkT-ct-jYu" id="iyN-dj-MUS"/>
                         <outlet property="signPasswordtextfield" destination="VfF-aM-mcA" id="Pqb-eJ-MHZ"/>
