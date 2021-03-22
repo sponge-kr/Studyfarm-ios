@@ -18,6 +18,16 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var nicknameTextFiled: UITextField!
     @IBOutlet weak var nicknameConfirmButton: UIButton!
     @IBOutlet weak var nicknameErrorTitleLabel: UILabel!
+    @IBOutlet var UserAgreementView: AgreementView!
+    
+    lazy var agreementViewContainerView: UIView = {
+        let containerView = UIView(frame: self.view.frame)
+        containerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        containerView.tag = 1
+        return containerView
+    }()
+    
+    public var isCheck: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setInitLayout()
@@ -59,13 +69,190 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         self.nicknameErrorTitleLabel.isHidden = true
         
     }
+    
+    private func didShowAgreementView() {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds
+        self.setInitAgreementViewLayout()
+        window?.addSubview(self.agreementViewContainerView)
+        window?.addSubview(self.UserAgreementView)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.agreementViewContainerView.alpha = 0.5
+            self.UserAgreementView.frame = CGRect(x: 0, y: screenSize.height - screenSize.height / 1.9, width: screenSize.width, height: screenSize.height + self.view.safeAreaInsets.bottom)
+        })
+    }
+    
+    private func setInitAgreementViewLayout() {
+        let screenSize = UIScreen.main.bounds.size
+        self.UserAgreementView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 2)
+        self.UserAgreementView.agreementTitleLabel.text = "약관 동의"
+        self.UserAgreementView.agreementTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
+        self.UserAgreementView.agreementTitleLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementTitleLabel.textAlignment = .left
+        self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementFullButton.addTarget(self, action: #selector(didTapFullAgreementCheck(_:)), for: .touchUpInside)
+        self.UserAgreementView.agreementFullTitleLabel.attributedText = NSAttributedString(string: "전체 동의", attributes: [NSAttributedString.Key.kern: -0.88])
+        self.UserAgreementView.agreementFullTitleLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementFullTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 16)
+        self.UserAgreementView.agreementFullTitleLabel.textAlignment = .left
+        self.UserAgreementView.agreementLineView.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0)
+        self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementServiceButton.addTarget(self, action: #selector(didTapServiceAgreementCheck(_:)), for: .touchUpInside)
+        self.UserAgreementView.agreementServiceLabel.attributedText = NSAttributedString(string: "스터디팜 이용약관 동의 [필수]", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.UserAgreementView.agreementServiceLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementServiceLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.UserAgreementView.agreementServiceDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,NSAttributedString.Key.kern: -0.66]), for: .normal)
+        self.UserAgreementView.agreementServiceDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
+        self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementPrivacyButton.addTarget(self, action: #selector(didTapPrivacyAgreementCheck(_:)), for: .touchUpInside)
+        self.UserAgreementView.agreementPrivacyLabel.attributedText = NSAttributedString(string: "개인정보 수집이용 동의 [필수]", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.UserAgreementView.agreementPrivacyLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementPrivacyLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.UserAgreementView.agreementPrivacyDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.66]), for: .normal)
+        self.UserAgreementView.agreementPrivacyDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
+        self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementPrivacyPrivateButton.addTarget(self, action: #selector(didTapPrivacePrivateAgreementCheck(_:)), for: .touchUpInside)
+        self.UserAgreementView.agreementPrivacyPrivateLabel.attributedText = NSAttributedString(string: "개인정보 수집이용 동의 [선택]", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.UserAgreementView.agreementPrivacyPrivateLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementPrivacyPrivateLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.UserAgreementView.agreementPrivacyPrivateDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.66]), for: .normal)
+        self.UserAgreementView.agreementPrivacyPrivateDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
+        self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementMarketingButton.addTarget(self, action: #selector(didTapMarketingAgreementCheck(_:)), for: .touchUpInside)
+        self.UserAgreementView.agreementMarketingLabel.attributedText = NSAttributedString(string: "마케팅 정보 수신 동의 [선택]", attributes: [NSAttributedString.Key.kern: -0.77])
+        self.UserAgreementView.agreementMarketingLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
+        self.UserAgreementView.agreementMarketingLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.UserAgreementView.agreementMarketingDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,NSAttributedString.Key.kern: -0.66]), for: .normal)
+        self.UserAgreementView.agreementMarketingDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
+        self.UserAgreementView.agreementConfirmButton.setAttributedTitle(NSAttributedString(string: "다음", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 16)]), for: .normal)
+        self.UserAgreementView.agreementConfirmButton.setTitleColor(UIColor.white, for: .normal)
+        self.UserAgreementView.agreementConfirmButton.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
+        self.UserAgreementView.agreementConfirmButton.layer.cornerRadius = 8
+        self.UserAgreementView.agreementConfirmButton.layer.masksToBounds = true
+        self.UserAgreementView.agreementConfirmButton.addTarget(self, action: #selector(didRemoveAgreementView), for: .touchUpInside)
+        self.UserAgreementView.layer.cornerRadius = 8
+        self.UserAgreementView.layer.masksToBounds = true
+        self.UserAgreementView.backgroundColor = .white
+    }
+    public func isAllSelect() {
+        if isCheck == true {
+            UserDefaults.standard.set(true, forKey: "oAuth_service_check")
+            self.UserAgreementView.agreementFullButton.isSelected = true
+            self.UserAgreementView.agreementServiceButton.isSelected = true
+            self.UserAgreementView.agreementPrivacyButton.isSelected = true
+            self.UserAgreementView.agreementPrivacyPrivateButton.isSelected = true
+            self.UserAgreementView.agreementMarketingButton.isSelected = true
+            self.UserAgreementView.agreementConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            self.UserAgreementView.agreementConfirmButton.isEnabled = true
+        } else {
+            UserDefaults.standard.set(false, forKey: "oAuth_service_check")
+            self.UserAgreementView.agreementFullButton.isSelected = false
+            self.UserAgreementView.agreementServiceButton.isSelected = false
+            self.UserAgreementView.agreementPrivacyButton.isSelected = false
+            self.UserAgreementView.agreementPrivacyPrivateButton.isSelected = false
+            self.UserAgreementView.agreementMarketingButton.isSelected = false
+            self.UserAgreementView.agreementConfirmButton.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
+            self.UserAgreementView.agreementConfirmButton.isEnabled = false
+        }
+    }
+    public func isEnabledConfrimButton() {
+        if self.UserAgreementView.agreementServiceButton.isSelected == true && self.UserAgreementView.agreementPrivacyButton.isSelected == true {
+            self.UserAgreementView.agreementConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+            UserDefaults.standard.set(true, forKey: "oAuth_service_check")
+            self.UserAgreementView.agreementConfirmButton.isEnabled = true
+        } else {
+            UserDefaults.standard.set(false, forKey: "oAuth_service_check")
+            self.UserAgreementView.agreementConfirmButton.backgroundColor = UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0)
+            self.UserAgreementView.agreementConfirmButton.isEnabled = false
+        }
+    }
+    
+    public func isCheckFullAgreement() {
+        if self.UserAgreementView.agreementServiceButton.isSelected == false || self.UserAgreementView.agreementPrivacyButton.isSelected == false || self.UserAgreementView.agreementPrivacyPrivateButton.isSelected == false || self.UserAgreementView.agreementMarketingButton.isSelected == false {
+            self.UserAgreementView.agreementFullButton.isSelected = false
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        }
+    }
+    
     @objc
-    private func didTapNicknameConfirmButton(){
+    private func didTapFullAgreementCheck(_ sender: UIButton) {
+        if sender.isSelected {
+            self.isCheck = false
+            self.isAllSelect()
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        } else {
+            self.isCheck = true
+            self.isAllSelect()
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+        }
+    }
+    
+    @objc
+    private func didTapServiceAgreementCheck(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.isEnabledConfrimButton()
+            self.isCheckFullAgreement()
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.isEnabledConfrimButton()
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+        }
+    }
+    
+    @objc func didTapPrivacyAgreementCheck(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.isEnabledConfrimButton()
+            self.isCheckFullAgreement()
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.isEnabledConfrimButton()
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+        }
+    }
+    
+    @objc func didTapPrivacePrivateAgreementCheck(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.isCheckFullAgreement()
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+        }
+    }
+    
+    @objc func didTapMarketingAgreementCheck(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.isCheckFullAgreement()
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+        }
+    }
+    
+    @objc
+    private func didTapNicknameConfirmButton() {
         OAuthApi.shared.AuthNickNameOverlap(Nickname: self.nicknameTextFiled.text!) { result in
             switch result {
             case .success(let value):
                 if value.exist == false {
                     UserDefaults.standard.set(self.nicknameTextFiled.text, forKey: "oAuth_Nickname")
+                    self.nicknameTextFiled.resignFirstResponder()
+                    self.didShowAgreementView()
                 } else {
                     UIView.animate(withDuration: 0.2) {
                         self.nicknameErrorTitleLabel.isHidden = false
@@ -85,6 +272,21 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
+    
+    @objc
+    private func didRemoveAgreementView() {
+        let window = UIApplication.shared.windows.first
+        let screenSize = UIScreen.main.bounds
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.agreementViewContainerView.alpha = 0
+            self.UserAgreementView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.9)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let EmailView = storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
+            guard let EamilVC = EmailView else { return }
+            self.navigationController?.pushViewController(EamilVC, animated: true)
+        })
+    }
+    
     
     @objc
     private func keyboardWillShow(_ notification: Notification) {
@@ -134,6 +336,19 @@ class AgreementView: UIView {
     @IBOutlet weak var agreementFullButton: UIButton!
     @IBOutlet weak var agreementFullTitleLabel: UILabel!
     @IBOutlet weak var agreementLineView: UIView!
+    @IBOutlet weak var agreementServiceButton: UIButton!
+    @IBOutlet weak var agreementServiceLabel: UILabel!
+    @IBOutlet weak var agreementServiceDetailButton: UIButton!
+    @IBOutlet weak var agreementPrivacyButton: UIButton!
+    @IBOutlet weak var agreementPrivacyLabel: UILabel!
+    @IBOutlet weak var agreementPrivacyDetailButton: UIButton!
+    @IBOutlet weak var agreementPrivacyPrivateButton: UIButton!
+    @IBOutlet weak var agreementPrivacyPrivateLabel: UILabel!
+    @IBOutlet weak var agreementPrivacyPrivateDetailButton: UIButton!
+    @IBOutlet weak var agreementMarketingButton: UIButton!
+    @IBOutlet weak var agreementMarketingLabel: UILabel!
+    @IBOutlet weak var agreementMarketingDetailButton: UIButton!
+    @IBOutlet weak var agreementConfirmButton: UIButton!
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

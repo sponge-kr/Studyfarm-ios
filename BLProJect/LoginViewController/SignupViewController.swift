@@ -68,14 +68,12 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         NotificationCenter.default.removeObserver(self)
     }
     
-    
     //MARK - 초기 회원가입 Layout 구현
     public func SetSingViewLayout(){
         
         self.navigationController?.navigationBar.tintColor = UIColor.black
         let Navigationimage = UIImage(named: "Navigation.png")
         self.navigationController?.navigationBar.backIndicatorImage = Navigationimage
-        
         
         self.signEmailerrorlabel.text = "올바른 형식의 이메일을 입력하세요."
         self.signEmailerrorlabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
@@ -89,7 +87,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         self.signPassworderrorlabel.numberOfLines = 1
         self.signPassworderrorlabel.textColor = UIColor.clear
         
-       
         self.signSubtitlelabel.text = "이메일로 시작하기"
         self.signSubtitlelabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
         self.signSubtitlelabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -143,7 +140,7 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         self.signConforbutton.layer.cornerRadius = 8
     }
     
-    public func addKeyboardNotification(){
+    public func addKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
