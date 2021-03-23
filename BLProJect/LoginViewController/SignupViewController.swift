@@ -43,7 +43,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     }()
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.SetSingViewLayout()
         self.signConforbutton.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)

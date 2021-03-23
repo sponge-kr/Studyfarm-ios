@@ -149,6 +149,7 @@
 		FFDC4899259BAA5400FEB691 /* EmailAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */; };
 		FFECAAFF2604BCE400E5B641 /* spongeEmail@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */; };
 		FFECAB1626074DCB00E5B641 /* NicknameSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFECAB1526074DCB00E5B641 /* NicknameSignupViewController.swift */; };
+		FFECAB5A2609FF5F00E5B641 /* AreaSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFECAB592609FF5E00E5B641 /* AreaSearchViewController.swift */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
 		FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212025C963B500ED7660 /* RedCheck@2x.png */; };
 		FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212525C963BA00ED7660 /* RedCheck@3x.png */; };
@@ -329,6 +330,7 @@
 		FFDC4898259BAA5400FEB691 /* EmailAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmailAuthViewController.storyboard; sourceTree = "<group>"; };
 		FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spongeEmail@1x.png"; sourceTree = "<group>"; };
 		FFECAB1526074DCB00E5B641 /* NicknameSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSignupViewController.swift; sourceTree = "<group>"; };
+		FFECAB592609FF5E00E5B641 /* AreaSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSearchViewController.swift; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
 		FFF5212025C963B500ED7660 /* RedCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@2x.png"; sourceTree = "<group>"; };
 		FFF5212525C963BA00ED7660 /* RedCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@3x.png"; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				FFD33E0226010D8C003C3AE9 /* AuthCodeViewController.swift */,
 				FFD33E072602055B003C3AE9 /* PasswordDefineViewController.swift */,
 				FFECAB1526074DCB00E5B641 /* NicknameSignupViewController.swift */,
+				FFECAB592609FF5E00E5B641 /* AreaSearchViewController.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
 				FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */,
 				D149391C24E7FA61004D661C /* SignupViewController.swift in Sources */,
+				FFECAB5A2609FF5F00E5B641 /* AreaSearchViewController.swift in Sources */,
 				D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */,
 				D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */,
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,

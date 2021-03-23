@@ -133,6 +133,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         self.UserAgreementView.layer.cornerRadius = 8
         self.UserAgreementView.layer.masksToBounds = true
         self.UserAgreementView.backgroundColor = .white
+        self.UserAgreementView.tag = 2
     }
     public func isAllSelect() {
         if isCheck == true {
@@ -172,6 +173,14 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             self.UserAgreementView.agreementFullButton.isSelected = false
             self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
         }
+    }
+    
+    public func isCheckInit() {
+        self.UserAgreementView.agreementFullButton.isSelected = false
+        self.UserAgreementView.agreementServiceButton.isSelected = false
+        self.UserAgreementView.agreementPrivacyButton.isSelected = false
+        self.UserAgreementView.agreementPrivacyPrivateButton.isSelected = false
+        self.UserAgreementView.agreementMarketingButton.isSelected = false
     }
     
     @objc
@@ -275,18 +284,29 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
     
     @objc
     private func didRemoveAgreementView() {
-        let window = UIApplication.shared.windows.first
         let screenSize = UIScreen.main.bounds
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.agreementViewContainerView.alpha = 0
             self.UserAgreementView.frame = CGRect(x: 0, y: screenSize.height, width: screenSize.width, height: screenSize.height / 1.9)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let EmailView = storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
-            guard let EamilVC = EmailView else { return }
-            self.navigationController?.pushViewController(EamilVC, animated: true)
+            self.isCheckInit()
+            let signUpParamter = SignUpParamter(email: UserDefaults.standard.string(forKey: "oAuth_Email")!, password: UserDefaults.standard.string(forKey: "oAuth_Password")!, nickname: self.nicknameTextFiled.text!, service_use_agree: UserDefaults.standard.bool(forKey: "oAuth_service_check"))
+            OAuthApi.shared.AuthSignUpCall(SignUpParamter: signUpParamter) { result in
+                switch result {
+                case .success(let value):
+                    if value.code == 200 {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let EmailView = storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
+                        guard let EamilVC = EmailView else { return }
+                        self.navigationController?.pushViewController(EamilVC, animated: true)
+                    } else {
+                        self.nicknameErrorTitleLabel.text = value.message
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         })
     }
-    
     
     @objc
     private func keyboardWillShow(_ notification: Notification) {

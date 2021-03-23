@@ -38,18 +38,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZx-pf-8Rc">
-                                <rect key="frame" x="20" y="266" width="55" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSS-Gh-iE0">
-                                <rect key="frame" x="115" y="266" width="55" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3D-vW-h3W">
                                 <rect key="frame" x="20" y="437" width="25" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -74,7 +62,6 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAc-5L-yYe">
                                 <rect key="frame" x="20" y="347" width="160" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgs-hh-lhG">
                                 <rect key="frame" x="20" y="473" width="133" height="40"/>
@@ -85,25 +72,101 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nc-NB-EMt">
+                                <rect key="frame" x="20" y="260" width="18" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSP-Hh-XMM">
+                                <rect key="frame" x="43" y="258" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lY2-hP-p0L">
+                                <rect key="frame" x="98" y="260" width="18" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amc-si-5zI">
+                                <rect key="frame" x="121" y="258" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVy-WK-k7n">
+                                <rect key="frame" x="20" y="582" width="374" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cI8-Aa-z6N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="birthdayView" destination="0fI-hf-Jvn" id="gmR-To-fmq"/>
                         <outlet property="userInformationConfirmButton" destination="mi2-6h-1u5" id="iYm-IP-O0Y"/>
+                        <outlet property="userInformationInterestingStudyButton" destination="FVy-WK-k7n" id="25b-cf-fPo"/>
                         <outlet property="userInformationIntresttitle" destination="zB3-Fc-61x" id="V6J-te-5Ln"/>
                         <outlet property="userInformationareaAddbtn" destination="cgs-hh-lhG" id="S3W-XX-4kD"/>
                         <outlet property="userInformationareatitle" destination="y3D-vW-h3W" id="9ok-AZ-zPV"/>
                         <outlet property="userInformationbirthday" destination="kgn-5a-vXH" id="tcD-5k-Inx"/>
                         <outlet property="userInformationbirthdayButton" destination="BAc-5L-yYe" id="SJ1-57-UeL"/>
                         <outlet property="userInformationgendertitle" destination="7O5-20-NVb" id="EQE-87-NMO"/>
-                        <outlet property="userInformationgirlbtn" destination="LSS-Gh-iE0" id="OhE-ap-Exl"/>
-                        <outlet property="userInformationmanbtn" destination="EZx-pf-8Rc" id="tkn-Ax-Jtx"/>
+                        <outlet property="userInformationgirlButton" destination="lY2-hP-p0L" id="rdX-t7-5Y4"/>
+                        <outlet property="userInformationgirlTitleLabel" destination="amc-si-5zI" id="6Y9-2c-HHT"/>
+                        <outlet property="userInformationmanButton" destination="0nc-NB-EMt" id="VD9-Qn-P2s"/>
+                        <outlet property="userInformationmanTitleLabel" destination="xSP-Hh-XMM" id="oVn-jx-Bgx"/>
                         <outlet property="userInformationsubtitle" destination="6RZ-IU-DDK" id="cBX-QV-Sau"/>
                         <outlet property="userInformationtitle" destination="c4u-6T-NH1" id="R1q-Ey-B70"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9T-hN-RA8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="0fI-hf-Jvn" customClass="BirthDayView" customModule="스터디팜" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="397"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOa-HD-smg">
+                            <rect key="frame" x="172" y="24" width="70" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="GDs-qO-0NN"/>
+                                <constraint firstAttribute="height" constant="24" id="eGk-rz-zwX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E7R-i4-GgB">
+                            <rect key="frame" x="0.0" y="79" width="414" height="221"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="221" id="ybm-5Y-sOp"/>
+                            </constraints>
+                        </pickerView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjr-Gw-r23">
+                            <rect key="frame" x="10" y="318" width="394" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="jf6-eJ-znl"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="3Ho-nU-6CB"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="E7R-i4-GgB" firstAttribute="trailing" secondItem="3Ho-nU-6CB" secondAttribute="trailing" id="0U7-vl-QF4"/>
+                        <constraint firstItem="3Ho-nU-6CB" firstAttribute="trailing" secondItem="zjr-Gw-r23" secondAttribute="trailing" constant="10" id="52X-QO-ASC"/>
+                        <constraint firstItem="E7R-i4-GgB" firstAttribute="top" secondItem="yOa-HD-smg" secondAttribute="bottom" constant="31" id="8zi-Xh-ygY"/>
+                        <constraint firstItem="zjr-Gw-r23" firstAttribute="leading" secondItem="3Ho-nU-6CB" secondAttribute="leading" constant="10" id="9Xy-oA-1y6"/>
+                        <constraint firstItem="E7R-i4-GgB" firstAttribute="leading" secondItem="3Ho-nU-6CB" secondAttribute="leading" id="Gcp-8v-tDh"/>
+                        <constraint firstItem="zjr-Gw-r23" firstAttribute="top" secondItem="E7R-i4-GgB" secondAttribute="bottom" constant="18" id="Pjk-Te-Tl8"/>
+                        <constraint firstItem="yOa-HD-smg" firstAttribute="centerX" secondItem="0fI-hf-Jvn" secondAttribute="centerX" id="l80-wf-1Uk"/>
+                        <constraint firstItem="yOa-HD-smg" firstAttribute="top" secondItem="0fI-hf-Jvn" secondAttribute="top" constant="24" id="rEr-Ke-pqf"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="birthDayConfirmButton" destination="zjr-Gw-r23" id="4Wz-Ub-2eT"/>
+                        <outlet property="birthDayPickerView" destination="E7R-i4-GgB" id="xs4-n3-QuJ"/>
+                        <outlet property="birthDayTitleLabel" destination="yOa-HD-smg" id="pTK-wY-56q"/>
+                    </connections>
+                </view>
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="-597.32142857142856"/>
         </scene>
