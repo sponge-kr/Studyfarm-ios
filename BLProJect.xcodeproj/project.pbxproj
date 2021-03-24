@@ -150,6 +150,8 @@
 		FFECAAFF2604BCE400E5B641 /* spongeEmail@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */; };
 		FFECAB1626074DCB00E5B641 /* NicknameSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFECAB1526074DCB00E5B641 /* NicknameSignupViewController.swift */; };
 		FFECAB5A2609FF5F00E5B641 /* AreaSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFECAB592609FF5E00E5B641 /* AreaSearchViewController.swift */; };
+		FFECAB65260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFECAB63260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift */; };
+		FFECAB66260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFECAB64260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib */; };
 		FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */; };
 		FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212025C963B500ED7660 /* RedCheck@2x.png */; };
 		FFF5212625C963BA00ED7660 /* RedCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFF5212525C963BA00ED7660 /* RedCheck@3x.png */; };
@@ -331,6 +333,8 @@
 		FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spongeEmail@1x.png"; sourceTree = "<group>"; };
 		FFECAB1526074DCB00E5B641 /* NicknameSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSignupViewController.swift; sourceTree = "<group>"; };
 		FFECAB592609FF5E00E5B641 /* AreaSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSearchViewController.swift; sourceTree = "<group>"; };
+		FFECAB63260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		FFECAB64260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AreaSearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		FFF5211B25C963AE00ED7660 /* RedCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@1x.png"; sourceTree = "<group>"; };
 		FFF5212025C963B500ED7660 /* RedCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@2x.png"; sourceTree = "<group>"; };
 		FFF5212525C963BA00ED7660 /* RedCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedCheck@3x.png"; sourceTree = "<group>"; };
@@ -665,6 +669,8 @@
 			children = (
 				FFD33E1226025305003C3AE9 /* PasswordDefineAlertView.swift */,
 				FFD33E1A26025344003C3AE9 /* PasswordDefineAlertView.xib */,
+				FFECAB63260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift */,
+				FFECAB64260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib */,
 			);
 			path = Loginxib;
 			sourceTree = "<group>";
@@ -831,6 +837,7 @@
 				FF70E73325C6879200AE82CD /* triangle@3x.png in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */,
+				FFECAB66260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib in Resources */,
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF24260025E12B5000A76850 /* user@2x.png in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
@@ -1077,6 +1084,7 @@
 				FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
+				FFECAB65260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift in Sources */,
 				FFD33E1326025306003C3AE9 /* PasswordDefineAlertView.swift in Sources */,
 				D1F85CCC24C45B1100E1F7BE /* ViewController.swift in Sources */,
 				FF4CE67025EB70B400C0ACF8 /* ReplyViewController.swift in Sources */,
