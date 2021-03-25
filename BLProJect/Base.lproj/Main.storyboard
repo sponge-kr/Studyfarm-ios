@@ -2686,29 +2686,62 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="BvI-fO-lxJ" id="7pe-Sy-O0c"/>
-                                    <outlet property="delegate" destination="BvI-fO-lxJ" id="6Ke-Sh-Sv8"/>
-                                </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-0z-ETW">
                                 <rect key="frame" x="10" y="770" width="394" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="orT-hj-vxK">
+                                <rect key="frame" x="0.0" y="267" width="414" height="393"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="393" id="shq-9U-v91"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hAs-OP-DXp">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="28" minY="0.0" maxX="33" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1wG-Dx-aNr" customClass="AreaCityCollectionViewCell" customModule="스터디팜" customModuleProvider="target">
+                                        <rect key="frame" x="28" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="b6T-E9-9yk">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeK-Do-Zb6">
+                                <rect key="frame" x="20" y="704" width="115" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOB-Ev-VEi">
+                                <rect key="frame" x="159" y="704" width="109" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qet-e4-Dii"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="orT-hj-vxK" firstAttribute="trailing" secondItem="Qet-e4-Dii" secondAttribute="trailing" id="0pC-q5-Oli"/>
                             <constraint firstItem="lbM-38-KfA" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="20" id="Csm-zn-Li8"/>
                             <constraint firstItem="kbu-7A-lgK" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="10" id="QRX-Rc-5s9"/>
                             <constraint firstItem="kbu-7A-lgK" firstAttribute="top" secondItem="lbM-38-KfA" secondAttribute="bottom" constant="20" id="VWu-dW-5gf"/>
                             <constraint firstItem="Qet-e4-Dii" firstAttribute="trailing" secondItem="kbu-7A-lgK" secondAttribute="trailing" constant="10" id="WYG-Fu-TbV"/>
+                            <constraint firstItem="orT-hj-vxK" firstAttribute="top" secondItem="kbu-7A-lgK" secondAttribute="bottom" constant="22" id="c3v-wI-fnL"/>
                             <constraint firstItem="lbM-38-KfA" firstAttribute="top" secondItem="Qet-e4-Dii" secondAttribute="top" constant="65" id="l4w-fq-R64"/>
+                            <constraint firstItem="orT-hj-vxK" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" id="lUL-Vk-Qu3"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="areaSearchCollectionView" destination="kbu-7A-lgK" id="bXf-YE-oK9"/>
+                        <outlet property="areaCityCollectionView" destination="orT-hj-vxK" id="s2h-Ka-ngd"/>
+                        <outlet property="areaCityTagButtonOne" destination="yeK-Do-Zb6" id="F5W-vd-2qB"/>
+                        <outlet property="areaCityTagButtonTwo" destination="dOB-Ev-VEi" id="ayJ-pQ-bUM"/>
+                        <outlet property="areaSearchCollectionView" destination="kbu-7A-lgK" id="CdI-7C-ES7"/>
                         <outlet property="areaSearchConfirmButton" destination="0bp-0z-ETW" id="1sk-FP-zYE"/>
                         <outlet property="areaSearchSubTitleLabel" destination="lbM-38-KfA" id="Oj8-ts-hzy"/>
                     </connections>

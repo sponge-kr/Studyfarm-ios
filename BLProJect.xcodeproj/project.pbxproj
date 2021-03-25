@@ -125,6 +125,10 @@
 		FFBA6F3225C805BC004783C6 /* GrayEllipse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */; };
 		FFBA6F3725C805C1004783C6 /* GrayEllipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */; };
 		FFBA6F3C25C805C6004783C6 /* GrayEllipse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */; };
+		FFBC3ED0260C757C00211A0B /* AreaCityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBC3ECE260C757C00211A0B /* AreaCityCollectionViewCell.swift */; };
+		FFBC3ED1260C757C00211A0B /* AreaCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */; };
+		FFBC3ED6260C8CB900211A0B /* Delete@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3ED5260C8CB900211A0B /* Delete@1x.png */; };
+		FFBC3EDB260C8CE000211A0B /* Delete@0.75.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */; };
 		FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */; };
 		FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */; };
 		FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */; };
@@ -308,6 +312,10 @@
 		FFBA6F3125C805BC004783C6 /* GrayEllipse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@1x.png"; sourceTree = "<group>"; };
 		FFBA6F3625C805C1004783C6 /* GrayEllipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@2x.png"; sourceTree = "<group>"; };
 		FFBA6F3B25C805C6004783C6 /* GrayEllipse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GrayEllipse@3x.png"; sourceTree = "<group>"; };
+		FFBC3ECE260C757C00211A0B /* AreaCityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaCityCollectionViewCell.swift; sourceTree = "<group>"; };
+		FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AreaCityCollectionViewCell.xib; sourceTree = "<group>"; };
+		FFBC3ED5260C8CB900211A0B /* Delete@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@1x.png"; sourceTree = "<group>"; };
+		FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@0.75.png"; sourceTree = "<group>"; };
 		FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserInformationViewController.storyboard; sourceTree = "<group>"; };
 		FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -525,6 +533,8 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */,
+				FFBC3ED5260C8CB900211A0B /* Delete@1x.png */,
 				FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */,
 				FFD33E0C26021AE5003C3AE9 /* secureeye@1x.png */,
 				FFD33DF025FF8167003C3AE9 /* eye@1x.png */,
@@ -671,6 +681,8 @@
 				FFD33E1A26025344003C3AE9 /* PasswordDefineAlertView.xib */,
 				FFECAB63260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift */,
 				FFECAB64260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib */,
+				FFBC3ECE260C757C00211A0B /* AreaCityCollectionViewCell.swift */,
+				FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */,
 			);
 			path = Loginxib;
 			sourceTree = "<group>";
@@ -799,6 +811,7 @@
 				FF70E74725C68C0700AE82CD /* Rectangle@2x.png in Resources */,
 				FF70E78425C6CABE00AE82CD /* searchbar@1x.png in Resources */,
 				D1F85CFF24CDAA6900E1F7BE /* icon.png in Resources */,
+				FFBC3ED6260C8CB900211A0B /* Delete@1x.png in Resources */,
 				FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */,
 				FF331D86259B34BD00BD8C33 /* Roboto-Light.ttf in Resources */,
 				FFC0B02725A4F70C00D21482 /* NotoSansKR-Light.otf in Resources */,
@@ -821,6 +834,7 @@
 				FF4CE64325E9169600C0ACF8 /* Modified@1X.png in Resources */,
 				FF70E74825C68C0700AE82CD /* Rectangle@1x.png in Resources */,
 				D1D9F3D924E15BAB008FF54D /* BLMainCollectionViewHeader.xib in Resources */,
+				FFBC3EDB260C8CE000211A0B /* Delete@0.75.png in Resources */,
 				FF70E72A25C6705C00AE82CD /* GrayCheck@1x.png in Resources */,
 				D167D8F42562F575008BB495 /* Navigation@1x.png in Resources */,
 				FF0EA19725E65FD90051B350 /* StudyDetailRepliesTableViewCell.xib in Resources */,
@@ -892,6 +906,7 @@
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
 				FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */,
 				FF2425F625E11ECD00A76850 /* calendar@3x.png in Resources */,
+				FFBC3ED1260C757C00211A0B /* AreaCityCollectionViewCell.xib in Resources */,
 				FF331D90259B34BD00BD8C33 /* Roboto-Italic.ttf in Resources */,
 				FFCA27AC25DFCB3A0053ECDD /* modified@2x.png in Resources */,
 				FFCA27A725DFCB010053ECDD /* modified@1x.png in Resources */,
@@ -1083,6 +1098,7 @@
 				FF92ED0625CFE57300D93CD7 /* StudyCategoryTableViewCell.swift in Sources */,
 				FFFFE32025F9222C000A01B6 /* StudyMapTableViewCell.swift in Sources */,
 				D149391724E7CA36004D661C /* LoginViewController.swift in Sources */,
+				FFBC3ED0260C757C00211A0B /* AreaCityCollectionViewCell.swift in Sources */,
 				FFB2EECD25C5504400DBFCBE /* EnrollMentViewController.swift in Sources */,
 				FFECAB65260B2DB100E5B641 /* AreaSearchCollectionViewCell.swift in Sources */,
 				FFD33E1326025306003C3AE9 /* PasswordDefineAlertView.swift in Sources */,
