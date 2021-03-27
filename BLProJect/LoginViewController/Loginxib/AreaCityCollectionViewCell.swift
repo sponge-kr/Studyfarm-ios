@@ -17,6 +17,9 @@ class AreaCityCollectionViewCell: UICollectionViewCell {
             if isSelected {
                 self.areaCityTitleButton.isSelected = true
                 self.areaCityTitleButton.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
+                self.areaCityTitleButton.setImage(UIImage(named: "areaCheck.png"), for: .selected)
+                self.areaCityTitleButton.imageToRight()
+                
             } else {
                 self.areaCityTitleButton.isSelected = false
                 self.areaCityTitleButton.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0), for: .normal)
@@ -37,4 +40,13 @@ class AreaCityCollectionViewCell: UICollectionViewCell {
         self.contentView.isUserInteractionEnabled = false
     }
 
+}
+
+
+extension UIButton {
+  func imageToRight() {
+      transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+      titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+      imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+  }
 }

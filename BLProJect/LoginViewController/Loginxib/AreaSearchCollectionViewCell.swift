@@ -10,7 +10,6 @@ import UIKit
 
 class AreaSearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var areaTitleButton: UIButton!
-    
     override var isSelected: Bool {
             didSet {
                 if isSelected {
@@ -18,6 +17,8 @@ class AreaSearchCollectionViewCell: UICollectionViewCell {
                     self.areaTitleButton.layer.borderWidth = 1
                     self.areaTitleButton.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
                     self.areaTitleButton.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
+                    self.areaTitleButton.setImage(UIImage(named: "areaCheck.png"), for: .selected)
+                    self.areaTitleButton.imageToRight()
                 } else {
                     self.areaTitleButton.isSelected = false
                     self.areaTitleButton.layer.borderWidth = 0
@@ -29,9 +30,9 @@ class AreaSearchCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.setInitLayout()
     }
+    
     private func setInitLayout() {
         self.areaTitleButton.layer.borderWidth = 0
         self.areaTitleButton.layer.borderColor = UIColor.clear.cgColor
@@ -40,13 +41,6 @@ class AreaSearchCollectionViewCell: UICollectionViewCell {
         self.areaTitleButton.layer.cornerRadius = 15
         self.areaTitleButton.layer.masksToBounds = true
         self.contentView.isUserInteractionEnabled = false
-//        self.areaTitleButton.addTarget(self, action: #selector(didTapareaSearch(_:)), for: .touchUpInside)
-    }
-    @objc
-    public func didTapareaSearch(_ sender: UIButton) {
-        sender.layer.borderWidth = 1
-        sender.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
-        sender.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
     }
 
 }

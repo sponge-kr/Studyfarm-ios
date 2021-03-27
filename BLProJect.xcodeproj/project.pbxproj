@@ -129,6 +129,9 @@
 		FFBC3ED1260C757C00211A0B /* AreaCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */; };
 		FFBC3ED6260C8CB900211A0B /* Delete@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3ED5260C8CB900211A0B /* Delete@1x.png */; };
 		FFBC3EDB260C8CE000211A0B /* Delete@0.75.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */; };
+		FFBC3EE7260F297F00211A0B /* areaCheck@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3EE6260F297E00211A0B /* areaCheck@1x.png */; };
+		FFBC3EEC260F298300211A0B /* areaCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3EEB260F298300211A0B /* areaCheck@2x.png */; };
+		FFBC3EF1260F298800211A0B /* areaCheck@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC3EF0260F298800211A0B /* areaCheck@3x.png */; };
 		FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */; };
 		FFC0B02325A4F70C00D21482 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */; };
 		FFC0B02425A4F70C00D21482 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */; };
@@ -316,6 +319,9 @@
 		FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AreaCityCollectionViewCell.xib; sourceTree = "<group>"; };
 		FFBC3ED5260C8CB900211A0B /* Delete@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@1x.png"; sourceTree = "<group>"; };
 		FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@0.75.png"; sourceTree = "<group>"; };
+		FFBC3EE6260F297E00211A0B /* areaCheck@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "areaCheck@1x.png"; sourceTree = "<group>"; };
+		FFBC3EEB260F298300211A0B /* areaCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "areaCheck@2x.png"; sourceTree = "<group>"; };
+		FFBC3EF0260F298800211A0B /* areaCheck@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "areaCheck@3x.png"; sourceTree = "<group>"; };
 		FFC0B01525A4EE7300D21482 /* UserInformationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserInformationViewController.storyboard; sourceTree = "<group>"; };
 		FFC0B01D25A4F70A00D21482 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		FFC0B01E25A4F70B00D21482 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -533,6 +539,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FFBC3EF0260F298800211A0B /* areaCheck@3x.png */,
+				FFBC3EEB260F298300211A0B /* areaCheck@2x.png */,
+				FFBC3EE6260F297E00211A0B /* areaCheck@1x.png */,
 				FFBC3EDA260C8CE000211A0B /* Delete@0.75.png */,
 				FFBC3ED5260C8CB900211A0B /* Delete@1x.png */,
 				FFECAAFE2604BCE400E5B641 /* spongeEmail@1x.png */,
@@ -818,6 +827,7 @@
 				FFD33DF125FF8167003C3AE9 /* eye@1x.png in Resources */,
 				D153B1AA2563F8C200C612CD /* kakao_login.png in Resources */,
 				FFECAAFF2604BCE400E5B641 /* spongeEmail@1x.png in Resources */,
+				FFBC3EEC260F298300211A0B /* areaCheck@2x.png in Resources */,
 				FF3D1A4525D96AF500BFB82C /* squarebox@2x.png in Resources */,
 				FFBA6F2D25C7F891004783C6 /* RedEllipse@3x.png in Resources */,
 				FF24260525E12B5600A76850 /* user@3x.png in Resources */,
@@ -844,6 +854,7 @@
 				FF4396F025F244A5009E0251 /* Areapin@3x.png in Resources */,
 				FF4CE66B25EA6B6A00C0ACF8 /* Favorite_fill@3x.png in Resources */,
 				FF5D961125FA3ACE00104C16 /* filter@2x.png in Resources */,
+				FFBC3EE7260F297F00211A0B /* areaCheck@1x.png in Resources */,
 				FF3D1A4725D96AFA00BFB82C /* squarebox@3x.png in Resources */,
 				FF2425F125E11EC700A76850 /* calendar@2x.png in Resources */,
 				FF331D8E259B34BD00BD8C33 /* Roboto-Medium.ttf in Resources */,
@@ -854,6 +865,7 @@
 				FFECAB66260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib in Resources */,
 				85BC73F625A9930B005830A1 /* .swiftlint.yml in Resources */,
 				FF24260025E12B5000A76850 /* user@2x.png in Resources */,
+				FFBC3EF1260F298800211A0B /* areaCheck@3x.png in Resources */,
 				FF331D89259B34BD00BD8C33 /* Roboto-Regular.ttf in Resources */,
 				FFC0B02525A4F70C00D21482 /* NotoSansKR-Black.otf in Resources */,
 				FFF5212125C963B500ED7660 /* RedCheck@2x.png in Resources */,

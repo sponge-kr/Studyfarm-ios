@@ -18,6 +18,7 @@ class AreaSearchViewController: UIViewController {
     @IBOutlet weak var areaCityTagButtonOne: UIButton!
     @IBOutlet weak var areaCityTagButtonTwo: UIButton!
     public var count = 0
+    public var areaCityisSelect: Bool = false
     public var selectItem = 0
     public var CityData = [StateCityContentContainer]()
     public var cityChildrenData = [StateCityChildrenContainer]()
@@ -25,6 +26,7 @@ class AreaSearchViewController: UIViewController {
         super.viewDidLoad()
         self.setInitLayout()
         self.getApiAreaCode()
+        self.getApiCityCode()
         let nibName = UINib(nibName: "AreaSearchCollectionViewCell", bundle: nil)
         self.areaSearchCollectionView.register(nibName, forCellWithReuseIdentifier: "AreaSearchCell")
         let AreaCitynibName = UINib(nibName: "AreaCityCollectionViewCell", bundle: nil)
@@ -59,6 +61,7 @@ class AreaSearchViewController: UIViewController {
         self.areaSearchCollectionView.allowsMultipleSelection = true
         self.areaCityCollectionView.allowsMultipleSelection = true
         self.areaCityCollectionView.canCancelContentTouches = true
+        self.areaCityCollectionView.allowsMultipleSelection = false
         self.areaCityTagButtonOne.layer.borderWidth = 1
         self.areaCityTagButtonOne.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
         self.areaCityTagButtonOne.backgroundColor = UIColor.white
@@ -115,7 +118,12 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
         if collectionView == self.areaSearchCollectionView {
             let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
             AreaSearchcell?.areaTitleButton.setTitle("\(self.CityData[indexPath.item].short_name!)", for: .normal)
-            
+            if indexPath.item == 0 {
+                AreaSearchcell?.areaTitleButton.isSelected = true
+                AreaSearchcell?.areaTitleButton.layer.borderWidth = 1
+                AreaSearchcell?.areaTitleButton.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
+                AreaSearchcell?.areaTitleButton.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
+            }
             return AreaSearchcell!
         } else {
             let AreaCitycell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaCityCell", for: indexPath) as? AreaCityCollectionViewCell
@@ -127,20 +135,19 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.areaSearchCollectionView {
+            let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
             let cellItems = collectionView.indexPathsForSelectedItems
             self.count = cellItems!.count
             DispatchQueue.main.async {
                 self.selectItem = indexPath.item
-                print("보내지는 SelectItem 값 입니다\(self.selectItem)")
+                print("보내지는 SelectItem 값 입니다\(self.count)")
                 self.getApiCityCode()
                 self.areaCityCollectionView.reloadData()
             }
-//            if cellItems!.count == 2 {
-//                self.areaSearchCollectionView.isUserInteractionEnabled = false
-//            } else {
-                collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-//            }
+            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+
         } else {
+            let AreaCitycell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaCityCell", for: indexPath) as? AreaCityCollectionViewCell
             if self.selectItem == 0 {
                 self.areaCityTagButtonOne.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
                 self.areaCityTagButtonOne.isHidden = false
@@ -150,6 +157,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 self.areaCityTagButtonTwo.isHidden = false
                 self.areaCityTagButtonTwo.setNeedsLayout()
             }
+            
         }
     }
     
@@ -161,14 +169,14 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
         if collectionView == self.areaSearchCollectionView {
             return CGSize(width: 57, height: 32)
         } else {
-            return CGSize(width: 38, height: 16)
+            return CGSize(width: 90, height: 16)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == self.areaSearchCollectionView {
             return 20
         } else {
-            return 40
+            return 10
         }
     }
     

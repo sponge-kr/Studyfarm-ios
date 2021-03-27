@@ -11,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AreaSearchCell" id="gTV-IL-0wX" customClass="AreaSearchCollectionViewCell" customModule="스터디팜" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="57" height="32"/>
+            <rect key="frame" x="0.0" y="0.0" width="61" height="32"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="57" height="32"/>
+                <rect key="frame" x="0.0" y="0.0" width="61" height="32"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDG-dY-bcT">
-                        <rect key="frame" x="0.0" y="0.0" width="57" height="32"/>
+                        <rect key="frame" x="0.0" y="0.0" width="61" height="32"/>
                     </button>
                 </subviews>
             </view>
@@ -32,7 +32,7 @@
             <connections>
                 <outlet property="areaTitleButton" destination="eDG-dY-bcT" id="Zgz-5F-Mot"/>
             </connections>
-            <point key="canvasLocation" x="121.73913043478262" y="46.875"/>
+            <point key="canvasLocation" x="121.0144927536232" y="46.875"/>
         </collectionViewCell>
     </objects>
 </document>
