@@ -17,9 +17,9 @@ class AreaSearchViewController: UIViewController {
     @IBOutlet weak var areaSearchConfirmButton: UIButton!
     @IBOutlet weak var areaCityTagButtonOne: UIButton!
     @IBOutlet weak var areaCityTagButtonTwo: UIButton!
-    public var count = 0
-    public var areaCityisSelect: Bool = false
-    public var selectItem = 0
+    public var count: Int = 0
+    public var selectItem: Int = 0
+    public var citySelctItem: Int = 0
     public var CityData = [StateCityContentContainer]()
     public var cityChildrenData = [StateCityChildrenContainer]()
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class AreaSearchViewController: UIViewController {
         self.areaCityCollectionView.delegate = self
         self.areaCityCollectionView.dataSource = self
     }
-    
+ 
     private func setInitLayout() {
         let navigationAttribute = NSMutableAttributedString()
         navigationAttribute.append(NSAttributedString(string: "지역 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
@@ -88,6 +88,7 @@ class AreaSearchViewController: UIViewController {
     public func getApiCityCode() {
         DispatchQueue.main.async {
             UtilApi.shared.UtilStatesCiteCodeCall { result in
+                
                 self.cityChildrenData = result[self.selectItem].children!
                 print("데이터 테스트 \(self.cityChildrenData)")
                 self.areaCityCollectionView.reloadData()
@@ -118,52 +119,51 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
         if collectionView == self.areaSearchCollectionView {
             let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
             AreaSearchcell?.areaTitleButton.setTitle("\(self.CityData[indexPath.item].short_name!)", for: .normal)
-            if indexPath.item == 0 {
-                AreaSearchcell?.areaTitleButton.isSelected = true
-                AreaSearchcell?.areaTitleButton.layer.borderWidth = 1
-                AreaSearchcell?.areaTitleButton.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
-                AreaSearchcell?.areaTitleButton.setTitleColor(UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0), for: .selected)
-            }
+                let indexPath:IndexPath = IndexPath(row: 0, section: 0)
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+                AreaSearchcell?.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
             return AreaSearchcell!
         } else {
             let AreaCitycell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaCityCell", for: indexPath) as? AreaCityCollectionViewCell
             AreaCitycell?.areaCityTitleButton.setTitle("\(self.cityChildrenData[indexPath.item].name!)", for: .normal)
+//            if self.selectItem == UserDefaults.standard.integer(forKey: "areaSearchItem") &&
+//                self.citySelctItem ==  UserDefaults.standard.integer(forKey: "areaCityItem") {
+//                AreaCitycell?.isSelected = true
+//            }
             return AreaCitycell!
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.areaSearchCollectionView {
-            let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
             let cellItems = collectionView.indexPathsForSelectedItems
             self.count = cellItems!.count
             DispatchQueue.main.async {
+                print("indexPath\(indexPath)")
                 self.selectItem = indexPath.item
-                print("보내지는 SelectItem 값 입니다\(self.count)")
+                UserDefaults.standard.set(self.selectItem, forKey: "areaSearchItem")
+                print("전달되는 selectitem \(self.selectItem)")
                 self.getApiCityCode()
                 self.areaCityCollectionView.reloadData()
+                collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
             }
-            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-
         } else {
-            let AreaCitycell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaCityCell", for: indexPath) as? AreaCityCollectionViewCell
-            if self.selectItem == 0 {
-                self.areaCityTagButtonOne.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
-                self.areaCityTagButtonOne.isHidden = false
-                self.areaCityTagButtonOne.setNeedsLayout()
-            } else {
-                self.areaCityTagButtonTwo.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
-                self.areaCityTagButtonTwo.isHidden = false
-                self.areaCityTagButtonTwo.setNeedsLayout()
-            }
-            
+            let areaCityCell = collectionView.cellForItem(at: indexPath) as? AreaCityCollectionViewCell
+            self.citySelctItem = indexPath.item
+            UserDefaults.standard.set(self.citySelctItem, forKey: "areaCityItem")
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
+        if self.count >= 2 {
+            if collectionView == self.areaSearchCollectionView {
+                let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
+                collectionView.deselectItem(at: indexPath, animated: true)
+                
+            }
+        }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.areaSearchCollectionView {

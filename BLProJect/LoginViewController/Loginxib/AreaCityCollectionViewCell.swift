@@ -45,8 +45,8 @@ class AreaCityCollectionViewCell: UICollectionViewCell {
 
 extension UIButton {
   func imageToRight() {
-      transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-      titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-      imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    self.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    self.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    self.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
   }
 }

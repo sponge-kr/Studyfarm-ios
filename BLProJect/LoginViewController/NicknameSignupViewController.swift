@@ -196,11 +196,11 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         } else {
             self.isCheck = true
             self.isAllSelect()
-            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
-            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
-            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
-            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
-            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
         }
     }
     
@@ -214,7 +214,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         } else {
             sender.isSelected = true
             self.isEnabledConfrimButton()
-            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
         }
     }
     
@@ -227,7 +227,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         } else {
             sender.isSelected = true
             self.isEnabledConfrimButton()
-            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
         }
     }
     
@@ -238,7 +238,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
-            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
         }
     }
     
@@ -249,7 +249,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
-            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "squarebox.png"), for: .selected)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
         }
     }
     
