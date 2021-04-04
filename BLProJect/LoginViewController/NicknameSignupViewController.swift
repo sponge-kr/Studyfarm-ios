@@ -89,35 +89,35 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         self.UserAgreementView.agreementTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
         self.UserAgreementView.agreementTitleLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.UserAgreementView.agreementTitleLabel.textAlignment = .left
-        self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         self.UserAgreementView.agreementFullButton.addTarget(self, action: #selector(didTapFullAgreementCheck(_:)), for: .touchUpInside)
         self.UserAgreementView.agreementFullTitleLabel.attributedText = NSAttributedString(string: "전체 동의", attributes: [NSAttributedString.Key.kern: -0.88])
         self.UserAgreementView.agreementFullTitleLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.UserAgreementView.agreementFullTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 16)
         self.UserAgreementView.agreementFullTitleLabel.textAlignment = .left
         self.UserAgreementView.agreementLineView.backgroundColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0)
-        self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         self.UserAgreementView.agreementServiceButton.addTarget(self, action: #selector(didTapServiceAgreementCheck(_:)), for: .touchUpInside)
         self.UserAgreementView.agreementServiceLabel.attributedText = NSAttributedString(string: "스터디팜 이용약관 동의 [필수]", attributes: [NSAttributedString.Key.kern: -0.77])
         self.UserAgreementView.agreementServiceLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.UserAgreementView.agreementServiceLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.UserAgreementView.agreementServiceDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,NSAttributedString.Key.kern: -0.66]), for: .normal)
         self.UserAgreementView.agreementServiceDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
-        self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         self.UserAgreementView.agreementPrivacyButton.addTarget(self, action: #selector(didTapPrivacyAgreementCheck(_:)), for: .touchUpInside)
         self.UserAgreementView.agreementPrivacyLabel.attributedText = NSAttributedString(string: "개인정보 수집이용 동의 [필수]", attributes: [NSAttributedString.Key.kern: -0.77])
         self.UserAgreementView.agreementPrivacyLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.UserAgreementView.agreementPrivacyLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.UserAgreementView.agreementPrivacyDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.66]), for: .normal)
         self.UserAgreementView.agreementPrivacyDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
-        self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         self.UserAgreementView.agreementPrivacyPrivateButton.addTarget(self, action: #selector(didTapPrivacePrivateAgreementCheck(_:)), for: .touchUpInside)
         self.UserAgreementView.agreementPrivacyPrivateLabel.attributedText = NSAttributedString(string: "개인정보 수집이용 동의 [선택]", attributes: [NSAttributedString.Key.kern: -0.77])
         self.UserAgreementView.agreementPrivacyPrivateLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.UserAgreementView.agreementPrivacyPrivateLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.UserAgreementView.agreementPrivacyPrivateDetailButton.setAttributedTitle(NSAttributedString(string: "자세히", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12),NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.66]), for: .normal)
         self.UserAgreementView.agreementPrivacyPrivateDetailButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
-        self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+        self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         self.UserAgreementView.agreementMarketingButton.addTarget(self, action: #selector(didTapMarketingAgreementCheck(_:)), for: .touchUpInside)
         self.UserAgreementView.agreementMarketingLabel.attributedText = NSAttributedString(string: "마케팅 정보 수신 동의 [선택]", attributes: [NSAttributedString.Key.kern: -0.77])
         self.UserAgreementView.agreementMarketingLabel.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
@@ -171,7 +171,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
     public func isCheckFullAgreement() {
         if self.UserAgreementView.agreementServiceButton.isSelected == false || self.UserAgreementView.agreementPrivacyButton.isSelected == false || self.UserAgreementView.agreementPrivacyPrivateButton.isSelected == false || self.UserAgreementView.agreementMarketingButton.isSelected == false {
             self.UserAgreementView.agreementFullButton.isSelected = false
-            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         }
     }
     
@@ -188,11 +188,11 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         if sender.isSelected {
             self.isCheck = false
             self.isAllSelect()
-            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
-            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
-            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
-            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
-            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementFullButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         } else {
             self.isCheck = true
             self.isAllSelect()
@@ -210,7 +210,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             sender.isSelected = false
             self.isEnabledConfrimButton()
             self.isCheckFullAgreement()
-            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementServiceButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
             self.isEnabledConfrimButton()
@@ -223,7 +223,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
             sender.isSelected = false
             self.isEnabledConfrimButton()
             self.isCheckFullAgreement()
-            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
             self.isEnabledConfrimButton()
@@ -235,7 +235,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         if sender.isSelected {
             sender.isSelected = false
             self.isCheckFullAgreement()
-            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
             self.UserAgreementView.agreementPrivacyPrivateButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
@@ -246,7 +246,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
         if sender.isSelected {
             sender.isSelected = false
             self.isCheckFullAgreement()
-            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "Rectangle.png"), for: .normal)
+            self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "CheckRectangle.png"), for: .normal)
         } else {
             sender.isSelected = true
             self.UserAgreementView.agreementMarketingButton.setImage(UIImage(named: "selectbox.png"), for: .selected)
