@@ -185,7 +185,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 switch result {
                 case.success(let value):
                     if value.code == 401 {
-                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hyunKim", service_use_agree: true)
+                        let kakaoParamter = KakaoUserParamter(nickname: value.nickname, service_use_agree: true)
                         OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result {
                             case.success(let value):
@@ -212,7 +212,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .success(let value):
                     print("네이버 로그인 테스트 \(value.code)")
                     if value.code == 401 {
-                        let naverParamter = NaverUserParamter(nickname: "Do-hyunkim", service_use_agree: true)
+                        let naverParamter = NaverUserParamter(nickname: value.nickname, service_use_agree: true)
                         OAuthApi.shared.AuthNaverSignUp(NaverUserParamter: naverParamter) { result in
                             switch result {
                             case .success(let value):

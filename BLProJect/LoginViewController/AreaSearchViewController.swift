@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class AreaSearchViewController: UIViewController {
     
     @IBOutlet weak var areaSearchSubTitleLabel: UILabel!
@@ -18,8 +17,10 @@ class AreaSearchViewController: UIViewController {
     @IBOutlet weak var areaCityTagButtonOne: UIButton!
     @IBOutlet weak var areaCityTagButtonTwo: UIButton!
     public var count: Int = 0
+    public var cityCount: Int = 0
     public var selectItem: Int = 0
-    public var firstSelect: Int = 0
+    public var deselectItem: Int = 0
+    public var thirdselectedIndexes = [IndexPath]()
     public var citySelctItem: Int = 0
     public var CityData = [StateCityContentContainer]()
     public var cityChildrenData = [StateCityChildrenContainer]()
@@ -44,7 +45,7 @@ class AreaSearchViewController: UIViewController {
             areaSearchCell?.isSelected = true
         }
     }
-
+    
     private func setInitLayout() {
         let navigationAttribute = NSMutableAttributedString()
         navigationAttribute.append(NSAttributedString(string: "지역 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
@@ -121,23 +122,42 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
             return self.cityChildrenData.count
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.areaSearchCollectionView {
             let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
             AreaSearchcell?.areaTitleButton.setTitle("\(self.CityData[indexPath.item].short_name!)", for: .normal)
-            self.firstSelect = indexPath.item
+            UserDefaults.standard.set(self.CityData[0].short_name, forKey: "first_name")
             return AreaSearchcell!
         } else {
             let AreaCitycell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaCityCell", for: indexPath) as? AreaCityCollectionViewCell
+            print("테스트 City index \(self.thirdselectedIndexes)")
             AreaCitycell?.areaCityTitleButton.setTitle("\(self.cityChildrenData[indexPath.item].name!)", for: .normal)
-            indexPath.forEach { (i) in
-                if self.cityChildrenData[i].name == UserDefaults.standard.string(forKey: "areaCityItem") {
-                    AreaCitycell?.isSelected = true
-                } else {
-                    AreaCitycell?.isSelected = false
+            
+            if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == false {
+                if self.areaCityTagButtonOne.titleLabel?.text!.components(separatedBy: " ")[0] == "서울"  && self.areaCityTagButtonTwo.titleLabel?.text!.components(separatedBy: " ")[0] == "서울" && self.CityData[selectItem].code! - 1  == 0 {
+                    collectionView.selectItem(at: self.thirdselectedIndexes.first, animated: true, scrollPosition: .init())
+                    collectionView.selectItem(at: self.thirdselectedIndexes.last, animated: true, scrollPosition: .init())
+                } else if self.areaCityTagButtonOne.titleLabel?.text!.components(separatedBy: " ")[0] == "부산"  && self.areaCityTagButtonTwo.titleLabel?.text!.components(separatedBy: " ")[0] == "부산" && self.CityData[selectItem].code! - 1  == 1  {
+                    collectionView.selectItem(at: self.thirdselectedIndexes.first, animated: true, scrollPosition: .init())
+                    collectionView.selectItem(at: self.thirdselectedIndexes.last, animated: true, scrollPosition: .init())
+                    
+                } else if self.areaCityTagButtonOne.titleLabel?.text?.components(separatedBy: " ")[0] == "서울" && self.areaCityTagButtonTwo.titleLabel?.text!.components(separatedBy: " ")[0] == "부산" {
+                    if self.CityData[selectItem].code! - 1  == 0 {
+                        collectionView.selectItem(at: self.thirdselectedIndexes.first, animated: true, scrollPosition: .init())
+                    } else if self.CityData[selectItem].code! - 1  == 1 {
+                        collectionView.selectItem(at: self.thirdselectedIndexes.last, animated: true, scrollPosition: .init())
+                    }
+                } else if self.areaCityTagButtonOne.titleLabel?.text?.components(separatedBy: " ")[0] == "부산" && self.areaCityTagButtonTwo.titleLabel?.text?.components(separatedBy: " ")[0] == "서울" {
+                    if self.CityData[selectItem].code! - 1  == 1 {
+                        collectionView.selectItem(at: self.thirdselectedIndexes.first, animated: true, scrollPosition: .init())
+                    } else if self.CityData[selectItem].code! - 1  == 0 {
+                        collectionView.selectItem(at: self.thirdselectedIndexes.last, animated: true, scrollPosition: .init())
+                    }
                 }
             }
+                
+            
             return AreaCitycell!
         }
     }
@@ -148,9 +168,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
             let cellItems = collectionView.indexPathsForSelectedItems
             self.count = cellItems!.count
             DispatchQueue.main.async {
-                print("indexPath\(indexPath)")
                 self.selectItem = indexPath.item
-                UserDefaults.standard.set(self.selectItem, forKey: "areaSeachItem")
                 print("전달되는 selectitem \(self.selectItem)")
                 self.getApiCityCode()
                 collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -160,22 +178,98 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
             }
         } else {
             let areaCityCell = collectionView.cellForItem(at: indexPath) as? AreaCityCollectionViewCell
+            self.cityCount = collectionView.indexPathsForSelectedItems!.count
             self.citySelctItem = indexPath.item
-            print("클릭 넘겨지는 데이터 \(self.cityChildrenData[indexPath.item].name)")
-            UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "areaCityItem")
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if self.count >= 2 {
-            if collectionView == self.areaSearchCollectionView {
-                let AreaSearchcell = collectionView.dequeueReusableCell(withReuseIdentifier: "AreaSearchCell", for: indexPath) as? AreaSearchCollectionViewCell
-                collectionView.deselectItem(at: indexPath, animated: true)
-                
+            
+            print("select count값 입니다 \(self.cityCount)")
+            if self.areaCityTagButtonOne.isHidden == true && self.areaCityTagButtonTwo.isHidden == true {
+                self.areaCityTagButtonOne.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
+                self.thirdselectedIndexes.append(indexPath)
+                self.areaCityTagButtonOne.isHidden = false
+                self.areaCityTagButtonOne.setNeedsLayout()
+                UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "first")
+                UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "first_name")
+            } else if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == true {
+                self.areaCityTagButtonTwo.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
+                self.thirdselectedIndexes.append(indexPath)
+                self.areaCityTagButtonTwo.isHidden = false
+                self.areaCityTagButtonTwo.setNeedsLayout()
+                UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
+                UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
+            }
+            
+            if self.areaCityTagButtonOne.isHidden == true && self.areaCityTagButtonTwo.isHidden == false {
+                self.areaCityTagButtonOne.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
+                if self.thirdselectedIndexes.count == 1 {
+                    self.thirdselectedIndexes.insert(indexPath, at: 0)
+                }
+                self.areaCityTagButtonOne.isHidden = false
+                self.areaCityTagButtonOne.setNeedsLayout()
+            } else if self.areaCityTagButtonOne.isHidden == true && self.areaCityTagButtonTwo.isHidden == false {
+                self.areaCityTagButtonTwo.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
+                self.thirdselectedIndexes.append(indexPath)
+                self.areaCityTagButtonTwo.isHidden = false
+                self.areaCityTagButtonTwo.setNeedsLayout()
+                UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
+                UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
             }
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == self.areaSearchCollectionView {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        } else if collectionView == self.areaCityCollectionView {
+            let areacityCell = collectionView.cellForItem(at: indexPath) as? AreaCityCollectionViewCell
+            let count = collectionView.indexPathsForSelectedItems!.count
+            self.deselectItem = count
+            
+            if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == false {
+                if self.thirdselectedIndexes.first! == indexPath || self.areaCityTagButtonOne.titleLabel?.text?.components(separatedBy: " ")[1] == self.cityChildrenData[indexPath.item].name {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonOne.isHidden = true
+                    self.thirdselectedIndexes.removeFirst()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                } else {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonTwo.isHidden = true
+                    self.thirdselectedIndexes.removeLast()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                }
+            } else if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == true {
+                if self.thirdselectedIndexes.first == indexPath {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonOne.isHidden = true
+                    self.thirdselectedIndexes.removeFirst()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                } else {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonTwo.isHidden = true
+                    self.thirdselectedIndexes.removeLast()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                }
+            } else {
+                if self.thirdselectedIndexes.first == indexPath {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonOne.isHidden = true
+                    self.thirdselectedIndexes.removeFirst()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                } else {
+                    areacityCell?.isSelected = false
+                    self.areaCityTagButtonTwo.isHidden = true
+                    self.thirdselectedIndexes.removeLast()
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView == self.areaCityCollectionView {
+            return (collectionView.indexPathsForSelectedItems?.count ?? 0) < 2
+        }
+        return true
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.areaSearchCollectionView {

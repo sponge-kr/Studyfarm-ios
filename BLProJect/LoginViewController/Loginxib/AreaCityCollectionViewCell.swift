@@ -10,8 +10,7 @@ import UIKit
 
 class AreaCityCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var areaCityTitleButton: UIButton!
-    
+    @IBOutlet weak var areaCityTitleButton: UIButton!    
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -38,6 +37,15 @@ class AreaCityCollectionViewCell: UICollectionViewCell {
         self.areaCityTitleButton.setTitleColor(UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0
         ), for: .normal)
         self.contentView.isUserInteractionEnabled = false
+    }
+    
+    public func setSelected(isSelcted: Bool, indexPath : IndexPath) {
+        for i in 0...1 {
+            if indexPath.item == UserDefaults.standard.array(forKey: "select_Index")![i] as! Int{
+                self.areaCityTitleButton.isSelected = isSelcted
+                self.isSelected = isSelcted
+            }
+        }
     }
 
 }

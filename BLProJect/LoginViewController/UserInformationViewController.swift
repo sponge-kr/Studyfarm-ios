@@ -92,6 +92,10 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInformationareatitle.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInformationareatitle.textAlignment = .left
         self.userInformationareaAddbtn.setAttributedTitle(NSAttributedString(string: "추가하기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
+        self.userInformationareaAddbtn.setImage(UIImage(named: "addCircle.png"), for: .normal)
+        self.userInformationareaAddbtn.contentHorizontalAlignment = .right
+        self.userInformationareaAddbtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        self.userInformationareaAddbtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 36)
         self.userInformationareaAddbtn.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInformationareaAddbtn.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
         self.userInformationareaAddbtn.layer.cornerRadius = 4
@@ -110,6 +114,10 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInformationInterestingStudyButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInformationInterestingStudyButton.layer.cornerRadius = 4
         self.userInformationInterestingStudyButton.layer.masksToBounds = true
+        self.userInformationInterestingStudyButton.setImage(UIImage(named: "addCircle.png"), for: .normal)
+        self.userInformationInterestingStudyButton.contentHorizontalAlignment = .right
+        self.userInformationInterestingStudyButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 140)
+        self.userInformationInterestingStudyButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 136)
     }
     
     private func birthDayViewInit() {

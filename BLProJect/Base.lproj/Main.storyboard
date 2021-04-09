@@ -2636,7 +2636,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="SignView" storyboardName="SignupViewController" referencedIdentifier="SignView" id="YwX-7n-TRn" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpU-hR-oxN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-868" y="-400"/>
+            <point key="canvasLocation" x="-820" y="-400"/>
         </scene>
         <!--EmailView-->
         <scene sceneID="1rY-PG-tKy">
@@ -2738,7 +2738,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="areaCityCollectionView" destination="orT-hj-vxK" id="s2h-Ka-ngd"/>
+                        <outlet property="areaCityCollectionView" destination="orT-hj-vxK" id="0U0-sP-v7w"/>
                         <outlet property="areaCityTagButtonOne" destination="yeK-Do-Zb6" id="F5W-vd-2qB"/>
                         <outlet property="areaCityTagButtonTwo" destination="dOB-Ev-VEi" id="ayJ-pQ-bUM"/>
                         <outlet property="areaSearchCollectionView" destination="kbu-7A-lgK" id="CdI-7C-ES7"/>
@@ -2748,7 +2748,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ba1-Qi-7OS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256.521739130435" y="-1090.1785714285713"/>
+            <point key="canvasLocation" x="1430" y="-597"/>
+        </scene>
+        <!--Interest Field View Controller-->
+        <scene sceneID="l9G-mW-qfY">
+            <objects>
+                <viewController id="5q2-tl-3Lr" customClass="InterestFieldViewController" customModule="스터디팜" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ea1-vr-i54">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="HHa-FW-rIA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2dW-Qu-5af" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2167" y="-597"/>
         </scene>
         <!--UserInformation-->
         <scene sceneID="C6r-pz-cZd">
