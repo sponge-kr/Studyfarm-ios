@@ -2655,7 +2655,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbM-38-KfA">
-                                <rect key="frame" x="20" y="109" width="250" height="40"/>
+                                <rect key="frame" x="20" y="74" width="250" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="SUp-Ak-A25"/>
                                     <constraint firstAttribute="width" constant="250" id="egE-rB-slJ"/>
@@ -2665,10 +2665,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kbu-7A-lgK">
-                                <rect key="frame" x="10" y="169" width="394" height="76"/>
+                                <rect key="frame" x="10" y="134" width="394" height="55"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="7VS-WP-Gi0"/>
+                                    <constraint firstAttribute="height" constant="55" id="7VS-WP-Gi0"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iky-1g-Edb">
                                     <size key="itemSize" width="128" height="128"/>
@@ -2678,7 +2678,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U0q-ZI-lzN" customClass="AreaSearchCollectionViewCell" customModule="스터디팜" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-26" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="-36.5" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Llz-Wx-iXR">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -2687,16 +2687,17 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-0z-ETW">
-                                <rect key="frame" x="10" y="770" width="394" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bp-0z-ETW">
+                                <rect key="frame" x="10" y="660" width="394" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="jPJ-w7-geA"/>
+                                </constraints>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="orT-hj-vxK">
-                                <rect key="frame" x="0.0" y="267" width="414" height="393"/>
+                                <rect key="frame" x="0.0" y="211" width="414" height="360"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="393" id="shq-9U-v91"/>
+                                    <constraint firstAttribute="height" constant="360" id="shq-9U-v91"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hAs-OP-DXp">
                                     <size key="itemSize" width="128" height="128"/>
@@ -2713,34 +2714,57 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="W22-gd-W3g" customClass="AreaEmptyCollectionViewCell" customModule="스터디팜" customModuleProvider="target">
+                                        <rect key="frame" x="253" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ht5-Rc-CiR">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeK-Do-Zb6">
-                                <rect key="frame" x="20" y="704" width="115" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeK-Do-Zb6">
+                                <rect key="frame" x="20" y="591" width="115" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="X3q-c3-ksS"/>
+                                    <constraint firstAttribute="width" constant="115" id="wOy-im-5OU"/>
+                                </constraints>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOB-Ev-VEi">
-                                <rect key="frame" x="159" y="704" width="109" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOB-Ev-VEi">
+                                <rect key="frame" x="147" y="591" width="115" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="F7z-uI-eUN"/>
+                                    <constraint firstAttribute="width" constant="115" id="RcA-RZ-9Wt"/>
+                                </constraints>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qet-e4-Dii"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="orT-hj-vxK" firstAttribute="trailing" secondItem="Qet-e4-Dii" secondAttribute="trailing" id="0pC-q5-Oli"/>
+                            <constraint firstItem="0bp-0z-ETW" firstAttribute="top" secondItem="yeK-Do-Zb6" secondAttribute="bottom" constant="35" id="9YF-oa-7zJ"/>
                             <constraint firstItem="lbM-38-KfA" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="20" id="Csm-zn-Li8"/>
+                            <constraint firstItem="0bp-0z-ETW" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="10" id="DU9-Fa-sAr"/>
+                            <constraint firstItem="dOB-Ev-VEi" firstAttribute="leading" secondItem="yeK-Do-Zb6" secondAttribute="trailing" constant="12" id="JCr-SQ-vUP"/>
                             <constraint firstItem="kbu-7A-lgK" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="10" id="QRX-Rc-5s9"/>
                             <constraint firstItem="kbu-7A-lgK" firstAttribute="top" secondItem="lbM-38-KfA" secondAttribute="bottom" constant="20" id="VWu-dW-5gf"/>
+                            <constraint firstItem="yeK-Do-Zb6" firstAttribute="top" secondItem="orT-hj-vxK" secondAttribute="bottom" constant="20" id="WVJ-QF-9gT"/>
                             <constraint firstItem="Qet-e4-Dii" firstAttribute="trailing" secondItem="kbu-7A-lgK" secondAttribute="trailing" constant="10" id="WYG-Fu-TbV"/>
+                            <constraint firstItem="Qet-e4-Dii" firstAttribute="trailing" secondItem="0bp-0z-ETW" secondAttribute="trailing" constant="10" id="Ypu-Dd-DTe"/>
                             <constraint firstItem="orT-hj-vxK" firstAttribute="top" secondItem="kbu-7A-lgK" secondAttribute="bottom" constant="22" id="c3v-wI-fnL"/>
-                            <constraint firstItem="lbM-38-KfA" firstAttribute="top" secondItem="Qet-e4-Dii" secondAttribute="top" constant="65" id="l4w-fq-R64"/>
+                            <constraint firstItem="yeK-Do-Zb6" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" constant="20" id="etK-tw-Kny"/>
+                            <constraint firstItem="lbM-38-KfA" firstAttribute="top" secondItem="Qet-e4-Dii" secondAttribute="top" constant="30" id="l4w-fq-R64"/>
                             <constraint firstItem="orT-hj-vxK" firstAttribute="leading" secondItem="Qet-e4-Dii" secondAttribute="leading" id="lUL-Vk-Qu3"/>
+                            <constraint firstItem="dOB-Ev-VEi" firstAttribute="top" secondItem="orT-hj-vxK" secondAttribute="bottom" constant="20" id="tjj-Tn-X0b"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="areaCityCollectionView" destination="orT-hj-vxK" id="0U0-sP-v7w"/>
+                        <outlet property="areaCityTagButtonConstraintWidth" destination="wOy-im-5OU" id="xRM-KK-yIr"/>
                         <outlet property="areaCityTagButtonOne" destination="yeK-Do-Zb6" id="F5W-vd-2qB"/>
                         <outlet property="areaCityTagButtonTwo" destination="dOB-Ev-VEi" id="ayJ-pQ-bUM"/>
+                        <outlet property="areaCityTagTwoButtonConstraintWidth" destination="RcA-RZ-9Wt" id="83d-TX-QHd"/>
                         <outlet property="areaSearchCollectionView" destination="kbu-7A-lgK" id="CdI-7C-ES7"/>
                         <outlet property="areaSearchConfirmButton" destination="0bp-0z-ETW" id="1sk-FP-zYE"/>
                         <outlet property="areaSearchSubTitleLabel" destination="lbM-38-KfA" id="Oj8-ts-hzy"/>

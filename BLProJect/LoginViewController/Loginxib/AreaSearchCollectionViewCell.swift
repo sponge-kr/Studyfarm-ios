@@ -39,5 +39,10 @@ class AreaSearchCollectionViewCell: UICollectionViewCell {
         self.areaTitleButton.layer.masksToBounds = true
         self.contentView.isUserInteractionEnabled = false
     }
+    public func setSelectLayout(indexPath : Int) {
+        if indexPath >= 3 {
+            self.areaTitleButton.setTitleColor(UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1.0), for: .selected)
+        }
+    }
     
 }

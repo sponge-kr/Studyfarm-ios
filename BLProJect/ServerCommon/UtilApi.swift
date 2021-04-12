@@ -92,6 +92,12 @@ struct StudyContentsContainer: Codable {
         self.children = try? values.decode([StudyChildrenContainer].self, forKey: .children)
     }
 }
+struct AreaApplySendResponse: Codable {
+    var code: Int
+    var message: String
+}
+
+
 struct StudyChildrenContainer: Codable {
     var code: Int?
     var name: String?
@@ -101,6 +107,12 @@ struct ResetEmailParamter: Encodable{
 }
 struct AuthEmailSendParamter: Encodable {
     var email: String
+}
+
+struct AreaSendApplyParamter: Encodable {
+    var state_code: Int
+    var city_code: Int
+    var user_seq: Int
 }
 
 
@@ -158,6 +170,24 @@ class UtilApi {
             }
     }
     
+    public func UtilAreaSendApply(AreaSendApplyParamter: AreaSendApplyParamter, completionHandler: @escaping(AreaApplySendResponse) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/utils/propose/local", method: .post, parameters: AreaSendApplyParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let applyData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let applyInstace = try JSONDecoder().decode(AreaApplySendResponse.self, from: applyData)
+                        completionHandler(applyInstace)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
+    
     
     // MARK: - 이메일 전송 함수 구현(POST)
     public func UtilSendResetEmailCall(EmailParamter: AuthEmailSendParamter, completionHandler: @escaping (Result<ResetEmailData,Error>) -> ()) {
@@ -196,6 +226,5 @@ class UtilApi {
                 }
             }
     }
-    
     
 }
