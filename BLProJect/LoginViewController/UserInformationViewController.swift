@@ -24,8 +24,14 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInformationmanTitleLabel: UILabel!
     @IBOutlet weak var userInformationgirlButton: UIButton!
     @IBOutlet weak var userInformationgirlTitleLabel: UILabel!
+    @IBOutlet weak var userInformationAreaSelectionButton: UIButton!
+    @IBOutlet weak var userInformationAreaSelectionButtonTwo: UIButton!
     @IBOutlet var birthdayView: BirthDayView!
     @IBOutlet weak var userInformationInterestingStudyButton: UIButton!
+    @IBOutlet weak var userInformationAreaLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfomationAreaSelectionTwoLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfomationAreaSelectionWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfomationAreaSelectionTwoWidthConstraint: NSLayoutConstraint!
     public let birthDayTitle = ["1980","1981","1982","1983","1984","1985","1986",
                                 "1987","1988","1989","1990","1991","1992","1993",
                                 "1994","1995","1996","1997","1998","1999","2000",
@@ -43,6 +49,12 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initLayout()
+        self.showAreaselectionButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.showAreaselectionButton()
+        
     }
 
     public func initLayout() {
@@ -101,6 +113,24 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInformationareaAddbtn.layer.cornerRadius = 4
         self.userInformationareaAddbtn.layer.masksToBounds = true
         self.userInformationareaAddbtn.addTarget(self, action: #selector(didTapAreaSearchView), for: .touchUpInside)
+        self.userInformationAreaSelectionButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInformationAreaSelectionButton.setAttributedTitle(NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.77,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14)]), for: .normal)
+        self.userInformationAreaSelectionButton.setImage(UIImage(named: "Delete.png"), for: .normal)
+        self.userInformationAreaSelectionButton.contentHorizontalAlignment = .right
+        self.userInformationAreaSelectionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 109, bottom: 0, right: 0)
+        self.userInformationAreaSelectionButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        self.userInformationAreaSelectionButton.layer.cornerRadius = 4
+        self.userInformationAreaSelectionButton.layer.masksToBounds = true
+        self.userInformationAreaSelectionButton.isHidden = true
+        self.userInformationAreaSelectionButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInformationAreaSelectionButtonTwo.setAttributedTitle(NSAttributedString(string: "", attributes: [NSAttributedString.Key.kern: -0.77,NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14)]), for: .normal)
+        self.userInformationAreaSelectionButtonTwo.setImage(UIImage(named: "Delete.png"), for: .normal)
+        self.userInformationAreaSelectionButtonTwo.contentHorizontalAlignment = .right
+        self.userInformationAreaSelectionButtonTwo.imageEdgeInsets = UIEdgeInsets(top: 0, left: 109, bottom: 0, right: 0)
+        self.userInformationAreaSelectionButtonTwo.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        self.userInformationAreaSelectionButtonTwo.layer.cornerRadius = 4
+        self.userInformationAreaSelectionButtonTwo.layer.masksToBounds = true
+        self.userInformationAreaSelectionButtonTwo.isHidden = true
         self.userInformationIntresttitle.textAlignment = .left
         self.userInformationIntresttitle.textColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0)
         self.userInformationIntresttitle.attributedText = NSAttributedString(string: "관심 스터디", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14)])
@@ -118,6 +148,9 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInformationInterestingStudyButton.contentHorizontalAlignment = .right
         self.userInformationInterestingStudyButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 140)
         self.userInformationInterestingStudyButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 136)
+        self.userInformationAreaSelectionButton.addTarget(self, action: #selector(self.didTapAreaInfoDelete(_:)), for: .touchUpInside)
+        self.userInformationAreaSelectionButtonTwo.addTarget(self, action: #selector(self.didTapAreaInfoTwoDelete(_:)), for: .touchUpInside)
+        self.userInformationInterestingStudyButton.addTarget(self, action: #selector(self.didTapShowInterestView), for: .touchUpInside)
     }
     
     private func birthDayViewInit() {
@@ -138,7 +171,46 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.birthdayView.layer.cornerRadius = 8
         self.birthdayView.layer.masksToBounds = true
         self.birthdayView.backgroundColor = UIColor.white
-
+    }
+    
+    public func showAreaselectionButton() {
+        if UserDefaults.standard.string(forKey: "first_name") != nil && UserDefaults.standard.string(forKey: "first_longname") != nil {
+            if UserDefaults.standard.string(forKey: "first_longname")?.count == 4 {
+                self.userInformationAreaSelectionButton.layoutIfNeeded()
+                self.userInfomationAreaSelectionWidthConstraint.constant = 150
+                self.userInformationAreaSelectionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 119, bottom: 0, right: 0)
+            } else {
+                self.userInformationAreaSelectionButton.layoutIfNeeded()
+                self.userInfomationAreaSelectionWidthConstraint.constant = 133
+                self.userInformationAreaSelectionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 109, bottom: 0, right: 0)
+            }
+            self.userInformationareaAddbtn.layoutIfNeeded()
+            self.userInformationAreaLeadingConstraint.constant = 163
+            self.userInformationAreaSelectionButton.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
+            self.userInformationAreaSelectionButton.setTitle("\(UserDefaults.standard.string(forKey: "first_name")!) \(UserDefaults.standard.string(forKey: "first_longname")!)", for: .normal)
+            self.userInformationAreaSelectionButton.isHidden = false
+        }
+        if UserDefaults.standard.string(forKey: "second_name") != nil && UserDefaults.standard.string(forKey: "second_longname") != nil {
+            if UserDefaults.standard.string(forKey: "second_longname")?.count == 4 {
+                self.userInformationAreaSelectionButtonTwo.layoutIfNeeded()
+                self.userInfomationAreaSelectionTwoWidthConstraint.constant = 150
+                self.userInfomationAreaSelectionTwoLeadingConstraint.constant = -110
+                self.userInformationAreaSelectionButtonTwo.imageEdgeInsets = UIEdgeInsets(top: 0, left: 119, bottom: 0, right: 0)
+            } else {
+                self.userInformationAreaSelectionButtonTwo.layoutIfNeeded()
+                self.userInfomationAreaSelectionTwoWidthConstraint.constant = 133
+                self.userInfomationAreaSelectionTwoLeadingConstraint.constant = -110
+                self.userInformationAreaSelectionButtonTwo.imageEdgeInsets = UIEdgeInsets(top: 0, left: 109, bottom: 0, right: 0)
+            }
+            if UserDefaults.standard.string(forKey: "second_longname")?.count == 4 && UserDefaults.standard.string(forKey: "first_longname")?.count == 3  || UserDefaults.standard.string(forKey: "second_longname")?.count == 3 && UserDefaults.standard.string(forKey: "first_longname")?.count == 3 {
+                self.userInfomationAreaSelectionTwoLeadingConstraint.constant = -130
+            }
+            self.userInformationAreaSelectionButtonTwo.isHidden = false
+            self.userInformationareaAddbtn.isHidden = true
+            self.userInformationAreaSelectionButtonTwo.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
+            self.userInformationAreaSelectionButtonTwo.setTitle("\(UserDefaults.standard.string(forKey: "second_name")!) \(UserDefaults.standard.string(forKey: "second_longname")!)", for: .normal)
+            self.userInformationAreaSelectionButtonTwo.isHidden = false
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -155,6 +227,52 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.userInformationbirthdayButton.setTitle(self.birthDayTitle[row], for: .normal)
     }
+    
+    
+    @objc
+    private func didTapAreaInfoDelete(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "first_longname")
+        UserDefaults.standard.removeObject(forKey: "first_name")
+        self.userInformationAreaSelectionButton.isHidden = true
+        self.userInformationareaAddbtn.isHidden = false
+        if self.userInformationAreaSelectionButton.isHidden == true && self.userInformationAreaSelectionButtonTwo.isHidden == true {
+            self.userInformationAreaLeadingConstraint.constant = 20
+        } else if self.userInformationAreaSelectionButtonTwo.isHidden == false && self.userInformationareaAddbtn.isHidden == false {
+            self.userInfomationAreaSelectionTwoLeadingConstraint.constant = -280
+            if UserDefaults.standard.string(forKey: "second_longname")?.count == 4 {
+                self.userInformationAreaLeadingConstraint.constant = 180
+                self.userInfomationAreaSelectionTwoLeadingConstraint.constant = -300
+            } else {
+                self.userInformationAreaLeadingConstraint.constant = 163
+            }
+        }
+    }
+    
+    @objc
+    private func didTapAreaInfoTwoDelete(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "second_longname")
+        UserDefaults.standard.removeObject(forKey: "second_name")
+        self.userInformationAreaSelectionButtonTwo.isHidden = true
+        self.userInformationareaAddbtn.isHidden = false
+        if self.userInformationAreaSelectionButton.isHidden == false {
+            self.userInformationAreaLeadingConstraint.constant = 163
+        }
+        if userInformationAreaSelectionButtonTwo.isHidden == true && self.userInformationAreaSelectionButton.isHidden == true {
+            self.userInformationAreaLeadingConstraint.constant = 20
+        } else if self.userInformationAreaSelectionButtonTwo.isHidden == true && self.userInformationAreaSelectionButton.isHidden == false {
+            self.userInformationAreaLeadingConstraint.constant = 163
+        }
+    }
+    
+    @objc
+    private func didTapShowInterestView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let interestView = storyboard.instantiateViewController(withIdentifier: "InterestView") as? InterestFieldViewController
+        guard let interestVC = interestView else {return}
+        self.navigationController?.pushViewController(interestVC, animated: true)
+    }
+    
+    
     
     @objc
     private func didTapMangender(_ sender: UIButton) {

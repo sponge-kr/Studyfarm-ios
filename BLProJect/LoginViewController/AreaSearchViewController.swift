@@ -83,11 +83,11 @@ class AreaSearchViewController: UIViewController {
     private func setInitLayout() {
         let navigationAttribute = NSMutableAttributedString()
         navigationAttribute.append(NSAttributedString(string: "지역 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
-        navigationAttribute.append(NSAttributedString(string: "  \(self.thirdselectedIndexes.count)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)]))
+        navigationAttribute.append(NSAttributedString(string: "  \(self.deselectItem)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)]))
         navigationAttribute.append(NSAttributedString(string: "/2", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18),NSAttributedString.Key.foregroundColor: UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)]))
         let areaNavigationLabel = UILabel()
         areaNavigationLabel.sizeToFit()
-        areaNavigationLabel.text = "지역 선택  \(self.thirdselectedIndexes.count)/2"
+        areaNavigationLabel.text = "지역 선택  \(self.deselectItem)/2"
         areaNavigationLabel.attributedText = navigationAttribute
         self.navigationItem.titleView = areaNavigationLabel
         self.areaSearchSubTitleLabel.attributedText = NSAttributedString(string: "집, 학교, 직장 등 자주 가는 곳을 설정해주세요.\n선택하신 지역으로 스터디를 찾아드릴게요!", attributes: [NSAttributedString.Key.kern: -0.77])
@@ -268,6 +268,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 self.areaCityTagButtonOne.setNeedsLayout()
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "first")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "first_name")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "first_longname")
             } else if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == true {
                 self.areaCityTagButtonTwo.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
                 self.thirdselectedIndexes.append(indexPath)
@@ -275,6 +276,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 self.areaCityTagButtonTwo.setNeedsLayout()
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "second_longname")
             }
             
             if self.areaCityTagButtonOne.isHidden == true && self.areaCityTagButtonTwo.isHidden == false {
@@ -291,6 +293,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 self.areaCityTagButtonTwo.setNeedsLayout()
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "second_longname")
             }
         }
     }
@@ -364,7 +367,8 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if collectionView == self.areaCityCollectionView {
-            return (collectionView.indexPathsForSelectedItems?.count ?? 0) < 2
+            
+            return (self.thirdselectedIndexes.count ?? 0) < 2
         }
         return true
     }
