@@ -110,6 +110,13 @@
 		FF7CB440261F61E20017783F /* addCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB43F261F61E20017783F /* addCircle@2x.png */; };
 		FF7CB445261F61E70017783F /* addCircle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB444261F61E70017783F /* addCircle@3x.png */; };
 		FF7CB45D2620C4B80017783F /* InterestFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CB45C2620C4B80017783F /* InterestFieldViewController.swift */; };
+		FF7CB46F2626EE730017783F /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CB46D2626EE730017783F /* InterestTableViewCell.swift */; };
+		FF7CB4702626EE730017783F /* InterestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB46E2626EE730017783F /* InterestTableViewCell.xib */; };
+		FF7CB4762626F5220017783F /* InterestSubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CB4742626F5220017783F /* InterestSubjectTableViewCell.swift */; };
+		FF7CB4772626F5220017783F /* InterestSubjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB4752626F5220017783F /* InterestSubjectTableViewCell.xib */; };
+		FF7CB47C2626FD100017783F /* checkWhite@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB47B2626FD0F0017783F /* checkWhite@1x.png */; };
+		FF7CB4812626FD140017783F /* checkWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB4802626FD140017783F /* checkWhite@2x.png */; };
+		FF7CB4862626FD190017783F /* checkWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7CB4852626FD190017783F /* checkWhite@3x.png */; };
 		FF89608F26184F9C00CB6492 /* CheckRectangle@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF89608E26184F9C00CB6492 /* CheckRectangle@1x.png */; };
 		FF89609426184FA200CB6492 /* CheckRectangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF89609326184FA200CB6492 /* CheckRectangle@2x.png */; };
 		FF89609926184FA700CB6492 /* CheckRectangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF89609826184FA700CB6492 /* CheckRectangle@3x.png */; };
@@ -311,6 +318,13 @@
 		FF7CB43F261F61E20017783F /* addCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addCircle@2x.png"; sourceTree = "<group>"; };
 		FF7CB444261F61E70017783F /* addCircle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addCircle@3x.png"; sourceTree = "<group>"; };
 		FF7CB45C2620C4B80017783F /* InterestFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestFieldViewController.swift; sourceTree = "<group>"; };
+		FF7CB46D2626EE730017783F /* InterestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
+		FF7CB46E2626EE730017783F /* InterestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestTableViewCell.xib; sourceTree = "<group>"; };
+		FF7CB4742626F5220017783F /* InterestSubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSubjectTableViewCell.swift; sourceTree = "<group>"; };
+		FF7CB4752626F5220017783F /* InterestSubjectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestSubjectTableViewCell.xib; sourceTree = "<group>"; };
+		FF7CB47B2626FD0F0017783F /* checkWhite@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkWhite@1x.png"; sourceTree = "<group>"; };
+		FF7CB4802626FD140017783F /* checkWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkWhite@2x.png"; sourceTree = "<group>"; };
+		FF7CB4852626FD190017783F /* checkWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkWhite@3x.png"; sourceTree = "<group>"; };
 		FF89608E26184F9C00CB6492 /* CheckRectangle@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckRectangle@1x.png"; sourceTree = "<group>"; };
 		FF89609326184FA200CB6492 /* CheckRectangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckRectangle@2x.png"; sourceTree = "<group>"; };
 		FF89609826184FA700CB6492 /* CheckRectangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckRectangle@3x.png"; sourceTree = "<group>"; };
@@ -561,6 +575,9 @@
 		D1F85CFD24CDAA5A00E1F7BE /* ImageFile */ = {
 			isa = PBXGroup;
 			children = (
+				FF7CB4852626FD190017783F /* checkWhite@3x.png */,
+				FF7CB4802626FD140017783F /* checkWhite@2x.png */,
+				FF7CB47B2626FD0F0017783F /* checkWhite@1x.png */,
 				FF89609826184FA700CB6492 /* CheckRectangle@3x.png */,
 				FF89608E26184F9C00CB6492 /* CheckRectangle@1x.png */,
 				FF89609326184FA200CB6492 /* CheckRectangle@2x.png */,
@@ -725,6 +742,10 @@
 				FFBC3ECF260C757C00211A0B /* AreaCityCollectionViewCell.xib */,
 				FFB4D0672611F5EB0011F1D4 /* AreaEmptyCollectionViewCell.swift */,
 				FFB4D0682611F5EB0011F1D4 /* AreaEmptyCollectionViewCell.xib */,
+				FF7CB46D2626EE730017783F /* InterestTableViewCell.swift */,
+				FF7CB46E2626EE730017783F /* InterestTableViewCell.xib */,
+				FF7CB4742626F5220017783F /* InterestSubjectTableViewCell.swift */,
+				FF7CB4752626F5220017783F /* InterestSubjectTableViewCell.xib */,
 			);
 			path = Loginxib;
 			sourceTree = "<group>";
@@ -899,6 +920,7 @@
 				FF70E73325C6879200AE82CD /* triangle@3x.png in Resources */,
 				D1F85CD124C45B1300E1F7BE /* Assets.xcassets in Resources */,
 				FFB4D05E2610E93E0011F1D4 /* selectbox@2x.png in Resources */,
+				FF7CB4862626FD190017783F /* checkWhite@3x.png in Resources */,
 				8592967825B2AA3F000C21E8 /* SignUpViewController2.storyboard in Resources */,
 				FFECAB66260B2DB100E5B641 /* AreaSearchCollectionViewCell.xib in Resources */,
 				FF24260025E12B5000A76850 /* user@2x.png in Resources */,
@@ -915,7 +937,9 @@
 				D1F85D0C24CDC35C00E1F7BE /* delete.png in Resources */,
 				D194D14F2519EC8A00023302 /* LoginAlertView.xib in Resources */,
 				FF7CB440261F61E20017783F /* addCircle@2x.png in Resources */,
+				FF7CB4772626F5220017783F /* InterestSubjectTableViewCell.xib in Resources */,
 				FFC0B01625A4EE7300D21482 /* UserInformationViewController.storyboard in Resources */,
+				FF7CB4812626FD140017783F /* checkWhite@2x.png in Resources */,
 				D11800C52564703700B8E5A1 /* uncheck@1x.png in Resources */,
 				FF331D85259B34BD00BD8C33 /* Roboto-BoldItalic.ttf in Resources */,
 				FF331D87259B34BD00BD8C33 /* Roboto-Bold.ttf in Resources */,
@@ -948,6 +972,7 @@
 				FF92ED0725CFE57300D93CD7 /* StudyCategoryTableViewCell.xib in Resources */,
 				FF3D1A4025D96AF100BFB82C /* squarebox@1x.png in Resources */,
 				D1F85CCF24C45B1100E1F7BE /* Main.storyboard in Resources */,
+				FF7CB47C2626FD100017783F /* checkWhite@1x.png in Resources */,
 				FF4CE66125EA6B5700C0ACF8 /* Favorite_fill@1x.png in Resources */,
 				FFF5211C25C963AE00ED7660 /* RedCheck@1x.png in Resources */,
 				FF4396E625F24499009E0251 /* Areapin@1x.png in Resources */,
@@ -956,6 +981,7 @@
 				FF331D88259B34BD00BD8C33 /* Roboto-Black.ttf in Resources */,
 				FFBA6F2825C7F872004783C6 /* RedEllipse@2x.png in Resources */,
 				FFB4D0592610E9380011F1D4 /* selectbox@1x.png in Resources */,
+				FF7CB4702626EE730017783F /* InterestTableViewCell.xib in Resources */,
 				FF4CE66625EA6B6400C0ACF8 /* Favorite_fill@2x.png in Resources */,
 				D1F85CFA24C45EDD00E1F7BE /* BLMainCollectionViewCell.xib in Resources */,
 				FF70E74625C68C0700AE82CD /* Rectangle@3x.png in Resources */,
@@ -1164,6 +1190,7 @@
 				D1F85CC824C45B1100E1F7BE /* AppDelegate.swift in Sources */,
 				D194D14D2519EC3F00023302 /* LoginAlertView.swift in Sources */,
 				D1F85CCA24C45B1100E1F7BE /* SceneDelegate.swift in Sources */,
+				FF7CB46F2626EE730017783F /* InterestTableViewCell.swift in Sources */,
 				FF3D1A7A25DFC21E00BFB82C /* StudyResearchViewController.swift in Sources */,
 				D1D9F3D824E15BAB008FF54D /* BLMainCollectionViewHeader.swift in Sources */,
 				FF7CB45D2620C4B80017783F /* InterestFieldViewController.swift in Sources */,
@@ -1174,6 +1201,7 @@
 				FF4396F525F3A63B009E0251 /* StudyMapViewController.swift in Sources */,
 				FF02BECB25EBB7C800FBCA8A /* FavoriteApi.swift in Sources */,
 				D18F6BCD24F27111001D53A1 /* SingUpAlertView.swift in Sources */,
+				FF7CB4762626F5220017783F /* InterestSubjectTableViewCell.swift in Sources */,
 				FF4CE67625EB848800C0ACF8 /* RepliesAllTableViewCell.swift in Sources */,
 				D1B46338255FA3F80063D714 /* ServerApi.swift in Sources */,
 				FF331D6D2598C81E00BD8C33 /* EmailAuthViewController.swift in Sources */,
