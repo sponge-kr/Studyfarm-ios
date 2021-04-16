@@ -21,6 +21,7 @@ class InterestFieldViewController: UIViewController {
     @IBOutlet weak var InterestSubjectTagTwoButton: UIButton!
     public var selectItem: Int = 0
     public var subjectselectItem: Int = 0
+    public var subjectIndexPath: IndexPath = []
     private var interestKindData = [StudyContentsContainer]()
     private var interestSubjectData = [StudyChildrenContainer]()
     override func viewDidLoad() {
@@ -134,11 +135,26 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
         } else {
             let interestSubjectCell = tableView.dequeueReusableCell(withIdentifier: "InterestSubjectCell", for: indexPath) as? InterestSubjectTableViewCell
             interestSubjectCell?.InterestSubjectLabel.text = "\(self.interestSubjectData[indexPath.row].name!)"
-            print("테스트 값 \(self.InterestSubjectTagOneButton.titleLabel?.text) 저장 값 \(UserDefaults.standard.string(forKey: "first_Intrest_name")) 데이터 \(self.interestSubjectData[self.subjectselectItem].name) ")
-            if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
-                tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
+//            print("테스트 값 \(self.InterestSubjectTagOneButton.titleLabel?.text) 저장 값 \(UserDefaults.standard.string(forKey: "first_Intrest_name")) 데이터 \(self.interestSubjectData[self.subjectselectItem].name) ")
+            //기타 중복 문구 예외 처리
+            if self.InterestSubjectTagOneButton.isHidden == false {
+                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "취미" {
+                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
+                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
+                }
+                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "취업/창업" {
+                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
+                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
+                }
+                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "기타" {
+                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
+                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
+                }
             }
-            
+
             return interestSubjectCell!
         }
     }
