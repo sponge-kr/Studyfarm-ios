@@ -9,8 +9,6 @@
 import UIKit
 
 class InterestFieldViewController: UIViewController {
-    
-    @IBOutlet weak var InterestSearchButton: UIButton!
     @IBOutlet weak var InterestKindTitleLabel: UILabel!
     @IBOutlet weak var InterestSubjectTitleLabel: UILabel!
     @IBOutlet weak var InterestConfirmButton: UIButton!
@@ -19,9 +17,10 @@ class InterestFieldViewController: UIViewController {
     @IBOutlet weak var InterestSubjectTableView: UITableView!
     @IBOutlet weak var InterestSubjectTagOneButton: UIButton!
     @IBOutlet weak var InterestSubjectTagTwoButton: UIButton!
+    @IBOutlet weak var InterestSubjectTagThreeButton: UIButton!
     public var selectItem: Int = 0
     public var subjectselectItem: Int = 0
-    public var subjectIndexPath: IndexPath = []
+    public var subjectIndexPath = [IndexPath]()
     private var interestKindData = [StudyContentsContainer]()
     private var interestSubjectData = [StudyChildrenContainer]()
     override func viewDidLoad() {
@@ -35,17 +34,16 @@ class InterestFieldViewController: UIViewController {
     }
     
     private func setLayoutInit() {
-        self.InterestSearchButton.layer.borderWidth = 1
-        self.InterestSearchButton.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
-        self.InterestSearchButton.layer.cornerRadius = 4
-        self.InterestSearchButton.layer.masksToBounds = true
-        self.InterestSearchButton.setTitle("관심 스터디를 검색해주세요.", for: .normal)
-        self.InterestSearchButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
-        self.InterestSearchButton.setTitleColor(UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0), for: .normal)
-        self.InterestSearchButton.contentHorizontalAlignment = .left
-        self.InterestSearchButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 0)
-        self.InterestSearchButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 300, bottom: 0, right: 15)
-        self.InterestSearchButton.setImage(UIImage(named: "searchbar.png"), for: .normal)
+        let navigationAttribute = NSMutableAttributedString()
+        navigationAttribute.append(NSAttributedString(string: "관심 분야 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
+        navigationAttribute.append(NSAttributedString(string: "  \(self.subjectIndexPath.count)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)]))
+        navigationAttribute.append(NSAttributedString(string: "/3", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18),NSAttributedString.Key.foregroundColor: UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)]))
+        let interestNavigationLabel = UILabel()
+        interestNavigationLabel.sizeToFit()
+        interestNavigationLabel.text = "관심 분야 선택  \(self.subjectIndexPath.count)/3"
+        interestNavigationLabel.attributedText = navigationAttribute
+        self.navigationItem.titleView = interestNavigationLabel
+        
         self.InterestKindTitleLabel.text = "종류"
         self.InterestKindTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)
         self.InterestKindTitleLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
@@ -95,6 +93,20 @@ class InterestFieldViewController: UIViewController {
         self.InterestSubjectTagTwoButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
         self.InterestSubjectTagTwoButton.backgroundColor = UIColor.white
         self.InterestSubjectTagTwoButton.isHidden = true
+        
+        
+        self.InterestSubjectTagThreeButton.layer.borderWidth = 1
+        self.InterestSubjectTagThreeButton.layer.borderColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0).cgColor
+        self.InterestSubjectTagThreeButton.layer.cornerRadius = 4
+        self.InterestSubjectTagThreeButton.layer.masksToBounds = true
+        self.InterestSubjectTagThreeButton.contentHorizontalAlignment = .right
+        self.InterestSubjectTagThreeButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.InterestSubjectTagThreeButton.setImage(UIImage(named: "Delete.png"), for: .normal)
+        self.InterestSubjectTagThreeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 66, bottom: 0, right: 0)
+        self.InterestSubjectTagThreeButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
+        self.InterestSubjectTagThreeButton.backgroundColor = UIColor.white
+        self.InterestSubjectTagThreeButton.isHidden = true
+        
     }
     private func sendInterestKindCode() {
         DispatchQueue.main.async {
@@ -138,23 +150,21 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
 //            print("테스트 값 \(self.InterestSubjectTagOneButton.titleLabel?.text) 저장 값 \(UserDefaults.standard.string(forKey: "first_Intrest_name")) 데이터 \(self.interestSubjectData[self.subjectselectItem].name) ")
             //기타 중복 문구 예외 처리
             if self.InterestSubjectTagOneButton.isHidden == false {
-                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "취미" {
-                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
-                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
-                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
-                }
-                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "취업/창업" {
-                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
-                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
-                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
-                }
-                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text && self.interestKindData[selectItem].name == "기타" {
-                    tableView.selectRow(at: [0,self.subjectselectItem], animated: false, scrollPosition: .none)
-                } else if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
-                    tableView.deselectRow(at: [0,self.subjectselectItem], animated: false)
+                if self.InterestSubjectTagOneButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.selectRow(at: self.subjectIndexPath.first, animated: false, scrollPosition: .none)
                 }
             }
-
+            if self.InterestSubjectTagTwoButton.isHidden == false {
+                if self.InterestSubjectTagTwoButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.selectRow(at: self.subjectIndexPath[1], animated: false, scrollPosition: .none)
+                }
+            }
+            if self.InterestSubjectTagThreeButton.isHidden == false {
+                if self.InterestSubjectTagThreeButton.titleLabel?.text == interestSubjectCell?.InterestSubjectLabel.text {
+                    tableView.selectRow(at: self.subjectIndexPath.last, animated: false, scrollPosition: .none)
+                }
+            }
+            
             return interestSubjectCell!
         }
     }
@@ -166,17 +176,56 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
                 self.sendIntrestSubjectCode()
             }
         } else {
+            let navigationAttribute = NSMutableAttributedString()
+            navigationAttribute.append(NSAttributedString(string: "관심 분야 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
+            navigationAttribute.append(NSAttributedString(string: "  \(self.subjectIndexPath.count + 1)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)]))
+            navigationAttribute.append(NSAttributedString(string: "/3", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18),NSAttributedString.Key.foregroundColor: UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)]))
+            let interestNavigationLabel = UILabel()
+            interestNavigationLabel.sizeToFit()
+            interestNavigationLabel.text = "관심 분야 선택  \(self.subjectIndexPath.count + 1)/3"
+            interestNavigationLabel.attributedText = navigationAttribute
+            self.navigationItem.titleView = interestNavigationLabel
             self.subjectselectItem = indexPath.row
             if self.InterestSubjectTagOneButton.isHidden == true {
                 self.InterestSubjectTagOneButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagOneButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagOneButton.isHidden = false
+                self.subjectIndexPath.append(indexPath)
                 UserDefaults.standard.set("first_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
             } else if self.InterestSubjectTagTwoButton.isHidden == true {
                 self.InterestSubjectTagTwoButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagTwoButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagTwoButton.isHidden = false
+                self.subjectIndexPath.append(indexPath)
                 UserDefaults.standard.set("second_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
+            } else if self.InterestSubjectTagThreeButton.isHidden == true {
+                self.InterestSubjectTagThreeButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+                self.InterestSubjectTagThreeButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
+                self.InterestSubjectTagThreeButton.isHidden = false
+                self.subjectIndexPath.append(indexPath)
+                UserDefaults.standard.set("three_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
+            }
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if self.InterestSubjectTagOneButton.isHidden == false && self.subjectIndexPath.first == indexPath {
+            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagOneButton.titleLabel?.text {
+                self.InterestSubjectTagOneButton.isHidden = true
+                self.subjectIndexPath.removeFirst()
+            }
+        }
+        if self.InterestSubjectTagTwoButton.isHidden == false && self.subjectIndexPath[1] == indexPath {
+            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagTwoButton.titleLabel?.text {
+                self.InterestSubjectTagTwoButton.isHidden = true
+                self.subjectIndexPath.remove(at: 1)
+            }
+        }
+        if self.InterestSubjectTagThreeButton.isHidden == false && self.subjectIndexPath.last == indexPath {
+            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagThreeButton.titleLabel?.text {
+                self.InterestSubjectTagThreeButton.isHidden = true
+                self.subjectIndexPath.removeLast()
             }
         }
     }
