@@ -210,22 +210,43 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if self.InterestSubjectTagOneButton.isHidden == false && self.subjectIndexPath.first == indexPath {
-            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagOneButton.titleLabel?.text {
-                self.InterestSubjectTagOneButton.isHidden = true
-                self.subjectIndexPath.removeFirst()
+        if tableView == self.InterestKindTableView {
+            
+        } else {
+            let navigationAttribute = NSMutableAttributedString()
+            navigationAttribute.append(NSAttributedString(string: "관심 분야 선택", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 18)]))
+            navigationAttribute.append(NSAttributedString(string: "  \(self.subjectIndexPath.count - 1)", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0),NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18)]))
+            navigationAttribute.append(NSAttributedString(string: "/3", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 18),NSAttributedString.Key.foregroundColor: UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)]))
+            let interestNavigationLabel = UILabel()
+            interestNavigationLabel.sizeToFit()
+            interestNavigationLabel.text = "관심 분야 선택  \(self.subjectIndexPath.count - 1)/3"
+            interestNavigationLabel.attributedText = navigationAttribute
+            self.navigationItem.titleView = interestNavigationLabel
+            if self.InterestSubjectTagOneButton.isHidden == false && self.subjectIndexPath.first == indexPath {
+                if self.interestSubjectData[indexPath.row].name == self.InterestSubjectTagOneButton.titleLabel?.text {
+                    self.InterestSubjectTagOneButton.isHidden = true
+                    self.subjectIndexPath.removeFirst()
+                }
             }
-        }
-        if self.InterestSubjectTagTwoButton.isHidden == false && self.subjectIndexPath[1] == indexPath {
-            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagTwoButton.titleLabel?.text {
-                self.InterestSubjectTagTwoButton.isHidden = true
-                self.subjectIndexPath.remove(at: 1)
+            if self.InterestSubjectTagTwoButton.isHidden == false && self.subjectIndexPath[1] == indexPath && self.InterestSubjectTagOneButton.isHidden == false {
+                if self.interestSubjectData[indexPath.row].name == self.InterestSubjectTagTwoButton.titleLabel?.text {
+                    self.InterestSubjectTagTwoButton.isHidden = true
+                    self.subjectIndexPath.remove(at: 1)
+                }
             }
-        }
-        if self.InterestSubjectTagThreeButton.isHidden == false && self.subjectIndexPath.last == indexPath {
-            if self.interestSubjectData[indexPath.item].name == self.InterestSubjectTagThreeButton.titleLabel?.text {
-                self.InterestSubjectTagThreeButton.isHidden = true
-                self.subjectIndexPath.removeLast()
+            if self.subjectIndexPath.isEmpty == false {
+                if self.InterestSubjectTagOneButton.isHidden == true && self.subjectIndexPath[0] == indexPath {
+                    if self.interestSubjectData[indexPath.row].name == self.InterestSubjectTagTwoButton.titleLabel?.text {
+                        self.InterestSubjectTagTwoButton.isHidden = true
+                        self.subjectIndexPath.removeFirst()
+                    }
+                }
+            }
+            if self.InterestSubjectTagThreeButton.isHidden == false && self.subjectIndexPath.last == indexPath {
+                if self.interestSubjectData[indexPath.row].name == self.InterestSubjectTagThreeButton.titleLabel?.text {
+                    self.InterestSubjectTagThreeButton.isHidden = true
+                    self.subjectIndexPath.removeLast()
+                }
             }
         }
     }
