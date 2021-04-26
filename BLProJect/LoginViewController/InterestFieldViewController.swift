@@ -191,19 +191,19 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
                 self.InterestSubjectTagOneButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagOneButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
-                UserDefaults.standard.set("first_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "first_Intrest_name")
             } else if self.InterestSubjectTagTwoButton.isHidden == true {
                 self.InterestSubjectTagTwoButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagTwoButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagTwoButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
-                UserDefaults.standard.set("second_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "second_Intrest_name")
             } else if self.InterestSubjectTagThreeButton.isHidden == true {
                 self.InterestSubjectTagThreeButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagThreeButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagThreeButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
-                UserDefaults.standard.set("three_Intrest_name", forKey: self.interestSubjectData[indexPath.row].name!)
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "three_Intrest_name")
             }
         }
     }
