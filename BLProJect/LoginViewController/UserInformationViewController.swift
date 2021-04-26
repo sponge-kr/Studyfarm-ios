@@ -32,6 +32,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInfomationAreaSelectionTwoLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfomationAreaSelectionWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfomationAreaSelectionTwoWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfoStudySelectTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoContainerView: UIView!
     @IBOutlet weak var userInfoBeginnerButton: UIButton!
     @IBOutlet weak var userInfoBegineerInterButton: UIButton!
@@ -59,13 +60,11 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.initLayout()
         self.showAreaselectionButton()
         self.showUserInfoStudyContinaerLayout()
-        print("테스트 user Info 관심 정보 \(UserDefaults.standard.string(forKey: "first_Intrest_name"))")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.showAreaselectionButton()
         self.showUserInfoStudyContinaerLayout()
-        print("테스트 user Info 관심 정보 \(UserDefaults.standard.string(forKey: "first_Intrest_name"))")
     }
     
     public func initLayout() {
@@ -271,6 +270,10 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             self.userInfoContinerViewDeleteButton.isHidden = false
             self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
             self.userInfoStepTitleLabel.text = "\(self.userInfoBeginnerButton.titleLabel!.text!)! 거의 처음 배워요"
+            UIView.animate(withDuration: 0.2) {
+                self.userInformationInterestingStudyButton.layoutIfNeeded()
+                self.userInfoStudySelectTopConstraint.constant = 115
+            }
         }
     }
     
