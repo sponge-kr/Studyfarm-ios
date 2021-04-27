@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 
 
-class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource, UIScrollViewDelegate {
+    @IBOutlet weak var userInfoScrollView: UIScrollView!
     @IBOutlet weak var userInformationtitle: UILabel!
     @IBOutlet weak var userInformationsubtitle: UILabel!
     @IBOutlet weak var userInformationgendertitle: UILabel!
@@ -41,6 +42,15 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInfoStepTitleLabel: UILabel!
     @IBOutlet weak var userInfoAdvancedButton: UIButton!
     @IBOutlet weak var userInfoContinerViewDeleteButton: UIButton!
+    @IBOutlet weak var userInfoBoxView: UIView!
+    @IBOutlet weak var userInfoContainerViewTwo: UIView!
+    @IBOutlet weak var userInfoBeginnerButtonTwo: UIButton!
+    @IBOutlet weak var userInfoBegineerInterButtonTwo: UIButton!
+    @IBOutlet weak var userInfoMiddleButtonTwo: UIButton!
+    @IBOutlet weak var userInfoAdvancedButtonTwo: UIButton!
+    @IBOutlet weak var userInfoStepTitleLabelTwo: UILabel!
+    @IBOutlet weak var userInfoContainerViewDeleteButtonTwo: UIButton!
+    @IBOutlet weak var userInfoContainerViewTitleLabelTwo: UILabel!
     public let birthDayTitle = ["1980","1981","1982","1983","1984","1985","1986",
                                 "1987","1988","1989","1990","1991","1992","1993",
                                 "1994","1995","1996","1997","1998","1999","2000",
@@ -60,6 +70,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.initLayout()
         self.showAreaselectionButton()
         self.showUserInfoStudyContinaerLayout()
+        self.userInfoScrollView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,26 +184,30 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoBeginnerButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoBeginnerButton.layer.cornerRadius = 4
         self.userInfoBeginnerButton.layer.masksToBounds = true
+        self.userInfoBeginnerButton.addTarget(self, action: #selector(self.didTapBegginerButton(_:)), for: .touchUpInside)
         self.userInfoBegineerInterButton.setTitle("초중급", for: .normal)
         self.userInfoBegineerInterButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoBegineerInterButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoBegineerInterButton.backgroundColor = UIColor.white
         self.userInfoBegineerInterButton.layer.cornerRadius = 4
         self.userInfoBegineerInterButton.layer.masksToBounds = true
+        self.userInfoBegineerInterButton.addTarget(self, action: #selector(self.didTapBegineerInterButton(_:)), for: .touchUpInside)
         self.userInfoMiddleButton.setTitle("중급", for: .normal)
         self.userInfoMiddleButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoMiddleButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoMiddleButton.backgroundColor = UIColor.white
         self.userInfoMiddleButton.layer.cornerRadius = 4
+        self.userInfoMiddleButton.addTarget(self, action: #selector(self.didTapMiddleButton(_:)), for: .touchUpInside)
         self.userInfoAdvancedButton.layer.masksToBounds = true
         self.userInfoAdvancedButton.setTitle("상급", for: .normal)
         self.userInfoAdvancedButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoAdvancedButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoAdvancedButton.backgroundColor = UIColor.white
         self.userInfoAdvancedButton.layer.cornerRadius = 4
-        self.userInfoAdvancedButton.layer.masksToBounds = true
+        self.userInfoAdvancedButton.addTarget(self, action: #selector(self.didTapAdvancedButton(_:)), for: .touchUpInside)
         self.userInfoContinerViewDeleteButton.setImage(UIImage(named: "userInfodelete.png"), for: .normal)
         self.userInfoContinerViewDeleteButton.setTitle("", for: .normal)
+        self.userInfoContinerViewDeleteButton.addTarget(self, action: #selector(self.didTapContainerDeleteButton(_:)), for: .touchUpInside)
         self.userInfoContinerViewDeleteButton.isHidden = true
         self.userInfoStepTitleLabel.text = ""
         self.userInfoStepTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 10)
@@ -200,7 +215,47 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoContainerViewTitleLabel.text = ""
         self.userInfoContainerViewTitleLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
         self.userInfoContainerViewTitleLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
-        
+        self.userInfoBoxView.isHidden = true
+        self.userInfoContainerViewTwo.layer.borderWidth = 1
+        self.userInfoContainerViewTwo.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
+        self.userInfoContainerViewTwo.layer.cornerRadius = 4
+        self.userInfoContainerViewTwo.layer.masksToBounds = true
+        self.userInfoBeginnerButtonTwo.setTitle("초급", for: .normal)
+        self.userInfoBeginnerButtonTwo.setTitleColor(UIColor.white, for: .normal)
+        self.userInfoBeginnerButtonTwo.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoBeginnerButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBeginnerButtonTwo.layer.cornerRadius = 4
+        self.userInfoBeginnerButtonTwo.layer.masksToBounds = true
+        self.userInfoBeginnerButtonTwo.addTarget(self, action: #selector(self.didTapBegginerButtonTwo(_:)), for: .touchUpInside)
+        self.userInfoBegineerInterButtonTwo.setTitle("초중급", for: .normal)
+        self.userInfoBegineerInterButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoBegineerInterButtonTwo.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonTwo.layer.cornerRadius = 4
+        self.userInfoBegineerInterButtonTwo.layer.masksToBounds = true
+        self.userInfoBegineerInterButtonTwo.addTarget(self, action: #selector(self.didTapBegginerInterButtonTwo(_:)), for: .touchUpInside)
+        self.userInfoMiddleButtonTwo.setTitle("중급", for: .normal)
+        self.userInfoMiddleButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoMiddleButtonTwo.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoMiddleButtonTwo.backgroundColor = UIColor.white
+        self.userInfoMiddleButtonTwo.layer.cornerRadius = 4
+        self.userInfoMiddleButtonTwo.addTarget(self, action: #selector(self.didTapMiddleButtonTwo(_:)), for: .touchUpInside)
+        self.userInfoAdvancedButtonTwo.setTitle("상급", for: .normal)
+        self.userInfoAdvancedButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoAdvancedButtonTwo.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonTwo.layer.cornerRadius = 4
+        self.userInfoAdvancedButtonTwo.layer.masksToBounds = true
+        self.userInfoAdvancedButtonTwo.addTarget(self, action: #selector(self.didTapAdvancedButtonTwo(_:)), for: .touchUpInside)
+        self.userInfoContainerViewDeleteButtonTwo.setImage(UIImage(named: "userInfodelete.png"), for: .normal)
+        self.userInfoContainerViewDeleteButtonTwo.setTitle("", for: .normal)
+        self.userInfoContainerViewDeleteButtonTwo.addTarget(self, action: #selector(self.didTapContainerDeleteTwoButton(_:)), for: .touchUpInside)
+        self.userInfoStepTitleLabelTwo.text = ""
+        self.userInfoStepTitleLabelTwo.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 10)
+        self.userInfoStepTitleLabelTwo.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
+        self.userInfoContainerViewTitleLabelTwo.text = ""
+        self.userInfoContainerViewTitleLabelTwo.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.userInfoContainerViewTitleLabelTwo.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
     }
     
     private func birthDayViewInit() {
@@ -221,6 +276,108 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.birthdayView.layer.cornerRadius = 8
         self.birthdayView.layer.masksToBounds = true
         self.birthdayView.backgroundColor = UIColor.white
+    }
+    
+    public func didTapBeginerLayoutInit() {
+        self.userInfoMiddleButton.isSelected = false
+        self.userInfoBegineerInterButton.isSelected = false
+        self.userInfoAdvancedButton.isSelected = false
+        self.userInfoMiddleButton.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButton.backgroundColor = UIColor.white
+        self.userInfoAdvancedButton.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabel.text = "\(self.userInfoBeginnerButton.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBeginnerButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBeginnerButton.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapBeginerTwoLayouInit() {
+        self.userInfoMiddleButtonTwo.isSelected = false
+        self.userInfoBegineerInterButtonTwo.isSelected = false
+        self.userInfoAdvancedButtonTwo.isSelected = false
+        self.userInfoMiddleButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBeginnerButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBeginnerButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBeginnerButtonTwo.setTitleColor(UIColor.white, for: .selected)
+    }
+
+    public func didTapBeginerInterLayoutInit() {
+        self.userInfoMiddleButton.isSelected = false
+        self.userInfoBeginnerButton.isSelected = false
+        self.userInfoAdvancedButton.isSelected = false
+        self.userInfoMiddleButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoAdvancedButton.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabel.text = "\(self.userInfoBegineerInterButton.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBegineerInterButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBegineerInterButton.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapBeginerInterTwoLayoutInit() {
+        self.userInfoMiddleButtonTwo.isSelected = false
+        self.userInfoBeginnerButtonTwo.isSelected = false
+        self.userInfoAdvancedButtonTwo.isSelected = false
+        self.userInfoMiddleButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBeginnerButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBegineerInterButtonTwo.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapMiddleLayoutInit() {
+        self.userInfoBegineerInterButton.isSelected = false
+        self.userInfoBeginnerButton.isSelected = false
+        self.userInfoAdvancedButton.isSelected = false
+        self.userInfoBegineerInterButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.backgroundColor = UIColor.white
+        self.userInfoAdvancedButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabel.text = "\(self.userInfoMiddleButton.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoMiddleButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoMiddleButton.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapMiddleTwoLayoutInit() {
+        self.userInfoBegineerInterButtonTwo.isSelected = false
+        self.userInfoBeginnerButtonTwo.isSelected = false
+        self.userInfoAdvancedButtonTwo.isSelected = false
+        self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoMiddleButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoMiddleButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoMiddleButtonTwo.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapAdvancedLayoutInit() {
+        self.userInfoMiddleButton.isSelected = false
+        self.userInfoBegineerInterButton.isSelected = false
+        self.userInfoBeginnerButton.isSelected = false
+        self.userInfoMiddleButton.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.backgroundColor = UIColor.white
+        self.userInfoBeginnerButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabel.text = "\(self.userInfoAdvancedButton.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoAdvancedButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoAdvancedButton.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapAdvancedTwoLayoutInit() {
+        self.userInfoMiddleButtonTwo.isSelected = false
+        self.userInfoBegineerInterButtonTwo.isSelected = false
+        self.userInfoBeginnerButtonTwo.isSelected = false
+        self.userInfoMiddleButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoAdvancedButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoAdvancedButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoAdvancedButtonTwo.setTitleColor(UIColor.white, for: .selected)
     }
     
     public func showAreaselectionButton() {
@@ -265,7 +422,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     
     
     public func showUserInfoStudyContinaerLayout() {
-        if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil {
+        if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") == nil {
             self.userInfoContainerView.isHidden = false
             self.userInfoContinerViewDeleteButton.isHidden = false
             self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
@@ -273,6 +430,18 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             UIView.animate(withDuration: 0.2) {
                 self.userInformationInterestingStudyButton.layoutIfNeeded()
                 self.userInfoStudySelectTopConstraint.constant = 115
+            }
+        } else if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") != nil {
+            self.userInfoContainerView.isHidden = false
+            self.userInfoContinerViewDeleteButton.isHidden = false
+            self.userInfoBoxView.isHidden = false
+            self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
+            self.userInfoStepTitleLabel.text = "\(self.userInfoBeginnerButton.titleLabel!.text!)! 거의 처음 배워요"
+            self.userInfoContainerViewTitleLabelTwo.text = "\(UserDefaults.standard.string(forKey: "second_Intrest_name")!)"
+            self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBeginnerButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+            UIView.animate(withDuration: 0.2) {
+                self.userInformationInterestingStudyButton.layoutIfNeeded()
+                self.userInfoStudySelectTopConstraint.constant = 215
             }
         }
     }
@@ -290,6 +459,33 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.userInformationbirthdayButton.setTitle(self.birthDayTitle[row], for: .normal)
+    }
+    
+    @objc
+    func didTapContainerDeleteButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoContainerView.isHidden = false
+        } else {
+            sender.isSelected = true
+            self.userInfoContainerView.isHidden = true
+            self.userInfoContinerViewDeleteButton.isHidden = true
+            self.userInformationInterestingStudyButton.layoutIfNeeded()
+            self.userInfoStudySelectTopConstraint.constant = 13
+        }
+    }
+    
+    @objc
+    func didTapContainerDeleteTwoButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBoxView.isHidden = false
+        } else {
+            sender.isSelected = true
+            self.userInfoBoxView.isHidden = true
+            self.userInformationInterestingStudyButton.layoutIfNeeded()
+            self.userInfoStudySelectTopConstraint.constant = 115
+        }
     }
     
     
@@ -311,6 +507,103 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             }
         }
     }
+    
+    @objc
+    func didTapBegginerButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBeginnerButton.backgroundColor = UIColor.white
+            self.userInfoBeginnerButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapBegineerInterButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBegineerInterButton.backgroundColor = UIColor.white
+            self.userInfoBegineerInterButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerInterLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapMiddleButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoMiddleButton.backgroundColor = UIColor.white
+            self.userInfoMiddleButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapMiddleLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapAdvancedButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoAdvancedButton.backgroundColor = UIColor.white
+            self.userInfoAdvancedButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapAdvancedLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapBegginerButtonTwo(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBeginnerButtonTwo.backgroundColor = UIColor.white
+            self.userInfoBeginnerButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerTwoLayouInit()
+        }
+    }
+    
+    @objc
+    func didTapBegginerInterButtonTwo(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor.white
+            self.userInfoBegineerInterButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerInterTwoLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapMiddleButtonTwo(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoMiddleButtonTwo.backgroundColor = UIColor.white
+            self.userInfoMiddleButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapMiddleTwoLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapAdvancedButtonTwo(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
+            self.userInfoAdvancedButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapAdvancedTwoLayoutInit()
+        }
+    }
+    
     
     @objc
     private func didTapAreaInfoTwoDelete(_ sender: UIButton) {
