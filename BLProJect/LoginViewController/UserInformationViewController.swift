@@ -34,6 +34,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInfomationAreaSelectionWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfomationAreaSelectionTwoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoStudySelectTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfoBoxTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoContainerView: UIView!
     @IBOutlet weak var userInfoBeginnerButton: UIButton!
     @IBOutlet weak var userInfoBegineerInterButton: UIButton!
@@ -43,8 +44,17 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInfoAdvancedButton: UIButton!
     @IBOutlet weak var userInfoContinerViewDeleteButton: UIButton!
     @IBOutlet weak var userInfoBoxView: UIView!
+    @IBOutlet weak var userInfoBoxViewTwo: UIView!
+    @IBOutlet weak var userInfoContainerViewTitleLabelThree: UILabel!
     @IBOutlet weak var userInfoContainerViewTwo: UIView!
+    @IBOutlet weak var userInfoBeginnerButtonThree: UIButton!
+    @IBOutlet weak var userInfoMiddleButtonThree: UIButton!
+    @IBOutlet weak var userInfoAdvancedButtonThree: UIButton!
+    @IBOutlet weak var userInfoStepTitleLabelThree: UILabel!
+    @IBOutlet weak var userInfoContainerViewThree: UIView!
+    @IBOutlet weak var userInfoBegineerInterButtonThree: UIButton!
     @IBOutlet weak var userInfoBeginnerButtonTwo: UIButton!
+    @IBOutlet weak var userInfoContainerViewDeleteButtonThree: UIButton!
     @IBOutlet weak var userInfoBegineerInterButtonTwo: UIButton!
     @IBOutlet weak var userInfoMiddleButtonTwo: UIButton!
     @IBOutlet weak var userInfoAdvancedButtonTwo: UIButton!
@@ -256,6 +266,43 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoContainerViewTitleLabelTwo.text = ""
         self.userInfoContainerViewTitleLabelTwo.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
         self.userInfoContainerViewTitleLabelTwo.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        self.userInfoBoxViewTwo.isHidden = true
+        self.userInfoContainerViewThree.layer.borderWidth = 1
+        self.userInfoContainerViewThree.layer.borderColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1.0).cgColor
+        self.userInfoContainerViewThree.layer.cornerRadius = 4
+        self.userInfoContainerViewThree.layer.masksToBounds = true
+        self.userInfoBeginnerButtonThree.setTitle("초급", for: .normal)
+        self.userInfoBeginnerButtonThree.setTitleColor(UIColor.white, for: .normal)
+        self.userInfoBeginnerButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoBeginnerButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBeginnerButtonThree.layer.cornerRadius = 4
+        self.userInfoBeginnerButtonThree.layer.masksToBounds = true
+        self.userInfoBegineerInterButtonThree.setTitle("초중급", for: .normal)
+        self.userInfoBegineerInterButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoBegineerInterButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonThree.layer.cornerRadius = 4
+        self.userInfoBegineerInterButtonThree.layer.masksToBounds = true
+        self.userInfoMiddleButtonThree.setTitle("중급", for: .normal)
+        self.userInfoMiddleButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoMiddleButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
+        self.userInfoMiddleButtonThree.layer.cornerRadius = 4
+        self.userInfoAdvancedButtonThree.setTitle("상급", for: .normal)
+        self.userInfoAdvancedButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoAdvancedButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
+        self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonThree.layer.cornerRadius = 4
+        self.userInfoAdvancedButtonThree.layer.masksToBounds = true
+        self.userInfoContainerViewDeleteButtonThree.setImage(UIImage(named: "userInfodelete.png"), for: .normal)
+        self.userInfoContainerViewDeleteButtonThree.setTitle("", for: .normal)
+        self.userInfoStepTitleLabelThree.text = ""
+        self.userInfoStepTitleLabelThree.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 10)
+        self.userInfoStepTitleLabelThree.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
+        self.userInfoContainerViewTitleLabelThree.text = ""
+        self.userInfoContainerViewTitleLabelThree.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 12)
+        self.userInfoContainerViewTitleLabelThree.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        
     }
     
     private func birthDayViewInit() {
@@ -323,7 +370,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoBeginnerButtonTwo.backgroundColor = UIColor.white
         self.userInfoBeginnerButtonTwo.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoAdvancedButtonTwo.backgroundColor = UIColor.white
-        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBeginnerButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBegineerInterButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
         self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoBegineerInterButtonTwo.setTitleColor(UIColor.white, for: .selected)
     }
@@ -422,7 +469,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     
     
     public func showUserInfoStudyContinaerLayout() {
-        if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") == nil {
+        if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") == nil && UserDefaults.standard.string(forKey: "three_Intrest_name") == nil {
             self.userInfoContainerView.isHidden = false
             self.userInfoContinerViewDeleteButton.isHidden = false
             self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
@@ -431,7 +478,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
                 self.userInformationInterestingStudyButton.layoutIfNeeded()
                 self.userInfoStudySelectTopConstraint.constant = 115
             }
-        } else if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") != nil {
+        } else if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") != nil && UserDefaults.standard.string(forKey: "three_Intrest_name") == nil {
             self.userInfoContainerView.isHidden = false
             self.userInfoContinerViewDeleteButton.isHidden = false
             self.userInfoBoxView.isHidden = false
@@ -442,6 +489,24 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             UIView.animate(withDuration: 0.2) {
                 self.userInformationInterestingStudyButton.layoutIfNeeded()
                 self.userInfoStudySelectTopConstraint.constant = 215
+                self.userInfoBoxTopConstraint.constant = 0
+            }
+        } else if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") != nil && UserDefaults.standard.string(forKey: "three_Intrest_name") != nil {
+            self.userInfoContainerView.isHidden = false
+            self.userInfoContinerViewDeleteButton.isHidden = false
+            self.userInfoBoxView.isHidden = false
+            self.userInfoBoxViewTwo.isHidden = false
+            self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
+            self.userInfoStepTitleLabel.text = "\(self.userInfoBeginnerButton.titleLabel!.text!)! 거의 처음 배워요"
+            self.userInfoContainerViewTitleLabelTwo.text = "\(UserDefaults.standard.string(forKey: "second_Intrest_name")!)"
+            self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBeginnerButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
+            self.userInfoContainerViewTitleLabelThree.text = "\(UserDefaults.standard.string(forKey: "three_Intrest_name")!)"
+            self.userInfoStepTitleLabelThree.text = "\(self.userInfoBeginnerButtonThree.titleLabel!.text!)! 거의 처음 배워요"
+            UIView.animate(withDuration: 0.2) {
+                self.userInformationInterestingStudyButton.layoutIfNeeded()
+                self.userInformationInterestingStudyButton.isHidden = true
+                self.userInfoStudySelectTopConstraint.constant = 240
+                self.userInfoBoxTopConstraint.constant = 0
             }
         }
     }
@@ -471,7 +536,12 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             self.userInfoContainerView.isHidden = true
             self.userInfoContinerViewDeleteButton.isHidden = true
             self.userInformationInterestingStudyButton.layoutIfNeeded()
-            self.userInfoStudySelectTopConstraint.constant = 13
+            if self.userInfoBoxView.isHidden == true {
+                self.userInfoStudySelectTopConstraint.constant = 13
+            } else {
+                self.userInfoBoxTopConstraint.constant = -90
+                self.userInfoStudySelectTopConstraint.constant = 90
+            }
         }
     }
     
@@ -484,7 +554,11 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             sender.isSelected = true
             self.userInfoBoxView.isHidden = true
             self.userInformationInterestingStudyButton.layoutIfNeeded()
-            self.userInfoStudySelectTopConstraint.constant = 115
+            if self.userInfoContainerView.isHidden == true {
+                self.userInfoStudySelectTopConstraint.constant = 13
+            } else {
+                self.userInfoStudySelectTopConstraint.constant = 115
+            }
         }
     }
     
