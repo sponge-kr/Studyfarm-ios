@@ -296,6 +296,7 @@ class NicknameSignupViewController: UIViewController,UITextFieldDelegate {
                     if value.code == 200 {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let EmailView = storyboard.instantiateViewController(withIdentifier: "EmailView") as? EmailAuthViewController
+                        UserDefaults.standard.set(value.user_seq, forKey: "Sponge_user_seq")
                         guard let EamilVC = EmailView else { return }
                         self.navigationController?.pushViewController(EamilVC, animated: true)
                     } else {

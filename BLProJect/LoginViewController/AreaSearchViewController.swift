@@ -101,6 +101,7 @@ class AreaSearchViewController: UIViewController {
         self.areaSearchConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.areaSearchConfirmButton.layer.cornerRadius = 4
         self.areaSearchConfirmButton.layer.masksToBounds = true
+        self.areaSearchConfirmButton.addTarget(self, action: #selector(self.didTapConfirmButton), for: .touchUpInside)
         self.areaSearchCollectionView.allowsMultipleSelection = false
         self.areaCityCollectionView.allowsMultipleSelection = true
         self.areaCityCollectionView.canCancelContentTouches = true
@@ -147,7 +148,10 @@ class AreaSearchViewController: UIViewController {
             }
         }
     }
-    
+    @objc
+    public func didTapConfirmButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -269,6 +273,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "first")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "first_name")
                 UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "first_longname")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].code, forKey: "first_code")
             } else if self.areaCityTagButtonOne.isHidden == false && self.areaCityTagButtonTwo.isHidden == true {
                 self.areaCityTagButtonTwo.setAttributedTitle(NSAttributedString(string: "\(self.CityData[self.selectItem].short_name!) \(self.cityChildrenData[indexPath.item].name!)", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14),NSAttributedString.Key.kern: -0.77]), for: .normal)
                 self.thirdselectedIndexes.append(indexPath)
@@ -277,6 +282,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
                 UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "second_longname")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].code, forKey: "second_code")
             }
             
             if self.areaCityTagButtonOne.isHidden == true && self.areaCityTagButtonTwo.isHidden == false {
@@ -294,6 +300,7 @@ extension AreaSearchViewController: UICollectionViewDelegate,UICollectionViewDat
                 UserDefaults.standard.set(self.CityData[self.selectItem].code, forKey: "second")
                 UserDefaults.standard.set(self.CityData[self.selectItem].short_name, forKey: "second_name")
                 UserDefaults.standard.set(self.cityChildrenData[indexPath.item].name, forKey: "second_longname")
+                UserDefaults.standard.set(self.cityChildrenData[indexPath.item].code, forKey: "second_code")
             }
         }
     }

@@ -171,6 +171,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInformationConfirmButton.setTitleColor(UIColor.white, for: .normal)
         self.userInformationConfirmButton.layer.cornerRadius = 4
         self.userInformationConfirmButton.layer.masksToBounds = true
+        self.userInformationConfirmButton.addTarget(self, action: #selector(self.didTapConfirmButton), for: .touchUpInside)
         self.userInformationInterestingStudyButton.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
         self.userInformationInterestingStudyButton.setAttributedTitle(NSAttributedString(string: "추가하기", attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 12)]), for: .normal)
         self.userInformationInterestingStudyButton.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
@@ -921,6 +922,21 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         let AreaSearchView = storyboard.instantiateViewController(withIdentifier: "AreaSearchView") as? AreaSearchViewController
         guard let AreaSearchVC = AreaSearchView else { return }
         self.navigationController?.pushViewController(AreaSearchVC, animated: true)
+    }
+    
+    @objc
+    private func didTapConfirmButton() {
+        let Paramter = oAuthUserInfoParamter(gender: 0, birth_year: 1998, city_info: [UserDefaults.standard.integer(forKey: "first"),UserDefaults.standard.integer(forKey: "first_code")], interesting: [UserDefaults.standard.integer(forKey: "first_Intrest_code"),2])
+        OAuthApi.shared.AuthUserInfo(userSeq: UserDefaults.standard.string(forKey: "Sponge_user_seq")!, oAuthUserInfoParamter: Paramter) { result in
+            switch result {
+            case .success(let value):
+                if value.code == 200 {
+                    print("성공하였습니다")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }

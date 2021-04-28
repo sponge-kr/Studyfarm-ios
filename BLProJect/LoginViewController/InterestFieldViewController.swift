@@ -55,6 +55,7 @@ class InterestFieldViewController: UIViewController {
         self.InterestConfirmButton.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.InterestConfirmButton.setTitleColor(UIColor.white, for: .normal)
         self.InterestConfirmButton.setTitle("확인", for: .normal)
+        self.InterestConfirmButton.addTarget(self, action: #selector(self.didTapConfirmButton), for: .touchUpInside)
         self.InterestKindTableView.delegate = self
         self.InterestKindTableView.dataSource = self
         self.InterestSubjectTableView.delegate = self
@@ -108,6 +109,12 @@ class InterestFieldViewController: UIViewController {
         self.InterestSubjectTagThreeButton.isHidden = true
         
     }
+    @objc
+    public func didTapConfirmButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     private func sendInterestKindCode() {
         DispatchQueue.main.async {
             UtilApi.shared.UtilStudyCategoryCall { result in
@@ -192,18 +199,21 @@ extension InterestFieldViewController: UITableViewDelegate,UITableViewDataSource
                 self.InterestSubjectTagOneButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
                 UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "first_Intrest_name")
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].code!, forKey: "first_Intrest_code")
             } else if self.InterestSubjectTagTwoButton.isHidden == true {
                 self.InterestSubjectTagTwoButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagTwoButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagTwoButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
                 UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "second_Intrest_name")
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].code!, forKey: "second_Intrest_code")
             } else if self.InterestSubjectTagThreeButton.isHidden == true {
                 self.InterestSubjectTagThreeButton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
                 self.InterestSubjectTagThreeButton.setTitle("\(self.interestSubjectData[indexPath.row].name!)", for: .normal)
                 self.InterestSubjectTagThreeButton.isHidden = false
                 self.subjectIndexPath.append(indexPath)
                 UserDefaults.standard.set(self.interestSubjectData[indexPath.row].name!, forKey: "three_Intrest_name")
+                UserDefaults.standard.set(self.interestSubjectData[indexPath.row].code!, forKey: "three_Intrest_code")
             }
         }
     }

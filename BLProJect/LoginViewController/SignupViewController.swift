@@ -44,10 +44,6 @@ class SignupViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let Storyboard = UIStoryboard(name: "UserInformationViewController", bundle: nil)
-        let informView = Storyboard.instantiateViewController(withIdentifier: "UserInformation") as? UserInformationViewController
-        guard let InformVC = informView else {return}
-        self.navigationController?.pushViewController(InformVC, animated: true)
         self.SetSingViewLayout()
         self.signConforbutton.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         self.signEmailtextfield.delegate = self
