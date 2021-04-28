@@ -392,7 +392,8 @@
                         <outlet property="userInfoBeginnerButton" destination="S48-Rt-tjd" id="CYL-z8-UcQ"/>
                         <outlet property="userInfoBeginnerButtonThree" destination="Fjt-Eh-bjp" id="tRF-b2-Qbv"/>
                         <outlet property="userInfoBeginnerButtonTwo" destination="bYg-5e-y2V" id="Sde-Ma-Oic"/>
-                        <outlet property="userInfoBoxTopConstraint" destination="nmh-Fg-nq1" id="eF2-GO-leC"/>
+                        <outlet property="userInfoBoxTopConstraint" destination="nmh-Fg-nq1" id="Jje-RH-idI"/>
+                        <outlet property="userInfoBoxTwoTopConstraint" destination="m1T-qc-tDc" id="Lqu-Na-aLa"/>
                         <outlet property="userInfoBoxView" destination="TRo-z4-lq5" id="cyu-pn-0SA"/>
                         <outlet property="userInfoBoxViewTwo" destination="EPB-Gh-ayI" id="7lM-RO-Hyd"/>
                         <outlet property="userInfoContainerView" destination="9EZ-Ai-8OQ" id="5my-8P-5Eb"/>

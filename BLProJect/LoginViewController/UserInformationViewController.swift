@@ -35,6 +35,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     @IBOutlet weak var userInfomationAreaSelectionTwoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoStudySelectTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoBoxTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userInfoBoxTwoTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var userInfoContainerView: UIView!
     @IBOutlet weak var userInfoBeginnerButton: UIButton!
     @IBOutlet weak var userInfoBegineerInterButton: UIButton!
@@ -277,25 +278,30 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoBeginnerButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoBeginnerButtonThree.layer.cornerRadius = 4
         self.userInfoBeginnerButtonThree.layer.masksToBounds = true
+        self.userInfoBeginnerButtonThree.addTarget(self, action: #selector(self.didTapBegginerButtonThree(_:)), for: .touchUpInside)
         self.userInfoBegineerInterButtonThree.setTitle("초중급", for: .normal)
         self.userInfoBegineerInterButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoBegineerInterButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
         self.userInfoBegineerInterButtonThree.layer.cornerRadius = 4
         self.userInfoBegineerInterButtonThree.layer.masksToBounds = true
+        self.userInfoBegineerInterButtonThree.addTarget(self, action: #selector(self.didTapBegginerInterButtonThree(_:)), for: .touchUpInside)
         self.userInfoMiddleButtonThree.setTitle("중급", for: .normal)
         self.userInfoMiddleButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoMiddleButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
         self.userInfoMiddleButtonThree.layer.cornerRadius = 4
+        self.userInfoMiddleButtonThree.addTarget(self, action: #selector(self.didTapMiddleButtonThree(_:)), for: .touchUpInside)
         self.userInfoAdvancedButtonThree.setTitle("상급", for: .normal)
         self.userInfoAdvancedButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
         self.userInfoAdvancedButtonThree.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
         self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
         self.userInfoAdvancedButtonThree.layer.cornerRadius = 4
         self.userInfoAdvancedButtonThree.layer.masksToBounds = true
+        self.userInfoAdvancedButtonThree.addTarget(self, action: #selector(self.didTapAdvancedButtonThree(_:)), for: .touchUpInside)
         self.userInfoContainerViewDeleteButtonThree.setImage(UIImage(named: "userInfodelete.png"), for: .normal)
         self.userInfoContainerViewDeleteButtonThree.setTitle("", for: .normal)
+        self.userInfoContainerViewDeleteButtonThree.addTarget(self, action: #selector(self.didTapContainerDeleteThreeButton(_:)), for: .touchUpInside)
         self.userInfoStepTitleLabelThree.text = ""
         self.userInfoStepTitleLabelThree.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 10)
         self.userInfoStepTitleLabelThree.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
@@ -348,7 +354,19 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoBeginnerButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoBeginnerButtonTwo.setTitleColor(UIColor.white, for: .selected)
     }
-
+    
+    public func didTapBeginerThreeLayoutInit() {
+        self.userInfoMiddleButtonThree.isSelected = false
+        self.userInfoBegineerInterButtonThree.isSelected = false
+        self.userInfoAdvancedButtonThree.isSelected = false
+        self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabelThree.text = "\(self.userInfoBeginnerButtonThree.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBeginnerButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBeginnerButtonThree.setTitleColor(UIColor.white, for: .selected)
+    }
+    
     public func didTapBeginerInterLayoutInit() {
         self.userInfoMiddleButton.isSelected = false
         self.userInfoBeginnerButton.isSelected = false
@@ -373,6 +391,19 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoStepTitleLabelTwo.text = "\(self.userInfoBegineerInterButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
         self.userInfoBegineerInterButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoBegineerInterButtonTwo.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapBeginerInterThreeLayoutInit() {
+        self.userInfoMiddleButtonThree.isSelected = false
+        self.userInfoBeginnerButtonThree.isSelected = false
+        self.userInfoAdvancedButtonThree.isSelected = false
+        self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonThree.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
+        self.userInfoStepTitleLabelThree.text = "\(self.userInfoBegineerInterButtonThree.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoBegineerInterButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoBegineerInterButtonThree.setTitleColor(UIColor.white, for: .selected)
     }
     
     public func didTapMiddleLayoutInit() {
@@ -401,6 +432,19 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoMiddleButtonTwo.setTitleColor(UIColor.white, for: .selected)
     }
     
+    public func didTapMiddleThreeLayoutInit() {
+        self.userInfoBegineerInterButtonThree.isSelected = false
+        self.userInfoBeginnerButtonThree.isSelected = false
+        self.userInfoAdvancedButtonThree.isSelected = false
+        self.userInfoBeginnerButtonThree.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
+        self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabelThree.text = "\(self.userInfoMiddleButtonThree.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoMiddleButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoMiddleButtonThree.setTitleColor(UIColor.white, for: .selected)
+    }
+    
     public func didTapAdvancedLayoutInit() {
         self.userInfoMiddleButton.isSelected = false
         self.userInfoBegineerInterButton.isSelected = false
@@ -425,6 +469,19 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         self.userInfoStepTitleLabelTwo.text = "\(self.userInfoAdvancedButtonTwo.titleLabel!.text!)! 거의 처음 배워요"
         self.userInfoAdvancedButtonTwo.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
         self.userInfoAdvancedButtonTwo.setTitleColor(UIColor.white, for: .selected)
+    }
+    
+    public func didTapAdvancedThreeLayoutInit() {
+        self.userInfoMiddleButtonThree.isSelected = false
+        self.userInfoBeginnerButtonThree.isSelected = false
+        self.userInfoBegineerInterButtonThree.isSelected = false
+        self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
+        self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonThree.backgroundColor = UIColor.white
+        self.userInfoBeginnerButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        self.userInfoStepTitleLabelThree.text = "\(self.userInfoAdvancedButtonThree.titleLabel!.text!)! 거의 처음 배워요"
+        self.userInfoAdvancedButtonThree.backgroundColor = UIColor(red: 255/255, green: 118/255, blue: 99/255, alpha: 1.0)
+        self.userInfoAdvancedButtonThree.setTitleColor(UIColor.white, for: .selected)
     }
     
     public func showAreaselectionButton() {
@@ -494,6 +551,9 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         } else if UserDefaults.standard.string(forKey: "first_Intrest_name") != nil && UserDefaults.standard.string(forKey: "second_Intrest_name") != nil && UserDefaults.standard.string(forKey: "three_Intrest_name") != nil {
             self.userInfoContainerView.isHidden = false
             self.userInfoContinerViewDeleteButton.isHidden = false
+            self.userInfoContainerViewTitleLabel.isHidden = false
+            self.userInfoStepTitleLabel.isHidden = false
+            self.userInfoContinerViewDeleteButton.isHidden = false
             self.userInfoBoxView.isHidden = false
             self.userInfoBoxViewTwo.isHidden = false
             self.userInfoContainerViewTitleLabel.text = "\(UserDefaults.standard.string(forKey: "first_Intrest_name")!)"
@@ -507,6 +567,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
                 self.userInformationInterestingStudyButton.isHidden = true
                 self.userInfoStudySelectTopConstraint.constant = 240
                 self.userInfoBoxTopConstraint.constant = 0
+                self.userInfoBoxTwoTopConstraint.constant = 0
             }
         }
     }
@@ -531,16 +592,31 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         if sender.isSelected {
             sender.isSelected = false
             self.userInfoContainerView.isHidden = false
+            if self.userInfoContainerView.isHidden == true {
+                self.userInfoStudySelectTopConstraint.constant = 13
+            }
         } else {
             sender.isSelected = true
             self.userInfoContainerView.isHidden = true
+            self.userInfoStepTitleLabel.isHidden = true
+            self.userInfoContainerViewTitleLabel.isHidden = true
             self.userInfoContinerViewDeleteButton.isHidden = true
             self.userInformationInterestingStudyButton.layoutIfNeeded()
             if self.userInfoBoxView.isHidden == true {
-                self.userInfoStudySelectTopConstraint.constant = 13
+                if self.userInfoBoxView.isHidden == true && self.userInfoBoxViewTwo.isHidden == false {
+                    self.userInfoBoxTwoTopConstraint.constant = -165
+                    self.userInfoStudySelectTopConstraint.constant = 100
+                } else {
+                    self.userInfoStudySelectTopConstraint.constant = 13
+                }
             } else {
+                if self.userInfoBoxViewTwo.isHidden == true && self.userInfoBoxView.isHidden == false {
+                    self.userInfoStudySelectTopConstraint.constant = 90
+                } else {
+                    self.userInfoStudySelectTopConstraint.constant = 175
+                }
+                self.userInformationInterestingStudyButton.isHidden = false
                 self.userInfoBoxTopConstraint.constant = -90
-                self.userInfoStudySelectTopConstraint.constant = 90
             }
         }
     }
@@ -554,10 +630,44 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             sender.isSelected = true
             self.userInfoBoxView.isHidden = true
             self.userInformationInterestingStudyButton.layoutIfNeeded()
-            if self.userInfoContainerView.isHidden == true {
-                self.userInfoStudySelectTopConstraint.constant = 13
+            if self.userInfoBoxViewTwo.isHidden == true {
+                if self.userInfoBoxViewTwo.isHidden == true {
+                    self.userInfoStudySelectTopConstraint.constant = 100
+                } else {
+                    self.userInfoStudySelectTopConstraint.constant = 13
+                }
             } else {
-                self.userInfoStudySelectTopConstraint.constant = 115
+                if self.userInfoContainerView.isHidden == false && self.userInfoBoxViewTwo.isHidden == false {
+                    self.userInfoStudySelectTopConstraint.constant = 210
+                } else if self.userInfoContainerView.isHidden == true || self.userInfoBoxViewTwo.isHidden == false {
+                    self.userInfoStudySelectTopConstraint.constant = 115
+                } else if self.userInfoContainerView.isHidden == true && self.userInfoBoxViewTwo.isHidden == true {
+                    self.userInfoStudySelectTopConstraint.constant = 13
+                }
+                self.userInfoBoxTwoTopConstraint.constant = -70
+                self.userInformationInterestingStudyButton.isHidden = false
+            }
+        }
+    }
+    
+    @objc
+    func didTapContainerDeleteThreeButton(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBoxViewTwo.isHidden = false
+        } else {
+            sender.isSelected = true
+            self.userInfoBoxViewTwo.isHidden = true
+            self.userInformationInterestingStudyButton.layoutIfNeeded()
+            if self.userInfoBoxView.isHidden == true {
+                if self.userInfoBoxViewTwo.isHidden == true && self.userInfoContainerView.isHidden == false {
+                    self.userInfoStudySelectTopConstraint.constant = 115
+                } else {
+                    self.userInfoStudySelectTopConstraint.constant = 13
+                }
+            } else {
+                self.userInfoStudySelectTopConstraint.constant = 210
+                self.userInformationInterestingStudyButton.isHidden = false
             }
         }
     }
@@ -678,6 +788,53 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
         }
     }
     
+    @objc
+    func didTapBegginerButtonThree(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBeginnerButtonThree.backgroundColor = UIColor.white
+            self.userInfoBeginnerButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerThreeLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapBegginerInterButtonThree(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoBegineerInterButtonThree.backgroundColor = UIColor.white
+            self.userInfoBegineerInterButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapBeginerInterThreeLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapMiddleButtonThree(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoMiddleButtonThree.backgroundColor = UIColor.white
+            self.userInfoMiddleButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapMiddleThreeLayoutInit()
+        }
+    }
+    
+    @objc
+    func didTapAdvancedButtonThree(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            self.userInfoAdvancedButtonThree.backgroundColor = UIColor.white
+            self.userInfoAdvancedButtonThree.setTitleColor(UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0), for: .normal)
+        } else {
+            sender.isSelected = true
+            self.didTapAdvancedThreeLayoutInit()
+        }
+    }
     
     @objc
     private func didTapAreaInfoTwoDelete(_ sender: UIButton) {
