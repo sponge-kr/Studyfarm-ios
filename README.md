@@ -32,7 +32,7 @@ Sponge App
 
 
 
-##### Sponge 앱은 Swift에서 지원하는 기존 프레임워크 기반인 Codable을 사용하여 JsonParsing을 하려 Refactoring 중이며<br>추후 SwiftyJson의 라이브러리를 제거할 계획입니다.
+##### Sponge 앱은 Swift에서 지원하는 기존 Framework 기반인 Codable을 사용하여 JsonParsing을 하려 Refactoring 중이며<br>추후 SwiftyJson의 라이브러리를 pod uninstall 계획입니다.
 
 
 
