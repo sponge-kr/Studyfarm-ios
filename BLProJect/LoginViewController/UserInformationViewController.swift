@@ -68,7 +68,9 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
                                 "2001","2002","2003","2004","2005","2006","2007",
                                 "2008","2009","2010","2011","2012","2013","2014",
                                 "2015","2016","2017","2018","2019","2020","2021"]
-    
+    public var genderdata: Int = 0
+    public var areadata: Array<Int> = []
+    public var interestdata: Array<Int> = []
     lazy var BirthDayContainerView: UIView = {
         let ConatinerView = UIView(frame: self.view.frame)
         ConatinerView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
@@ -87,6 +89,8 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     override func viewWillAppear(_ animated: Bool) {
         self.showAreaselectionButton()
         self.showUserInfoStudyContinaerLayout()
+        print("데이터 테스트 \(UserDefaults.standard.integer(forKey: "first"))")
+        print("데이터 테스트2 \(UserDefaults.standard.integer(forKey: "first_code"))")
     }
     
     public func initLayout() {
@@ -501,6 +505,8 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             self.userInformationAreaSelectionButton.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
             self.userInformationAreaSelectionButton.setTitle("\(UserDefaults.standard.string(forKey: "first_name")!) \(UserDefaults.standard.string(forKey: "first_longname")!)", for: .normal)
             self.userInformationAreaSelectionButton.isHidden = false
+            self.areadata.append(UserDefaults.standard.integer(forKey: "first"))
+            self.areadata.append(UserDefaults.standard.integer(forKey: "first_code"))
         }
         if UserDefaults.standard.string(forKey: "second_name") != nil && UserDefaults.standard.string(forKey: "second_longname") != nil {
             if UserDefaults.standard.string(forKey: "second_longname")?.count == 4 {
@@ -522,6 +528,8 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
             self.userInformationAreaSelectionButtonTwo.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1.0)
             self.userInformationAreaSelectionButtonTwo.setTitle("\(UserDefaults.standard.string(forKey: "second_name")!) \(UserDefaults.standard.string(forKey: "second_longname")!)", for: .normal)
             self.userInformationAreaSelectionButtonTwo.isHidden = false
+            self.areadata.append(UserDefaults.standard.integer(forKey: "second"))
+            self.areadata.append(UserDefaults.standard.integer(forKey: "second_code"))
         }
     }
     
@@ -926,7 +934,14 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     
     @objc
     private func didTapConfirmButton() {
-        let Paramter = oAuthUserInfoParamter(gender: 0, birth_year: 1998, city_info: [UserDefaults.standard.integer(forKey: "first"),UserDefaults.standard.integer(forKey: "first_code")], interesting: [UserDefaults.standard.integer(forKey: "first_Intrest_code"),2])
+        if self.userInformationmanButton.isSelected == true {
+            self.genderdata = 0
+        } else if self.userInformationgirlButton.isSelected == true {
+            self.genderdata = 1
+        }
+    
+        print("지역 파라메터 데이터 테스트 최종 \(self.areadata)")
+        let Paramter = oAuthUserInfoParamter(gender: self.genderdata, birth_year: Int(self.userInformationbirthdayButton.titleLabel!.text!)!, city_info: self.areadata, interesting: [UserDefaults.standard.integer(forKey: "first_Intrest_code"),2])
         OAuthApi.shared.AuthUserInfo(userSeq: UserDefaults.standard.string(forKey: "Sponge_user_seq")!, oAuthUserInfoParamter: Paramter) { result in
             switch result {
             case .success(let value):
