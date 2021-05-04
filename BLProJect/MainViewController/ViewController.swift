@@ -115,7 +115,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let StudyFarmView = BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return  }
+        guard let StudyFarmView = self.BLMainCollectionView.cellForItem(at: indexPath) as? BLMainCollectionViewCell  else { return }
 
         self.index = self.StudyModel[indexPath.row].study_seq
         self.performSegue(withIdentifier: "StudyResearch", sender: nil)

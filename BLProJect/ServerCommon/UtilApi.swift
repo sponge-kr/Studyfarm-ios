@@ -12,17 +12,13 @@ import Alamofire
 import SwiftKeychainWrapper
 
 struct StateCodeData {
-    var code: Int?
+    var content: JSON?
     var message: String?
-    var stateCode: Int?
-    var stateName: String?
-}
-
-struct StateCityCodeData {
     var code: Int?
-    var message: String?
-    var stateCityCode: Int?
-    var stateCityName: String?
+    var name: String?
+    var short_name: String?
+    var children_Code: Int?
+    var children_Name: String?
 }
 
 struct ResetEmailData {
@@ -46,12 +42,39 @@ struct ResetEamilCodeData {
     var expired_at: String?
 }
 
+struct StateCityCodeResponse: Codable {
+    var result: StateCityCodeResults
+}
+struct StateCityCodeResults: Codable {
+    var content: [StateCityContentContainer]?
+    enum CodingKeys: String,CodingKey {
+        case content
+    }
+    init(from decoder: Decoder) throws {
+        let value = try decoder.container(keyedBy: CodingKeys.self)
+        self.content = try? value.decode([StateCityContentContainer].self, forKey: .content)
+    }
+}
+struct StateCityContentContainer: Codable {
+    var code: Int?
+    var name: String?
+    var short_name: String?
+    var children: [StateCityChildrenContainer]?
+}
+
+struct StateCityChildrenContainer: Codable {
+    var code: Int?
+    var name: String?
+}
+
+
+
 struct StudyCategoryResponse: Codable {
-    var result: StudyCategoryReuslts
+    var result: StudyCategoryReuslts?
 }
 
 struct StudyCategoryReuslts: Codable {
-    var content: [StudyContentsContainer]
+    var content: [StudyContentsContainer]?
 }
 struct StudyContentsContainer: Codable {
     let code: Int?
@@ -69,15 +92,27 @@ struct StudyContentsContainer: Codable {
         self.children = try? values.decode([StudyChildrenContainer].self, forKey: .children)
     }
 }
-struct StudyChildrenContainer: Codable {
+struct AreaApplySendResponse: Codable {
     var code: Int
-    var name: String
+    var message: String
+}
+
+
+struct StudyChildrenContainer: Codable {
+    var code: Int?
+    var name: String?
 }
 struct ResetEmailParamter: Encodable{
     var email: String
 }
 struct AuthEmailSendParamter: Encodable {
     var email: String
+}
+
+struct AreaSendApplyParamter: Encodable {
+    var state_code: Int
+    var city_code: Int
+    var user_seq: Int
 }
 
 
@@ -90,27 +125,27 @@ class UtilApi {
     fileprivate let Privateheaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))", "Accept": "application/hal+json"]
     
     public var stateCodeModel = StateCodeData()
-    public var stateCityCodeModel = StateCityCodeData()
     public var resetEmailModel = ResetEmailData()
     public var resetEmailCodeModel = ResetEamilCodeData()
     
     private init() {}
     
     // MARK: - 스터디 시도 리스트 조회 함수 구현(GET)
-    public func UtilStatesCiteCodeCall(completionHandler: @escaping (Result<StateCodeData,Error>) -> ()) {
+    public func UtilStatesCiteCodeCall(completionHandler: @escaping([StateCityContentContainer]) -> ()) {
         AF.request("http://3.214.168.45:3724/api/v1/utils/states", method: .get, headers: headers)
-            .response { response in
+            .responseJSON { response in
+                debugPrint(response)
                 switch response.result {
                 case.success(let value):
-                    let StateJson = JSON(value)
-                    for (_, subJson):(String,JSON) in StateJson["result"]["content"] {
-                        self.stateCodeModel.stateCode = StateJson["code"].intValue
-                        self.stateCodeModel.stateName = StateJson["name"].stringValue
-                        completionHandler(.success(self.stateCodeModel))
+                    do {
+                        let stateData = try? JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let stateInstance = try? JSONDecoder().decode(StateCityCodeResponse.self, from: stateData!)
+                        completionHandler(stateInstance!.result.content!)
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 case.failure(let error):
                     print(error.localizedDescription)
-                    completionHandler(.failure(error))
                 }
                 
             }
@@ -125,11 +160,29 @@ class UtilApi {
                     do {
                         let CategoryData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let CateogryInstance = try JSONDecoder().decode(StudyCategoryResponse.self, from: CategoryData)
-                        completionHandler(CateogryInstance.result.content)
+                        completionHandler(CateogryInstance.result!.content!)
                     } catch {
                         print(error.localizedDescription)
                     }
                 case.failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
+    
+    public func UtilAreaSendApply(AreaSendApplyParamter: AreaSendApplyParamter, completionHandler: @escaping(AreaApplySendResponse) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/utils/propose/local", method: .post, parameters: AreaSendApplyParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    do {
+                        let applyData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let applyInstace = try JSONDecoder().decode(AreaApplySendResponse.self, from: applyData)
+                        completionHandler(applyInstace)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
@@ -173,6 +226,5 @@ class UtilApi {
                 }
             }
     }
-    
     
 }

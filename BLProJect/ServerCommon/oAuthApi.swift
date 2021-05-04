@@ -80,6 +80,11 @@ struct LogoutDataModel {
     var responseTime : String = ""
 }
 
+struct UserInfoDataModel {
+    var code: Int = 0
+    var message: String = ""
+}
+
 // MARK - 닉네임 중복확인 데이터 모델
 struct NickNameOverlapDataModel {
     var code: Int = 0
@@ -191,12 +196,20 @@ struct LoginParamter: Encodable {
 }
 
 // MARK - 회원가입 Paramter
-struct SignUpParamter : Encodable {
+struct SignUpParamter: Encodable {
     var email : String
     var password: String
     var nickname: String
     var service_use_agree : Bool
 }
+
+struct oAuthUserInfoParamter: Encodable {
+    var gender: Int
+    var birth_year: Int
+    var city_info: Array<Int>
+    var interesting: Array<Int>
+}
+
 
 // MARK - 회원가입 Email 인증 버튼 Paramter
 struct OAuthButtonParamter: Encodable {
@@ -232,8 +245,8 @@ class OAuthApi {
     static let shared = OAuthApi()
     fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
     fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token":"\(KeychainWrapper.standard.string(forKey: "kakaoToken"))"]
-    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))"]
+    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "kakaoToken")!)"]
+    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))","id_token":"\(KeychainWrapper.standard.string(forKey: "googleIDToken"))"]
     fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken"))"]
     
     
@@ -255,6 +268,7 @@ class OAuthApi {
     public var passwordChangeModel = PasswordChageDataModel()
     public var emailModel = EmailOverlapDataModel()
     public var AuthEmailCodeModel = EmailAuthCodeDataModel()
+    public var UserInfoModel = UserInfoDataModel()
     
     //MARK - oAtuh Server 로그인 요청 함수(POST)
     public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
@@ -275,7 +289,7 @@ class OAuthApi {
                 }
             }
     }
-        
+    
     //MARK - oAuth Server 로그아웃 요청 함수(POST)
     public func AuthLogoutCall(completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
         AF.request("http://3.214.168.45:3724/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
@@ -319,6 +333,7 @@ class OAuthApi {
                     let signJson = JSON(value!)
                     self.signUpModel.code = signJson["code"].intValue
                     self.signUpModel.message = signJson["message"].stringValue
+                    self.signUpModel.user_seq = signJson["result"]["users_seq"].intValue
                     self.signUpModel.email = signJson["result"]["email"].stringValue
                     self.signUpModel.nickname = signJson["result"]["nickname"].stringValue
                     self.signUpModel.gender = signJson["result"]["gender"].stringValue
@@ -340,6 +355,22 @@ class OAuthApi {
             }
     }
     
+    
+    public func AuthUserInfo(userSeq:String, oAuthUserInfoParamter: oAuthUserInfoParamter, completionHandler: @escaping(Result<UserInfoDataModel,Error>) -> ()) {
+        AF.request("http://3.214.168.45:3724/api/v1/user/info/\(userSeq)", method: .post, parameters: oAuthUserInfoParamter, encoder: JSONParameterEncoder.default, headers: tokenheaders)
+            .response { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let value):
+                    let UserInfoJson = JSON(value!)
+                    self.UserInfoModel.code = UserInfoJson["code"].intValue
+                    self.UserInfoModel.message = UserInfoJson["message"].stringValue
+                    completionHandler(.success(self.UserInfoModel))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
     
     //MARK - oAuth Server 이메일 인증 버튼 함수(POST)
     public func AuthEmailCall(oAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
@@ -384,7 +415,9 @@ class OAuthApi {
     
     //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
     public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameOverlapDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        let Tempurl = "http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)"
+        let url : URL = URL(string: Tempurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+        AF.request(url, method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -579,7 +612,6 @@ class OAuthApi {
                     completionHandler(.failure(error))
                 }
             }
-        
     }
     public func AuthEmailCode(EmailAuthCodeParamter: EmailAuthCodeParamter, completionHandler: @escaping(Result<EmailAuthCodeDataModel,Error>) -> ()) {
         AF.request("http://3.214.168.45:3724/api/v1/utils/send-mail/code", method: .post, parameters: EmailAuthCodeParamter, encoder: JSONParameterEncoder.default, headers: headers)

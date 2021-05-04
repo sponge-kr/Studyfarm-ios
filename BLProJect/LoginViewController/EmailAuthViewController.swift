@@ -31,7 +31,7 @@ class EmailAuthViewController: UIViewController {
         self.SendEmailLabel.text = "인증메일 발송 완료"
         self.SendEmailLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 26)
         self.SendEmailLabel.tintColor = UIColor(red: 61/255, green: 61/266, blue: 61/255, alpha: 1.0)
-        self.SendEmailSubLabel.attributedText = NSAttributedString(string: "\(UserDefaults.standard.string(forKey: "service_use_email")!)으로 인증 메일을 발송했습니다.", attributes: [NSAttributedString.Key.kern: -0.7])
+        self.SendEmailSubLabel.attributedText = NSAttributedString(string: "\(UserDefaults.standard.string(forKey: "oAuth_Email")!)으로 인증 메일을 발송했습니다.", attributes: [NSAttributedString.Key.kern: -0.7])
         self.SendEmailSubLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         self.SendEmailSubLabel.textAlignment = .left
         self.SendEmailSubLabel.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14)
@@ -76,8 +76,8 @@ class EmailAuthViewController: UIViewController {
     }
         
     @objc private func SelectSendEmail() {
-        let EmailParamter = AuthEmailSendParamter(email: UserDefaults.standard.string(forKey: "service_use_email")!)
-        print(UserDefaults.standard.value(forKey: "service_use_email"))
+        let EmailParamter = AuthEmailSendParamter(email: UserDefaults.standard.string(forKey: "oAuth_Email")!)
+        print(UserDefaults.standard.value(forKey: "oAuth_Email"))
         UtilApi.shared.UtilSendResetEmailCall(EmailParamter: EmailParamter) { result in
             switch result {
             case .success(let value):
@@ -94,7 +94,7 @@ class EmailAuthViewController: UIViewController {
     
     @objc private func UserAuchConfirmAction(){
         
-        OAuthApi.shared.AuthCheckUserCall(checkUser: UserDefaults.standard.string(forKey: "service_use_email")!) { result in
+        OAuthApi.shared.AuthCheckUserCall(checkUser: UserDefaults.standard.string(forKey: "oAuth_Email")!) { result in
             switch result {
             case .success(let value):
                 if value.code == 200 && value.check_result == false {

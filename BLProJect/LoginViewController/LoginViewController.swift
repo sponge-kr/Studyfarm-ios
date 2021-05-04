@@ -157,7 +157,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .success(let value):
                     print(value.code)
                     if value.code == 401 {
-                        let googleParamter = GIDUserParamter(nickname: "Do-hyunKim", service_use_agree: true)
+                        let googleParamter = GIDUserParamter(nickname: value.nickname, service_use_agree: true)
                         OAuthApi.shared.AuthGIDSignUp(GIDUserParamter: googleParamter) { result in
                             switch result {
                             case .success(let value):
@@ -185,7 +185,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 switch result {
                 case.success(let value):
                     if value.code == 401 {
-                        let kakaoParamter = KakaoUserParamter(nickname: "Do-hyunKim", service_use_agree: true)
+                        let kakaoParamter = KakaoUserParamter(nickname: value.nickname, service_use_agree: true)
                         OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
                             switch result {
                             case.success(let value):
@@ -212,7 +212,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 case .success(let value):
                     print("네이버 로그인 테스트 \(value.code)")
                     if value.code == 401 {
-                        let naverParamter = NaverUserParamter(nickname: "Do-hyunkim", service_use_agree: true)
+                        let naverParamter = NaverUserParamter(nickname: value.nickname, service_use_agree: true)
                         OAuthApi.shared.AuthNaverSignUp(NaverUserParamter: naverParamter) { result in
                             switch result {
                             case .success(let value):
@@ -342,9 +342,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
             return
         }
         guard let googleToken = user.authentication.accessToken else { return }
-        print("구글 idToken 입니다\(googleToken)")
+        guard let googleIdToken = user.authentication.idToken else { return }
+        print("구글 accessToken 입니다\(googleToken)")
+        print("구글 idToken 입니다\(googleIdToken)")
         if googleToken != "" {
-            print("구글 토큰 입니다\(KeychainWrapper.standard.set(googleToken, forKey: "gooleToken"))")
+            KeychainWrapper.standard.set(googleToken, forKey: "googleaccesToken")
+            KeychainWrapper.standard.set(googleIdToken, forKey: "googleIDToken")
+            print("구글 ID토큰 입니다\(KeychainWrapper.standard.string(forKey: "googleaccesToken"))")
+            print("구글 토큰 입니다\(KeychainWrapper.standard.string(forKey: "googleIDToken"))")
             self.googleApiCall()
         }
     }

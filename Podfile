@@ -12,7 +12,6 @@ target 'BLProJect' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
   pod 'GoogleSignIn'
-  pod 'SwiftLint'
   pod 'FSCalendar'
   pod 'NMapsMap'
   pod 'naveridlogin-sdk-ios'
