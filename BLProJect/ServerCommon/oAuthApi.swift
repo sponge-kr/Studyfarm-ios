@@ -244,10 +244,6 @@ struct EmailAuthCodeParamter: Encodable {
 class OAuthApi {
     static let shared = OAuthApi()
     fileprivate let headers: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept": "application/hal+json"]
-    fileprivate let tokenheaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json", "Authorization": "Bearer \(KeychainWrapper.standard.string(forKey: "token"))"]
-    fileprivate let kakaoTokenHeaders: HTTPHeaders = ["Content-Type":"application/hal+json;charset=UTF-8", "Accept":"application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "kakaoToken")!)"]
-    fileprivate let gIdTokenHeaders: HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "googleToken"))","id_token":"\(KeychainWrapper.standard.string(forKey: "googleIDToken"))"]
-    fileprivate let naverTokenHeaders : HTTPHeaders = ["Content-Type": "application/hal+json;charset=UTF-8", "Accept": "application/hal+json","access_token": "\(KeychainWrapper.standard.string(forKey: "naverToken"))"]
     
     
     //MARK - 초기화
@@ -291,8 +287,14 @@ class OAuthApi {
     }
     
     //MARK - oAuth Server 로그아웃 요청 함수(POST)
-    public func AuthLogoutCall(completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
+    public func AuthLogoutCall(token: String,completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
+        let tokenLoginheaders: HTTPHeaders = [
+            "Content-Type":"application/hal+json;charset=UTF-8",
+            "Accept":"application/hal+json",
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        AF.request("http://3.214.168.45:3724/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenLoginheaders)
             .response { response in
                 switch response.result {
                 case.success(let value):
@@ -356,7 +358,13 @@ class OAuthApi {
     }
     
     
-    public func AuthUserInfo(userSeq:String, oAuthUserInfoParamter: oAuthUserInfoParamter, completionHandler: @escaping(Result<UserInfoDataModel,Error>) -> ()) {
+    public func AuthUserInfo(token: String, userSeq:String, oAuthUserInfoParamter: oAuthUserInfoParamter, completionHandler: @escaping(Result<UserInfoDataModel,Error>) -> ()) {
+        let tokenheaders: HTTPHeaders = [
+            "Content-Type":"application/hal+json;charset=UTF-8",
+            "Accept":"application/hal+json",
+            "Authorization": "Bearer \(token)"
+        ]
+        
         AF.request("http://3.214.168.45:3724/api/v1/user/info/\(userSeq)", method: .post, parameters: oAuthUserInfoParamter, encoder: JSONParameterEncoder.default, headers: tokenheaders)
             .response { response in
                 debugPrint(response)
@@ -458,8 +466,12 @@ class OAuthApi {
     
     
     //MARK - oAuth Server KakaoLogin 함수(POST)
-    public func AuthKakaoLoginCall(completionHandler : @escaping(Result<KakaoLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: kakaoTokenHeaders)
+    public func AuthKakaoLoginCall(accessToken: String, completionHandler : @escaping(Result<KakaoLoginDataModel,Error>) -> ()){
+        let headers :HTTPHeaders =  [
+            "Content-Type":"application/hal+json;charset=UTF-8",
+            "Accept":"application/hal+json","access_token": "\(accessToken)"
+        ]
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -481,8 +493,12 @@ class OAuthApi {
     }
     
     //MARK - oAuth Server KakaoUser 등록 함수(POST)
-    public func AuthkakaoSignUp(KakaoUserParamter : KakaoUserParamter, completionHandler : @escaping(Result<KakaoSingDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: kakaoTokenHeaders)
+    public func AuthkakaoSignUp(KakaoUserParamter : KakaoUserParamter, accessToken: String,completionHandler : @escaping(Result<KakaoSingDataModel,Error>) -> ()){
+        let headers :HTTPHeaders =  [
+            "Content-Type":"application/hal+json;charset=UTF-8",
+            "Accept":"application/hal+json","access_token": "\(accessToken)"
+        ]
+        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -504,8 +520,15 @@ class OAuthApi {
             }
     }
     
-    public func AuthGIDLoginCall(completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: gIdTokenHeaders)
+    public func AuthGIDLoginCall(idToken: String, accessToken: String, completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
+        let gIdLoginHeader:HTTPHeaders = [
+            "Content-Type": "application/hal+json;charset=UTF-8",
+            "Accept": "application/hal+json",
+            "access_token": "\(accessToken)",
+            "id_token":"\(idToken)"
+        ]
+        
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: gIdLoginHeader)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -530,8 +553,15 @@ class OAuthApi {
     }
     
     
-    public func AuthGIDSignUp(GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: gIdTokenHeaders)
+    public func AuthGIDSignUp(idToken:String, accessToken: String ,GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
+        let gIdSignHeader:HTTPHeaders = [
+            "Content-Type": "application/hal+json;charset=UTF-8",
+            "Accept": "application/hal+json",
+            "access_token": "\(accessToken)",
+            "id_token":"\(idToken)"
+        ]
+        
+        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: gIdSignHeader)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -555,8 +585,13 @@ class OAuthApi {
             }
     }
     
-    public func AuthNaverLoginCall(completionHandler : @escaping(Result<NaverLoginDataModel,Error>) -> () ) {
-        AF.request("http://3.214.168.45:3724/api/v1/auth/login/naver", method: .post, headers: naverTokenHeaders)
+    public func AuthNaverLoginCall(accessToken: String,completionHandler : @escaping(Result<NaverLoginDataModel,Error>) -> () ) {
+        let naverLoginHeader : HTTPHeaders = [
+            "Content-Type": "application/hal+json;charset=UTF-8",
+            "Accept": "application/hal+json",
+            "access_token": "\(accessToken))"
+        ]
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/naver", method: .post, headers: naverLoginHeader)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -576,8 +611,14 @@ class OAuthApi {
                 
             }
     }
-    public func AuthNaverSignUp(NaverUserParamter : NaverUserParamter, completionHandler : @escaping(Result<NaverSignDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:3724/api/v1/user/naver", method: .post, parameters: NaverUserParamter, encoder: JSONParameterEncoder.default, headers: naverTokenHeaders)
+    public func AuthNaverSignUp(accessToken: String, NaverUserParamter : NaverUserParamter, completionHandler : @escaping(Result<NaverSignDataModel,Error>) -> ()){
+        
+        let naverSignHeaders : HTTPHeaders = [
+            "Content-Type": "application/hal+json;charset=UTF-8",
+            "Accept": "application/hal+json",
+            "access_token": "\(accessToken))"
+        ]
+        AF.request("http://3.214.168.45:3724/api/v1/user/naver", method: .post, parameters: NaverUserParamter, encoder: JSONParameterEncoder.default, headers: naverSignHeaders)
             .response { response in
                 debugPrint(response)
                 switch response.result {
