@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import SwiftKeychainWrapper
 
 class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource, UIScrollViewDelegate {
     @IBOutlet weak var userInfoScrollView: UIScrollView!
@@ -942,7 +942,7 @@ class UserInformationViewController: UIViewController,UIPickerViewDelegate,UIPic
     
         print("지역 파라메터 데이터 테스트 최종 \(self.areadata)")
         let Paramter = oAuthUserInfoParamter(gender: self.genderdata, birth_year: Int(self.userInformationbirthdayButton.titleLabel!.text!)!, city_info: self.areadata, interesting: [UserDefaults.standard.integer(forKey: "first_Intrest_code"),2])
-        OAuthApi.shared.AuthUserInfo(userSeq: UserDefaults.standard.string(forKey: "Sponge_user_seq")!, oAuthUserInfoParamter: Paramter) { result in
+        OAuthApi.shared.AuthUserInfo(token: KeychainWrapper.standard.string(forKey: "token")!, userSeq: UserDefaults.standard.string(forKey: "Sponge_user_seq")!, oAuthUserInfoParamter: Paramter) { result in
             switch result {
             case .success(let value):
                 if value.code == 200 {

@@ -152,13 +152,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     
     private func googleApiCall() {
         if KeychainWrapper.standard.string(forKey: "googleToken") != nil {
-            OAuthApi.shared.AuthGIDLoginCall { result in
+            OAuthApi.shared.AuthGIDLoginCall(idToken: KeychainWrapper.standard.string(forKey: "googleIDToken")!, accessToken: KeychainWrapper.standard.string(forKey: "googleToken")!) { result in
                 switch result {
                 case .success(let value):
                     print(value.code)
                     if value.code == 401 {
                         let googleParamter = GIDUserParamter(nickname: value.nickname, service_use_agree: true)
-                        OAuthApi.shared.AuthGIDSignUp(GIDUserParamter: googleParamter) { result in
+                        OAuthApi.shared.AuthGIDSignUp(idToken: KeychainWrapper.standard.string(forKey: "googleIDToken")!, accessToken: KeychainWrapper.standard.string(forKey: "googleToken")!, GIDUserParamter: googleParamter) { result in
                             switch result {
                             case .success(let value):
                                 print("구글 유저 동록 \(value.nickname)")
@@ -175,18 +175,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
                 }
             }
         }
-
     }
     
     
     private func kakaoApiCall() {
         if KeychainWrapper.standard.string(forKey: "kakaoToken") != nil{
-            OAuthApi.shared.AuthKakaoLoginCall { result in
+            OAuthApi.shared.AuthKakaoLoginCall(accessToken: KeychainWrapper.standard.string(forKey: "kakaoToken")!) { result in
                 switch result {
                 case.success(let value):
                     if value.code == 401 {
                         let kakaoParamter = KakaoUserParamter(nickname: value.nickname, service_use_agree: true)
-                        OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter) {  result in
+                        OAuthApi.shared.AuthkakaoSignUp(KakaoUserParamter: kakaoParamter, accessToken: KeychainWrapper.standard.string(forKey: "kakaoToken")!) {  result in
                             switch result {
                             case.success(let value):
                                 print(value.email)
@@ -207,13 +206,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate, GIDSignInDelega
     
     private func naverApiCall() {
         if KeychainWrapper.standard.string(forKey: "naverToken") != nil {
-            OAuthApi.shared.AuthNaverLoginCall { result in
+            OAuthApi.shared.AuthNaverLoginCall(accessToken: KeychainWrapper.standard.string(forKey: "naverToken")!) { result in
                 switch result {
                 case .success(let value):
                     print("네이버 로그인 테스트 \(value.code)")
                     if value.code == 401 {
                         let naverParamter = NaverUserParamter(nickname: value.nickname, service_use_agree: true)
-                        OAuthApi.shared.AuthNaverSignUp(NaverUserParamter: naverParamter) { result in
+                        OAuthApi.shared.AuthNaverSignUp(accessToken: KeychainWrapper.standard.string(forKey: "naverToken")!, NaverUserParamter: naverParamter) { result in
                             switch result {
                             case .success(let value):
                                 print(value.email)
