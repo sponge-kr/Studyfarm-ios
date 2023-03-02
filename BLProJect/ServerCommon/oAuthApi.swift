@@ -12,27 +12,58 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 
-// MARK - 로그인 데이터 모델
-struct LoginDataModel {
+struct LoginResponse: Codable {
     var code: Int?
     var message: String?
-    var token: String = ""
-    var user_seq: Int?
-    var email: String?
-    var name: String?
-    var nickname: String?
-    var phone: String?
-    var age: Int?
-    var state_code: Int?
-    var state_name: String?
-    var city_code: Int?
-    var city_name: String?
-    var gender: String?
-    var interesting_name: String?
-    var interesting_skill_level: String?
-    var born_date: String?
-    var profile: String?
+    var result: LoginResult?
 }
+struct LoginResult: Codable {
+    var token: String
+    var user: LoginUserContainer?
+}
+struct LoginUserContainer: Codable {
+    let users_seq,age: Int?
+    let email,nickname,gender,simple_introduce,profile,user_created_at,user_updated_at: String?
+    let user_info_process,user_active: Bool?
+    let interesting: [LoginInterestingContainer]?
+    let user_city_info: [LoginCiryInfoContainer]?
+    enum CodingKeys: String,CodingKey {
+        case users_seq,age
+        case email,nickname,gender,simple_introduce,profile,user_created_at,user_updated_at
+        case user_info_process,user_active
+        case interesting
+        case user_city_info
+    }
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.users_seq = try? values.decode(Int.self, forKey: .users_seq)
+        self.age = try? values.decode(Int.self, forKey: .age)
+        self.email = try? values.decode(String.self, forKey: .email.self)
+        self.nickname = try? values.decode(String.self, forKey: .nickname)
+        self.gender = try? values.decode(String.self, forKey: .gender)
+        self.simple_introduce = try? values.decode(String.self, forKey: .simple_introduce)
+        self.profile = try? values.decode(String.self, forKey: .profile)
+        self.user_created_at = try? values.decode(String.self, forKey: .user_created_at)
+        self.user_updated_at = try? values.decode(String.self, forKey: .user_updated_at)
+        self.user_info_process = try? values.decode(Bool.self, forKey: .user_info_process)
+        self.user_active = try? values.decode(Bool.self, forKey: .user_active)
+        self.interesting = try? values.decode([LoginInterestingContainer].self, forKey: .interesting)
+        self.user_city_info = try? values.decode([LoginCiryInfoContainer].self, forKey: .user_city_info)
+    }
+}
+struct LoginInterestingContainer: Codable {
+    var code: Int
+    var name: String
+    var skill_level: Int
+    var parent_code: Int
+}
+struct LoginCiryInfoContainer: Codable {
+    var state_code: Int
+    var state_name: String
+    var city_code: Int
+    var city_name: String
+}
+
 
 // MARK - 이메일 인증 버튼 데이타 모델
 struct OAuthButtonDataModel {
@@ -163,7 +194,6 @@ class OAuthApi {
     private init(){}
     
     //MARK - DataModel Instace 초기화
-    public var LoginModel = LoginDataModel()
     public var oAuthButtonModel = OAuthButtonDataModel()
     public var LogoutModel = LogoutDataModel()
     public var SignUpModel = SignUpDataModel()
@@ -173,50 +203,29 @@ class OAuthApi {
     public var UserCheckModel = UserCheckDataModel()
     public var GIDSignModel = GIDSignDataModel()
     
-    
     //MARK - oAtuh Server 로그인 요청 함수(POST)
-    public func AuthLoginCall(LoginParamter : LoginParamter, completionHandler : @escaping (Result<LoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
-            .response { response in
+    public func AuthLoginfetch(LoginParamter: LoginParamter, completionHandler : @escaping(LoginResponse) -> ()){
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login", method: .post, parameters: LoginParamter, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseJSON { response in
                 debugPrint(response)
                 switch response.result {
                 case .success(let value):
-                    let LoginJson = JSON(value!)
-                    self.LoginModel.code = LoginJson["code"].intValue
-                    self.LoginModel.message = LoginJson["message"].stringValue
-                    self.LoginModel.token = LoginJson["result"]["token"].stringValue
-                    for (_,LoginSubJson):(String,JSON) in LoginJson["result"]["user"] {
-                        self.LoginModel.email = LoginSubJson["email"].stringValue
-                        self.LoginModel.name = LoginSubJson["name"].stringValue
-                        self.LoginModel.nickname = LoginSubJson["nickname"].stringValue
-                        self.LoginModel.age = LoginSubJson["age"].intValue
-                        self.LoginModel.gender = LoginSubJson["gender"].stringValue
-                        self.LoginModel.state_code = LoginSubJson["user_city_info"]["state_code"].intValue
-                        self.LoginModel.state_name = LoginSubJson["user_city_info"]["state_name"].stringValue
-                        self.LoginModel.city_code = LoginSubJson["user_city_info"]["city_code"].intValue
-                        self.LoginModel.city_name = LoginSubJson["user_city_info"]["city_name"].stringValue
-                        self.LoginModel.interesting_name = LoginSubJson["interesting"]["name"].stringValue
-                        self.LoginModel.interesting_skill_level = LoginSubJson["interesting"]["skill_level"].stringValue
-                        self.LoginModel.born_date = LoginSubJson["born_date"].stringValue
-                        self.LoginModel.profile = LoginSubJson["profile"].stringValue
+                    do {
+                        let LoginData = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                        let LoginInstance = try JSONDecoder().decode(LoginResponse.self, from: LoginData)
+                        completionHandler(LoginInstance)
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                    print("스터디팜 로그인 토근 값입니다 \(self.LoginModel.token)")
-                    print("AuthSignUpCall스터디팜 로그인 status code 값입니다 \(self.LoginModel.code)")
-                    print("스터디팜 로그인 email 값입니다 \(self.LoginModel.email)")
-                    print("스터디팜 로그인 nickname 값 입니다 \(self.LoginModel.nickname)")
-                    completionHandler(.success(self.LoginModel))
-                    
                 case .failure(let error):
                     print(error.localizedDescription)
-                    completionHandler(.failure(error))
-                    
                 }
             }
     }
-    
+        
     //MARK - oAuth Server 로그아웃 요청 함수(POST)
     public func AuthLogoutCall(completionHandler : @escaping (Result<LogoutDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/logout", method: .post, encoding: JSONEncoding.default, headers: tokenheaders)
             .response { response in
                 switch response.result {
                 case.success(let value):
@@ -247,7 +256,7 @@ class OAuthApi {
     
     //MARK - oAuth Server 유저 등록 요청 함수(POST)
     public func AuthSignUpCall(SignUpParamter : SignUpParamter, completionHandler : @escaping (Result<SignUpDataModel,Error>) -> ()) {
-        AF.request("http://3.214.168.45:8080/api/v1/user", method: .post, parameters: SignUpParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user", method: .post, parameters: SignUpParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -279,7 +288,7 @@ class OAuthApi {
     
     //MARK - oAuth Server 이메일 인증 버튼 함수(POST)
     public func AuthEmailCall(OAuthButtonParamter : OAuthButtonParamter, completionHandler : @escaping(Result<OAuthButtonDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/auth-email-button", method: .post, parameters: OAuthButtonParamter, encoder: JSONParameterEncoder.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result {
@@ -295,13 +304,12 @@ class OAuthApi {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
             }
     }
     
     //MARK - 유저 인증 확인 함수 구현(GET)
     public func AuthCheckUserCall(CheckUser : String, completionHandler : @escaping(Result<UserCheckDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-active?email=\(CheckUser)", method: .get, encoding: JSONEncoding.default, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -315,14 +323,13 @@ class OAuthApi {
                     print(error.localizedDescription)
                     completionHandler(.failure(error))
                 }
-                
             }
     }
     
     
     //MARK - oAuth Server 닉네임 중복 확인 함수(GET)
     public func AuthNickNameOverlap(Nickname : String, completionHandler : @escaping(Result<NickNameDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
+        AF.request("http://3.214.168.45:3724/api/v1/user/check-nickname?nickname=\(Nickname)", method: .get, encoding: JSONEncoding.prettyPrinted, headers: headers)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -346,7 +353,7 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoLogin 함수(POST)
     public func AuthKakaoLoginCall(completionHandler : @escaping(Result<KakaoLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login/kakao", method: .post, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/kakao", method: .post, headers: Kakaotokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -371,7 +378,7 @@ class OAuthApi {
     
     //MARK - oAuth Server KakaoUser 등록 함수(POST)
     public func AuthkakaoSignUp(KakaoUserParamter : KakaoUserParamter, completionHandler : @escaping(Result<KakaoSingDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: Kakaotokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/kakao", method: .post, parameters: KakaoUserParamter, encoder: JSONParameterEncoder.default, headers: Kakaotokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{
@@ -394,7 +401,7 @@ class OAuthApi {
     }
     
     public func AuthGIDLoginCall(completionHandler : @escaping(Result<GIDLoginDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/auth/login/google", method: .post, headers: GIDtokenheaders)
             .response { response in
                 
             }
@@ -402,7 +409,7 @@ class OAuthApi {
     
     
     public func AuthGIDSignUp(GIDUserParamter : GIDUserParamter, completionHandler : @escaping(Result<GIDSignDataModel,Error>) -> ()){
-        AF.request("http://3.214.168.45:8080/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
+        AF.request("http://3.214.168.45:3724/api/v1/user/google", method: .post, parameters: GIDUserParamter, encoder: JSONParameterEncoder.default, headers: GIDtokenheaders)
             .response { response in
                 debugPrint(response)
                 switch response.result{

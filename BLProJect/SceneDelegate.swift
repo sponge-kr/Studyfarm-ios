@@ -26,11 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         //구글 로그인 스킴값으로 호출
-        if let url = URLContexts.first?.url.scheme{
-            if url.contains("com.googleusercontent.apps") {
-                GIDSignIn.sharedInstance()?.handle(URLContexts.first?.url)
-            }
-        }
+//        if let url = URLContexts.first?.url.scheme{
+//            if url.contains("com.googleusercontent.apps") {
+//                GIDSignIn.sharedInstance()?.handle(URLContexts.first?.url)
+//            }
+//        }
         
     }
 
@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let RootView = UIStoryboard(name: "Main", bundle: nil)
-            let initalViewController = RootView.instantiateViewController(identifier: "RootView")
+            let initalViewController = RootView.instantiateViewController(identifier: "MainView")
             let NavigationView = UINavigationController(rootViewController: initalViewController)
             self.window?.rootViewController = NavigationView
             self.window?.makeKeyAndVisible()
