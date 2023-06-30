@@ -32,12 +32,12 @@ PODS:
     - KakaoSDKCommon (= 2.4.1)
   - naveridlogin-sdk-ios (4.1.3)
   - NMapsMap (3.11.0)
-  - RxCocoa (5.1.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.2)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
   - SnapKit (5.0.1)
   - SwiftKeychainWrapper (4.0.1)
   - SwiftyJSON (4.3.0)
@@ -49,8 +49,8 @@ DEPENDENCIES:
   - KakaoSDKUser
   - naveridlogin-sdk-ios
   - NMapsMap
-  - RxCocoa (~> 5)
-  - RxSwift (~> 5)
+  - RxCocoa (~> 6)
+  - RxSwift (~> 6)
   - SnapKit (~> 5.0.0)
   - SwiftKeychainWrapper
   - SwiftyJSON (~> 4.0)
@@ -87,13 +87,13 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 11955811d99d1ff1f1dfd5428afe69937e31ccef
   naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
   NMapsMap: e6dbea85c2c195c7532deb637a5e90fd70f94fed
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 229cd84a09f844df0d67d75bb519522d06734f66
+PODFILE CHECKSUM: d02eaa2deb58f47e87aa863e73d0ff19dee557c1
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.12.1

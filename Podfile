@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '14.0'
 
 target 'BLProJect' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,8 +7,8 @@ target 'BLProJect' do
   pod 'KakaoSDKCommon'
   pod 'KakaoSDKUser'
   pod 'SnapKit', '~> 5.0.0'
-  pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
+  pod 'RxSwift', '~> 6'
+  pod 'RxCocoa', '~> 6'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftKeychainWrapper'
   pod 'GoogleSignIn'
@@ -16,15 +16,14 @@ target 'BLProJect' do
   pod 'NMapsMap'
   pod 'naveridlogin-sdk-ios'
 
-  # Pods for BLProJect
+end
 
-  target 'BLProJectTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'BLProJectUITests' do
-    # Pods for testing
-  end
-
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+    	target.build_configurations.each do |config|
+         	config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+               end
+          end
+   end
 end
